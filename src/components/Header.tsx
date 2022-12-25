@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import Button from './Button';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (

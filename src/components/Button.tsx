@@ -25,6 +25,7 @@ const Container = styled.div<{ type?: string; size?: string }>`
     props.size === 'small' ? '9px 18px 9px 18px;' : '21px 130px'};
   size: ${(props) => (props.size === 'small' ? '18px' : '22px')};
   color: ${(props) => (props.type === 'outline' ? 'black' : 'white')};
+  font-weight: ${(props) => (props.size === 'small' ? '500' : '700')};
   background-color: ${(props) =>
     props.type === 'outline' ? 'transparent' : '#6792F8'};
 `;

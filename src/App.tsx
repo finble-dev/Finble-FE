@@ -1,5 +1,5 @@
 import Header from './components/Header';
-import Main from './pages/Main';
+import Main from './pages/Main/Main';
 import MyStock from './pages/MyStock';
 import Lab from './pages/Lab';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -40,6 +40,5 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 1920px;
-  height: 100vh;
   border: 1px solid black;
 `;
