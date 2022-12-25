@@ -4,19 +4,23 @@ import MyStock from './pages/MyStock';
 import Lab from './pages/Lab';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
+import GlobalStyles from './assets/styles/Globalstyles';
 
 function App() {
   return (
-    <Container>
-      <Header />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Main />}></Route>
-          <Route path="/stock" element={<MyStock />}></Route>
-          <Route path="/lab" element={<Lab />}></Route>
-        </Routes>
-      </BrowserRouter>
-    </Container>
+    <>
+      <GlobalStyles />
+      <Container>
+        <Header />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Main />}></Route>
+            <Route path="/stock" element={<MyStock />}></Route>
+            <Route path="/lab" element={<Lab />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </Container>
+    </>
   );
 }
 
