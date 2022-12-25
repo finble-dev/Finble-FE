@@ -2,22 +2,29 @@ import Header from './components/Header';
 import Main from './pages/Main/Main';
 import MyStock from './pages/MyStock';
 import Lab from './pages/Lab';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyles from './assets/styles/Globalstyles';
+import { useState } from 'react';
 
 function App() {
+  const [isLogin, setLogin] = useState(true);
+
   return (
     <>
       <GlobalStyles />
       <Wrapper>
         <Container>
           <BrowserRouter>
-            <Header />
+            <Header isLogin={isLogin} />
             <Routes>
               <Route path="/" element={<Main />}></Route>
-              <Route path="/stock" element={<MyStock />}></Route>
-              <Route path="/lab" element={<Lab />}></Route>
+              <Route
+                path="/stock"
+                element={<MyStock isLogin={isLogin} />}
+              ></Route>
+              <Route path="/lab" element={<Lab isLogin={isLogin} />}></Route>
             </Routes>
           </BrowserRouter>
         </Container>
@@ -39,6 +46,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  // width: 100%;
   width: 1920px;
   border: 1px solid black;
 `;
