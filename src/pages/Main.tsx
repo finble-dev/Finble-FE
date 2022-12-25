@@ -1,23 +1,10 @@
-import styled from 'styled-components';
+import TypoGraphy from '../components/Typography';
 
 const Main = () => {
   return (
     <>
-      <MainBlue>main blue</MainBlue>
-      <MainGreen>main green</MainGreen>
+      <TypoGraphy text="title1" size="h1" color="var(--main-blue)" />
     </>
   );
 };
 export default Main;
-
-const MainBlue = styled.div`
-  color: var(--main-blue);
-  font-size: var(--fs-h1);
-  font-weight: var(--fw-h1);
-`;
-
-const MainGreen = styled.div`
-  color: var(--main-green);
-  font-size: var(--fs-h3);
-  font-weight: var(--fw-h3);
-`;
