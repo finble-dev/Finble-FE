@@ -10,23 +10,36 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Container>
-        <Header />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route path="/stock" element={<MyStock />}></Route>
-            <Route path="/lab" element={<Lab />}></Route>
-          </Routes>
-        </BrowserRouter>
-      </Container>
+      <Wrapper>
+        <Container>
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Main />}></Route>
+              <Route path="/stock" element={<MyStock />}></Route>
+              <Route path="/lab" element={<Lab />}></Route>
+            </Routes>
+          </BrowserRouter>
+        </Container>
+      </Wrapper>
     </>
   );
 }
 
 export default App;
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  width: 1920px;
+  height: 100vh;
+  border: 1px solid black;
 `;

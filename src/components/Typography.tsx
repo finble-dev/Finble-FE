@@ -4,11 +4,12 @@ interface typo {
   text: string;
   size: string;
   color?: string;
+  style?: React.CSSProperties | undefined;
 }
 
-const TypoGraphy = ({ text, size, color }: typo) => {
+const TypoGraphy = ({ text, size, color, style }: typo) => {
   return (
-    <Container size={size} color={color}>
+    <Container size={size} color={color} style={style}>
       {text}
     </Container>
   );
