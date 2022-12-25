@@ -4,7 +4,11 @@ import Typography from './Typography';
 import Button from './Button';
 import { Link } from 'react-router-dom';
 
-const Header = () => {
+interface login {
+  isLogin: boolean;
+}
+
+const Header = ({ isLogin }: login) => {
   return (
     <Container>
       <Row style={{ marginLeft: '356px' }}>
@@ -26,15 +30,26 @@ const Header = () => {
           />
         </Link>
       </Row>
-      <Row style={{ marginRight: '356px' }}>
-        <Typography text={'김민성 님'} size={'b1'} />
-        <Button
-          type={'outline'}
-          size={'small'}
-          text={'로그아웃'}
-          style={{ marginLeft: '20px' }}
-        />
-      </Row>
+      {isLogin === true ? (
+        <Row style={{ marginRight: '356px' }}>
+          <Typography text={'김민성 님'} size={'b1'} />
+          <Button
+            type={'outline'}
+            size={'small'}
+            text={'로그아웃'}
+            style={{ marginLeft: '20px' }}
+          />
+        </Row>
+      ) : (
+        <Row style={{ marginRight: '356px' }}>
+          <Button
+            type={'outline'}
+            size={'small'}
+            text={'회원가입 / 로그인'}
+            style={{ marginLeft: '20px' }}
+          />
+        </Row>
+      )}
     </Container>
   );
 };

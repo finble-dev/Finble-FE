@@ -1,4 +1,3 @@
-import TypoGraphy from '../../components/Typography';
 import styled from 'styled-components';
 import Inform from './components/Inform';
 import Question from './components/Question';
