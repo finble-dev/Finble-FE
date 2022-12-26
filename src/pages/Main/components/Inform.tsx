@@ -2,6 +2,7 @@ import TypoGraphy from '../../../components/Typography';
 import Button from '../../../components/Button';
 import styled from 'styled-components';
 import mainImg from '../../../assets/mainImg.svg';
+import { Img, ImgContainer } from '../../../assets/styles/styles';
 
 const Inform = () => {
   return (
@@ -63,7 +64,7 @@ const TextWrap = styled.div`
   line-height: 65px;
 `;
 
-const ImgContainer = styled.div`
+/*const ImgContainer = styled.div`
   width: 70%;
   display: flex;
   align-items: flex-end;
@@ -71,7 +72,4 @@ const ImgContainer = styled.div`
 `;
 const Img = styled.img`
   width: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-contents: center;
-`;
+`;*/

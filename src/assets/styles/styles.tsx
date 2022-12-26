@@ -9,4 +9,14 @@ const Container = styled.div`
   padding: 5rem 0;
 `;
 
-export { Container };
+const ImgContainer = styled.div<{ width?: string }>`
+  width: ${(props) => props.width || '70%'};
+  display: flex;
+  align-items: flex-end;
+  justify-contents: center;
+`;
+const Img = styled.img`
+  width: 100%;
+`;
+
+export { Container, ImgContainer, Img };
