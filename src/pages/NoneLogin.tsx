@@ -7,29 +7,21 @@ const NoneLogin = () => {
   return (
     <Wrapper>
       <Container>
-        <Column /*style={{ marginLeft: '362px', marginTop: '229px' }}*/>
+        <Column>
           <TypoGraphy text="앗, 로그인부터!" size="h1" />
-          <TypoGraphy
-            text="로그인/회원가입 이후 내 포트폴리오를 입력할 수 있어요."
-            size="h3"
-            style={{ marginTop: '38px', fontSize: '22px' }}
-          />
-          <TypoGraphy
-            text="기존 가입 회원은 가입한 방법으로 로그인해주세요."
-            size="h3"
-            style={{ marginTop: '10px', fontSize: '22px' }}
-          />
-          <Button
-            text={'로그인하기'}
-            //size="small"
-            style={{
-              width: '404px',
-              height: '75px',
-              fontSize: '24px',
-              fontWeight: 600,
-              marginTop: '60px',
-            }}
-          />
+          <TextWrap>
+            <TypoGraphy
+              text="로그인/회원가입 이후 내 포트폴리오를 입력할 수 있어요."
+              size="h3"
+              style={{ fontSize: '22px' }}
+            />
+            <TypoGraphy
+              text="기존 가입 회원은 가입한 방법으로 로그인해주세요."
+              size="h3"
+              style={{ fontSize: '22px' }}
+            />
+          </TextWrap>
+          <Button text={'로그인하기'} size="medium" width={404} height={75} />
         </Column>
         <ImgContainer>
           <Img src={mainImg} />
@@ -61,6 +53,10 @@ const Column = styled.div`
   justify-content: center;
   width: 50%;
   height: 100%;
+`;
+const TextWrap = styled.div`
+  padding: 3rem 0 4rem 0;
+  line-height: 44.99px;
 `;
 
 const ImgContainer = styled.div`

@@ -9,7 +9,7 @@ import GlobalStyles from './assets/styles/Globalstyles';
 import { useState } from 'react';
 
 function App() {
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState(true);
 
   return (
     <>

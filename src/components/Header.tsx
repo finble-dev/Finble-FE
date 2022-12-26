@@ -11,34 +11,36 @@ interface login {
 const Header = ({ isLogin }: login) => {
   return (
     <Container>
-      <Row /*style={{ marginLeft: '356px' }}*/>
+      <Row>
         <Link to={'/'}>
           <Logo src={logo} />
         </Link>
         <Link to="/stock">
-          <Typography
-            text={'내 주식'}
-            size={'b1'}
-            style={{ marginLeft: '66px' }}
-          />
+          <Typography text={'내 주식'} size={'b1'} />
         </Link>
         <Link to="/lab">
-          <Typography
-            text={'투자실험실'}
-            size={'b1'}
-            style={{ marginLeft: '66px' }}
-          />
+          <Typography text={'투자실험실'} size={'b1'} />
         </Link>
       </Row>
       {isLogin === true ? (
-        <Row /*style={{ marginRight: '356px' }}*/>
+        <Row gap="1rem">
           <Typography text={'김민성 님'} size={'b1'} />
-          <Button type={'outline'} size={'small'} text={'로그아웃'} />
+          <Button
+            type={'outline'}
+            size="small"
+            text={'로그아웃'}
+            width={98.11}
+            height={40.06}
+          />
         </Row>
       ) : (
-        <Row /*style={{ marginRight: '356px' }}*/>
-          <Button type={'outline'} size={'small'} text={'회원가입 / 로그인'} />
-        </Row>
+        <Button
+          type={'outline'}
+          size="small"
+          text={'회원가입 / 로그인'}
+          width={150.11}
+          height={40.06}
+        />
       )}
     </Container>
   );
@@ -59,9 +61,9 @@ const Logo = styled.img`
   width: 106px;
 `;
 
-const Row = styled.div`
+const Row = styled.div<{ gap?: string }>`
   display: flex;
-  flex-direction: row;
+  gap: ${(props) => props.gap || '65.77px'};
   align-items: center;
   height: 100%;
 `;

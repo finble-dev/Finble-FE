@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <Container>
       <Wrapper>
-        <Column /*style={{ marginLeft: '357px' }}*/>
+        <Column>
           <TypoGraphy
             text="먼저 본인의 투자 현황을 입력하고"
             //size="h2"
@@ -22,12 +22,9 @@ const Footer = () => {
         <Link to={'/lab'}>
           <Button
             text={'시작하기'}
-            style={{
-              fontSize: '18px',
-              width: '269.61px',
-              height: '56.38px',
-              padding: 0,
-            }}
+            size="small-bold"
+            width={269.61}
+            height={56.38}
           />
         </Link>
       </Wrapper>
@@ -41,7 +38,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 274px;
+  height: 203px;
   background-color: #f6f8fe;
 `;
 

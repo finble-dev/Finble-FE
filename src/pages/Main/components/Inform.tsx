@@ -7,25 +7,21 @@ const Inform = () => {
   return (
     <Wrapper>
       <Container>
-        <Column /*style={{ marginLeft: '362px', marginTop: '229px' }}*/>
-          <TypoGraphy
-            text="주식창을 볼 때마다 심장이 철렁했다면?"
-            size="h2"
-            style={{ fontWeight: 400 }}
-          />
-          <TypoGraphy text="편안하게 투자할 수 있도록" size="h2" />
-          <TypoGraphy text="핀블이 도와드릴게요!" size="h2" />
+        <Column>
+          <TextWrap>
+            <TypoGraphy
+              text="주식창을 볼 때마다 심장이 철렁했다면?"
+              size="h2"
+              style={{ fontWeight: 400 }}
+            />
+            <TypoGraphy text="편안하게 투자할 수 있도록" size="h2" />
+            <TypoGraphy text="핀블이 도와드릴게요!" size="h2" />
+          </TextWrap>
           <Button
             text={'지금 바로 시작하기'}
-            //size="small"
-            style={{
-              width: '288px',
-              height: '54px',
-              fontSize: '18px',
-              fontWeight: 700,
-              marginTop: '100px',
-              padding: 0,
-            }}
+            size="small-bold"
+            width={288}
+            height={54}
           />
         </Column>
         {/* 이미지 크기 조정필요*/}
@@ -59,6 +55,11 @@ const Column = styled.div`
   justify-content: center;
   width: 70%;
   height: 100%;
+  line-height: 65px;
+`;
+
+const TextWrap = styled.div`
+  padding: 0 0 4rem 0;
   line-height: 65px;
 `;
 
