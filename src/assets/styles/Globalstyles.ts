@@ -27,15 +27,15 @@ const GlobalStyles = createGlobalStyle`
     // font-weight
     --fw-h1: 700;
     --fw-h2: 700;
-    --fw-h3: 500;
+    --fw-h3: 700;
     --fw-b1: 500;
     --fw-b2: 400;
     --fw-b3: 500;
 
     // font-size
-    --fs-h1: 26.6792px;
-    --fs-h2: 21.3433px;
-    --fs-h3: 13.3396px;
+    --fs-h1: 40px;
+    --fs-h2: 36px;
+    --fs-h3: 32px;
     --fs-b1: 12.0056px;
     --fs-b2: 10.6717px;
     --fs-b3: 9.3377px;

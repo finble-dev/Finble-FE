@@ -11,7 +11,7 @@ interface login {
 const Header = ({ isLogin }: login) => {
   return (
     <Container>
-      <Row style={{ marginLeft: '356px' }}>
+      <Row /*style={{ marginLeft: '356px' }}*/>
         <Link to={'/'}>
           <Logo src={logo} />
         </Link>
@@ -31,23 +31,13 @@ const Header = ({ isLogin }: login) => {
         </Link>
       </Row>
       {isLogin === true ? (
-        <Row style={{ marginRight: '356px' }}>
+        <Row /*style={{ marginRight: '356px' }}*/>
           <Typography text={'김민성 님'} size={'b1'} />
-          <Button
-            type={'outline'}
-            size={'small'}
-            text={'로그아웃'}
-            style={{ marginLeft: '20px' }}
-          />
+          <Button type={'outline'} size={'small'} text={'로그아웃'} />
         </Row>
       ) : (
-        <Row style={{ marginRight: '356px' }}>
-          <Button
-            type={'outline'}
-            size={'small'}
-            text={'회원가입 / 로그인'}
-            style={{ marginLeft: '20px' }}
-          />
+        <Row /*style={{ marginRight: '356px' }}*/>
+          <Button type={'outline'} size={'small'} text={'회원가입 / 로그인'} />
         </Row>
       )}
     </Container>
@@ -57,10 +47,10 @@ export default Header;
 
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
   height: 83.06px;
 `;
 

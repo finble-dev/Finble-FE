@@ -1,62 +1,52 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
+import { Container } from '../../../assets/styles/styles';
 
 const Answer = () => {
   return (
     <Container>
-      <TypoGraphy
-        text="마음 편히 주식 투자하는 방법!"
-        size="h2"
-        style={{ marginTop: '10px' }}
-      />
-      <TextRow>
-        <TypoGraphy text="핀블의 '" size="h2" style={{ marginTop: '10px' }} />
-        <TypoGraphy
-          text="투자 실험"
-          size="h2"
-          color="#6792F8"
-          style={{ marginTop: '10px' }}
-        />
-        <TypoGraphy
-          text="'을 소개합니다."
-          size="h2"
-          style={{ marginTop: '10px' }}
-        />
-      </TextRow>
+      <TextWrap lineHeight={51.5} align="center">
+        <TypoGraphy text="마음 편히 주식 투자하는 방법!" size="h2" />
+        <TextRow>
+          <TypoGraphy text="핀블의 '" size="h2" />
+          <TypoGraphy text="투자 실험" size="h2" color="#6792F8" />
+          <TypoGraphy text="'을 소개합니다." size="h2" />
+        </TextRow>
+      </TextWrap>
 
-      <TypoGraphy
-        text="가상의 투자 결과를 바라보며"
-        size="h3"
-        style={{ marginTop: '38px' }}
-      />
-      <TypoGraphy
-        text="'앞으로 어떻게 투자해야할지 미리 알아보세요"
-        size="h3"
-        style={{ marginTop: '5px' }}
-      />
-      <Row />
+      <TextWrap lineHeight={34.17} align="center">
+        <TypoGraphy
+          text="가상의 투자 결과를 바라보며"
+          style={{ fontSize: '22px', fontWeight: 400, color: '#7a7a7a' }}
+        />
+        <TypoGraphy
+          text="'앞으로 어떻게 투자해야할지 미리 알아보세요"
+          style={{ fontSize: '22px', fontWeight: 400, color: '#7a7a7a' }}
+        />
+      </TextWrap>
     </Container>
   );
 };
 export default Answer;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-top: 180px;
-`;
+// const Container = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   width: 100%;
+//   justify-content: center;
+//   align-items: center;
+//   margin-top: 180px;
+// `;
 
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  height: 400px;
+const TextWrap = styled.div<{ lineHeight?: number; align?: string }>`
+  line-height: ${(props) => props.lineHeight || 1}px;
+  text-align: ${(props) => props.align || 'left'};
+  padding: 1rem 0;
 `;
 
 const TextRow = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: row;
+  text-align: center;
+  justify-content: center;
 `;
