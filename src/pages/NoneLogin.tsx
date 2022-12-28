@@ -18,13 +18,11 @@ const NoneLogin = () => {
           <TextWrap padding={3}>
             <TypoGraphy
               text="로그인/회원가입 이후 내 포트폴리오를 입력할 수 있어요."
-              size="h3"
-              style={{ fontSize: '22px' }}
+              size="t3"
             />
             <TypoGraphy
               text="기존 가입 회원은 가입한 방법으로 로그인해주세요."
-              size="h3"
-              style={{ fontSize: '22px' }}
+              size="t3"
             />
           </TextWrap>
           <div onClick={() => setModalOpen(true)}>
@@ -57,17 +55,17 @@ const NoneLogin = () => {
           }}
         >
           <ModalOpen>
-            <TypoGraphy text="시작하기" size="h1" />
-            <TextWrap lineHeight={33.39}>
+            <TypoGraphy text="시작하기" size="38px" />
+            <TextWrap lineHeight={35.04}>
               <TypoGraphy
-                text="주린이들을 위한 분산 투자 가이드, 포겟미낫"
-                size="b1"
-                style={{ fontSize: '22px', color: '#515151' }}
+                text="주린이들을 위한 분산 투자 가이드, 핀블"
+                size="t3"
+                color="#515151"
               />
               <TypoGraphy
                 text="포트폴리오 분석을 시작해보세요"
-                size="b1"
-                style={{ fontSize: '22px', color: '#515151' }}
+                size="t3"
+                color="#515151"
               />
             </TextWrap>
             <ImgContainer width="427px">
@@ -76,13 +74,13 @@ const NoneLogin = () => {
             <TextWrap lineHeight={26}>
               <TypoGraphy
                 text="로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며,"
-                size="b1"
-                style={{ fontSize: '16px', color: '#a8a8a8' }}
+                size="b3"
+                color="#a8a8a8"
               />
               <TypoGraphy
                 text="서비스 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다."
-                size="b1"
-                style={{ fontSize: '16px', color: '#a8a8a8' }}
+                size="b3"
+                color="#a8a8a8"
               />
             </TextWrap>
           </ModalOpen>

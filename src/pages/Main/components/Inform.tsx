@@ -12,15 +12,24 @@ const Inform = () => {
           <TextWrap>
             <TypoGraphy
               text="주식창을 볼 때마다 심장이 철렁했다면?"
-              size="h2"
-              style={{ fontWeight: 400 }}
+              size="36px"
+              color="#686868"
+              style={{ fontWeight: 700 }}
             />
-            <TypoGraphy text="편안하게 투자할 수 있도록" size="h2" />
-            <TypoGraphy text="핀블이 도와드릴게요!" size="h2" />
+            <TypoGraphy
+              text="편안하게 투자할 수 있도록"
+              size="36px"
+              style={{ fontWeight: 700 }}
+            />
+            <TypoGraphy
+              text="핀블이 도와드릴게요!"
+              size="36px"
+              style={{ fontWeight: 700 }}
+            />
           </TextWrap>
           <Button
             text={'지금 바로 시작하기'}
-            size="small-bold"
+            size="small"
             width={288}
             height={54}
           />
