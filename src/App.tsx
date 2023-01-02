@@ -9,23 +9,22 @@ import GlobalStyles from './assets/styles/Globalstyles';
 import { useState } from 'react';
 
 function App() {
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState(true);
 
   return (
     <>
       <GlobalStyles />
       <Wrapper>
-        <BrowserRouter>
-          <Header isLogin={isLogin} />
-          <Routes>
-            <Route path="/" element={<Main />}></Route>
-            <Route
-              path="/stock"
-              element={<MyStock isLogin={isLogin} />}
-            ></Route>
-            <Route path="/lab" element={<Lab isLogin={isLogin} />}></Route>
-          </Routes>
-        </BrowserRouter>
+        <Container>
+          <BrowserRouter>
+            <Header isLogin={isLogin} />
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/stock" element={<MyStock isLogin={isLogin} />} />
+              <Route path="/lab" element={<Lab isLogin={isLogin} />} />
+            </Routes>
+          </BrowserRouter>
+        </Container>
       </Wrapper>
     </>
   );
@@ -39,4 +38,10 @@ const Wrapper = styled.div`
   width: 100%;
   justify-content: center;
   align-items: center;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 1920px;
 `;
