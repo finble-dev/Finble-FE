@@ -1,8 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 import logo from '../assets/logo.svg';
 import Typography from './Typography';
-import Button from './Button';
 import { Link } from 'react-router-dom';
+import { Btn60 } from './Button';
 
 interface login {
   isLogin: boolean;
@@ -26,22 +26,10 @@ const Header = ({ isLogin }: login) => {
         {isLogin === true ? (
           <Row gap="1rem">
             <Typography text="김민성 님" size="b2" />
-            <Button
-              type="outline"
-              size="small"
-              text="로그아웃"
-              width={98.11}
-              height={40.06}
-            />
+            <Btn60 type="login" text="로그아웃" />
           </Row>
         ) : (
-          <Button
-            type="outline"
-            size="small"
-            text="회원가입 / 로그인"
-            width={150.11}
-            height={40.06}
-          />
+          <Btn60 type="login" text="회원가입 / 로그인" />
         )}
       </Container>
     </Wrapper>

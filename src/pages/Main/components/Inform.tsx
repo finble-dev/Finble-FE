@@ -1,8 +1,8 @@
 import TypoGraphy from '../../../components/Typography';
-import Button from '../../../components/Button';
 import styled from 'styled-components';
 import mainImg from '../../../assets/mainImg.svg';
 import { Img, ImgContainer } from '../../../assets/styles/styles';
+import { Btn60 } from '../../../components/Button';
 
 const Inform = () => {
   return (
@@ -27,12 +27,7 @@ const Inform = () => {
               style={{ fontWeight: 700 }}
             />
           </TextWrap>
-          <Button
-            text={'지금 바로 시작하기'}
-            size="small"
-            width={288}
-            height={54}
-          />
+          <Btn60 type="able" text="지금 바로 시작하기" />
         </Column>
         {/* 이미지 크기 조정필요*/}
         <ImgContainer>
