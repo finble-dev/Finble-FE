@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import Button from './Button';
@@ -15,12 +15,12 @@ const Header = ({ isLogin }: login) => {
         <Link to="/">
           <Logo src={logo} />
         </Link>
-        <Link to="/stock">
+        <NavLink to="/stock">
           <Typography text="내 주식" size="b2" />
-        </Link>
-        <Link to="/lab">
+        </NavLink>
+        <NavLink to="/lab">
           <Typography text="투자실험실" size="b2" />
-        </Link>
+        </NavLink>
       </Row>
       {isLogin === true ? (
         <Row gap="1rem">
@@ -66,4 +66,33 @@ const Row = styled.div<{ gap?: string }>`
   gap: ${(props) => props.gap || '65.77px'};
   align-items: center;
   height: 100%;
+`;
+
+const ani = keyframes`
+0% {
+  width: 0%;
+}
+100% {
+  width: 60%;
+}
+`;
+
+const NavLink = styled(Link)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: var(--main-blue);
+    // position: absolute;
+    left: 0;
+    bottom: 0;
+    animation: ${ani} 0.5s 1;
+    animation-fill-mode: forwards;
+  }
 `;
