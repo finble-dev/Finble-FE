@@ -19,12 +19,9 @@ function App() {
           <BrowserRouter>
             <Header isLogin={isLogin} />
             <Routes>
-              <Route path="/" element={<Main />}></Route>
-              <Route
-                path="/stock"
-                element={<MyStock isLogin={isLogin} />}
-              ></Route>
-              <Route path="/lab" element={<Lab isLogin={isLogin} />}></Route>
+              <Route path="/" element={<Main />} />
+              <Route path="/stock" element={<MyStock isLogin={isLogin} />} />
+              <Route path="/lab" element={<Lab isLogin={isLogin} />} />
             </Routes>
           </BrowserRouter>
         </Container>
@@ -46,7 +43,5 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  // width: 100%;
   width: 1920px;
-  border: 1px solid black;
 `;

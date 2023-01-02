@@ -21,24 +21,36 @@ const GlobalStyles = createGlobalStyle`
     --type-gray-1: #3B3B3B;
     --type-gray-2: #818181;
     --type-gray-3: #909090;
-    --type-gray-3: #A7A7A7;
+    --type-gray-4: #A5A5A5;
+    --type-gray-5: #DADADA;
+    --type-gray-6: #F7F8FA;
     --type-white: #ffffff;
 
     // font-weight
     --fw-h1: 700;
     --fw-h2: 700;
-    --fw-h3: 500;
+    --fw-t1: 500;
+    --fw-t2: 500;
+    --fw-t3: 500;
     --fw-b1: 500;
-    --fw-b2: 400;
+    --fw-b2: 500;
     --fw-b3: 500;
+    --fw-b4: 500;
+    --fw-small: 700;
+    --fw-input: 400;
 
     // font-size
-    --fs-h1: 26.6792px;
-    --fs-h2: 21.3433px;
-    --fs-h3: 13.3396px;
-    --fs-b1: 12.0056px;
-    --fs-b2: 10.6717px;
-    --fs-b3: 9.3377px;
+    --fs-h1: 40px;
+    --fs-h2: 32px;
+    --fs-t1: 40px;
+    --fs-t2: 32px;
+    --fs-t3: 24px;
+    --fs-b1: 22px;
+    --fs-b2: 18px;
+    --fs-b3: 16px;
+    --fs-b4: 14px;
+    --fs-small: 18px;
+    --fs-input: 22px;
   }
 `;
 

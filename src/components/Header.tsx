@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import Button from './Button';
@@ -10,57 +10,59 @@ interface login {
 
 const Header = ({ isLogin }: login) => {
   return (
-    <Container>
-      <Row style={{ marginLeft: '356px' }}>
-        <Link to={'/'}>
-          <Logo src={logo} />
-        </Link>
-        <Link to="/stock">
-          <Typography
-            text={'내 주식'}
-            size={'b1'}
-            style={{ marginLeft: '66px' }}
-          />
-        </Link>
-        <Link to="/lab">
-          <Typography
-            text={'투자실험실'}
-            size={'b1'}
-            style={{ marginLeft: '66px' }}
-          />
-        </Link>
-      </Row>
-      {isLogin === true ? (
-        <Row style={{ marginRight: '356px' }}>
-          <Typography text={'김민성 님'} size={'b1'} />
-          <Button
-            type={'outline'}
-            size={'small'}
-            text={'로그아웃'}
-            style={{ marginLeft: '20px' }}
-          />
+    <Wrapper>
+      <Container>
+        <Row>
+          <Link to="/">
+            <Logo src={logo} />
+          </Link>
+          <Link to="/stock">
+            <Typography text="내 주식" size="b2" />
+          </Link>
+          <Link to="/lab">
+            <Typography text="투자실험실" size="b2" />
+          </Link>
         </Row>
-      ) : (
-        <Row style={{ marginRight: '356px' }}>
+        {isLogin === true ? (
+          <Row gap="1rem">
+            <Typography text="김민성 님" size="b2" />
+            <Button
+              type="outline"
+              size="small"
+              text="로그아웃"
+              width={98.11}
+              height={40.06}
+            />
+          </Row>
+        ) : (
           <Button
-            type={'outline'}
-            size={'small'}
-            text={'회원가입 / 로그인'}
-            style={{ marginLeft: '20px' }}
+            type="outline"
+            size="small"
+            text="회원가입 / 로그인"
+            width={150.11}
+            height={40.06}
           />
-        </Row>
-      )}
-    </Container>
+        )}
+      </Container>
+    </Wrapper>
   );
 };
 export default Header;
 
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 83.06px;
+`;
+
 const Container = styled.div`
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
   height: 83.06px;
 `;
 
@@ -69,9 +71,38 @@ const Logo = styled.img`
   width: 106px;
 `;
 
-const Row = styled.div`
+const Row = styled.div<{ gap?: string }>`
   display: flex;
-  flex-direction: row;
+  gap: ${(props) => props.gap || '65.77px'};
   align-items: center;
   height: 100%;
+`;
+
+const ani = keyframes`
+0% {
+  width: 0%;
+}
+100% {
+  width: 60%;
+}
+`;
+
+const NavLink = styled(Link)`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    content: '';
+    width: 0%;
+    height: 2px;
+    background: var(--main-blue);
+    // position: absolute;
+    left: 0;
+    bottom: 0;
+    animation: ${ani} 0.5s 1;
+    animation-fill-mode: forwards;
+  }
 `;
