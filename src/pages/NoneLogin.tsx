@@ -1,5 +1,5 @@
 import TypoGraphy from '../components/Typography';
-import Button from '../components/Button';
+import { Btn60 } from '../components/Button';
 import styled from 'styled-components';
 import googleLogin from '../assets/img/googleLogin.png';
 import mainImg from '../assets/mainImg.svg';
@@ -26,7 +26,7 @@ const NoneLogin = () => {
             />
           </TextWrap>
           <div onClick={() => setModalOpen(true)}>
-            <Button text={'로그인하기'} size="medium" width={404} height={75} />
+            <Btn60 type="disable" text="로그인하기" />
           </div>
         </Column>
         <ImgContainer>

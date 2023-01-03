@@ -1,5 +1,5 @@
 import TypoGraphy from '../../../components/Typography';
-import Button from '../../../components/Button';
+import { Btn60 } from '../../../components/Button';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -12,12 +12,7 @@ const Footer = () => {
           <TypoGraphy text="실험을 시작해보세요!" size="t3" />
         </Column>
         <Link to="/lab">
-          <Button
-            text="시작하기"
-            size="small-bold"
-            width={269.61}
-            height={56.38}
-          />
+          <Btn60 type="able" text="지금 바로 시작하기" />
         </Link>
       </Wrapper>
     </Container>
