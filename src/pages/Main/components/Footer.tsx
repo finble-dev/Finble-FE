@@ -2,15 +2,15 @@ import TypoGraphy from '../../../components/Typography';
 import { Btn60 } from '../../../components/Button';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { TextWrap } from '../../../assets/styles/styles';
 
 const Footer = () => {
   return (
     <Container>
       <Wrapper>
-        <Column>
-          <TypoGraphy text="먼저 본인의 투자 현황을 입력하고" size="t3" />
-          <TypoGraphy text="실험을 시작해보세요!" size="t3" />
-        </Column>
+        <TextWrap padding="0 0 40px 0">
+          <TypoGraphy text="편안한 주식, 핀블과 함께 시작해보세요!" size="h1" />
+        </TextWrap>
         <Link to="/lab">
           <Btn60 type="able" text="지금 바로 시작하기" />
         </Link>
@@ -25,21 +25,17 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 214px;
-  background-color: #f6f8fe;
+  height: 446px;
+  background: linear-gradient(95.87deg, #c2d4fe 17.05%, #8baeff 90.04%);
+
+  //여기에 백그라운드로 배경이미지 추가
 `;
 
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1200px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const Column = styled.div`
-  display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
-  line-height: 42.67px;
+  justify-content: center;
+  align-items: flex-start;
 `;

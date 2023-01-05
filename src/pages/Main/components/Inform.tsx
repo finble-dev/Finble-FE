@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import mainBg from '../../../assets/img/mainBg.png';
 import { Btn60 } from '../../../components/Button';
 import { Link } from 'react-router-dom';
+import { TextWrap } from '../../../assets/styles/styles';
 
 const Inform = () => {
   return (
     <Container>
       <Wrapper>
-        <TextWrap>
+        <TextWrap lineHeight={65} padding="0 0 50px 0">
           <TypoGraphy
             text="주식창을 볼 때마다 심장이 철렁했다면?"
             size="h1"
@@ -52,10 +53,6 @@ const Wrapper = styled.div`
   max-width: 1200px;
 `;
 
-const TextWrap = styled.div`
-  padding: 0 0 4rem 0;
-  line-height: 65px;
-`;
 const BtnWrapper = styled(Link)`
   width: fit-content;
 `;

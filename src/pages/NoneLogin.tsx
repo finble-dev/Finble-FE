@@ -5,7 +5,7 @@ import googleLogin from '../assets/img/googleLogin.png';
 import noneLoginBg from '../assets/img/noneLoginBg.png';
 import ReactModal from 'react-modal';
 import { useState } from 'react';
-import { Img, ImgContainer } from '../assets/styles/styles';
+import { Img, ImgContainer, TextWrap } from '../assets/styles/styles';
 import closeIcon from '../assets/icons/close.svg';
 
 const NoneLogin = () => {
@@ -111,10 +111,6 @@ const Wrapper = styled.div`
   max-width: 1200px;
 `;
 
-const TextWrap = styled.div<{ lineHeight?: number; padding?: string }>`
-  padding: ${(props) => props.padding || 0};
-  line-height: ${(props) => props.lineHeight || 44.99}px;
-`;
 const IconWrapper = styled.div`
   position: absolute;
   right: 0;

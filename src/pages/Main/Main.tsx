@@ -3,6 +3,7 @@ import Inform from './components/Inform';
 import Question from './components/Question';
 import Answer from './components/Answer';
 import Footer from './components/Footer';
+import Ask from './components/Ask';
 
 const Main = () => {
   return (
@@ -10,6 +11,7 @@ const Main = () => {
       <Inform />
       <Question />
       <Answer />
+      <Ask />
       <Footer />
     </Container>
   );
