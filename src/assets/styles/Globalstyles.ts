@@ -40,9 +40,9 @@ const GlobalStyles = createGlobalStyle`
     --fw-input: 400;
 
     // font-size
-    --fs-h1: 40px;
+    --fs-h1: 38px;
     --fs-h2: 32px;
-    --fs-t1: 40px;
+    --fs-t1: 38px;
     --fs-t2: 32px;
     --fs-t3: 24px;
     --fs-b1: 22px;
