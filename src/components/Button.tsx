@@ -105,7 +105,7 @@ const Btn10Container = styled.div<btn>`
       : props.type === 'add'
       ? '#DEE7FD'
       : props.type === 'disable_check' || props.type === 'disable_add'
-      ? 'var(--type-gray-4)'
+      ? 'var(--type-gray-5)'
       : 'var(--main-blue)'};
 
   border: ${(props) =>

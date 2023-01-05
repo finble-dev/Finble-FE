@@ -13,7 +13,7 @@ const Question = () => {
         <Column>
           <TextWrap lineHeight={52} padding="0 0 45px 0">
             <TypoGraphy text="특정 종목에만 돈을 몰아넣으며" size="h2" />
-            <TextRow>
+            <TextRow align="center">
               <TypoGraphy
                 text="위험한 투자"
                 color="var(--main-blue)"

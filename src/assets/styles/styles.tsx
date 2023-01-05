@@ -19,11 +19,12 @@ const TextWrap = styled.div<{
   line-height: ${(props) => props.lineHeight || 44.99}px;
   text-align: ${(props) => props.align || 'left'};
 `;
-const TextRow = styled.div`
+
+const TextRow = styled.div<{ align?: string; justifyContent?: string }>`
   width: 100%;
   display: flex;
-  text-align: center;
-  justify-content: center;
+  text-align: ${(props) => props.align || 'left'};
+  justify-content: ${(props) => props.align || 'inherit'};
 `;
 
 //Img

@@ -8,7 +8,7 @@ const Ask = () => {
       <Container>
         <TextWrap lineHeight={60} align="center">
           <TypoGraphy text="먼저 본인의 투자 현황을 입력하고" size="h1" />
-          <TextRow>
+          <TextRow align="center">
             <TypoGraphy
               text="안전한 투자 방법"
               size="h1"
