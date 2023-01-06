@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Container, TextRow, TextWrap } from '../assets/styles/styles';
 import { Btn10 } from '../components/Button';
@@ -17,7 +18,7 @@ const MyStock = ({ isLogin }: login) => {
             <Title>
               <div>
                 <TypoGraphy text="민성님의 포트폴리오" size="t1" />
-                <TextWrap padding="24px 0 45px 0">
+                <TextWrap padding="15px 0 40px 0">
                   <TypoGraphy
                     text="보유 중인 주식을 입력하고 내 투자 현황까지 진단 받아보세요."
                     color="var(--type-gray-2)"
@@ -31,7 +32,7 @@ const MyStock = ({ isLogin }: login) => {
             </Title>
             <BoxContainer>
               <Box height="224px">
-                <TextWrap padding="36px 0 42px 0">
+                <TextWrap padding="22px 0 20px 0">
                   <TypoGraphy
                     text="총 자산"
                     size="b3"
@@ -39,11 +40,25 @@ const MyStock = ({ isLogin }: login) => {
                   />
                 </TextWrap>
                 <TextRow>
-                  <TypoGraphy text="0" size="b3" />
-                  <TypoGraphy text="원" size="b3" color="var(--type-gray-2)" />
+                  <TypoGraphy text="0&nbsp;" size="t1" />
+                  <TypoGraphy text="원" size="t1" color="var(--type-gray-2)" />
                 </TextRow>
               </Box>
-              <Box height="100%"></Box>
+              <Box height="100%">
+                <TextWrap padding="22px 0 20px 0">
+                  <TypoGraphy text="보유 종목 입력" size="small" />
+                </TextWrap>
+                <Link to="/">
+                  <Btn10 type="big_add" text="+ 추가하기" />
+                </Link>
+                <TextWrap align="center" padding="100px 0 0 0">
+                  <TypoGraphy
+                    text="아직 추가된 종목이 없어요"
+                    size="b2"
+                    color="var(--type-gray-4)"
+                  />
+                </TextWrap>
+              </Box>
             </BoxContainer>
           </Container>
         </Wrap>

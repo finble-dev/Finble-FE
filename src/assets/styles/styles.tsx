@@ -20,7 +20,7 @@ const TextWrap = styled.div<{
   text-align: ${(props) => props.align || 'left'};
 `;
 
-const TextRow = styled.div<{ align?: string; justifyContent?: string }>`
+const TextRow = styled.div<{ align?: string }>`
   width: 100%;
   display: flex;
   text-align: ${(props) => props.align || 'left'};
