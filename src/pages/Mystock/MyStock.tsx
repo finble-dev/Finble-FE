@@ -1,15 +1,20 @@
-import { Link } from 'react-router-dom';
+import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { Container, TextRow, TextWrap } from '../assets/styles/styles';
-import { Btn10 } from '../components/Button';
-import TypoGraphy from '../components/Typography';
-import NoneLogin from './NoneLogin';
+import { Container, Img, TextRow, TextWrap } from '../../assets/styles/styles';
+import { Btn10 } from '../../components/Button';
+import TypoGraphy from '../../components/Typography';
+import NoneLogin from '../NoneLogin';
+import closeIcon from '../../assets/icons/close.svg';
+import { useState } from 'react';
+import Modal from './components/Modal';
 
 interface login {
   isLogin: boolean;
 }
 
 const MyStock = ({ isLogin }: login) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <>
       {isLogin ? (
@@ -48,9 +53,9 @@ const MyStock = ({ isLogin }: login) => {
                 <TextWrap padding="22px 0 20px 0">
                   <TypoGraphy text="보유 종목 입력" size="small" />
                 </TextWrap>
-                <Link to="/">
+                <div onClick={() => setModalOpen(true)}>
                   <Btn10 type="big_add" text="+ 추가하기" />
-                </Link>
+                </div>
                 <TextWrap align="center" padding="100px 0 0 0">
                   <TypoGraphy
                     text="아직 추가된 종목이 없어요"
@@ -61,6 +66,39 @@ const MyStock = ({ isLogin }: login) => {
               </Box>
             </BoxContainer>
           </Container>
+
+          {/* modal */}
+          <ReactModal
+            isOpen={modalOpen}
+            onRequestClose={() => setModalOpen(false)}
+            style={{
+              overlay: {
+                position: 'fixed',
+                background: 'rgba(0, 0, 0, 0.3)',
+              },
+              content: {
+                margin: 'auto',
+                width: '544px',
+                height: '714px',
+                background: 'var(--type-white)',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
+                borderRadius: '20px',
+                padding: '30px',
+              },
+            }}
+          >
+            <ModalOpen>
+              <TitleWrap>
+                <TypoGraphy text="종목 추가하기" size="t3" />
+                <div onClick={() => setModalOpen(false)}>
+                  <Img src={closeIcon} />
+                </div>
+              </TitleWrap>
+              <Modal />
+            </ModalOpen>
+          </ReactModal>
         </Wrap>
       ) : (
         <NoneLogin />
@@ -103,4 +141,22 @@ const Box = styled.div<{ height?: string }>`
   height: ${(props) => props.height || 'auto'};
   border-radius: 10px;
   padding: 0 27px;
+`;
+
+// modal
+const ModalOpen = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+`;
+const TitleWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0 0 40px 0;
 `;

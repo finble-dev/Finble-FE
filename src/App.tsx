@@ -1,6 +1,6 @@
 import Header from './components/Header';
 import Main from './pages/Main/Main';
-import MyStock from './pages/MyStock';
+import MyStock from './pages/Mystock/MyStock';
 import Lab from './pages/Lab';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
