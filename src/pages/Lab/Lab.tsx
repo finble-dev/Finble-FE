@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import ReactModal from 'react-modal';
 import { useState } from 'react';
-import { Img, TextWrap } from '../../assets/styles/styles';
+import { Img, TextRow, TextWrap } from '../../assets/styles/styles';
 
 import TypoGraphy from '../../components/Typography';
 import closeIcon from '../../assets/icons/close.svg';
@@ -58,7 +58,6 @@ const Lab = ({ isLogin }: login) => {
                 justifyContent: 'flex-start',
                 alignItems: 'flex-start',
                 borderRadius: '20px',
-                padding: '30px',
               },
             }}
           >
@@ -68,7 +67,8 @@ const Lab = ({ isLogin }: login) => {
                   <Img src={closeIcon} />
                 </div>
               </TitleWrap>
-              <Row style={{ marginTop: '-32px' }}>
+              {/* <Row style={{ marginTop: '-32px' }}> */}
+              <TextRow>
                 <TypoGraphy
                   text="투자 실험"
                   size="t1"
@@ -79,12 +79,13 @@ const Lab = ({ isLogin }: login) => {
                   size="t1"
                   style={{ marginBottom: '16px' }}
                 />
-              </Row>
+              </TextRow>
+              {/* </Row> */}
               <img src={modalImg} />
 
-              <TextWrap lineHeight={34} style={{ marginTop: '32px' }}>
+              <TextWrap lineHeight={34} padding="32px 0 0 0">
                 {list1.map((items: any, idx: number) => (
-                  <Row lineHeight={34}>
+                  <TextRow align="center">
                     {items.map((item: any, idx: number) =>
                       item[0] === 'black' ? (
                         <TypoGraphy
@@ -100,7 +101,7 @@ const Lab = ({ isLogin }: login) => {
                         />
                       )
                     )}
-                  </Row>
+                  </TextRow>
                 ))}
               </TextWrap>
             </ModalOpen>
@@ -122,13 +123,6 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const Row = styled.div<{ lineHeight?: number }>`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  line-height: ${(props) => props.lineHeight || 44.99}px;
-`;
-
 // modal
 const ModalOpen = styled.div`
   display: flex;
@@ -144,5 +138,5 @@ const TitleWrap = styled.div`
   justify-content: end;
   width: 100%;
   height: 100%;
-  padding: 0 0 40px 0;
+  // padding: 0 0 40px 0;
 `;

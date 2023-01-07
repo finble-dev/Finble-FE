@@ -37,7 +37,7 @@ const Experiment = () => {
   const graphData = {
     labels: label,
     datasets: [
-      // { yAxisID: 'yAxes', xAxisID: 'xAxes' },
+      //{ yAxisID: 'yAxes', xAxisID: 'xAxes' },
       {
         label: '기존 포트폴리오',
         borderColor: 'rgb(103, 146, 248)',
@@ -60,8 +60,9 @@ const Experiment = () => {
   useEffect(() => {
     i++;
     let lastYear = 0;
-    setLabel([]);
+
     if (i >= 2) {
+      setLabel([]);
       myData.map((item: { date: number; data: number }) => {
         const year = Math.floor(item.date / 10000);
         let newLabel = label;
@@ -115,26 +116,25 @@ const options = {
   responsive: true,
   legend: { display: true, align: 'start' },
   scales: {
-    yAxes: [
-      {
-        id: 'yAxes',
+    y: {
+      id: 'yAxes',
+      display: true,
+      title: {
         display: true,
-        title: {
-          display: true,
-          text: 'value',
-        },
+        text: 'value',
       },
-    ],
-    xAxes: [
-      {
-        id: 'xAxes',
+    },
+    x: {
+      id: 'xAxes',
+      display: true,
+      title: {
         display: true,
-        title: {
-          display: true,
-          text: 'value',
-        },
+        text: '새로 만든 포트폴리오',
       },
-    ],
+      grid: {
+        display: false,
+      },
+    },
   },
 } as any;
 
