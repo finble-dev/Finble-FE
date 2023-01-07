@@ -1,11 +1,11 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
-import mainBg from '../../../assets/img/mainBg.png';
+import mainBg from '../../../assets/img/main/mainBg.png';
 import { Btn60 } from '../../../components/Button';
 import { Link } from 'react-router-dom';
 import { TextWrap, Row } from '../../../assets/styles/styles';
 
-const Inform = () => {
+const Section1 = () => {
   return (
     <Container>
       <Wrapper>
@@ -36,7 +36,7 @@ const Inform = () => {
     </Container>
   );
 };
-export default Inform;
+export default Section1;
 
 const Container = styled.div`
   display: flex;

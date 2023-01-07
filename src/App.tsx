@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import Main from './pages/Main/Main';
 import MyStock from './pages/Mystock/MyStock';
-import Lab from './pages/Lab';
+import Lab from './pages/Lab/Lab';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';

@@ -49,6 +49,7 @@ const Btn60Container = styled.div<btn>`
   align-items: center;
   justify-content: center;
   border-radius: 60px;
+  cursor: pointer;
 
   padding: ${(props) =>
     props.type === 'login'
@@ -75,6 +76,7 @@ const Btn10Container = styled.div<btn>`
   align-items: center;
   justify-content: center;
   border-radius: 10px;
+  cursor: pointer;
 
   padding: ${(props) =>
     props.type === 'big_add'

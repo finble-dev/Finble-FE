@@ -6,10 +6,10 @@ import {
   Row,
 } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
-import mainSub4 from '../../../assets/img/mainSub4.png';
-import mainSub5 from '../../../assets/img/mainSub5.png';
+import mainSub4 from '../../../assets/img/main/mainSub4.png';
+import mainSub5 from '../../../assets/img/main/mainSub5.png';
 
-const Ask = () => {
+const Section4 = () => {
   return (
     <Wrapper>
       <Container>
@@ -33,7 +33,7 @@ const Ask = () => {
   );
 };
 
-export default Ask;
+export default Section4;
 
 const Wrapper = styled.div`
   display: flex;

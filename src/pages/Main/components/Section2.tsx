@@ -6,9 +6,9 @@ import {
   TextWrap,
   Row,
 } from '../../../assets/styles/styles';
-import mainSub from '../../../assets/img/mainSub1.png';
+import mainSub from '../../../assets/img/main/mainSub1.png';
 
-const Question = () => {
+const Section2 = () => {
   return (
     <Container>
       <TextWrap lineHeight={66} padding="148px 0 120px 0" align="center">
@@ -55,7 +55,7 @@ const Question = () => {
     </Container>
   );
 };
-export default Question;
+export default Section2;
 
 const Column = styled.div`
   display: flex;

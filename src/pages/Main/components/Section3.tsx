@@ -6,10 +6,10 @@ import {
   TextWrap,
   Row,
 } from '../../../assets/styles/styles';
-import mainSub2 from '../../../assets/img/mainSub2.png';
-import mainSub3 from '../../../assets/img/mainSub3.png';
+import mainSub2 from '../../../assets/img/main/mainSub2.png';
+import mainSub3 from '../../../assets/img/main/mainSub3.png';
 
-const Answer = () => {
+const Section3 = () => {
   return (
     <Container>
       <div style={{ marginTop: '-158px' }}></div>
@@ -44,4 +44,4 @@ const Answer = () => {
     </Container>
   );
 };
-export default Answer;
+export default Section3;

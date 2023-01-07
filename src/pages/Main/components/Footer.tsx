@@ -3,7 +3,7 @@ import { Btn60 } from '../../../components/Button';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { TextWrap, Row } from '../../../assets/styles/styles';
-import mainSub6 from '../../../assets/img/mainSub6.png';
+import mainSub6 from '../../../assets/img/main/mainSub6.png';
 
 const Footer = () => {
   return (
