@@ -1,6 +1,8 @@
 import TypoGraphy from '../../../components/Typography';
+import { Btn10 } from '../../../components/Button';
 import styled from 'styled-components';
 import { TextRow, TextWrap, Row } from '../../../assets/styles/styles';
+
 import { useState } from 'react';
 
 const Experiment = () => {
@@ -56,6 +58,13 @@ const Experiment = () => {
         ) : (
           <></>
         )}
+
+        <Row style={{ marginTop: '45px' }}>
+          <Box></Box>
+          <Box></Box>
+        </Row>
+
+        <Btn10 text={'실험 결과 확인하기'} type={'check'} />
       </Column>
     </Container>
   );
@@ -79,4 +88,13 @@ const Column = styled.div`
   width: 1200px;
   margin-top: 120px;
   margin-bottom: 120px;
+`;
+
+const Box = styled.div`
+  width: 591px;
+  height: 730px;
+
+  background: #ffffff;
+  border-radius: 10px;
+  margin-right: 22px;
 `;

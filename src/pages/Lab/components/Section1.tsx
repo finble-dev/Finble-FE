@@ -6,7 +6,7 @@ import graph1 from '../../../assets/img/lab/graph1.png';
 const list1 = [
   [['blue', '달걀을 한 바구니에 담지 말라']],
   [['black', '이 속담을 한 번이라도 들어봤다면']],
-  [['black', "투자 실험을 통해 내 자산을 여러 '바구니'에 나눠보며"]],
+  [['black', '쉽게 이해할 수 있어요.']],
 ];
 
 const list2 = [

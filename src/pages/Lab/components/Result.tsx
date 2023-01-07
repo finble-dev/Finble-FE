@@ -1,6 +1,6 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
-import { TextRow, TextWrap, Row } from '../../../assets/styles/styles';
+import { TextWrap, Row } from '../../../assets/styles/styles';
 import { useState, useEffect } from 'react';
 
 import { Line } from 'react-chartjs-2';
@@ -60,8 +60,9 @@ const Experiment = () => {
   useEffect(() => {
     i++;
     let lastYear = 0;
-    setLabel([]);
+    // 아에
     if (i >= 2) {
+      setLabel([]);
       myData.map((item: { date: number; data: number }) => {
         const year = Math.floor(item.date / 10000);
         let newLabel = label;
