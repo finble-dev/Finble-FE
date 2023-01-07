@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import mainBg from '../../../assets/img/mainBg.png';
 import { Btn60 } from '../../../components/Button';
 import { Link } from 'react-router-dom';
-import { TextWrap } from '../../../assets/styles/styles';
+import { TextWrap, Row } from '../../../assets/styles/styles';
 
 const Inform = () => {
   return (
@@ -20,11 +20,14 @@ const Inform = () => {
             size="h1"
             color="var(--type-black)"
           />
-          <TypoGraphy
-            text="핀블이 도와드릴게요!"
-            size="h1"
-            color="var(--type-black)"
-          />
+          <Row>
+            <TypoGraphy text="핀블" size="h1" color="var(--main-blue)" />
+            <TypoGraphy
+              text="이 도와드릴게요!"
+              size="h1"
+              color="var(--type-black)"
+            />
+          </Row>
         </TextWrap>
         <BtnWrapper to="/stock">
           <Btn60 type="able" text="지금 바로 시작하기" />

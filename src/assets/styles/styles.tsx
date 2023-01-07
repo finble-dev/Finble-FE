@@ -9,6 +9,11 @@ const Container = styled.div`
   max-width: 1200px;
 `;
 
+const Row = styled.div`
+  display: flex;
+  width: 100%;
+`;
+
 // Text
 const TextWrap = styled.div<{
   lineHeight?: number;
@@ -38,4 +43,4 @@ const Img = styled.img`
   width: 100%;
 `;
 
-export { Container, ImgContainer, Img, TextWrap, TextRow };
+export { Container, ImgContainer, Img, TextWrap, TextRow, Row };
