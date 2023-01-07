@@ -1,12 +1,12 @@
 import NoneLogin from '../NoneLogin';
-import Section1 from './components/Section1';
-import Section2 from './components/Section2';
-import Experiment from './components/Experiment';
-import Result from './components/Result';
+import Section1 from './section/Section1';
+import Section2 from './section/Section2';
+import Experiment from './section/Experiment';
+import Result from './section/Result';
 import styled from 'styled-components';
 
 import ReactModal from 'react-modal';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Img, TextRow, TextWrap } from '../../assets/styles/styles';
 
 import TypoGraphy from '../../components/Typography';
@@ -33,14 +33,18 @@ const list1 = [
 
 const Lab = ({ isLogin }: login) => {
   const [modalOpen, setModalOpen] = useState(true);
+  const [isExp, setIsExp] = useState(false);
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
   return (
     <>
       {isLogin ? (
         <Container>
           <Section1 />
           <Section2 />
-          <Experiment />
-          <Result />
+          <Experiment isExp={isExp} setIsExp={setIsExp} />
+          {isExp ? <Result /> : <></>}
           <ReactModal
             isOpen={modalOpen}
             onRequestClose={() => setModalOpen(false)}
@@ -121,6 +125,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  background-color: #f7f8fa;
 `;
 
 // modal

@@ -1,11 +1,16 @@
 import styled from 'styled-components';
-import Section1 from './components/Section1';
-import Section2 from './components/Section2';
-import Section3 from './components/Section3';
-import Footer from './components/Footer';
-import Section4 from './components/Section4';
+import Section1 from './section/Section1';
+import Section2 from './section/Section2';
+import Section3 from './section/Section3';
+import Footer from './section/Footer';
+import Section4 from './section/Section4';
+
+import { useEffect } from 'react';
 
 const Main = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
   return (
     <Container>
       <Section1 />

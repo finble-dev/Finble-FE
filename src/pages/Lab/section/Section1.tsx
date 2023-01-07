@@ -27,9 +27,9 @@ const Section1 = () => {
               <TypoGraphy
                 text="투자 실험,"
                 color="var(--main-blue)"
-                size="t1"
+                size="h2"
               />
-              <TypoGraphy text="왜 필요한 걸까요?" size="t1" />
+              <TypoGraphy text="왜 필요한 걸까요?" size="h2" />
             </TextRow>
           </TextWrap>
 

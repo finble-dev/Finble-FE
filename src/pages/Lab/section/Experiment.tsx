@@ -5,7 +5,12 @@ import { TextRow, TextWrap, Row } from '../../../assets/styles/styles';
 
 import { useState } from 'react';
 
-const Experiment = () => {
+interface exp {
+  isExp?: boolean;
+  setIsExp?: any;
+}
+
+const Experiment = ({ isExp, setIsExp }: exp) => {
   const [modalFlag, setModalFlag] = useState(false);
 
   return (
@@ -64,7 +69,16 @@ const Experiment = () => {
           <Box></Box>
         </Row>
 
-        <Btn10 text={'실험 결과 확인하기'} type={'check'} />
+        <ButtonContainer>
+          <div
+            onClick={() => {
+              setIsExp(!isExp);
+              window.scrollTo({ top: 2800, left: 0, behavior: 'smooth' });
+            }}
+          >
+            <Btn10 text={'실험 결과 확인하기'} type="check" />
+          </div>
+        </ButtonContainer>
       </Column>
     </Container>
   );
@@ -97,4 +111,12 @@ const Box = styled.div`
   background: #ffffff;
   border-radius: 10px;
   margin-right: 22px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 100px;
 `;

@@ -44,7 +44,7 @@ const Section2 = () => {
         <Column>
           <TextWrap lineHeight={52} padding="0 0 45px 0">
             <TextRow align="center">
-              <TypoGraphy text="투자 실험은 어떻게 하나요?" size="t1" />
+              <TypoGraphy text="투자 실험은 어떻게 하나요?" size="h2" />
             </TextRow>
           </TextWrap>
 
