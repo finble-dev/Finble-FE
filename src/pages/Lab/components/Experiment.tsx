@@ -37,13 +37,13 @@ const Experiment = () => {
         {modalFlag ? (
           <>
             <TypoGraphy
-              text="가장 유명한 전략인 \'60/40 전략\'을 따라가보는 건 어떨까요? "
+              text="가장 유명한 전략인 '60/40 전략'을 따라가보는 건 어떨까요? "
               color="var(--type-gray-2)"
               size="b1"
               style={{ marginTop: '37px' }}
             />
             <TypoGraphy
-              text="\'60/40 전략\'은 주식과 채권의 비율을 60:40으로 투자하는 전략이에요."
+              text="'60/40 전략'은 주식과 채권의 비율을 60:40으로 투자하는 전략이에요."
               color="var(--type-gray-2)"
               size="b1"
             />
