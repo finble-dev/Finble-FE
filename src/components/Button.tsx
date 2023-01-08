@@ -56,6 +56,8 @@ const Btn60Container = styled.div<btn>`
       ? '12px 18px'
       : props.type === 'able' || props.type === 'disable'
       ? '16px 78px'
+      : props.type === 'outline_disable' || props.type === 'outline_able'
+      ? '14px 35px'
       : '20px 206px'};
   background: ${(props) =>
     props.type === 'login'
@@ -65,9 +67,9 @@ const Btn60Container = styled.div<btn>`
       : 'var(--type-white)'};
   border: ${(props) =>
     props.type === 'login' || props.type === 'outline_disable'
-      ? '1px solid var(--type-gray-4)'
-      : props.type === 'outline_disable'
-      ? '1px solid var(--main-blue)'
+      ? '2px solid var(--type-gray-4)'
+      : props.type === 'outline_able'
+      ? '2px solid var(--main-blue)'
       : 'none'};
 `;
 
