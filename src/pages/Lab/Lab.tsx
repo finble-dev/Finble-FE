@@ -1,4 +1,4 @@
-import NoneLogin from '../NoneLogin';
+import NoneLogin from '../Login/NoneLogin';
 import Section1 from './section/Section1';
 import Section2 from './section/Section2';
 import Experiment from './section/Experiment';

@@ -8,7 +8,7 @@ export default Input;
 
 const InputBox = styled.input`
   width: 100%;
-  padding: 15px 0;
+  padding: 15px 10px;
   font-size: var(--fs-input);
   font-weight: var(--fw-input);
   outline: none;

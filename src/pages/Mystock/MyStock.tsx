@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Container, Img, TextRow, TextWrap } from '../../assets/styles/styles';
 import { Btn10 } from '../../components/Button';
 import TypoGraphy from '../../components/Typography';
-import NoneLogin from '../NoneLogin';
+import NoneLogin from '../Login/NoneLogin';
 import closeIcon from '../../assets/icons/close.svg';
 import { useState } from 'react';
 import Modal from './components/Modal';
