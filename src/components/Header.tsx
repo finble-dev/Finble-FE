@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 83.06px;
+  height: 70px;
 `;
 
 const Container = styled.div`
@@ -51,7 +51,7 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  height: 83.06px;
+  height: 100%;
 `;
 
 const Logo = styled.img`

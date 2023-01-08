@@ -1,15 +1,22 @@
 import styled from 'styled-components';
-import Inform from './components/Inform';
-import Question from './components/Question';
-import Answer from './components/Answer';
-import Footer from './components/Footer';
+import Section1 from './section/Section1';
+import Section2 from './section/Section2';
+import Section3 from './section/Section3';
+import Footer from './section/Footer';
+import Section4 from './section/Section4';
+
+import { useEffect } from 'react';
 
 const Main = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
   return (
     <Container>
-      <Inform />
-      <Question />
-      <Answer />
+      <Section1 />
+      <Section2 />
+      <Section3 />
+      <Section4 />
       <Footer />
     </Container>
   );

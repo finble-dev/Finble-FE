@@ -1,7 +1,7 @@
 import Header from './components/Header';
 import Main from './pages/Main/Main';
-import MyStock from './pages/MyStock';
-import Lab from './pages/Lab';
+import MyStock from './pages/Mystock/MyStock';
+import Lab from './pages/Lab/Lab';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
@@ -9,7 +9,7 @@ import GlobalStyles from './assets/styles/Globalstyles';
 import { useState } from 'react';
 
 function App() {
-  const [isLogin, setLogin] = useState(false);
+  const [isLogin, setLogin] = useState(true);
 
   return (
     <>
@@ -43,5 +43,5 @@ const Wrapper = styled.div`
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 1920px;
+  width: 100%;
 `;

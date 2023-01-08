@@ -1,0 +1,162 @@
+import ReactModal from 'react-modal';
+import styled from 'styled-components';
+import { Container, Img, TextRow, TextWrap } from '../../assets/styles/styles';
+import { Btn10 } from '../../components/Button';
+import TypoGraphy from '../../components/Typography';
+import NoneLogin from '../NoneLogin';
+import closeIcon from '../../assets/icons/close.svg';
+import { useState } from 'react';
+import Modal from './components/Modal';
+
+interface login {
+  isLogin: boolean;
+}
+
+const MyStock = ({ isLogin }: login) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  return (
+    <>
+      {isLogin ? (
+        <Wrap>
+          <Container>
+            <Title>
+              <div>
+                <TypoGraphy text="민성님의 포트폴리오" size="t1" />
+                <TextWrap padding="15px 0 40px 0">
+                  <TypoGraphy
+                    text="보유 중인 주식을 입력하고 내 투자 현황까지 진단 받아보세요."
+                    color="var(--type-gray-2)"
+                    size="b1"
+                  />
+                </TextWrap>
+              </div>
+              <BtnWrapper>
+                <Btn10 text="내 주식 진단받기 >" type="disable_check" />
+              </BtnWrapper>
+            </Title>
+            <BoxContainer>
+              <Box height="224px">
+                <TextWrap padding="22px 0 20px 0">
+                  <TypoGraphy
+                    text="총 자산"
+                    size="b3"
+                    color="var(--type-gray-2)"
+                  />
+                </TextWrap>
+                <TextRow>
+                  <TypoGraphy text="0&nbsp;" size="t1" />
+                  <TypoGraphy text="원" size="t1" color="var(--type-gray-2)" />
+                </TextRow>
+              </Box>
+              <Box height="100%">
+                <TextWrap padding="22px 0 20px 0">
+                  <TypoGraphy text="보유 종목 입력" size="small" />
+                </TextWrap>
+                <div onClick={() => setModalOpen(true)}>
+                  <Btn10 type="big_add" text="+ 추가하기" />
+                </div>
+                <TextWrap align="center" padding="100px 0 0 0">
+                  <TypoGraphy
+                    text="아직 추가된 종목이 없어요"
+                    size="b2"
+                    color="var(--type-gray-4)"
+                  />
+                </TextWrap>
+              </Box>
+            </BoxContainer>
+          </Container>
+
+          {/* modal */}
+          <ReactModal
+            isOpen={modalOpen}
+            onRequestClose={() => setModalOpen(false)}
+            style={{
+              overlay: {
+                position: 'fixed',
+                background: 'rgba(0, 0, 0, 0.3)',
+              },
+              content: {
+                margin: 'auto',
+                width: '544px',
+                height: '714px',
+                background: 'var(--type-white)',
+                display: 'flex',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
+                borderRadius: '20px',
+                padding: '30px',
+              },
+            }}
+          >
+            <ModalOpen>
+              <TitleWrap>
+                <TypoGraphy text="종목 추가하기" size="t3" />
+                <div onClick={() => setModalOpen(false)}>
+                  <Img src={closeIcon} />
+                </div>
+              </TitleWrap>
+              <Modal />
+            </ModalOpen>
+          </ReactModal>
+        </Wrap>
+      ) : (
+        <NoneLogin />
+      )}
+    </>
+  );
+};
+export default MyStock;
+
+const Wrap = styled.div`
+  width: 100%;
+  height: calc(100vh - 70px);
+  background: var(--type-gray-6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 68px 0;
+`;
+
+const Title = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const BtnWrapper = styled.div`
+  height: fit-content;
+`;
+
+const BoxContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+const Box = styled.div<{ height?: string }>`
+  background: var(--type-white);
+  width: 590px;
+  height: ${(props) => props.height || 'auto'};
+  border-radius: 10px;
+  padding: 0 27px;
+`;
+
+// modal
+const ModalOpen = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+`;
+const TitleWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding: 0 0 40px 0;
+`;
