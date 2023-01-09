@@ -1,12 +1,13 @@
-import TypoGraphy from '../components/Typography';
-import { Btn60 } from '../components/Button';
+import TypoGraphy from '../../components/Typography';
+import { Btn60 } from '../../components/Button';
 import styled from 'styled-components';
-import googleLogin from '../assets/img/googleLogin.png';
-import noneLoginBg from '../assets/img/noneLoginBg.png';
+// import googleLogin from '../assets/img/googleLogin.png';
+import noneLoginBg from '../../assets/img/noneLoginBg.png';
 import ReactModal from 'react-modal';
 import { useState } from 'react';
-import { Img, ImgContainer, TextWrap } from '../assets/styles/styles';
-import closeIcon from '../assets/icons/close.svg';
+import { Img, ImgContainer, TextWrap } from '../../assets/styles/styles';
+import closeIcon from '../../assets/icons/close.svg';
+import { GoogleButton } from './components/GoogleLogin';
 
 const NoneLogin = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -58,7 +59,7 @@ const NoneLogin = () => {
             <Img src={closeIcon} />
           </IconWrapper>
           <TypoGraphy text="시작하기" size="t1" />
-          <TextWrap lineHeight={35.04} padding="44px 0 40px 0">
+          <TextWrap lineHeight={35.04} padding="44px 0 40px 0" align="center">
             <TypoGraphy
               text="주린이들을 위한 분산 투자 가이드, 핀블"
               size="t3"
@@ -70,10 +71,11 @@ const NoneLogin = () => {
               color="var(--type-gray-2)"
             />
           </TextWrap>
-          <ImgContainer width="440px">
+          {/* <ImgContainer width="440px">
             <Img src={googleLogin} />
-          </ImgContainer>
-          <TextWrap lineHeight={21} padding="40px 0 0 0">
+          </ImgContainer> */}
+          <GoogleButton />
+          <TextWrap lineHeight={21} padding="40px 0 0 0" align="center">
             <TypoGraphy
               text="로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며,"
               size="b3"
