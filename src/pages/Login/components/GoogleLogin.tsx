@@ -58,7 +58,7 @@ const GoogleButton = () => {
       onSuccess={OnSuccess}
       onFailure={onFailure}
       isSignedIn={true}
-      render={(renderProps) => (
+      render={(renderProps: any) => (
         <GoogleCustomButton
           onClick={renderProps.onClick}
           disabled={renderProps.disabled}

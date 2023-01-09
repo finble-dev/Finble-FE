@@ -17,9 +17,18 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  Tooltip,
+  Legend,
 } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement);
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend
+);
 
 const Experiment = () => {
   const [modalFlag, setModalFlag] = useState(false);
@@ -264,16 +273,11 @@ export default Experiment;
 
 const options = {
   responsive: true,
-  // legend: { position: 'bottom' },
   plugins: {
     legend: {
       display: true,
-      position: 'top',
+      align: 'start',
     },
-    // title: {
-    //   display: true,
-    //   text: '테스트 개발 v1',
-    // },
   },
 
   scales: {
