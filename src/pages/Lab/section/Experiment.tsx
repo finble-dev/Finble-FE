@@ -3,6 +3,7 @@ import { Btn10, Btn60 } from '../../../components/Button';
 import styled from 'styled-components';
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
+import { myStock } from '../../../assets/myStock';
 import { Item } from '../components/Item';
 import { useState, useEffect } from 'react';
 import { ETF } from '../../../interface/interface';
@@ -21,6 +22,18 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     [false, false],
     [false],
   ]);
+  const [myStk, setMyStk] = useState(myStock);
+  const changeMine = (num: number, event: any) => {
+    let newStk = [] as any;
+
+    myStk.map((item: { name: string; per: number }, idx: number) =>
+      idx === num
+        ? newStk.push({ name: item.name, per: event.target.value })
+        : newStk.push({ name: item.name, per: item.per })
+    );
+
+    setMyStk(newStk);
+  };
 
   const onClickBtn = (idx: number) => {
     let newList = [];
@@ -139,7 +152,45 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               )
             )}
           </Box>
-          <Box></Box>
+          <Box>
+            <TypoGraphy
+              text="보유 종목"
+              size="b2"
+              style={{ fontWeight: 700 }}
+            />
+            <RetainBox>
+              <Row style={{ justifyContent: 'space-between' }}>
+                <TypoGraphy
+                  text="종목 이름"
+                  color="var(--type-gray-2)"
+                  size="b3"
+                />
+                <TypoGraphy text="비중" color="var(--type-gray-2)" size="b3" />
+              </Row>
+              {myStk.map((item: { name: string; per: number }, idx: number) => (
+                <Row
+                  style={{
+                    marginBottom: '32px',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <TypoGraphy text={item.name} size="b2" />
+                  <Input
+                    value={myStk[idx].per}
+                    onChange={(e) => {
+                      changeMine(idx, e);
+                    }}
+                  />
+                </Row>
+              ))}
+            </RetainBox>
+            <Line />
+            <TypoGraphy
+              text="추가 종목"
+              size="b2"
+              style={{ fontWeight: 700 }}
+            />
+          </Box>
         </Row>
 
         <ButtonContainer>
@@ -215,11 +266,10 @@ const Box = styled.div`
   padding: 24px 30px;
 `;
 
-const BtnBox = styled.div`
+const RetainBox = styled.div`
   display: flex;
-  align-items: center;
-  width: 580px;
-  height: 48px;
+  flex-direction: column;
+  padding: 18px;
 `;
 
 const ButtonContainer = styled.div`
@@ -228,4 +278,22 @@ const ButtonContainer = styled.div`
   align-items: center;
   width: 1200px;
   margin-top: 100px;
+`;
+
+const Line = styled.div`
+  height: 1px;
+  width: 100%;
+  background-color: #dedede;
+  margin-bottom: 21px;
+`;
+
+const Input = styled.input`
+  width: 89px;
+  height: 38px;
+  background: #ffffff;
+  border: 0.910972px solid #dedede;
+  border-radius: 5.46583px;
+  padding: 15px 10px;
+  font-size: var(--fs-input);
+  font-weight: var(--fw-input);
 `;
