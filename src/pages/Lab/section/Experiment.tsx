@@ -2,8 +2,10 @@ import TypoGraphy from '../../../components/Typography';
 import { Btn10, Btn60 } from '../../../components/Button';
 import styled from 'styled-components';
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
-
+import { ETFList } from '../../../assets/ETFList';
+import { Item } from '../components/Item';
 import { useState, useEffect } from 'react';
+import { ETF } from '../../../interface/interface';
 
 interface exp {
   isExp?: boolean;
@@ -14,23 +16,11 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
   const [modalFlag, setModalFlag] = useState(false);
   const [expNum, setExpNum] = useState(0);
   const [btnFlag, setBtnFlag] = useState([true, false, false]);
-  const btn = [
-    {
-      name: '해외',
-      text1: '국내 증시 이슈에 대비해 해외에도 자산을 배분해보세요.',
-      text2: '먼저 꾸준히 우상향해온 미국 시장에 투자하는 건 어떨까요?',
-    },
-    {
-      name: '채권',
-      text1: '채권의 가격은 주식 시장과 반대로 움직이는 경향이 있어요.',
-      text2: '작년 같은 하락장에서 수익률을 안정적으로 지켜줘요.',
-    },
-    {
-      name: '금',
-      text1: '금은 우크라이나 전쟁처럼 큰 경제 위기가 닥쳤을 때',
-      text2: '가격이 오르는 대표적인 안전자산이에요.',
-    },
-  ];
+  const [ETFFlag, setETFFlag] = useState([
+    [false, false],
+    [false, false],
+    [false],
+  ]);
 
   const onClickBtn = (idx: number) => {
     let newList = [];
@@ -113,6 +103,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                   )}
                 </div>
               ))}
+              {}
             </Row>
 
             {btnFlag.map((item: any, idx: number) =>
@@ -129,6 +120,20 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                     size="b3"
                   />
                 </>
+              ) : (
+                <></>
+              )
+            )}
+            {ETFList.map((itemList: Array<ETF>, listNum: number) =>
+              btnFlag[listNum] ? (
+                itemList.map((item: ETF, itemNum: number) => (
+                  <Item
+                    item={item}
+                    ETFFlag={ETFFlag}
+                    listNum={listNum}
+                    itemNum={itemNum}
+                  ></Item>
+                ))
               ) : (
                 <></>
               )
@@ -156,6 +161,24 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
   );
 };
 export default Experiment;
+
+const btn = [
+  {
+    name: '해외',
+    text1: '국내 증시 이슈에 대비해 해외에도 자산을 배분해보세요.',
+    text2: '먼저 꾸준히 우상향해온 미국 시장에 투자하는 건 어떨까요?',
+  },
+  {
+    name: '채권',
+    text1: '채권의 가격은 주식 시장과 반대로 움직이는 경향이 있어요.',
+    text2: '작년 같은 하락장에서 수익률을 안정적으로 지켜줘요.',
+  },
+  {
+    name: '금',
+    text1: '금은 우크라이나 전쟁처럼 큰 경제 위기가 닥쳤을 때',
+    text2: '가격이 오르는 대표적인 안전자산이에요.',
+  },
+];
 
 const Container = styled.div`
   display: flex;

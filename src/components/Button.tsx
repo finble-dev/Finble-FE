@@ -102,4 +102,6 @@ const Btn10Container = styled.div<btn>`
 
   border: ${(props) =>
     props.type === 'big_add' ? '2px dashed var(--main-blue)' : 'none'};
+  height: ${(props) =>
+    props.type === 'add' || props.type === 'disable_add' ? '38px' : 'auto'};
 `;
