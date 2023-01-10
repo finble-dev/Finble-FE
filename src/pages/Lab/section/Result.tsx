@@ -92,7 +92,6 @@ const Experiment = () => {
   const graphData = {
     labels: label,
     datasets: [
-      //{ yAxisID: 'yAxes', xAxisID: 'xAxes' },
       {
         label: '기존 포트폴리오',
         data: myData.map((item: { date: number; data: number }) => item.data),
@@ -196,7 +195,7 @@ const Experiment = () => {
 
               <QuestionRow>
                 <div style={{ display: 'flex', justifyContent: 'start' }}>
-                  <Img src={q} />
+                  <ImgQA src={q} />
                   <TypoGraphy
                     text={item.question}
                     size="b1"
@@ -209,14 +208,18 @@ const Experiment = () => {
                     item.setFlag(!item.flag);
                   }}
                 >
-                  {item.flag ? <Img src={down} /> : <Img src={up} />}
+                  {item.flag ? (
+                    <ImgToggle src={down} />
+                  ) : (
+                    <ImgToggle src={up} />
+                  )}
                 </div>
               </QuestionRow>
               {item.flag ? (
                 <>
-                  <TipLine />{' '}
+                  <TipLine />
                   <AnswerRow>
-                    <Img src={a} />
+                    <ImgQA src={a} />
                     <TextWrap lineHeight={46} style={{ marginLeft: '30px' }}>
                       <TypoGraphy text={item.answer1} size="b1" />
                       <TypoGraphy text={item.answer2} size="b1" />
@@ -277,6 +280,11 @@ const options = {
     legend: {
       display: true,
       align: 'start',
+    },
+    tooltip: {
+      padding: 10,
+      bodySpacing: 5,
+      usePointStyle: true,
     },
   },
 
@@ -371,8 +379,14 @@ const AnswerRow = styled.div`
   background-color: #f7f8fa;
 `;
 
-const Img = styled.img`
+const ImgQA = styled.img`
   width: 23px;
   height: 23px;
+  cursor: pointer;
+`;
+
+const ImgToggle = styled.img`
+  width: 19.6px;
+  height: 9.8px;
   cursor: pointer;
 `;

@@ -1,8 +1,7 @@
 import NoneLogin from '../Login/NoneLogin';
-import Section1 from './section/Section1';
-import Section2 from './section/Section2';
 import Experiment from './section/Experiment';
 import Result from './section/Result';
+import Intro from './section/Intro';
 import styled from 'styled-components';
 
 import ReactModal from 'react-modal';
@@ -41,8 +40,7 @@ const Lab = ({ isLogin }: login) => {
     <>
       {isLogin ? (
         <Container>
-          <Section1 />
-          <Section2 />
+          <Intro />
           <Experiment isExp={isExp} setIsExp={setIsExp} />
           {isExp ? <Result /> : <></>}
           <ReactModal
@@ -75,12 +73,12 @@ const Lab = ({ isLogin }: login) => {
               <TextRow>
                 <TypoGraphy
                   text="투자 실험"
-                  size="t1"
+                  size="t2"
                   color="var(--main-blue)"
                 />
                 <TypoGraphy
                   text="이 무엇인가요?"
-                  size="t1"
+                  size="t2"
                   style={{ marginBottom: '16px' }}
                 />
               </TextRow>
@@ -94,14 +92,14 @@ const Lab = ({ isLogin }: login) => {
                       item[0] === 'black' ? (
                         <TypoGraphy
                           text={item[1]}
-                          size="b1"
+                          size="b2"
                           color="var(--type-gray-2)"
                         />
                       ) : (
                         <TypoGraphy
                           text={item[1]}
                           color="var(--main-blue)"
-                          size="b1"
+                          size="b2"
                         />
                       )
                     )}

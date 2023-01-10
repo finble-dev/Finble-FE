@@ -9,17 +9,19 @@ const Section1 = () => {
   return (
     <Container>
       <Wrapper>
-        <TextWrap lineHeight={65} padding="0 0 50px 0">
-          <TypoGraphy
-            text="주식창을 볼 때마다 심장이 철렁했다면?"
-            size="h1"
-            color="var(--type-gray-2)"
-          />
+        <TypoGraphy
+          text="주식창을 볼 때마다 심장이 철렁했다면?"
+          size="h2"
+          color="var(--type-gray-2)"
+          style={{ marginBottom: '40px' }}
+        />
+        <TextWrap lineHeight={55} padding="0 0 50px 0">
           <TypoGraphy
             text="편안하게 투자할 수 있도록"
             size="h1"
             color="var(--type-black)"
           />
+
           <Row>
             <TypoGraphy text="핀블" size="h1" color="var(--main-blue)" />
             <TypoGraphy

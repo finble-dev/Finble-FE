@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Row = styled.div<{ lineHeight?: number }>`
   display: flex;
-  width: 100%;
+  // width: 100%;
   line-height: ${(props) => props.lineHeight || 44.99}px;
 `;
 
