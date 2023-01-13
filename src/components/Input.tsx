@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-import {
-  faMagnifyingGlass,
-  faWonSign,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TypoGraphy from './Typography';
 
@@ -11,6 +8,7 @@ const Input = ({ type }: { type: string }) => {
   if (type === 'search') placeholder = '종목 검색 예) 카카오, 테슬라, SPY';
   else if (type === 'price') placeholder = '예) 78.000';
   else if (type === 'number') placeholder = '예) 1.2';
+
   return (
     <InputBox>
       {type === 'search' ? (

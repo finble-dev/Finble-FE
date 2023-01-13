@@ -85,7 +85,7 @@ const MyStock = ({ isLogin }: login) => {
                 justifyContent: 'flex-start',
                 alignItems: 'flex-start',
                 borderRadius: '20px',
-                padding: '30px',
+                padding: '10px',
               },
             }}
           >
@@ -158,5 +158,5 @@ const TitleWrap = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 0 0 40px 0;
+  padding: 20px 38px 20px 20px;
 `;
