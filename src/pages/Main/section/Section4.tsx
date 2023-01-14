@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import {
-  Container,
-  TextRow,
-  TextWrap,
-  Row,
-} from '../../../assets/styles/styles';
+import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
 import mainSub4 from '../../../assets/img/main/mainSub4.png';
 import mainSub5 from '../../../assets/img/main/mainSub5.png';
@@ -24,10 +19,10 @@ const Section4 = () => {
             <TypoGraphy text="을 알아보세요!" size="h1" />
           </TextRow>
         </TextWrap>
-        <Row style={{ marginTop: '100px', marginLeft: '-35px' }}>
+        <TextRow style={{ marginTop: '100px', marginLeft: '-35px' }}>
           <img src={mainSub4} />
           <img src={mainSub5} style={{ marginLeft: '-60px' }} />
-        </Row>
+        </TextRow>
       </Container>
     </Wrapper>
   );

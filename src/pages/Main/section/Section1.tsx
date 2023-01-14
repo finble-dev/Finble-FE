@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import mainBg from '../../../assets/img/main/mainBg.png';
 import { Btn60 } from '../../../components/Button';
 import { Link } from 'react-router-dom';
-import { TextWrap, Row } from '../../../assets/styles/styles';
+import { TextWrap, TextRow } from '../../../assets/styles/styles';
 
 const Section1 = () => {
   return (
@@ -22,14 +22,14 @@ const Section1 = () => {
             color="var(--type-black)"
           />
 
-          <Row>
+          <TextRow>
             <TypoGraphy text="핀블" size="h1" color="var(--main-blue)" />
             <TypoGraphy
               text="이 도와드릴게요!"
               size="h1"
               color="var(--type-black)"
             />
-          </Row>
+          </TextRow>
         </TextWrap>
         <BtnWrapper to="/stock">
           <Btn60 type="able" text="지금 바로 시작하기" />

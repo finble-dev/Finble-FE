@@ -2,9 +2,10 @@ import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
 import {
   Container,
+  Img,
+  ImgContainer,
   TextRow,
   TextWrap,
-  Row,
 } from '../../../assets/styles/styles';
 import mainSub from '../../../assets/img/main/mainSub1.png';
 
@@ -15,7 +16,7 @@ const Section2 = () => {
         <TypoGraphy text="끝없이 떨어지던 작년 주식 시장," size="h1" />
         <TypoGraphy text="혹시 크게 스트레스 받진 않았나요?" size="h1" />
       </TextWrap>
-      <Row style={{ justifyContent: 'space-between' }}>
+      <TextRow style={{ justifyContent: 'space-between' }}>
         <Column>
           <TextWrap lineHeight={52} padding="0 0 45px 0">
             <TypoGraphy text="특정 종목에만 돈을 몰아넣으며" size="h2" />
@@ -36,7 +37,7 @@ const Section2 = () => {
               size="t3"
               color="var(--type-gray-2)"
             />
-            <Row>
+            <TextRow>
               <TypoGraphy
                 text="'포트폴리오'"
                 color="var(--main-blue)"
@@ -47,11 +48,13 @@ const Section2 = () => {
                 color="var(--type-gray-2)"
                 size="t3"
               />
-            </Row>
+            </TextRow>
           </TextWrap>
         </Column>
-        <img src={mainSub} style={{ width: '532px', height: '285px' }} />
-      </Row>
+        <ImgContainer width="532px">
+          <Img src={mainSub} />
+        </ImgContainer>
+      </TextRow>
     </Container>
   );
 };

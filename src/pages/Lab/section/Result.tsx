@@ -1,6 +1,6 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
-import { TextWrap, Row } from '../../../assets/styles/styles';
+import { TextWrap, TextRow } from '../../../assets/styles/styles';
 import { useState, useEffect } from 'react';
 
 import { Line } from 'react-chartjs-2';
@@ -133,11 +133,13 @@ const Experiment = () => {
     <Container>
       <Column>
         <TypoGraphy text="투자 실험 결과" size="h1" />
-        <Row style={{ justifyContent: 'space-between', maxWidth: '1200px' }}>
+        <TextRow
+          style={{ justifyContent: 'space-between', maxWidth: '1200px' }}
+        >
           <Column>
             <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
               {list1.map((items: any, idx: number) => (
-                <Row lineHeight={34}>
+                <TextRow lineHeight={34}>
                   {items.map((item: any, idx: number) =>
                     item[0] === 'black' ? (
                       <TypoGraphy text={item[1]} size="t2" />
@@ -149,25 +151,27 @@ const Experiment = () => {
                       />
                     )
                   )}
-                </Row>
+                </TextRow>
               ))}
             </TextWrap>
           </Column>
-          <Row>
+          <TextRow>
             <BarGraphWrapper>
               <TypoGraphy text="연평균 수익률" size="b2" />
             </BarGraphWrapper>
             <BarGraphWrapper>
               <TypoGraphy text="최대 낙폭" size="b2" />
             </BarGraphWrapper>
-          </Row>
-        </Row>
+          </TextRow>
+        </TextRow>
 
-        <Row style={{ justifyContent: 'space-between', maxWidth: '1200px' }}>
+        <TextRow
+          style={{ justifyContent: 'space-between', maxWidth: '1200px' }}
+        >
           <Column>
             <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
               {list2.map((items: any, idx: number) => (
-                <Row lineHeight={40}>
+                <TextRow lineHeight={40}>
                   {items.map((item: any, idx: number) =>
                     item[0] === 'black' ? (
                       <TypoGraphy text={item[1]} size="t2" />
@@ -179,11 +183,11 @@ const Experiment = () => {
                       />
                     )
                   )}
-                </Row>
+                </TextRow>
               ))}
             </TextWrap>
           </Column>
-        </Row>
+        </TextRow>
         <LineGraphWrapper>
           <Line data={graphData} options={options} />
         </LineGraphWrapper>
