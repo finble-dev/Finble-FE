@@ -3,11 +3,23 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TypoGraphy from './Typography';
 
-const Input = ({ type, name }: { type: string; name?: string }) => {
-  let placeholder;
+interface input {
+  type: string;
+  name?: string;
+  category?: string;
+}
+
+const Input = ({ type, name, category }: input) => {
+  let placeholder, unit;
   if (type === 'search') placeholder = '종목 검색 예) 카카오, 테슬라, SPY';
-  else if (type === 'price') placeholder = '예) 78.000';
-  else if (type === 'number') placeholder = '예) 1.2';
+  else if (type === 'price') {
+    placeholder = '예) 78.000';
+    if (category === '한국주식') unit = '₩';
+    else unit = '$';
+  } else if (type === 'number') {
+    unit = '주';
+    placeholder = '예) 1.2';
+  }
 
   return (
     <InputBox>
@@ -23,13 +35,7 @@ const Input = ({ type, name }: { type: string; name?: string }) => {
         <InputArea placeholder={placeholder} />
       )}
 
-      {type === 'price' ? (
-        <TypoGraphy text="₩" color="var(--type-gray-1)" size="input" />
-      ) : type === 'number' ? (
-        <TypoGraphy text="주" color="var(--type-gray-1)" size="input" />
-      ) : (
-        <></>
-      )}
+      <TypoGraphy text={unit} color="var(--type-gray-1)" size="input" />
     </InputBox>
   );
 };

@@ -3,15 +3,15 @@ import TypoGraphy from '../../../components/Typography';
 
 interface stock {
   name: string;
-  code: string;
+  symbol: string;
   category?: string;
 }
 
-const SearchListBox = ({ name, code }: stock) => {
+const SearchListBox = ({ name, symbol }: stock) => {
   return (
     <Container>
       <TypoGraphy text={name} size="b1" />
-      <TypoGraphy text={code} color="#b9b9b9" size="input" />
+      <TypoGraphy text={symbol} color="#b9b9b9" size="input" />
     </Container>
   );
 };

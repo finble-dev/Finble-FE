@@ -7,23 +7,25 @@ import { useState } from 'react';
 import Modal2 from './Modal2';
 
 const data: any[] = [
-  { name: '삼성물산', code: '03423' },
-  { name: '삼성화재', code: '03423' },
-  { name: '삼성생명', code: '03423' },
-  { name: '삼성제약', code: '03423' },
-  { name: '삼성전자', code: '03423' },
-  { name: '삼성공조', code: '03423' },
-  { name: '삼성전기', code: '03423' },
-  { name: '삼성물산', code: '03423' },
-  { name: '삼성물산', code: '03423' },
+  { name: '삼성물산', symbol: '03423', category: '한국주식' },
+  { name: '애플', symbol: '03423', category: '외국주식' },
+  { name: '삼성생명', symbol: '03423', category: '한국주식' },
+  { name: '삼성제약', symbol: '03423', category: '한국주식' },
+  { name: '테슬라', symbol: '03423', category: '외국주식' },
+  { name: '삼성공조', symbol: '03423', category: '한국주식' },
+  { name: '삼성전기', symbol: '03423', category: '한국주식' },
+  { name: '삼성전자', symbol: '03423', category: '한국주식' },
+  { name: '삼성화재', symbol: '03423', category: '한국주식' },
 ];
 
 const Modal = () => {
   const [name, setName] = useState('');
+  const [category, setCategory] = useState('');
   const [click, setclick] = useState(false);
 
-  const onClick = (name: string) => {
-    setName(name);
+  const onClick = (i: any) => {
+    setName(i.name);
+    setCategory(i.category);
     setclick(true);
   };
 
@@ -46,15 +48,15 @@ const Modal = () => {
           ) : (
             <SearchResult>
               {data.map((i) => (
-                <div key={i.index} onClick={() => onClick(i.name)}>
-                  <SearchListBox name={i.name} code={i.code} />
+                <div key={i.index} onClick={() => onClick(i)}>
+                  <SearchListBox name={i.name} symbol={i.symbol} />
                 </div>
               ))}
             </SearchResult>
           )}
         </>
       ) : (
-        <Modal2 name={name} />
+        <Modal2 name={name} category={category} />
       )}
     </>
   );
@@ -64,18 +66,18 @@ export default Modal;
 
 const InputWrap = styled.div`
   width: 100%;
-  padding: 26px 38px 0 18px;
+  padding: 52px 34px 0 34px;
 `;
 const SearchResult = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 20px;
 
   width: 100%;
-  height: 504px;
+  height: 480px;
   overflow-y: auto;
-  margin-top: 23px;
-  padding: 5px 23px 0 23px;
+  margin: 28px 0;
+  padding: 0 0 0 34px;
 
   &::-webkit-scrollbar {
     width: 18px;

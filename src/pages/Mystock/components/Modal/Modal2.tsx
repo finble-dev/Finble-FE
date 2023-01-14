@@ -3,7 +3,7 @@ import { Btn60 } from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import TypoGraphy from '../../../../components/Typography';
 
-const Modal2 = ({ name }: { name: string }) => {
+const Modal2 = ({ name, category }: { name: string; category: string }) => {
   const input = [
     {
       title: '종목명',
@@ -28,7 +28,7 @@ const Modal2 = ({ name }: { name: string }) => {
         {input.map((i, index) => (
           <InputWrapper key={index}>
             <TypoGraphy text={i.title} size="t3" color="var(--type-gray-2)" />
-            <Input type={i.type} name={i.name} />
+            <Input type={i.type} name={i.name} category={category} />
           </InputWrapper>
         ))}
       </Wrapper>
@@ -45,7 +45,7 @@ const Container = styled.div`
   height: 600px;
   display: flex;
   flex-direction: column;
-  padding: 0 18px;
+  padding: 0 34px;
 `;
 
 const Wrapper = styled.div`
