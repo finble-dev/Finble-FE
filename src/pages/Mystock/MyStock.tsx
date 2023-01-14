@@ -7,6 +7,7 @@ import NoneLogin from '../Login/NoneLogin';
 import closeIcon from '../../assets/icons/close.svg';
 import { useState } from 'react';
 import Modal from './components/Modal/Modal1';
+import { Link } from 'react-router-dom';
 
 interface login {
   isLogin: boolean;
@@ -14,6 +15,17 @@ interface login {
 
 const MyStock = ({ isLogin }: login) => {
   const [modalOpen, setModalOpen] = useState(false);
+
+  //임시
+  const [diagonsis, setDiagonsis] = useState(true);
+  let link, button;
+  if (diagonsis) {
+    link = '/diagnosis';
+    button = 'check';
+  } else {
+    link = '/stock';
+    button = 'disable_check';
+  }
 
   return (
     <>
@@ -31,8 +43,8 @@ const MyStock = ({ isLogin }: login) => {
                   />
                 </TextWrap>
               </div>
-              <BtnWrapper>
-                <Btn10 text="내 주식 진단받기 >" type="disable_check" />
+              <BtnWrapper to={link}>
+                <Btn10 text="내 주식 진단받기 >" type={button} />
               </BtnWrapper>
             </Title>
             <BoxContainer>
@@ -124,7 +136,7 @@ const Title = styled.div`
   justify-content: space-between;
 `;
 
-const BtnWrapper = styled.div`
+const BtnWrapper = styled(Link)`
   height: fit-content;
 `;
 

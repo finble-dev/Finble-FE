@@ -16,7 +16,8 @@ const Section2 = () => {
         <TypoGraphy text="끝없이 떨어지던 작년 주식 시장," size="h1" />
         <TypoGraphy text="혹시 크게 스트레스 받진 않았나요?" size="h1" />
       </TextWrap>
-      <TextRow style={{ justifyContent: 'space-between' }}>
+
+      <SubContainer>
         <Column>
           <TextWrap lineHeight={52} padding="0 0 45px 0">
             <TypoGraphy text="특정 종목에만 돈을 몰아넣으며" size="h2" />
@@ -51,10 +52,10 @@ const Section2 = () => {
             </TextRow>
           </TextWrap>
         </Column>
-        <ImgContainer width="532px">
+        <ImgContainer width="532px" height="285px">
           <Img src={mainSub} />
         </ImgContainer>
-      </TextRow>
+      </SubContainer>
     </Container>
   );
 };
@@ -65,4 +66,11 @@ const Column = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: start;
+`;
+
+const SubContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-itmes: center;
+  height: 100%;
 `;

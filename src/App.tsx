@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalStyles from './assets/styles/Globalstyles';
 import { useState } from 'react';
+import StockDiagnosis from './pages/Mystock/StockDiagnosis ';
 
 function App() {
   const [isLogin, setLogin] = useState(true);
@@ -22,6 +23,7 @@ function App() {
               <Route path="/" element={<Main />} />
               <Route path="/stock" element={<MyStock isLogin={isLogin} />} />
               <Route path="/lab" element={<Lab isLogin={isLogin} />} />
+              <Route path="/diagnosis" element={<StockDiagnosis />} />
             </Routes>
           </BrowserRouter>
         </Container>

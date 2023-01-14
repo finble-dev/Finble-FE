@@ -35,8 +35,9 @@ const TextRow = styled.div<{ align?: string; lineHeight?: number }>`
 `;
 
 //Img
-const ImgContainer = styled.div<{ width?: string }>`
+const ImgContainer = styled.div<{ width?: string; height?: string }>`
   width: ${(props) => props.width || '70%'};
+  height: ${(props) => props.height || '70%'};
   display: flex;
   align-items: flex-end;
   justify-contents: center;
