@@ -1,149 +1,143 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
-import { TextRow, TextWrap, Row } from '../../../assets/styles/styles';
+import {
+  TextRow,
+  TextWrap,
+  Img,
+  ImgContainer,
+} from '../../../assets/styles/styles';
 import graph1 from '../../../assets/img/lab/graph1.png';
 import graph2 from '../../../assets/img/lab/graph2.png';
 
 const Intro = () => {
   return (
     <Container>
-      <TypoGraphy
-        text="투자 실험실"
-        color="var(--main-blue)"
-        size="t3"
-        style={{ marginTop: '109px', marginBottom: '10px' }}
-      />
-      <TypoGraphy text="마음 편히 주식 투자하는 방법," size="h1" />
-      <Row style={{ marginBottom: '35px', lineHeight: '55px' }}>
-        <TypoGraphy text="핀블의 '" size="h1" />
-        <TypoGraphy text="투자 실험" color="var(--main-blue)" size="h1" />
-        <TypoGraphy text="'을 소개합니다." size="h1" />
-      </Row>
+      {/* title */}
+      <TypoGraphy text="투자 실험실" color="var(--main-blue)" size="t3" />
+      <TextWrap align="center" lineHeight={55} padding="10px 0 15px 0">
+        <TypoGraphy text="마음 편히 주식 투자하는 방법," size="h1" />
+        <TextRow>
+          <TypoGraphy text="핀블의 ‘" size="h1" />
+          <TypoGraphy text="투자 실험" color="var(--main-blue)" size="h1" />
+          <TypoGraphy text="’을 소개합니다." size="h1" />
+        </TextRow>
+      </TextWrap>
 
+      {/* first box */}
       <Box>
-        <Row style={{ justifyContent: 'space-between', maxWidth: '1200px' }}>
-          <Column>
-            <TextWrap lineHeight={52} padding="0 0 45px 0">
-              <TextRow align="center">
-                <TypoGraphy
-                  text="투자 실험,"
-                  color="var(--main-blue)"
-                  size="h1"
-                />
-                <TypoGraphy text="왜 필요한 걸까요?" size="h1" />
+        {/* left text */}
+        <Column>
+          <TextWrap lineHeight={52} padding="0 0 45px 0">
+            <TextRow align="center">
+              <TypoGraphy text="투자 실험" color="var(--main-blue)" size="h1" />
+              <TypoGraphy text=", 왜 필요한 걸까요?" size="h1" />
+            </TextRow>
+          </TextWrap>
+
+          <TextWrap lineHeight={34}>
+            {list1.map((items: any, idx: number) => (
+              <TextRow lineHeight={34}>
+                {items.map((item: any, idx: number) =>
+                  item[0] === 'black' ? (
+                    <TypoGraphy text={item[1]} size="b1" />
+                  ) : (
+                    <TypoGraphy
+                      text={item[1]}
+                      color="var(--main-blue)"
+                      size="b1"
+                    />
+                  )
+                )}
               </TextRow>
-            </TextWrap>
+            ))}
+          </TextWrap>
 
-            <TextWrap lineHeight={34}>
-              {list1.map((items: any, idx: number) => (
-                <Row lineHeight={34}>
-                  {items.map((item: any, idx: number) =>
-                    item[0] === 'black' ? (
-                      <TypoGraphy text={item[1]} size="b1" />
-                    ) : (
-                      <TypoGraphy
-                        text={item[1]}
-                        color="var(--main-blue)"
-                        size="b1"
-                      />
-                    )
-                  )}
-                </Row>
-              ))}
-            </TextWrap>
+          <TextWrap lineHeight={34} padding="30px 0 0 0">
+            {list2.map((items: any, idx: number) => (
+              <TextRow lineHeight={34}>
+                {items.map((item: any, idx: number) =>
+                  item[0] === 'black' ? (
+                    <TypoGraphy text={item[1]} size="b1" />
+                  ) : (
+                    <TypoGraphy
+                      text={item[1]}
+                      color="var(--main-blue)"
+                      size="b1"
+                    />
+                  )
+                )}
+              </TextRow>
+            ))}
+          </TextWrap>
+        </Column>
 
-            <div style={{ marginTop: '30px' }} />
-
-            <TextWrap lineHeight={34}>
-              {list2.map((items: any, idx: number) => (
-                <Row lineHeight={34}>
-                  {items.map((item: any, idx: number) =>
-                    item[0] === 'black' ? (
-                      <TypoGraphy text={item[1]} size="b1" />
-                    ) : (
-                      <TypoGraphy
-                        text={item[1]}
-                        color="var(--main-blue)"
-                        size="b1"
-                      />
-                    )
-                  )}
-                </Row>
-              ))}
-            </TextWrap>
-          </Column>
-          <img src={graph1} style={{ width: '532px', height: '285px' }} />
-        </Row>
+        {/* right img */}
+        <ImgContainer width="532px">
+          <Img src={graph1} />
+        </ImgContainer>
       </Box>
 
+      {/* second box */}
       <Box>
-        <Row
-          style={{
-            justifyContent: 'space-between',
-            maxWidth: '1200px',
-            alignItems: 'center',
-          }}
-        >
-          <img src={graph2} style={{ width: '381px', height: '244px' }} />
-          <Column style={{ marginLeft: '91px' }}>
-            <TextWrap lineHeight={52} padding="0 0 45px 0">
-              <TextRow align="center">
-                <TypoGraphy
-                  text="투자 실험"
-                  color="var(--main-blue)"
-                  size="h1"
-                />
-                <TypoGraphy text="은 어떻게 하나요?" size="h1" />
+        {/* right img */}
+        <ImgContainer width="381px">
+          <Img src={graph2} />
+        </ImgContainer>
+
+        {/* left text */}
+        <Column padding="0 0 0 90px">
+          <TextWrap lineHeight={52} padding="0 0 25px 0">
+            <TextRow align="center">
+              <TypoGraphy text="투자 실험" color="var(--main-blue)" size="h1" />
+              <TypoGraphy text="은 어떻게 하나요?" size="h1" />
+            </TextRow>
+          </TextWrap>
+
+          <TextWrap lineHeight={34}>
+            {list3.map((items: any, idx: number) => (
+              <TextRow lineHeight={34}>
+                {items.map((item: any, idx: number) =>
+                  item[0] === 'black' ? (
+                    <TypoGraphy text={item[1]} size="b1" />
+                  ) : (
+                    <TypoGraphy
+                      text={item[1]}
+                      color="var(--main-blue)"
+                      size="b1"
+                    />
+                  )
+                )}
               </TextRow>
-            </TextWrap>
+            ))}
+          </TextWrap>
 
-            <TextWrap lineHeight={34}>
-              {list3.map((items: any, idx: number) => (
-                <Row lineHeight={34}>
-                  {items.map((item: any, idx: number) =>
-                    item[0] === 'black' ? (
-                      <TypoGraphy text={item[1]} size="b1" />
-                    ) : (
-                      <TypoGraphy
-                        text={item[1]}
-                        color="var(--main-blue)"
-                        size="b1"
-                      />
-                    )
-                  )}
-                </Row>
-              ))}
-            </TextWrap>
-
-            <div style={{ marginTop: '30px' }} />
-
-            <TextWrap lineHeight={34}>
-              {list4.map((items: any, idx: number) => (
-                <Row lineHeight={34}>
-                  {items.map((item: any, idx: number) =>
-                    item[0] === 'black' ? (
-                      <TypoGraphy text={item[1]} size="b1" />
-                    ) : (
-                      <TypoGraphy
-                        text={item[1]}
-                        color="var(--main-blue)"
-                        size="b1"
-                      />
-                    )
-                  )}
-                </Row>
-              ))}
-            </TextWrap>
-          </Column>
-        </Row>
+          <TextWrap lineHeight={34} padding="20px 0 0 0">
+            {list4.map((items: any, idx: number) => (
+              <TextRow lineHeight={34}>
+                {items.map((item: any, idx: number) =>
+                  item[0] === 'black' ? (
+                    <TypoGraphy text={item[1]} size="b1" />
+                  ) : (
+                    <TypoGraphy
+                      text={item[1]}
+                      color="var(--main-blue)"
+                      size="b1"
+                    />
+                  )
+                )}
+              </TextRow>
+            ))}
+          </TextWrap>
+        </Column>
       </Box>
     </Container>
   );
 };
+
 export default Intro;
 
 const list1 = [
-  [['blue', '달걀을 한 바구니에 담지 말라']],
+  [['blue', '“달걀을 한 바구니에 담지 말라”']],
   [['black', '이 속담을 한 번이라도 들어봤다면']],
   [['black', '쉽게 이해할 수 있어요.']],
 ];
@@ -191,12 +185,11 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   background: #f7f8fa;
-  margin-bottom: 75px;
+  padding: 109px 0 100px 0;
 `;
 
 const Box = styled.div`
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 1200px;
@@ -204,12 +197,13 @@ const Box = styled.div`
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  margin-bottom: 45px;
+  margin: 22px 0;
 `;
 
-const Column = styled.div`
+const Column = styled.div<{ padding?: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  padding: ${(props) => props.padding || 0};
 `;

@@ -92,17 +92,19 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     <Container>
       <Column>
         <TypoGraphy text="투자 실험하기" size="h1" />
-        <TypoGraphy
-          text="민성님의 편안한 투자를 위해 대표적인 ETF들을 선별해봤어요."
-          color="var(--type-gray-2)"
-          size="b1"
-          style={{ marginTop: '13px' }}
-        />
-        <TypoGraphy
-          text="이제 여러 자산을 내 포트폴리오에 넣었다 뺐다 하며 비중을 조절해보세요."
-          color="var(--type-gray-2)"
-          size="b1"
-        />
+        <TextWrap lineHeight={30} padding="25px 0">
+          <TypoGraphy
+            text="민성님의 편안한 투자를 위해 대표적인 ETF들을 선별해봤어요."
+            color="var(--type-gray-1)"
+            size="b1"
+          />
+          <TypoGraphy
+            text="이제 여러 자산을 내 포트폴리오에 넣었다 뺐다 하며 비중을 조절해보세요."
+            color="var(--type-gray-1)"
+            size="b1"
+          />
+        </TextWrap>
+
         <div
           onClick={() => {
             setModalFlag(!modalFlag);
@@ -112,17 +114,16 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
             text="> 어디서부터 시작해야 할지 모르겠다면?"
             color="var(--main-blue)"
             size="b1"
-            style={{ marginTop: '28px', cursor: 'pointer' }}
+            style={{ cursor: 'pointer' }}
           />
         </div>
 
         {modalFlag ? (
-          <>
+          <TextWrap lineHeight={30} padding="25px 0 40px 0">
             <TypoGraphy
               text="가장 유명한 전략인 '60/40 전략'을 따라가보는 건 어떨까요? "
               color="var(--type-gray-2)"
               size="b1"
-              style={{ marginTop: '37px' }}
             />
             <TypoGraphy
               text="'60/40 전략'은 주식과 채권의 비율을 60:40으로 투자하는 전략이에요."
@@ -134,12 +135,12 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               color="var(--type-gray-2)"
               size="b1"
             />
-          </>
+          </TextWrap>
         ) : (
           <></>
         )}
 
-        <Row style={{ marginTop: '45px' }}>
+        <Row>
           <Box>
             <Row>
               {btn.map((item: any, idx: number) => (
@@ -154,7 +155,6 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                   )}
                 </div>
               ))}
-              {}
             </Row>
 
             {btnFlag.map((item: any, idx: number) =>
@@ -192,11 +192,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
             )}
           </Box>
           <Box>
-            <TypoGraphy
-              text="보유 종목"
-              size="b2"
-              style={{ fontWeight: 700 }}
-            />
+            <TypoGraphy text="보유 종목" size="small" />
             <SubBox>
               <RetainBox>
                 <Row style={{ justifyContent: 'space-between' }}>
@@ -231,11 +227,9 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                 )}
               </RetainBox>
               <Line />
-              <TypoGraphy
-                text="추가 종목"
-                size="b2"
-                style={{ fontWeight: 700, marginBottom: '21px' }}
-              />
+              <TextWrap padding="0 0 20px 0">
+                <TypoGraphy text="추가 종목" size="small" />
+              </TextWrap>
               {ETFList.map((items: any, listNum: number) =>
                 items.map((item: any, itemNum: number) =>
                   ETFFlag[listNum][itemNum] ? (

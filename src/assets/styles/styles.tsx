@@ -26,11 +26,12 @@ const TextWrap = styled.div<{
   text-align: ${(props) => props.align || 'left'};
 `;
 
-const TextRow = styled.div<{ align?: string }>`
+const TextRow = styled.div<{ align?: string; lineHeight?: number }>`
   width: 100%;
   display: flex;
   text-align: ${(props) => props.align || 'left'};
   justify-content: ${(props) => props.align || 'inherit'};
+  line-height: ${(props) => props.lineHeight || 44.99}px;
 `;
 
 //Img
