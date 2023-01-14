@@ -4,12 +4,26 @@ import TypoGraphy from '../../../components/Typography';
 import { ETF } from '../../../interface/interface';
 import { Btn10 } from '../../../components/Button';
 
-export const Item = ({ item, ETFFlag, listNum, itemNum }: any) => {
+interface ETFItem {
+  item: ETF;
+  changeFlag: (listNum: number, itemNum: number) => void;
+  ETFFlag: Array<Array<boolean>>;
+  listNum: number;
+  itemNum: number;
+}
+
+export const ETFItem = ({
+  item,
+  changeFlag,
+  ETFFlag,
+  listNum,
+  itemNum,
+}: ETFItem) => {
   return (
     <Container>
       <Row style={{ justifyContent: 'space-between' }}>
         <Row>
-          <Img />
+          <Profile src={item.img} />
           <Column>
             <TypoGraphy text={item.name} size="t3" />
             <TypoGraphy
@@ -23,7 +37,13 @@ export const Item = ({ item, ETFFlag, listNum, itemNum }: any) => {
         {ETFFlag[listNum][itemNum] ? (
           <Btn10 text={'추가됨'} type="disable_add" />
         ) : (
-          <Btn10 text={'추가하기'} type="add" />
+          <div
+            onClick={() => {
+              changeFlag(listNum, itemNum);
+            }}
+          >
+            <Btn10 text={'추가하기'} type="add" />
+          </div>
         )}
       </Row>
       <TextWrap lineHeight={26}>
@@ -66,9 +86,7 @@ const Row = styled.div`
   margin-bottom: 17px;
 `;
 
-const Img = styled.div`
-  width: 58.15px;
+const Profile = styled.img`
   height: 58px;
-  background-color: gray;
-  border-radius: 50rem;
+  width: 58px;
 `;

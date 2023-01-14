@@ -3,4 +3,5 @@ export interface ETF {
   intro: string;
   detail: Array<string>;
   hashTag: string;
+  img: string;
 }
