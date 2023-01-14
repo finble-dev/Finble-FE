@@ -6,7 +6,7 @@ import TypoGraphy from '../../components/Typography';
 import NoneLogin from '../Login/NoneLogin';
 import closeIcon from '../../assets/icons/close.svg';
 import { useState } from 'react';
-import Modal from './components/Modal';
+import Modal from './components/Modal/Modal1';
 
 interface login {
   isLogin: boolean;
