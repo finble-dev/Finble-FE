@@ -9,6 +9,7 @@ export const ETFList = [
         '수익률과 변동성이 낮아요.',
       ],
       hashTag: '#미국경제전체',
+      img: '/img/lab/해외.svg',
     },
     {
       name: 'QQQ',
@@ -19,6 +20,7 @@ export const ETFList = [
         "'SPY'보다 수익률과 변동성이 높아요.",
       ],
       hashTag: '#미국기술주',
+      img: '/img/lab/해외.svg',
     },
   ],
   [
@@ -30,6 +32,7 @@ export const ETFList = [
         '손실과 변동성을 최소화하고 싶은 주린이들에게 추천해요.',
       ],
       hashTag: '#주린이추천',
+      img: '/img/lab/채권.svg',
     },
     {
       name: 'TLF',
@@ -40,6 +43,7 @@ export const ETFList = [
         '단기투자시에는 손실이 일어날 수 있어요.',
       ],
       hashTag: '#장기투자',
+      img: '/img/lab/채권.svg',
     },
   ],
   [
@@ -51,6 +55,7 @@ export const ETFList = [
         '금을 보유한 것과 같은 수익을 얻을 수 있어요.',
       ],
       hashTag: '#대표안전자산',
+      img: '/img/lab/금.svg',
     },
   ],
 ];

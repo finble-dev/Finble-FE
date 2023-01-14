@@ -4,9 +4,10 @@ import styled from 'styled-components';
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
 import { myStock } from '../../../assets/myStock';
-import { Item } from '../components/Item';
+import { ETFItem } from '../components/ETFItem';
 import { useState, useEffect } from 'react';
 import { ETF } from '../../../interface/interface';
+import { AddedItem } from '../components/AddedItem';
 
 interface exp {
   isExp?: boolean;
@@ -22,6 +23,43 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     [false, false],
     [false],
   ]);
+  const changeFlag = (listNum: number, itemNum: number) => {
+    let newList = [];
+
+    for (let i = 0; i < ETFFlag.length; i++) {
+      let newItem = [];
+      for (let j = 0; j < ETFFlag[i].length; j++) {
+        if (i === listNum && j === itemNum) {
+          newItem.push(!ETFFlag[i][j]);
+        } else {
+          newItem.push(ETFFlag[i][j]);
+        }
+      }
+      newList.push(newItem);
+    }
+
+    setETFFlag(newList);
+  };
+
+  const [ETFValue, setETFValue] = useState([[0, 0], [0, 0], [0]]);
+  const changeETFValue = (listNum: number, itemNum: number, e: any) => {
+    let newList = [];
+
+    for (let i = 0; i < ETFValue.length; i++) {
+      let newItem = [];
+      for (let j = 0; j < ETFValue[i].length; j++) {
+        if (i === listNum && j === itemNum) {
+          newItem.push(e.target.value);
+        } else {
+          newItem.push(ETFValue[i][j]);
+        }
+      }
+      newList.push(newItem);
+    }
+
+    setETFValue(newList);
+  };
+
   const [myStk, setMyStk] = useState(myStock);
   const changeMine = (num: number, event: any) => {
     let newStk = [] as any;
@@ -140,12 +178,13 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
             {ETFList.map((itemList: Array<ETF>, listNum: number) =>
               btnFlag[listNum] ? (
                 itemList.map((item: ETF, itemNum: number) => (
-                  <Item
+                  <ETFItem
                     item={item}
+                    changeFlag={changeFlag}
                     ETFFlag={ETFFlag}
                     listNum={listNum}
                     itemNum={itemNum}
-                  ></Item>
+                  />
                 ))
               ) : (
                 <></>
@@ -158,38 +197,68 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               size="b2"
               style={{ fontWeight: 700 }}
             />
-            <RetainBox>
-              <Row style={{ justifyContent: 'space-between' }}>
-                <TypoGraphy
-                  text="종목 이름"
-                  color="var(--type-gray-2)"
-                  size="b3"
-                />
-                <TypoGraphy text="비중" color="var(--type-gray-2)" size="b3" />
-              </Row>
-              {myStk.map((item: { name: string; per: number }, idx: number) => (
-                <Row
-                  style={{
-                    marginBottom: '32px',
-                    justifyContent: 'space-between',
-                  }}
-                >
-                  <TypoGraphy text={item.name} size="b2" />
-                  <Input
-                    value={myStk[idx].per}
-                    onChange={(e) => {
-                      changeMine(idx, e);
-                    }}
+            <SubBox>
+              <RetainBox>
+                <Row style={{ justifyContent: 'space-between' }}>
+                  <TypoGraphy
+                    text="종목 이름"
+                    color="var(--type-gray-2)"
+                    size="b3"
+                  />
+                  <TypoGraphy
+                    text="비중"
+                    color="var(--type-gray-2)"
+                    size="b3"
                   />
                 </Row>
-              ))}
-            </RetainBox>
-            <Line />
-            <TypoGraphy
-              text="추가 종목"
-              size="b2"
-              style={{ fontWeight: 700 }}
-            />
+                {myStk.map(
+                  (item: { name: string; per: number }, idx: number) => (
+                    <Row
+                      style={{
+                        marginBottom: '32px',
+                        justifyContent: 'space-between',
+                      }}
+                    >
+                      <TypoGraphy text={item.name} size="b2" />
+                      <Input
+                        value={myStk[idx].per}
+                        onChange={(e) => {
+                          changeMine(idx, e);
+                        }}
+                      />
+                    </Row>
+                  )
+                )}
+              </RetainBox>
+              <Line />
+              <TypoGraphy
+                text="추가 종목"
+                size="b2"
+                style={{ fontWeight: 700, marginBottom: '21px' }}
+              />
+              {ETFList.map((items: any, listNum: number) =>
+                items.map((item: any, itemNum: number) =>
+                  ETFFlag[listNum][itemNum] ? (
+                    <AddedItem
+                      listNum={listNum}
+                      itemNum={itemNum}
+                      ETFValue={ETFValue}
+                      changeETFValue={changeETFValue}
+                      changeFlag={changeFlag}
+                    />
+                  ) : (
+                    <></>
+                  )
+                )
+              )}
+            </SubBox>
+            <Footer>
+              <TypoGraphy
+                text="합이 100%가 되어야 합니다."
+                size="b2"
+                color="var(--type-gray-2)"
+              />
+            </Footer>
           </Box>
         </Row>
 
@@ -246,6 +315,14 @@ const Row = styled.div`
   margin-bottom: 21px;
 `;
 
+const Footer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  height: 70px;
+  align-items: center;
+`;
+
 const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -264,6 +341,24 @@ const Box = styled.div`
   border-radius: 10px;
   margin-right: 22px;
   padding: 24px 30px;
+`;
+
+const SubBox = styled.div`
+  width: 562px;
+  height: 610px;
+
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #c2d4fe;
+    border-radius: 10px;
+    height: 367px;
+  }
 `;
 
 const RetainBox = styled.div`
