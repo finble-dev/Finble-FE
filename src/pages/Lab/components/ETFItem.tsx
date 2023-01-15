@@ -48,7 +48,12 @@ export const ETFItem = ({
       </Row>
       <TextWrap lineHeight={26}>
         {item.detail.map((item: string, idx: number) => (
-          <TypoGraphy text={item} color="var(--type-gray-2)" size="b2" />
+          <TypoGraphy
+            text={item}
+            color="var(--type-gray-2)"
+            size="b2"
+            key={idx}
+          />
         ))}
       </TextWrap>
       <TypoGraphy

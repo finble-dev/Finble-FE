@@ -35,16 +35,17 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={34}>
-            {list1.map((items: any, idx: number) => (
-              <TextRow lineHeight={34}>
-                {items.map((item: any, idx: number) =>
+            {list1.map((items: any, itemsIdx: number) => (
+              <TextRow lineHeight={34} key={itemsIdx}>
+                {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" />
+                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
+                      key={itemIdx}
                     />
                   )
                 )}
@@ -53,16 +54,17 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={34} padding="30px 0 0 0">
-            {list2.map((items: any, idx: number) => (
-              <TextRow lineHeight={34}>
-                {items.map((item: any, idx: number) =>
+            {list2.map((items: any, itemsIdx: number) => (
+              <TextRow lineHeight={34} key={itemsIdx}>
+                {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" />
+                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
+                      key={itemIdx}
                     />
                   )
                 )}
@@ -94,16 +96,17 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={34}>
-            {list3.map((items: any, idx: number) => (
-              <TextRow lineHeight={34}>
-                {items.map((item: any, idx: number) =>
+            {list3.map((items: any, itemsIdx: number) => (
+              <TextRow lineHeight={34} key={itemsIdx}>
+                {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" />
+                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
+                      key={itemIdx}
                     />
                   )
                 )}
@@ -112,16 +115,17 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={34} padding="20px 0 0 0">
-            {list4.map((items: any, idx: number) => (
-              <TextRow lineHeight={34}>
-                {items.map((item: any, idx: number) =>
+            {list4.map((items: any, itemsIdx: number) => (
+              <TextRow lineHeight={34} key={itemsIdx}>
+                {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" />
+                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
+                      key={itemIdx}
                     />
                   )
                 )}
@@ -152,7 +156,7 @@ const list2 = [
 
 const list3 = [
   [
-    ['black', '개인이 직접 투자하기에는 힘든'],
+    ['black', '개인이 직접 투자하기에는 힘든\u00A0'],
     ['blue', '채권, 금과 같은 자산'],
     ['black', '들을'],
   ],
