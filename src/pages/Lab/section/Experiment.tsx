@@ -1,13 +1,19 @@
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import ReactModal from 'react-modal';
+//components
 import TypoGraphy from '../../../components/Typography';
 import { Btn10, Btn60 } from '../../../components/Button';
-import styled from 'styled-components';
-import { TextRow, TextWrap } from '../../../assets/styles/styles';
+import { AddedItem } from '../components/AddedItem';
+import { ETFItem } from '../components/ETFItem';
+// assets
+import { TextRow, TextWrap, Img } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
 import { myStock } from '../../../assets/myStock';
-import { ETFItem } from '../components/ETFItem';
-import { useState, useEffect } from 'react';
+import modalImg from '../../../assets/img/lab/캐릭터.png';
+// interface
 import { ETF } from '../../../interface/interface';
-import { AddedItem } from '../components/AddedItem';
+import { Link } from 'react-router-dom';
 
 interface exp {
   isExp?: boolean;
@@ -15,9 +21,12 @@ interface exp {
 }
 
 const Experiment = ({ isExp, setIsExp }: exp) => {
-  const [modalFlag, setModalFlag] = useState(false);
+  const [toggleFlag, setToggleFlag] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+
   const [expNum, setExpNum] = useState(0);
-  const [btnFlag, setBtnFlag] = useState([true, false, false]);
+  // 해외, 채권, 금 카테고리 선택 여부
+  const [cateFlag, setCateFlag] = useState([true, false, false]);
   const [ETFFlag, setETFFlag] = useState([
     [false, false],
     [false, false],
@@ -42,6 +51,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
   };
 
   const [ETFValue, setETFValue] = useState([[0, 0], [0, 0], [0]]);
+
   const changeETFValue = (listNum: number, itemNum: number, e: any) => {
     let newList = [];
 
@@ -60,7 +70,11 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     setETFValue(newList);
   };
 
-  const [myStk, setMyStk] = useState(myStock);
+  const [myStk, setMyStk] = useState([{ name: '카카오', per: 0 }]) as any;
+  useEffect(() => {
+    if (myStock.length === 0) setModalOpen(true);
+    else setMyStk(myStock);
+  }, []);
   const changeMine = (num: number, event: any) => {
     let newStk = [] as any;
 
@@ -73,13 +87,27 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     setMyStk(newStk);
   };
 
+  const [totalPer, setTotal] = useState(0);
+
+  useEffect(() => {
+    let newTotal = 0 as number;
+    ETFValue.map((items: any, listNum: number) =>
+      items.map(
+        (item: any, itemNum: number) =>
+          (newTotal += Number(ETFValue[listNum][itemNum]))
+      )
+    );
+    myStk.map((item: any, idx: number) => (newTotal += Number(item.per)));
+    setTotal(newTotal);
+  }, [ETFValue, myStk]);
+
   const onClickBtn = (idx: number) => {
     let newList = [];
     for (let i = 0; i < 3; i++) {
       if (i == idx) newList.push(true);
       else newList.push(false);
     }
-    setBtnFlag(newList);
+    setCateFlag(newList);
   };
 
   useEffect(() => {
@@ -107,7 +135,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
 
         <div
           onClick={() => {
-            setModalFlag(!modalFlag);
+            setToggleFlag(!toggleFlag);
           }}
         >
           <TypoGraphy
@@ -118,8 +146,8 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
           />
         </div>
 
-        {modalFlag ? (
-          <TextWrap lineHeight={30} padding="25px 0 40px 0">
+        {toggleFlag ? (
+          <TextWrap lineHeight={30} padding="25px 0 0 0">
             <TypoGraphy
               text="가장 유명한 전략인 '60/40 전략'을 따라가보는 건 어떨까요? "
               color="var(--type-gray-2)"
@@ -140,7 +168,10 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
           <></>
         )}
 
-        <Row>
+        <Row
+          style={{ marginTop: '44px' }}
+          blurFlag={myStock.length === 0 ? true : false}
+        >
           <Box>
             <Row>
               {btn.map((item: any, idx: number) => (
@@ -148,7 +179,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                   onClick={() => onClickBtn(idx)}
                   style={{ marginRight: '10px' }}
                 >
-                  {btnFlag[idx] === true ? (
+                  {cateFlag[idx] === true ? (
                     <Btn60 text={item.name} type={'outline_able'} />
                   ) : (
                     <Btn60 text={item.name} type={'outline_disable'} />
@@ -157,7 +188,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               ))}
             </Row>
 
-            {btnFlag.map((item: any, idx: number) =>
+            {cateFlag.map((item: any, idx: number) =>
               item ? (
                 <>
                   <TypoGraphy
@@ -176,7 +207,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               )
             )}
             {ETFList.map((itemList: Array<ETF>, listNum: number) =>
-              btnFlag[listNum] ? (
+              cateFlag[listNum] ? (
                 itemList.map((item: ETF, itemNum: number) => (
                   <ETFItem
                     item={item}
@@ -216,12 +247,19 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                       }}
                     >
                       <TypoGraphy text={item.name} size="b2" />
-                      <Input
-                        value={myStk[idx].per}
-                        onChange={(e) => {
-                          changeMine(idx, e);
-                        }}
-                      />
+                      <InputBox>
+                        <InputArea
+                          value={myStk[idx].per}
+                          onChange={(e) => {
+                            changeMine(idx, e);
+                          }}
+                        />
+                        <TypoGraphy
+                          text="%"
+                          size="input"
+                          color="var(--type-gray-3)"
+                        />
+                      </InputBox>
                     </Row>
                   )
                 )}
@@ -247,11 +285,26 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               )}
             </SubBox>
             <Footer>
-              <TypoGraphy
-                text="합이 100%가 되어야 합니다."
-                size="b2"
-                color="var(--type-gray-2)"
-              />
+              {totalPer === 100 ? (
+                <TypoGraphy
+                  text="합이 100%가 되어야 합니다."
+                  size="b2"
+                  color="var(--type-gray-2)"
+                  style={{ marginRight: '11px' }}
+                />
+              ) : (
+                <TypoGraphy
+                  text="합이 100%가 되어야 합니다."
+                  size="b2"
+                  color="red"
+                  style={{ marginRight: '11px' }}
+                />
+              )}
+
+              <InputBox>
+                <InputArea value={totalPer} />
+                <TypoGraphy text="%" size="input" color="var(--type-gray-3)" />
+              </InputBox>
             </Footer>
           </Box>
         </Row>
@@ -259,8 +312,10 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
         <ButtonContainer>
           <div
             onClick={() => {
-              setIsExp(true);
-              setExpNum(expNum + 1);
+              if (totalPer === 100) {
+                setIsExp(true);
+                setExpNum(expNum + 1);
+              }
             }}
           >
             {isExp ? (
@@ -270,6 +325,41 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
             )}
           </div>
         </ButtonContainer>
+        <ReactModal
+          isOpen={modalOpen}
+          onRequestClose={() => setModalOpen(false)}
+          style={{
+            overlay: {
+              position: 'absolute',
+              top: '2050px',
+              backdropFilter: 'blur(10px)',
+            },
+            content: {
+              margin: 'auto',
+              width: '815px',
+              height: '495px',
+              background: 'var(--type-white)',
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+              borderRadius: '20px',
+            },
+          }}
+        >
+          <ModalOpen>
+            <TextRow>
+              <TypoGraphy
+                text="보유 중인 주식을 입력 후에 테스트해볼 수 있어요!"
+                size="t2"
+                style={{ marginTop: '54px', marginBottom: '40px' }}
+              />
+            </TextRow>
+            <img src={modalImg} style={{ marginBottom: '50px' }} />
+            <Link to="/stock">
+              <Btn60 type="able" text="내 주식 입력하러 가기>" />
+            </Link>
+          </ModalOpen>
+        </ReactModal>
       </Column>
     </Container>
   );
@@ -303,10 +393,11 @@ const Container = styled.div`
   background: #dfe9ff;
 `;
 
-const Row = styled.div`
+const Row = styled.div<{ blurFlag?: boolean }>`
   display: flex;
   flex-direction: row;
   margin-bottom: 21px;
+  filter: ${(props) => (props.blurFlag === true ? 'blur(10px)' : 'blur(0px)')};
 `;
 
 const Footer = styled.div`
@@ -376,7 +467,9 @@ const Line = styled.div`
   margin-bottom: 21px;
 `;
 
-const Input = styled.input`
+const InputBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 89px;
   height: 38px;
   background: #ffffff;
@@ -385,4 +478,35 @@ const Input = styled.input`
   padding: 15px 10px;
   font-size: var(--fs-input);
   font-weight: var(--fw-input);
+`;
+
+const InputArea = styled.input`
+  width: 100%;
+  font-size: var(--fs-input);
+  font-weight: var(--fw-input);
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: var(--type-gray-5);
+  }
+`;
+
+// modal
+const ModalOpen = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  backdrop-filter: blur(10px);
+`;
+const TitleWrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+  height: 100%;
+  // padding: 0 0 40px 0;
 `;

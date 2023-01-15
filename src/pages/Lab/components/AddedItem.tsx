@@ -45,12 +45,15 @@ export const AddedItem = ({
           </Column>
         </Row>
 
-        <Input
-          value={String(ETFValue[listNum][itemNum])}
-          onChange={(e) => {
-            changeETFValue(listNum, itemNum, e);
-          }}
-        />
+        <InputBox>
+          <InputArea
+            value={String(ETFValue[listNum][itemNum])}
+            onChange={(e) => {
+              changeETFValue(listNum, itemNum, e);
+            }}
+          />
+          <TypoGraphy text="%" size="input" color="var(--type-gray-3)" />
+        </InputBox>
       </Box>
     </Container>
   );
@@ -97,7 +100,9 @@ const Column = styled.div`
   flex-direction: column;
 `;
 
-const Input = styled.input`
+const InputBox = styled.div`
+  display: flex;
+  align-items: center;
   width: 89px;
   height: 38px;
   background: #ffffff;
@@ -106,4 +111,16 @@ const Input = styled.input`
   padding: 15px 10px;
   font-size: var(--fs-input);
   font-weight: var(--fw-input);
+`;
+
+const InputArea = styled.input`
+  width: 100%;
+  font-size: var(--fs-input);
+  font-weight: var(--fw-input);
+  border: none;
+  outline: none;
+
+  &::placeholder {
+    color: var(--type-gray-5);
+  }
 `;
