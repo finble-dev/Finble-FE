@@ -21,6 +21,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
 
 ChartJS.register(
   CategoryScale,
@@ -34,9 +35,9 @@ ChartJS.register(
 const Experiment = () => {
   const [modalFlag, setModalFlag] = useState(false);
   // 투자원금
-  const [current, setCurrent] = useState(2626302);
+  const [current, setCurrent] = useState('2,626,302');
   // 최종금액
-  const [total, setTotal] = useState(11345623);
+  const [total, setTotal] = useState('11,345,623');
   // 연평균 수익률
   const [year, setYear] = useState(28);
   const [yearPercent, setYearPercent] = useState(4);
@@ -64,8 +65,9 @@ const Experiment = () => {
   const list2 = [
     [['black', `현재 투자원금인 ${current}원을 10년간 투자했다면`]],
     [
-      ['black', '최종 금액은 \t'],
-      ['blue', ` ${total}원(+${Math.floor(total / current) * 100}%)`],
+      ['black', '최종 금액은\u00A0'],
+      // ['blue', ` ${total}원(+${Math.floor(total / current) * 100}%)`],
+      ['blue', ` ${total}원(+332%)`],
       ['black', '이 되었을 거에요.'],
     ],
   ];
@@ -120,13 +122,15 @@ const Experiment = () => {
       myData.map((item: { date: number; data: number }) => {
         const year = Math.floor(item.date / 10000);
         let newLabel = label;
+        // newLabel.push('20' + year.toString());
 
         if (year != lastYear) {
           newLabel.push('20' + year.toString());
           lastYear = year;
         } else {
-          newLabel.push('\t');
+          newLabel.push('');
         }
+
         setLabel(newLabel);
       });
     }
@@ -137,9 +141,14 @@ const Experiment = () => {
       <Column>
         <TypoGraphy text="투자 실험 결과" size="h1" />
         <TextRow
-          style={{ justifyContent: 'space-between', maxWidth: '1200px' }}
+          style={{
+            justifyContent: 'space-between',
+            alignContent: 'center',
+            maxWidth: '1200px',
+            marginTop: '20px',
+          }}
         >
-          <Column>
+          <Column style={{ marginTop: '0px' }}>
             <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
               {list1.map((items: any, idx: number) => (
                 <TextRow lineHeight={40}>
@@ -192,7 +201,11 @@ const Experiment = () => {
           </Column>
         </TextRow>
         <LineGraphWrapper>
-          <Line data={graphData} options={options} />
+          <Line
+            data={graphData}
+            options={options}
+            style={{ width: '1093px', height: '542px', padding: '20px' }}
+          />
         </LineGraphWrapper>
         <Column>
           <TypoGraphy
@@ -319,6 +332,12 @@ const options = {
     legend: {
       display: true,
       align: 'start',
+      title: {
+        color: 'black',
+      },
+      labels: {
+        boxHeight: 2,
+      },
     },
     tooltip: {
       padding: 10,
@@ -381,8 +400,8 @@ const LineGraphWrapper = styled.div`
   display: flex;
   justify-content: center;
   width: 1200px;
-  height: 517px;
-  padding: 24px;
+  height: 600px;
+  padding: 24px 24px;
   background: #ffffff;
   border-radius: 19.9997px;
 `;
