@@ -1,11 +1,6 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
-import {
-  Container,
-  TextRow,
-  TextWrap,
-  Row,
-} from '../../../assets/styles/styles';
+import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
 import mainSub2 from '../../../assets/img/main/mainSub2.png';
 import mainSub3 from '../../../assets/img/main/mainSub3.png';
 
@@ -36,10 +31,10 @@ const Section3 = () => {
           text="'앞으로 어떻게 투자해야할지 미리 알아보세요."
         />
       </TextWrap>
-      <Row>
+      <TextRow>
         <img src={mainSub2} style={{ marginRight: '20px' }} />
         <img src={mainSub3} />
-      </Row>
+      </TextRow>
       <div style={{ marginBottom: '218px' }}></div>
     </Container>
   );

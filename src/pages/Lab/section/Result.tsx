@@ -1,6 +1,6 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
-import { TextWrap, Row } from '../../../assets/styles/styles';
+import { TextWrap, TextRow } from '../../../assets/styles/styles';
 import { useState, useEffect } from 'react';
 
 import { Line } from 'react-chartjs-2';
@@ -92,7 +92,6 @@ const Experiment = () => {
   const graphData = {
     labels: label,
     datasets: [
-      //{ yAxisID: 'yAxes', xAxisID: 'xAxes' },
       {
         label: '기존 포트폴리오',
         data: myData.map((item: { date: number; data: number }) => item.data),
@@ -134,11 +133,13 @@ const Experiment = () => {
     <Container>
       <Column>
         <TypoGraphy text="투자 실험 결과" size="h1" />
-        <Row style={{ justifyContent: 'space-between', maxWidth: '1200px' }}>
+        <TextRow
+          style={{ justifyContent: 'space-between', maxWidth: '1200px' }}
+        >
           <Column>
             <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
               {list1.map((items: any, idx: number) => (
-                <Row lineHeight={34}>
+                <TextRow lineHeight={34}>
                   {items.map((item: any, idx: number) =>
                     item[0] === 'black' ? (
                       <TypoGraphy text={item[1]} size="t2" />
@@ -150,25 +151,27 @@ const Experiment = () => {
                       />
                     )
                   )}
-                </Row>
+                </TextRow>
               ))}
             </TextWrap>
           </Column>
-          <Row>
+          <TextRow>
             <BarGraphWrapper>
               <TypoGraphy text="연평균 수익률" size="b2" />
             </BarGraphWrapper>
             <BarGraphWrapper>
               <TypoGraphy text="최대 낙폭" size="b2" />
             </BarGraphWrapper>
-          </Row>
-        </Row>
+          </TextRow>
+        </TextRow>
 
-        <Row style={{ justifyContent: 'space-between', maxWidth: '1200px' }}>
+        <TextRow
+          style={{ justifyContent: 'space-between', maxWidth: '1200px' }}
+        >
           <Column>
             <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
               {list2.map((items: any, idx: number) => (
-                <Row lineHeight={40}>
+                <TextRow lineHeight={40}>
                   {items.map((item: any, idx: number) =>
                     item[0] === 'black' ? (
                       <TypoGraphy text={item[1]} size="t2" />
@@ -180,11 +183,11 @@ const Experiment = () => {
                       />
                     )
                   )}
-                </Row>
+                </TextRow>
               ))}
             </TextWrap>
           </Column>
-        </Row>
+        </TextRow>
         <LineGraphWrapper>
           <Line data={graphData} options={options} />
         </LineGraphWrapper>
@@ -196,7 +199,7 @@ const Experiment = () => {
 
               <QuestionRow>
                 <div style={{ display: 'flex', justifyContent: 'start' }}>
-                  <Img src={q} />
+                  <ImgQA src={q} />
                   <TypoGraphy
                     text={item.question}
                     size="b1"
@@ -209,14 +212,18 @@ const Experiment = () => {
                     item.setFlag(!item.flag);
                   }}
                 >
-                  {item.flag ? <Img src={down} /> : <Img src={up} />}
+                  {item.flag ? (
+                    <ImgToggle src={down} />
+                  ) : (
+                    <ImgToggle src={up} />
+                  )}
                 </div>
               </QuestionRow>
               {item.flag ? (
                 <>
-                  <TipLine />{' '}
+                  <TipLine />
                   <AnswerRow>
-                    <Img src={a} />
+                    <ImgQA src={a} />
                     <TextWrap lineHeight={46} style={{ marginLeft: '30px' }}>
                       <TypoGraphy text={item.answer1} size="b1" />
                       <TypoGraphy text={item.answer2} size="b1" />
@@ -277,6 +284,11 @@ const options = {
     legend: {
       display: true,
       align: 'start',
+    },
+    tooltip: {
+      padding: 10,
+      bodySpacing: 5,
+      usePointStyle: true,
     },
   },
 
@@ -371,8 +383,14 @@ const AnswerRow = styled.div`
   background-color: #f7f8fa;
 `;
 
-const Img = styled.img`
+const ImgQA = styled.img`
   width: 23px;
   height: 23px;
+  cursor: pointer;
+`;
+
+const ImgToggle = styled.img`
+  width: 19.6px;
+  height: 9.8px;
   cursor: pointer;
 `;

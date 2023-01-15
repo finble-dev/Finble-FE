@@ -12,7 +12,7 @@ const GlobalStyles = createGlobalStyle`
     --main-blue: #6792F8;
     --main-green: #4FEDAE;
 
-    --semantic-red: #DA5752;
+    --semantic-red: #FF5852;
     --semantic-blue: #4492F7;
     --semantic-yellow: #F8D25C;
     --semantic-green: #6FC183;
@@ -40,9 +40,9 @@ const GlobalStyles = createGlobalStyle`
     --fw-input: 400;
 
     // font-size
-    --fs-h1: 38px;
-    --fs-h2: 32px;
-    --fs-t1: 38px;
+    --fs-h1: 34px;
+    --fs-h2: 28px;
+    --fs-t1: 36px;
     --fs-t2: 32px;
     --fs-t3: 24px;
     --fs-b1: 22px;

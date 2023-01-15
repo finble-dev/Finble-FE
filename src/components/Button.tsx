@@ -67,7 +67,7 @@ const Btn60Container = styled.div<btn>`
       : 'var(--type-white)'};
   border: ${(props) =>
     props.type === 'login' || props.type === 'outline_disable'
-      ? '2px solid var(--type-gray-4)'
+      ? '1px solid var(--type-gray-4)'
       : props.type === 'outline_able'
       ? '2px solid var(--main-blue)'
       : 'none'};
@@ -102,4 +102,6 @@ const Btn10Container = styled.div<btn>`
 
   border: ${(props) =>
     props.type === 'big_add' ? '2px dashed var(--main-blue)' : 'none'};
+  height: ${(props) =>
+    props.type === 'add' || props.type === 'disable_add' ? '38px' : 'auto'};
 `;

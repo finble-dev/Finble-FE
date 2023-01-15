@@ -11,7 +11,7 @@ const Container = styled.div`
 
 const Row = styled.div<{ lineHeight?: number }>`
   display: flex;
-  width: 100%;
+  // width: 100%;
   line-height: ${(props) => props.lineHeight || 44.99}px;
 `;
 
@@ -26,16 +26,18 @@ const TextWrap = styled.div<{
   text-align: ${(props) => props.align || 'left'};
 `;
 
-const TextRow = styled.div<{ align?: string }>`
+const TextRow = styled.div<{ align?: string; lineHeight?: number }>`
   width: 100%;
   display: flex;
   text-align: ${(props) => props.align || 'left'};
   justify-content: ${(props) => props.align || 'inherit'};
+  line-height: ${(props) => props.lineHeight || 44.99}px;
 `;
 
 //Img
-const ImgContainer = styled.div<{ width?: string }>`
+const ImgContainer = styled.div<{ width?: string; height?: string }>`
   width: ${(props) => props.width || '70%'};
+  height: ${(props) => props.height || '70%'};
   display: flex;
   align-items: flex-end;
   justify-contents: center;

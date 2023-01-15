@@ -97,7 +97,6 @@ export default NoneLogin;
 const Container = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100%;
   height: calc(100vh - 70px);
   background-image: url(${noneLoginBg});
@@ -109,7 +108,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 70%;
+  padding-top: 220px;
   max-width: 1200px;
 `;
 
