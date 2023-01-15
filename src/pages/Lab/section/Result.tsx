@@ -2,6 +2,7 @@ import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
 import { TextWrap, TextRow } from '../../../assets/styles/styles';
 import { useState, useEffect } from 'react';
+import { Btn10 } from '../../../components/Button';
 
 import { Line } from 'react-chartjs-2';
 import { myData, newData } from '../../../assets/graphData';
@@ -38,13 +39,15 @@ const Experiment = () => {
   const [total, setTotal] = useState(11345623);
   // 연평균 수익률
   const [year, setYear] = useState(28);
-  const [yearPercent, setYearPercent] = useState(-4);
+  const [yearPercent, setYearPercent] = useState(4);
   //최대 낙폭
   const [loss, setLoss] = useState(28);
-  const [lossPercent, setLossPercent] = useState(-17);
+  const [lossPercent, setLossPercent] = useState(17);
   // tip flag
   const [q1, setQ1] = useState(false);
   const [q2, setQ2] = useState(false);
+
+  const [inform, setInform] = useState(false);
 
   const list1 = [
     [['black', `10년 동안 테스트했을 때`]],
@@ -139,7 +142,7 @@ const Experiment = () => {
           <Column>
             <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
               {list1.map((items: any, idx: number) => (
-                <TextRow lineHeight={34}>
+                <TextRow lineHeight={40}>
                   {items.map((item: any, idx: number) =>
                     item[0] === 'black' ? (
                       <TypoGraphy text={item[1]} size="t2" />
@@ -192,7 +195,11 @@ const Experiment = () => {
           <Line data={graphData} options={options} />
         </LineGraphWrapper>
         <Column>
-          <TypoGraphy text="더 나은 투자 전략을 만들기 위한 TIP" size="t2" />
+          <TypoGraphy
+            text="더 나은 투자 전략을 만들기 위한 TIP"
+            size="t2"
+            style={{ marginBottom: '35px' }}
+          />
           {question.map((item: any, idx: number) => (
             <>
               <TipLine />
@@ -224,7 +231,12 @@ const Experiment = () => {
                   <TipLine />
                   <AnswerRow>
                     <ImgQA src={a} />
-                    <TextWrap lineHeight={46} style={{ marginLeft: '30px' }}>
+                    <TextWrap
+                      lineHeight={46}
+                      style={{
+                        marginLeft: '30px',
+                      }}
+                    >
                       <TypoGraphy text={item.answer1} size="b1" />
                       <TypoGraphy text={item.answer2} size="b1" />
                     </TextWrap>
@@ -261,7 +273,7 @@ const Experiment = () => {
           </Column>
           <div
             onClick={() => {
-              window.scrollTo({ top: 900, left: 0, behavior: 'smooth' });
+              window.scrollTo({ top: 1500, left: 0, behavior: 'smooth' });
             }}
           >
             <TypoGraphy
@@ -273,6 +285,29 @@ const Experiment = () => {
           </div>
         </div>
       </StepWrapper>
+      <MoreWrapper>
+        <TypoGraphy text="더 많은 기능을 써보고 싶다면?" size="t2" />
+        <TypoGraphy
+          text="아직 핀블은 베타 버전이에요. 정식으로 출시하면 알려드릴게요!"
+          size="b1"
+          color="var(--type-gray-2)"
+          style={{ marginTop: '20px' }}
+        />
+        <Row>
+          <Input placeholder="이메일 또는 전화번호 입력하기" />
+          {inform ? (
+            <Btn10 type="inform" text="완료" />
+          ) : (
+            <div
+              onClick={() => {
+                setInform(true);
+              }}
+            >
+              <Btn10 type="inform" text="소식 받기" />
+            </div>
+          )}
+        </Row>
+      </MoreWrapper>
     </Container>
   );
 };
@@ -316,6 +351,12 @@ const Container = styled.div`
   margin-bottom: 120px;
 `;
 
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 49px;
+`;
+
 const Column = styled.div`
   display: flex;
   flex-direction: column;
@@ -350,19 +391,6 @@ const TipLine = styled.div`
   background-color: #dadada;
   height: 1px;
   width: 1200px;
-  margin-bottom: 30px;
-  margin-top: 30px;
-`;
-
-const StepWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #6792f8;
-  width: 1200px;
-  height: 242.73px;
-  border-radius: 20px;
-  padding: 49px 32px;
-  margin-top: 200px;
 `;
 
 const QuestionRow = styled.div`
@@ -371,7 +399,8 @@ const QuestionRow = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 70px;
+  height: 91px;
+  padding: 0 25px;
 `;
 
 const AnswerRow = styled.div`
@@ -380,7 +409,8 @@ const AnswerRow = styled.div`
   align-items: center;
   width: 100%;
   height: 136px;
-  background-color: #f7f8fa;
+  background-color: rgba(218, 218, 218, 0.4);
+  padding: 0 25px;
 `;
 
 const ImgQA = styled.img`
@@ -393,4 +423,43 @@ const ImgToggle = styled.img`
   width: 19.6px;
   height: 9.8px;
   cursor: pointer;
+`;
+
+const StepWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: #6792f8;
+  width: 1200px;
+  height: 242.73px;
+  border-radius: 20px;
+  padding: 49px 32px;
+  margin-top: 120px;
+`;
+
+const MoreWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ebf0fe;
+  width: 1200px;
+  height: 304px;
+  border-radius: 20px;
+  // padding: 41px 0 64px 0;
+  margin-top: 44px;
+`;
+
+const Input = styled.input`
+  width: 480px;
+  height: 51px;
+  background: #dee7fd;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  margin-right: 18px;
+  padding: 18px;
+
+  &::placeholder {
+    color: var(--type-gray-4);
+  }
 `;

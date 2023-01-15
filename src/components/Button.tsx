@@ -29,7 +29,8 @@ const Btn10 = ({ text, type }: btn) => {
   if (type === 'add') textColor = 'var(--main-blue)';
   else if (type === 'disable_add' || type === 'disable_check')
     textColor = 'var(--type-gray-4)';
-  else if (type === 'check') textColor = 'var(--type-white)';
+  else if (type === 'check' || type === 'inform')
+    textColor = 'var(--type-white)';
   else if (type === 'big_add') {
     textColor = 'var(--main-blue)';
     textSize = 't3';
