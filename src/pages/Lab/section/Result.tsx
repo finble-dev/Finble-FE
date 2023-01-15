@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { TextWrap, TextRow } from '../../../assets/styles/styles';
 import { useState, useEffect } from 'react';
 import { Btn10 } from '../../../components/Button';
+import { LossBar } from '../components/LossBar';
+import { EarnBar } from '../components/EarnBar';
 
 import { Line } from 'react-chartjs-2';
 import { myData, newData } from '../../../assets/graphData';
@@ -42,7 +44,7 @@ const Experiment = () => {
   const [year, setYear] = useState(28);
   const [yearPercent, setYearPercent] = useState(4);
   //최대 낙폭
-  const [loss, setLoss] = useState(28);
+  const [loss, setLoss] = useState(15);
   const [lossPercent, setLossPercent] = useState(17);
   // tip flag
   const [q1, setQ1] = useState(false);
@@ -170,9 +172,11 @@ const Experiment = () => {
           <TextRow>
             <BarGraphWrapper>
               <TypoGraphy text="연평균 수익률" size="b2" />
+              <EarnBar cur={32} last={28} />
             </BarGraphWrapper>
             <BarGraphWrapper>
               <TypoGraphy text="최대 낙폭" size="b2" />
+              <LossBar cur={32} last={15} />
             </BarGraphWrapper>
           </TextRow>
         </TextRow>
