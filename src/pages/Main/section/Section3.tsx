@@ -28,7 +28,7 @@ const Section3 = () => {
         <TypoGraphy
           size="t3"
           color="var(--type-gray-2)"
-          text="'앞으로 어떻게 투자해야할지 미리 알아보세요."
+          text="앞으로 어떻게 투자해야할지 미리 알아보세요."
         />
       </TextWrap>
       <TextRow>

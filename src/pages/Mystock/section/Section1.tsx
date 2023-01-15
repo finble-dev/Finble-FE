@@ -18,7 +18,7 @@ const Section1 = () => {
     labels: [],
     datasets: [
       {
-        label: '# of Votes',
+        // label: '# of Votes',
         data: data.map((i) => i.rate),
         backgroundColor: backgroundColor,
         borderWidth: 0,
