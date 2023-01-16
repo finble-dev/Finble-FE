@@ -19,7 +19,7 @@ interface login {
 const list1 = [
   [
     ['blue', '가상의 돈'],
-    ['black', '을 나눠서'],
+    ['black', '을 나눠서\u00A0'],
     ['blue', '투자'],
     ['black', '해보고, 어떤 결과가 나올지'],
   ],
@@ -86,20 +86,22 @@ const Lab = ({ isLogin }: login) => {
               <img src={modalImg} />
 
               <TextWrap lineHeight={34} padding="32px 0 0 0">
-                {list1.map((items: any, idx: number) => (
-                  <TextRow align="center">
-                    {items.map((item: any, idx: number) =>
+                {list1.map((items: any, itemsIdx: number) => (
+                  <TextRow align="center" key={itemsIdx}>
+                    {items.map((item: any, itemIdx: number) =>
                       item[0] === 'black' ? (
                         <TypoGraphy
                           text={item[1]}
                           size="b2"
                           color="var(--type-gray-2)"
+                          key={itemIdx}
                         />
                       ) : (
                         <TypoGraphy
                           text={item[1]}
                           color="var(--main-blue)"
                           size="b2"
+                          key={itemIdx}
                         />
                       )
                     )}

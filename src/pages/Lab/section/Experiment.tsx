@@ -178,6 +178,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                 <div
                   onClick={() => onClickBtn(idx)}
                   style={{ marginRight: '10px' }}
+                  key={idx}
                 >
                   {cateFlag[idx] === true ? (
                     <Btn60 text={item.name} type={'outline_able'} />
@@ -190,7 +191,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
 
             {cateFlag.map((item: any, idx: number) =>
               item ? (
-                <>
+                <div key={idx}>
                   <TypoGraphy
                     text={btn[idx].text1}
                     color="var(--type-gray-2)"
@@ -201,9 +202,9 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                     color="var(--type-gray-2)"
                     size="b3"
                   />
-                </>
+                </div>
               ) : (
-                <></>
+                <div key={idx}></div>
               )
             )}
             {ETFList.map((itemList: Array<ETF>, listNum: number) =>
@@ -215,10 +216,11 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                     ETFFlag={ETFFlag}
                     listNum={listNum}
                     itemNum={itemNum}
+                    key={itemNum}
                   />
                 ))
               ) : (
-                <></>
+                <div key={listNum}></div>
               )
             )}
           </Box>
@@ -245,6 +247,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                         marginBottom: '32px',
                         justifyContent: 'space-between',
                       }}
+                      key={idx}
                     >
                       <TypoGraphy text={item.name} size="b2" />
                       <InputBox>
@@ -277,9 +280,10 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                       ETFValue={ETFValue}
                       changeETFValue={changeETFValue}
                       changeFlag={changeFlag}
+                      key={itemNum}
                     />
                   ) : (
-                    <></>
+                    <div key={listNum}></div>
                   )
                 )
               )}
