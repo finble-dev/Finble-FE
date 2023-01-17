@@ -15,6 +15,7 @@ import {
 import { myData, newData } from '../../../assets/graphData';
 import { useEffect, useState } from 'react';
 import { WhiteBox, WhiteSmallBox } from '../components/WhiteBox';
+import StepBox from '../../../components/StepBox';
 
 ChartJS.register(
   CategoryScale,
@@ -146,6 +147,8 @@ const Section2 = () => {
           </VS>
           <WhiteSmallBox title="코스피" status="" />
         </WhiteBoxWrap>
+
+        <StepBox step={2} />
       </Container>
     </Wrap>
   );
