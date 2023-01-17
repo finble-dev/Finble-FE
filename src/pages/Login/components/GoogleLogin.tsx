@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import TypoGraphy from '../../../components/Typography';
 import google from '../../../assets/icons/google.svg';
 import { Img, ImgContainer } from '../../../assets/styles/styles';
+import { SERVER } from '../../../network/config';
 
 const clientID =
   '508740843119-alvj4p7vgjqd8ge3k4cvog00gmhak18e.apps.googleusercontent.com';
-let GoogleToken = '';
+
+let GoogleToken = ''; //리덕스 사용 예정
 
 const GoogleButton = () => {
   const [token, setToken] = useState('');
@@ -27,19 +29,18 @@ const GoogleButton = () => {
             nickname:name
         });*/
 
-    // fetch('/api/v1/users/googleLogin', {
-    //   method: 'POST',
-    //   cache: 'no-cache',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ token: response.tokenId }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((response) => {
-    //     setToken(response.data.accessToken);
-    //     alert('로그인 완료');
-    //   });
+    fetch(`${SERVER}/login/`, {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token: response.accessToken }),
+    })
+      .then((response) => response.json())
+      .then((response) => {
+        setToken(response.token.access);
+      });
   };
 
   if (token != null) {

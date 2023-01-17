@@ -9,7 +9,6 @@ interface label {
 }
 
 const Label = ({ color, name, cate, rate }: label) => {
-  console.log(color);
   return (
     <Container>
       <Left>
