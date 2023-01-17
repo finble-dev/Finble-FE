@@ -14,6 +14,7 @@ import {
 } from 'chart.js';
 import { myData, newData } from '../../../assets/graphData';
 import { useEffect, useState } from 'react';
+import { WhiteBox, WhiteSmallBox } from '../components/WhiteBox';
 
 ChartJS.register(
   CategoryScale,
@@ -26,20 +27,46 @@ ChartJS.register(
 
 const Section2 = () => {
   const [label, setLabel] = useState([] as Array<string>);
+  const [status, setStatus] = useState('위험');
+  const WhiteSmallBoxTitle = [
+    {
+      title: '내 포트폴리오',
+      status: status,
+    },
+    {
+      title: '코스피',
+      status: '',
+    },
+    ,
+  ];
 
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth();
+  let indexArray: number[] = [];
 
   useEffect(() => {
     setLabel([]);
-    let lastYear = currentYear - 1;
 
-    myData.map((item: { date: number; data: number }) => {
-      const year = Math.floor(item.date / 10000);
-      let newLabel = label;
+    // let newMyData = myData.filter(
+    //   (item: { date: number; data: number },index:number) =>
+    //     Math.floor(item.date / 100) ==
+    //     ((currentYear % 100) - 1) * 100 + (currentMonth + 1)
+    //   // let newLabel = label;
+    // );
 
-      setLabel(newLabel);
-    });
+    myData.map(
+      (item: { date: number; data: number }, index: number) => {
+        if (
+          Math.floor(item.date / 100) ==
+          ((currentYear % 100) - 1) * 100 + (currentMonth + 1)
+        ) {
+          indexArray.push(index);
+        }
+        // Math.floor(item.date / 100) ==
+        //   ((currentYear % 100) - 1) * 100 + (currentMonth + 1);
+      }
+      // let newLabel = label;
+    );
   }, []);
 
   const graphData = {
@@ -63,6 +90,7 @@ const Section2 = () => {
   return (
     <Wrap>
       <Container>
+        {/* section 2-1 */}
         {/* title */}
         <TypoGraphy
           text="최근 1년간 얼마나 벌었을까요?"
@@ -87,6 +115,37 @@ const Section2 = () => {
             style={{ width: '1093px', height: '542px', padding: '20px' }}
           />
         </WhiteBox>
+
+        {/* section2-2 */}
+        <TextWrap padding="120px 0 16px 0">
+          <TypoGraphy
+            text="이만큼 떨어지기도 했어요"
+            size="t3"
+            color="var(--type-gray-2)"
+          />
+        </TextWrap>
+        <TextRow>
+          <TypoGraphy text="가장 많이 떨어진 시기에는 시장보다 약" size="t2" />
+          <TypoGraphy
+            text="&nbsp;14%p&nbsp;"
+            size="t2"
+            color="var(--main-blue)"
+          />
+          <TypoGraphy text="더 떨어져서" size="t2" />
+        </TextRow>
+        <TextRow>
+          <TypoGraphy text="위험도가 높다" size="t2" color="var(--main-blue)" />
+          <TypoGraphy text="고 할 수 있어요" size="t2" />
+        </TextRow>
+
+        {/* white boxes */}
+        <WhiteBoxWrap>
+          <WhiteSmallBox title="내 포트폴리오" status={status} />
+          <VS>
+            <TypoGraphy text="VS" size="t3" color="var(--main-blue)" />
+          </VS>
+          <WhiteSmallBox title="코스피" status="" />
+        </WhiteBoxWrap>
       </Container>
     </Wrap>
   );
@@ -139,10 +198,19 @@ const Wrap = styled.div`
   padding: 120px 0;
 `;
 
-const WhiteBox = styled.div<{ width?: string; padding?: string }>`
-  width: ${(props) => props.width || '100%'};
-  height: auto;
-  background: var(--type-white);
-  padding: ${(props) => props.padding || '30px 40px'};
-  border-radius: 20px;
+const WhiteBoxWrap = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 44px 0 120px 0;
+`;
+const VS = styled.div`
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #dee7fd;
+  width: 55px;
+  height: 55px;
 `;
