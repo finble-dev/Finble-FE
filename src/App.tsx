@@ -10,7 +10,7 @@ import { useState } from 'react';
 import StockDiagnosis from './pages/Mystock/StockDiagnosis ';
 
 function App() {
-  const [isLogin, setLogin] = useState(true);
+  const [isLogin, setLogin] = useState(false);
 
   return (
     <>

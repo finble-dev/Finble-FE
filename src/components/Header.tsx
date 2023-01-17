@@ -29,7 +29,9 @@ const Header = ({ isLogin }: login) => {
             <Btn60 type="login" text="로그아웃" />
           </Row>
         ) : (
-          <Btn60 type="login" text="회원가입 / 로그인" />
+          <Link to="/stock">
+            <Btn60 type="login" text="회원가입 / 로그인" />
+          </Link>
         )}
       </Container>
     </Wrapper>

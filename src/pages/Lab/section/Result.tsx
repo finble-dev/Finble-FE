@@ -24,6 +24,7 @@ import {
   Legend,
 } from 'chart.js';
 import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
+import StepBox from '../../../components/StepBox';
 
 ChartJS.register(
   CategoryScale,
@@ -267,41 +268,7 @@ const Experiment = () => {
         </Column>
       </Column>
 
-      <StepWrapper>
-        <TypoGraphy text="Step 3" color="var(--type-white)" size="h2" />
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'end',
-          }}
-        >
-          <Column style={{ marginTop: '21px', width: 'auto' }}>
-            <TypoGraphy
-              text="다시 새로운 포트폴리오를"
-              color="var(--type-white)"
-              size="t2"
-            />
-            <TypoGraphy
-              text="만들어보고 싶으신가요?"
-              color="var(--type-white)"
-              size="t2"
-            />
-          </Column>
-          <div
-            onClick={() => {
-              window.scrollTo({ top: 1500, left: 0, behavior: 'smooth' });
-            }}
-          >
-            <TypoGraphy
-              text="다시 만들기 > "
-              color="var(--type-white)"
-              size="h2"
-              style={{ cursor: 'pointer' }}
-            />
-          </div>
-        </div>
-      </StepWrapper>
+      <StepBox step={3} />
       <MoreWrapper>
         <TypoGraphy text="더 많은 기능을 써보고 싶다면?" size="t2" />
         <TypoGraphy
@@ -446,17 +413,6 @@ const ImgToggle = styled.img`
   width: 19.6px;
   height: 9.8px;
   cursor: pointer;
-`;
-
-const StepWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #6792f8;
-  width: 1200px;
-  height: 242.73px;
-  border-radius: 20px;
-  padding: 49px 32px;
-  margin-top: 120px;
 `;
 
 const MoreWrapper = styled.div`
