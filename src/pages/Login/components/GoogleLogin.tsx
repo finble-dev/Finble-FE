@@ -1,22 +1,26 @@
 import { useState } from 'react';
-import GoogleLogin from 'react-google-login';
 import styled from 'styled-components';
 import TypoGraphy from '../../../components/Typography';
 import google from '../../../assets/icons/google.svg';
 import { Img, ImgContainer } from '../../../assets/styles/styles';
 import { SERVER } from '../../../network/config';
-
-const clientID: string = process.env.REACT_APP_CLIENT_ID as string;
+import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
 
 let GoogleToken = ''; //리덕스 사용 예정
 
 const GoogleButton = () => {
+  // console.log(clientID);
   const [token, setToken] = useState('');
+
+  const googleSocialLogin = useGoogleLogin({
+    onSuccess: (res) => OnSuccess(res),
+    flow: 'auth-code',
+  });
 
   const OnSuccess = async (response: any) => {
     console.log(response);
 
-    const userName = response.profileObj.name;
+    // const userName = response.profileObj.name;
 
     fetch(`${SERVER}/login/`, {
       method: 'POST',
@@ -24,7 +28,7 @@ const GoogleButton = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ token: response.accessToken }),
+      body: JSON.stringify({ token: response.code }),
     })
       .then((response) => response.json())
       .then((response) => {
@@ -42,29 +46,45 @@ const GoogleButton = () => {
   };
 
   return (
-    <GoogleLogin
-      clientId={clientID}
-      //   buttonText="   Google 아이디로 로그인   "
-      responseType={'id_token'}
-      onSuccess={OnSuccess}
-      onFailure={onFailure}
-      isSignedIn={false}
-      render={(renderProps: any) => (
-        <GoogleCustomButton
-          onClick={renderProps.onClick}
-          disabled={renderProps.disabled}
-        >
-          <ImgContainer width="38px">
-            <Img src={google} />
-          </ImgContainer>
-          <TypoGraphy
-            text="Google 계정으로 로그인"
-            color="#515151"
-            size="input"
-          />
-        </GoogleCustomButton>
-      )}
-    />
+    // <GoogleLogin
+    //   clientId={clientID}
+    //   //   buttonText="   Google 아이디로 로그인   "
+    //   responseType={'id_token'}
+    //   onSuccess={OnSuccess}
+    //   onFailure={onFailure}
+    //   isSignedIn={false}
+    //   render={(renderProps: any) => (
+    //     <GoogleCustomButton
+    //       onClick={renderProps.onClick}
+    //       disabled={renderProps.disabled}
+    //     >
+    //       <ImgContainer width="38px">
+    //         <Img src={google} />
+    //       </ImgContainer>
+    //       <TypoGraphy
+    //         text="Google 계정으로 로그인"
+    //         color="#515151"
+    //         size="input"
+    //       />
+    //     </GoogleCustomButton>
+    //   )}
+    // />
+
+    // <GoogleLogin
+    //   onSuccess={OnSuccess}
+    //   shape="circle"
+    //   width="300px"
+    //   onError={() => {
+    //     console.log('Login Failed');
+    //   }}
+    // />
+
+    <GoogleCustomButton onClick={googleSocialLogin}>
+      <ImgContainer width="38px">
+        <Img src={google} />
+      </ImgContainer>
+      <TypoGraphy text="Google 계정으로 로그인" color="#515151" size="input" />
+    </GoogleCustomButton>
   );
 };
 

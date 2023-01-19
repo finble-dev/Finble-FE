@@ -5,9 +5,11 @@ import { Btn10 } from '../../components/Button';
 import TypoGraphy from '../../components/Typography';
 import NoneLogin from '../Login/NoneLogin';
 import closeIcon from '../../assets/icons/close.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from './components/Modal/Modal1';
 import { Link } from 'react-router-dom';
+// import { SERVER } from '../../network/config';
+import { GoogleToken } from '../Login/components/GoogleLogin';
 
 interface login {
   isLogin: boolean;
@@ -15,6 +17,16 @@ interface login {
 
 const MyStock = ({ isLogin }: login) => {
   const [modalOpen, setModalOpen] = useState(false);
+
+  // useEffect(() => {
+  //   fetch(`${SERVER}/portfolio/`, {
+  //     headers: {
+  //       Authorization: `Bearer ${GoogleToken}`,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => console.log(res));
+  // });
 
   //임시
   const [diagonsis, setDiagonsis] = useState(true);
