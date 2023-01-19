@@ -1,16 +1,20 @@
 import TypoGraphy from '../../components/Typography';
 import { Btn60 } from '../../components/Button';
 import styled from 'styled-components';
-// import googleLogin from '../assets/img/googleLogin.png';
 import noneLoginBg from '../../assets/img/noneLoginBg.png';
 import ReactModal from 'react-modal';
 import { useState } from 'react';
-import { Img, ImgContainer, TextWrap } from '../../assets/styles/styles';
+import { Img, TextWrap } from '../../assets/styles/styles';
 import closeIcon from '../../assets/icons/close.svg';
-import { GoogleButton } from './components/GoogleLogin';
+import { IconWrapper, ModalContent, ModalOpen } from './components/Modal';
 
 const NoneLogin = () => {
   const [modalOpen, setModalOpen] = useState(false);
+
+  // let open = false;
+  // useEffect(() => {
+  //   open = true;
+  // }, [modalOpen]);
 
   return (
     <Container>
@@ -58,35 +62,7 @@ const NoneLogin = () => {
           <IconWrapper onClick={() => setModalOpen(false)}>
             <Img src={closeIcon} />
           </IconWrapper>
-          <TypoGraphy text="시작하기" size="t1" />
-          <TextWrap lineHeight={35.04} padding="44px 0 40px 0" align="center">
-            <TypoGraphy
-              text="주린이들을 위한 분산 투자 가이드, 핀블"
-              size="t3"
-              color="var(--type-gray-2)"
-            />
-            <TypoGraphy
-              text="포트폴리오 분석을 시작해보세요"
-              size="t3"
-              color="var(--type-gray-2)"
-            />
-          </TextWrap>
-          {/* <ImgContainer width="440px">
-            <Img src={googleLogin} />
-          </ImgContainer> */}
-          <GoogleButton />
-          <TextWrap lineHeight={21} padding="40px 0 0 0" align="center">
-            <TypoGraphy
-              text="로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며,"
-              size="b3"
-              color="var(--type-gray-4)"
-            />
-            <TypoGraphy
-              text="서비스 이용을 위해 이메일과 이름, 프로필 이미지를 수집합니다."
-              size="b3"
-              color="var(--type-gray-4)"
-            />
-          </TextWrap>
+          <ModalContent />
         </ModalOpen>
       </ReactModal>
     </Container>
@@ -112,21 +88,6 @@ const Wrapper = styled.div`
   max-width: 1200px;
 `;
 
-const IconWrapper = styled.div`
-  position: absolute;
-  right: 0;
-  top: 0;
-  padding: 30px;
-`;
 const BtnWrapper = styled.div`
   width: fit-content;
-`;
-
-// modal
-const ModalOpen = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
 `;

@@ -39,7 +39,14 @@ const StepBox = ({ step }: { step: number }) => {
             onClick={() => {
               window.scrollTo({ top: 1500, left: 0, behavior: 'smooth' });
             }}
-          ></div>
+          >
+            <TypoGraphy
+              text={arrow}
+              color="var(--type-white)"
+              size="h2"
+              style={{ cursor: 'pointer' }}
+            />
+          </div>
         )}
       </SubContainer>
     </StepWrapper>

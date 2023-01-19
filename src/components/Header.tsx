@@ -3,12 +3,23 @@ import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import { Link } from 'react-router-dom';
 import { Btn60 } from './Button';
+import ReactModal from 'react-modal';
+import { useState } from 'react';
+import {
+  IconWrapper,
+  ModalContent,
+  ModalOpen,
+} from '../pages/Login/components/Modal';
+import closeIcon from '../assets/icons/close.svg';
+import { Img } from '../assets/styles/styles';
 
 interface login {
   isLogin: boolean;
 }
 
 const Header = ({ isLogin }: login) => {
+  const [modalOpen, setModalOpen] = useState(false);
+
   return (
     <Wrapper>
       <Container>
@@ -29,10 +40,39 @@ const Header = ({ isLogin }: login) => {
             <Btn60 type="login" text="로그아웃" />
           </Row>
         ) : (
-          <Link to="/stock">
+          <Link to="/stock" onClick={() => setModalOpen(true)}>
             <Btn60 type="login" text="회원가입 / 로그인" />
           </Link>
         )}
+
+        {/* modal */}
+        <ReactModal
+          isOpen={modalOpen}
+          onRequestClose={() => setModalOpen(false)}
+          style={{
+            overlay: {
+              position: 'fixed',
+              background: 'rgba(0, 0, 0, 0.3)',
+            },
+            content: {
+              margin: 'auto',
+              width: '815px',
+              height: '495px',
+              background: 'var(--type-white)',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderRadius: '20px',
+            },
+          }}
+        >
+          <ModalOpen>
+            <IconWrapper onClick={() => setModalOpen(false)}>
+              <Img src={closeIcon} />
+            </IconWrapper>
+            <ModalContent />
+          </ModalOpen>
+        </ReactModal>
       </Container>
     </Wrapper>
   );
