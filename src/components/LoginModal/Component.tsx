@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { TextWrap } from '../../../assets/styles/styles';
-import TypoGraphy from '../../../components/Typography';
+import { TextWrap } from '../../assets/styles/styles';
+import TypoGraphy from '../Typography';
 import { GoogleButton } from './GoogleLogin';
 
 const ModalContent = () => {

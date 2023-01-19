@@ -2,12 +2,9 @@ import TypoGraphy from '../../components/Typography';
 import { Btn60 } from '../../components/Button';
 import styled from 'styled-components';
 import noneLoginBg from '../../assets/img/noneLoginBg.png';
-import ReactModal from 'react-modal';
 import { useState } from 'react';
-import { Img, TextWrap } from '../../assets/styles/styles';
-import closeIcon from '../../assets/icons/close.svg';
-import { IconWrapper, ModalContent, ModalOpen } from './components/Modal';
-
+import { TextWrap } from '../../assets/styles/styles';
+import LoginModal from '../../components/LoginModal';
 const NoneLogin = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -33,34 +30,7 @@ const NoneLogin = () => {
       </Wrapper>
 
       {/* modal */}
-      <ReactModal
-        ariaHideApp={false}
-        isOpen={modalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        style={{
-          overlay: {
-            position: 'fixed',
-            background: 'rgba(0, 0, 0, 0.3)',
-          },
-          content: {
-            margin: 'auto',
-            width: '815px',
-            height: '495px',
-            background: 'var(--type-white)',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            borderRadius: '20px',
-          },
-        }}
-      >
-        <ModalOpen>
-          <IconWrapper onClick={() => setModalOpen(false)}>
-            <Img src={closeIcon} />
-          </IconWrapper>
-          <ModalContent />
-        </ModalOpen>
-      </ReactModal>
+      <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
     </Container>
   );
 };
