@@ -1,10 +1,7 @@
-import ReactModal from 'react-modal';
 import styled from 'styled-components';
-import { Img, TextWrap } from '../../../assets/styles/styles';
+import { TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
 import { GoogleButton } from './GoogleLogin';
-import closeIcon from '../../../assets/icons/close.svg';
-import { useState } from 'react';
 
 const ModalContent = () => {
   return (

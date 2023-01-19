@@ -108,31 +108,31 @@ const Row = styled.div<{ gap?: string }>`
   height: 100%;
 `;
 
-const ani = keyframes`
-0% {
-  width: 0%;
-}
-100% {
-  width: 60%;
-}
-`;
+// const ani = keyframes`
+// 0% {
+//   width: 0%;
+// }
+// 100% {
+//   width: 60%;
+// }
+// `;
 
-const NavLink = styled(Link)`
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+// const NavLink = styled(Link)`
+//   height: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
 
-  &:after {
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: var(--main-blue);
-    // position: absolute;
-    left: 0;
-    bottom: 0;
-    animation: ${ani} 0.5s 1;
-    animation-fill-mode: forwards;
-  }
-`;
+//   &:after {
+//     content: '';
+//     width: 0%;
+//     height: 2px;
+//     background: var(--main-blue);
+//     // position: absolute;
+//     left: 0;
+//     bottom: 0;
+//     animation: ${ani} 0.5s 1;
+//     animation-fill-mode: forwards;
+//   }
+// `;

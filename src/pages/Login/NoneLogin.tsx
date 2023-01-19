@@ -11,11 +11,6 @@ import { IconWrapper, ModalContent, ModalOpen } from './components/Modal';
 const NoneLogin = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
-  // let open = false;
-  // useEffect(() => {
-  //   open = true;
-  // }, [modalOpen]);
-
   return (
     <Container>
       <Wrapper>
