@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import TypoGraphy from '../../../components/Typography';
-import google from '../../../assets/icons/google.svg';
-import { Img, ImgContainer } from '../../../assets/styles/styles';
-import { SERVER } from '../../../network/config';
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import TypoGraphy from '../Typography';
+import google from '../../assets/icons/google.svg';
+import { Img, ImgContainer } from '../../assets/styles/styles';
+import { SERVER } from '../../network/config';
+import { useGoogleLogin } from '@react-oauth/google';
 
 let GoogleToken = ''; //리덕스 사용 예정
 

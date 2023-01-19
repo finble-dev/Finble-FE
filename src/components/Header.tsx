@@ -3,15 +3,8 @@ import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import { Link } from 'react-router-dom';
 import { Btn60 } from './Button';
-import ReactModal from 'react-modal';
 import { useState } from 'react';
-import {
-  IconWrapper,
-  ModalContent,
-  ModalOpen,
-} from '../pages/Login/components/Modal';
-import closeIcon from '../assets/icons/close.svg';
-import { Img } from '../assets/styles/styles';
+import LoginModal from './LoginModal';
 
 interface login {
   isLogin: boolean;
@@ -46,34 +39,7 @@ const Header = ({ isLogin }: login) => {
         )}
 
         {/* modal */}
-        <ReactModal
-          ariaHideApp={false}
-          isOpen={modalOpen}
-          onRequestClose={() => setModalOpen(false)}
-          style={{
-            overlay: {
-              position: 'fixed',
-              background: 'rgba(0, 0, 0, 0.3)',
-            },
-            content: {
-              margin: 'auto',
-              width: '815px',
-              height: '495px',
-              background: 'var(--type-white)',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderRadius: '20px',
-            },
-          }}
-        >
-          <ModalOpen>
-            <IconWrapper onClick={() => setModalOpen(false)}>
-              <Img src={closeIcon} />
-            </IconWrapper>
-            <ModalContent />
-          </ModalOpen>
-        </ReactModal>
+        <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
       </Container>
     </Wrapper>
   );
@@ -108,32 +74,3 @@ const Row = styled.div<{ gap?: string }>`
   align-items: center;
   height: 100%;
 `;
-
-// const ani = keyframes`
-// 0% {
-//   width: 0%;
-// }
-// 100% {
-//   width: 60%;
-// }
-// `;
-
-// const NavLink = styled(Link)`
-//   height: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-
-//   &:after {
-//     content: '';
-//     width: 0%;
-//     height: 2px;
-//     background: var(--main-blue);
-//     // position: absolute;
-//     left: 0;
-//     bottom: 0;
-//     animation: ${ani} 0.5s 1;
-//     animation-fill-mode: forwards;
-//   }
-// `;
