@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import GoogleLogin from 'react-google-login';
 import styled from 'styled-components';
-import TypoGraphy from '../../../components/Typography';
-import google from '../../../assets/icons/google.svg';
-import { Img, ImgContainer } from '../../../assets/styles/styles';
-import { SERVER } from '../../../network/config';
+import TypoGraphy from '../Typography';
+import google from '../../assets/icons/google.svg';
+import { Img, ImgContainer } from '../../assets/styles/styles';
+import { SERVER } from '../../network/config';
 
 const clientID: string = process.env.REACT_APP_CLIENT_ID as string;
 
