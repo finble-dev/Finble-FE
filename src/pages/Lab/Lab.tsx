@@ -44,6 +44,7 @@ const Lab = ({ isLogin }: login) => {
           <Experiment isExp={isExp} setIsExp={setIsExp} />
           {isExp ? <Result /> : <></>}
           <ReactModal
+            ariaHideApp={false}
             isOpen={modalOpen}
             onRequestClose={() => setModalOpen(false)}
             style={{

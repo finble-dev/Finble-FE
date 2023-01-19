@@ -81,6 +81,7 @@ const MyStock = ({ isLogin }: login) => {
 
           {/* modal */}
           <ReactModal
+            ariaHideApp={false}
             isOpen={modalOpen}
             onRequestClose={() => setModalOpen(false)}
             style={{

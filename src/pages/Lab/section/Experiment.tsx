@@ -330,6 +330,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
           </div>
         </ButtonContainer>
         <ReactModal
+          ariaHideApp={false}
           isOpen={modalOpen}
           onRequestClose={() => setModalOpen(false)}
           style={{

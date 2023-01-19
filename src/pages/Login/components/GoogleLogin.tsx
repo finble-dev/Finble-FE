@@ -6,8 +6,7 @@ import google from '../../../assets/icons/google.svg';
 import { Img, ImgContainer } from '../../../assets/styles/styles';
 import { SERVER } from '../../../network/config';
 
-const clientID =
-  '508740843119-alvj4p7vgjqd8ge3k4cvog00gmhak18e.apps.googleusercontent.com';
+const clientID: string = process.env.REACT_APP_CLIENT_ID as string;
 
 let GoogleToken = ''; //리덕스 사용 예정
 
@@ -17,17 +16,7 @@ const GoogleButton = () => {
   const OnSuccess = async (response: any) => {
     console.log(response);
 
-    const {
-      googleID,
-      profileObj: { email, name },
-    } = response;
-
-    /*  await onSocial({
-            socialID: googleID,
-            socialType: 'google',
-            email,
-            nickname:name
-        });*/
+    const userName = response.profileObj.name;
 
     fetch(`${SERVER}/login/`, {
       method: 'POST',
@@ -39,6 +28,7 @@ const GoogleButton = () => {
     })
       .then((response) => response.json())
       .then((response) => {
+        console.log(response);
         setToken(response.token.access);
       });
   };
@@ -58,7 +48,7 @@ const GoogleButton = () => {
       responseType={'id_token'}
       onSuccess={OnSuccess}
       onFailure={onFailure}
-      isSignedIn={true}
+      isSignedIn={false}
       render={(renderProps: any) => (
         <GoogleCustomButton
           onClick={renderProps.onClick}
