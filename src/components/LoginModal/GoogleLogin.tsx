@@ -9,12 +9,13 @@ import { useGoogleLogin } from '@react-oauth/google';
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
 const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
 
-let GoogleToken = ''; //리덕스 사용 예정
+// let GoogleToken = ''; //리덕스 사용 예정
 
 const GoogleButton = () => {
   const [code, setCode] = useState('');
   const [googletoken, setGoogleToken] = useState(''); // 구글에서 받은 access token
   const [token, setToken] = useState(''); // finble에서 받은 access token
+  const [name, setName] = useState('');
 
   const googleSocialLogin = useGoogleLogin({
     onSuccess: (response) => setCode(response.code), // 1회용 auth code 발급
@@ -53,52 +54,16 @@ const GoogleButton = () => {
       body: JSON.stringify({ token: googletoken }),
     })
       .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        if (!googletoken.trim()) setToken(response.token.access);
+      .then((res) => {
+        setToken(res.token.access);
+        setName(res.user.first_name);
       });
   }, [googletoken]);
 
-  if (token != null) {
-    GoogleToken = token;
-  }
-
+  // if (token != null) {
+  //   GoogleToken = token;
+  // }
   return (
-    // <GoogleLogin
-    //   clientId={clientID}
-    //   //   buttonText="   Google 아이디로 로그인   "
-    //   responseType={'id_token'}
-    //   onSuccess={OnSuccess}
-    //   onFailure={onFailure}
-    //   isSignedIn={false}
-    //   render={(renderProps: any) => (
-    //     <GoogleCustomButton
-    //       onClick={renderProps.onClick}
-    //       disabled={renderProps.disabled}
-    //     >
-    //       <ImgContainer width="38px">
-    //         <Img src={google} />
-    //       </ImgContainer>
-    //       <TypoGraphy
-    //         text="Google 계정으로 로그인"
-    //         color="#515151"
-    //         size="input"
-    //       />
-    //     </GoogleCustomButton>
-    //   )}
-    // />
-
-    // google 에서 제공하는 구글로그인 버튼
-    // <GoogleLogin
-    //   onSuccess={OnSuccess}
-    //   shape="circle"
-    //   width="447px"
-    //   text="signin_with"
-    //   onError={() => {
-    //     console.log('Login Failed');
-    //   }}
-    // />
-
     // custom login button
     <GoogleCustomButton onClick={googleSocialLogin}>
       <ImgContainer width="38px">
@@ -109,7 +74,7 @@ const GoogleButton = () => {
   );
 };
 
-export { GoogleButton, GoogleToken };
+export { GoogleButton };
 
 const GoogleCustomButton = styled.button`
   display: flex;
