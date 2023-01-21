@@ -5,13 +5,23 @@ import { Link } from 'react-router-dom';
 import { Btn60 } from './Button';
 import { useState } from 'react';
 import LoginModal from './LoginModal';
+import { nameState } from '../store/slice/userSlice';
+import { useSelector } from 'react-redux';
+import { setName, setToken } from '../store/slice/userSlice';
+import { useDispatch } from 'react-redux';
 
 interface login {
   isLogin: boolean;
 }
 
-const Header = ({ isLogin }: login) => {
+const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const name = useSelector(nameState);
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(setName({ name: '' }));
+    dispatch(setToken({ token: '' }));
+  };
 
   return (
     <Wrapper>
@@ -27,10 +37,12 @@ const Header = ({ isLogin }: login) => {
             <Typography text="투자실험실" size="b2" />
           </Link>
         </Row>
-        {isLogin === true ? (
+        {name !== '' ? (
           <Row gap="1rem">
-            <Typography text="김민성 님" size="b2" />
-            <Btn60 type="login" text="로그아웃" />
+            <Typography text={`${name}님`} size="b2" />
+            <div onClick={logout}>
+              <Btn60 type="login" text="로그아웃" />
+            </div>
           </Row>
         ) : (
           <Link to="/stock" onClick={() => setModalOpen(true)}>

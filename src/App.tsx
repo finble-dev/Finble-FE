@@ -13,8 +13,6 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 const clientID: string = process.env.REACT_APP_CLIENT_ID as string;
 
 function App() {
-  const [isLogin, setLogin] = useState(false);
-
   return (
     <>
       <GlobalStyles />
@@ -22,11 +20,11 @@ function App() {
         <Container>
           <BrowserRouter>
             <GoogleOAuthProvider clientId={clientID}>
-              <Header isLogin={isLogin} />
+              <Header />
               <Routes>
                 <Route path="/" element={<Main />} />
-                <Route path="/stock" element={<MyStock isLogin={isLogin} />} />
-                <Route path="/lab" element={<Lab isLogin={isLogin} />} />
+                <Route path="/stock" element={<MyStock />} />
+                <Route path="/lab" element={<Lab />} />
                 <Route path="/diagnosis" element={<StockDiagnosis />} />
               </Routes>
             </GoogleOAuthProvider>
