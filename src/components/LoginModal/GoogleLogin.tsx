@@ -6,16 +6,22 @@ import { Img, ImgContainer } from '../../assets/styles/styles';
 import { SERVER } from '../../network/config';
 import { useGoogleLogin } from '@react-oauth/google';
 
+import { setName, setToken } from '../../store/slice/userSlice';
+import { useSelector } from 'react-redux';
+import { nameState, tokenState } from '../../store/slice/userSlice';
+import { useDispatch } from 'react-redux';
+
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
 const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
 
-// let GoogleToken = ''; //리덕스 사용 예정
+// let googleToken = ''; //리덕스 사용 예정
 
-const GoogleButton = () => {
-  const [code, setCode] = useState('');
-  const [googletoken, setGoogleToken] = useState(''); // 구글에서 받은 access token
-  const [token, setToken] = useState(''); // finble에서 받은 access token
-  const [name, setName] = useState('');
+const GoogleButton = ({ setModalOpen }: any) => {
+  const [code, setCode] = useState(''); // 1회용 auth code
+  const [googleToken, setGoogleToken] = useState(''); // 구글에서 받은 access token
+  const name = useSelector(nameState);
+  const token = useSelector(tokenState);
+  const dispatch = useDispatch();
 
   const googleSocialLogin = useGoogleLogin({
     onSuccess: (response) => setCode(response.code), // 1회용 auth code 발급
@@ -24,6 +30,7 @@ const GoogleButton = () => {
     flow: 'auth-code',
   });
 
+  // 1회용 auth code 발급받고 google access token 발급 받음
   useEffect(() => {
     const data = JSON.stringify({
       code: code,
@@ -44,6 +51,7 @@ const GoogleButton = () => {
       .then((res) => setGoogleToken(res.access_token));
   }, [code]);
 
+  // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
   useEffect(() => {
     fetch(`${SERVER}/login/`, {
       method: 'POST',
@@ -51,20 +59,18 @@ const GoogleButton = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ token: googletoken }),
+      body: JSON.stringify({ token: googleToken }),
     })
       .then((response) => response.json())
       .then((res) => {
-        setToken(res.token.access);
-        setName(res.user.first_name);
+        console.log(res);
+        dispatch(setName({ name: res.user.username as string }));
+        dispatch(setToken({ token: res.token.access as string }));
+        setModalOpen(false);
       });
-  }, [googletoken]);
+  }, [googleToken]);
 
-  // if (token != null) {
-  //   GoogleToken = token;
-  // }
   return (
-    // custom login button
     <GoogleCustomButton onClick={googleSocialLogin}>
       <ImgContainer width="38px">
         <Img src={google} />

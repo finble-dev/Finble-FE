@@ -30,7 +30,7 @@ const LoginModal = ({ modalOpen, setModalOpen }: any) => {
         <IconWrapper onClick={() => setModalOpen(false)}>
           <Img src={closeIcon} />
         </IconWrapper>
-        <ModalContent />
+        <ModalContent setModalOpen={setModalOpen} />
       </ModalOpen>
     </ReactModal>
   );

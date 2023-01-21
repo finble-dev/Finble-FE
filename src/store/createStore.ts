@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { useReducer } from 'react';
-import { userReducer } from './slice/userSlice';
+import userSlice from './slice/userSlice';
 
 // const rootReducer = combineReducers({
 //   name: nameReducer,
@@ -8,7 +8,7 @@ import { userReducer } from './slice/userSlice';
 // });
 
 const store = configureStore({
-  reducer: userReducer,
+  reducer: { userSlice: userSlice },
 });
 
 export type RootState = ReturnType<typeof store.getState>;

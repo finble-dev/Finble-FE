@@ -3,7 +3,7 @@ import { TextWrap } from '../../assets/styles/styles';
 import TypoGraphy from '../Typography';
 import { GoogleButton } from './GoogleLogin';
 
-const ModalContent = () => {
+const ModalContent = ({ setModalOpen }: any) => {
   return (
     <>
       <TypoGraphy text="시작하기" size="t1" />
@@ -19,7 +19,7 @@ const ModalContent = () => {
           color="var(--type-gray-2)"
         />
       </TextWrap>
-      <GoogleButton />
+      <GoogleButton setModalOpen={setModalOpen} />
       <TextWrap lineHeight={21} padding="40px 0 0 0" align="center">
         <TypoGraphy
           text="로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며,"
