@@ -27,3 +27,6 @@ export default userSlice.reducer;
 
 export const nameState = (state: RootState) => state.userSlice.name;
 export const tokenState = (state: RootState) => state.userSlice.token;
+
+
+

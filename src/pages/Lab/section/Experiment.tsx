@@ -141,7 +141,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
         <TypoGraphy text="투자 실험하기" size="h1" />
         <TextWrap lineHeight={30} padding="25px 0">
           <TypoGraphy
-            text="민성님의 편안한 투자를 위해 대표적인 ETF들을 선별해봤어요."
+            text={`${name}님의 편안한 투자를 위해 대표적인 ETF들을 선별해봤어요.`}
             color="var(--type-gray-1)"
             size="b1"
           />

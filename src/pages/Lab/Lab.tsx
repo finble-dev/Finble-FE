@@ -89,7 +89,11 @@ const Lab = () => {
 
               <TextWrap lineHeight={34} padding="32px 0 0 0">
                 {list1.map((items: any, itemsIdx: number) => (
-                  <TextRow align="center" key={itemsIdx}>
+                  <TextRow
+                    align="center"
+                    key={itemsIdx}
+                    style={{ height: '34px' }}
+                  >
                     {items.map((item: any, itemIdx: number) =>
                       item[0] === 'black' ? (
                         <TypoGraphy

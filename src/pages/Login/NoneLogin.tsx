@@ -19,7 +19,7 @@ const NoneLogin = () => {
             color="var(--type-gray-2)"
           />
           <TypoGraphy
-            text="기존 가입 회원은 가입한 방법으로 로그인해주세요."
+            text="로그인하고 더 많은 정보를 확인해보세요!"
             size="t3"
             color="var(--type-gray-2)"
           />
@@ -41,6 +41,7 @@ const Container = styled.div`
   justify-content: center;
   width: 100%;
   height: calc(100vh - 70px);
+  background-color: #f6f8fe;
   background-image: url(${noneLoginBg});
   background-position: center center;
   background-size: cover;
@@ -49,7 +50,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 1204px;
   padding-top: 220px;
   max-width: 1200px;
 `;
