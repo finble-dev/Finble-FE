@@ -10,10 +10,6 @@ import { useSelector } from 'react-redux';
 import { setName, setToken } from '../store/slice/userSlice';
 import { useDispatch } from 'react-redux';
 
-interface login {
-  isLogin: boolean;
-}
-
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);

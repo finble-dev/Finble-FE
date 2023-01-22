@@ -7,13 +7,17 @@ import { Btn10, Btn60 } from '../../../components/Button';
 import { AddedItem } from '../components/AddedItem';
 import { ETFItem } from '../components/ETFItem';
 // assets
-import { TextRow, TextWrap, Img } from '../../../assets/styles/styles';
+import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
 import { myStock } from '../../../assets/myStock';
 import modalImg from '../../../assets/img/lab/캐릭터.png';
 // interface
 import { ETF } from '../../../interface/interface';
 import { Link } from 'react-router-dom';
+
+import { nameState, tokenState } from '../../../store/slice/userSlice';
+import { useSelector } from 'react-redux';
+import { SERVER } from '../../../network/config';
 
 interface exp {
   isExp?: boolean;
@@ -23,6 +27,21 @@ interface exp {
 const Experiment = ({ isExp, setIsExp }: exp) => {
   const [toggleFlag, setToggleFlag] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const name = useSelector(nameState);
+  const token = useSelector(tokenState);
+
+  useEffect(() => {
+    fetch(`${SERVER}/test-portfolio/`, {
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const [expNum, setExpNum] = useState(0);
   // 해외, 채권, 금 카테고리 선택 여부
