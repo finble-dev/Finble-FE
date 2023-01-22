@@ -5,15 +5,19 @@ import { Btn10 } from '../../components/Button';
 import TypoGraphy from '../../components/Typography';
 import NoneLogin from '../Login/NoneLogin';
 import closeIcon from '../../assets/icons/close.svg';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from './components/Modal/Modal1';
 import { Link } from 'react-router-dom';
 
-import { nameState } from '../../store/slice/userSlice';
+import { nameState, tokenState } from '../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
+import { SERVER } from '../../network/config';
+import StockBox from './components/StockBox';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [data, setData] = useState([] as any);
+  const token = useSelector(tokenState);
   const name = useSelector(nameState); // 성 + 이름
   const firstName = name[1] + name[2]; // 이름
 
@@ -27,6 +31,19 @@ const MyStock = () => {
     link = '/stock';
     button = 'disable_check';
   }
+
+  useEffect(() => {
+    fetch(`${SERVER}/portfolio/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setData(res.data);
+      });
+  });
 
   return (
     <>
@@ -69,13 +86,22 @@ const MyStock = () => {
                 <div onClick={() => setModalOpen(true)}>
                   <Btn10 type="big_add" text="+ 추가하기" />
                 </div>
-                <TextWrap align="center" padding="100px 0 0 0">
-                  <TypoGraphy
-                    text="아직 추가된 종목이 없어요"
-                    size="b2"
-                    color="var(--type-gray-4)"
-                  />
-                </TextWrap>
+
+                {data === undefined ? (
+                  <TextWrap align="center" padding="100px 0 0 0">
+                    <TypoGraphy
+                      text="아직 추가된 종목이 없어요"
+                      size="b2"
+                      color="var(--type-gray-4)"
+                    />
+                  </TextWrap>
+                ) : (
+                  <StockListWrap>
+                    {data.map((i: any, index: number) => (
+                      <StockBox stock={i} key={index} />
+                    ))}
+                  </StockListWrap>
+                )}
               </Box>
             </BoxContainer>
           </Container>
@@ -155,6 +181,22 @@ const Box = styled.div<{ height?: string }>`
   height: ${(props) => props.height || 'auto'};
   border-radius: 10px;
   padding: 0 27px;
+`;
+const StockListWrap = styled.div`
+  overflow: auto;
+  padding: 10px 0;
+
+  &::-webkit-scrollbar {
+    width: 18px;
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 124px;
+    background-color: #ccd8ff;
+    border-radius: 12px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0);
+  }
 `;
 
 // modal
