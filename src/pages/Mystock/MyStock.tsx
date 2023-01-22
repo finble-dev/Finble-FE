@@ -9,12 +9,12 @@ import { useState } from 'react';
 import Modal from './components/Modal/Modal1';
 import { Link } from 'react-router-dom';
 
-interface login {
-  isLogin: boolean;
-}
+import { nameState } from '../../store/slice/userSlice';
+import { useSelector } from 'react-redux';
 
-const MyStock = ({ isLogin }: login) => {
+const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const name = useSelector(nameState);
 
   //임시
   const [diagonsis, setDiagonsis] = useState(true);
@@ -29,7 +29,7 @@ const MyStock = ({ isLogin }: login) => {
 
   return (
     <>
-      {isLogin ? (
+      {name !== '' ? (
         <Wrap>
           <Container>
             <Title>

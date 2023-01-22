@@ -12,9 +12,8 @@ import TypoGraphy from '../../components/Typography';
 import closeIcon from '../../assets/icons/close.svg';
 import modalImg from '../../assets/img/lab/modalImg.png';
 
-interface login {
-  isLogin: boolean;
-}
+import { nameState } from '../../store/slice/userSlice';
+import { useSelector } from 'react-redux';
 
 const list1 = [
   [
@@ -30,15 +29,17 @@ const list1 = [
   [['black', "'이렇게 투자했으면 어땠을까?' 하는 궁금증을 풀어보세요."]],
 ];
 
-const Lab = ({ isLogin }: login) => {
+const Lab = () => {
   const [modalOpen, setModalOpen] = useState(true);
   const [isExp, setIsExp] = useState(false);
+  const name = useSelector(nameState);
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
   return (
     <>
-      {isLogin ? (
+      {name !== '' ? (
         <Container>
           <Intro />
           <Experiment isExp={isExp} setIsExp={setIsExp} />

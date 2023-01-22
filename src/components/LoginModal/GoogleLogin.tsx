@@ -1,74 +1,86 @@
-import { useState } from 'react';
-import GoogleLogin from 'react-google-login';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TypoGraphy from '../Typography';
 import google from '../../assets/icons/google.svg';
 import { Img, ImgContainer } from '../../assets/styles/styles';
 import { SERVER } from '../../network/config';
+import { useGoogleLogin } from '@react-oauth/google';
 
-const clientID: string = process.env.REACT_APP_CLIENT_ID as string;
+import { setName, setToken } from '../../store/slice/userSlice';
+import { useSelector } from 'react-redux';
+import { nameState, tokenState } from '../../store/slice/userSlice';
+import { useDispatch } from 'react-redux';
 
-let GoogleToken = ''; //리덕스 사용 예정
+const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
+const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
 
-const GoogleButton = () => {
-  const [token, setToken] = useState('');
+// let googleToken = ''; //리덕스 사용 예정
 
-  const OnSuccess = async (response: any) => {
-    console.log(response);
+const GoogleButton = ({ setModalOpen }: any) => {
+  const [code, setCode] = useState(''); // 1회용 auth code
+  const [googleToken, setGoogleToken] = useState(''); // 구글에서 받은 access token
+  const name = useSelector(nameState);
+  const token = useSelector(tokenState);
+  const dispatch = useDispatch();
 
-    const userName = response.profileObj.name;
+  const googleSocialLogin = useGoogleLogin({
+    onSuccess: (response) => setCode(response.code), // 1회용 auth code 발급
+    onError: (err) => console.log(err),
+    scope: 'https://www.googleapis.com/auth/userinfo.profile',
+    flow: 'auth-code',
+  });
 
+  // 1회용 auth code 발급받고 google access token 발급 받음
+  useEffect(() => {
+    const data = JSON.stringify({
+      code: code,
+      client_id: client_id,
+      client_secret: client_secret,
+      redirect_uri: 'http://localhost:3000',
+      grant_type: 'authorization_code',
+    });
+
+    fetch('https://oauth2.googleapis.com/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: data,
+    })
+      .then((res) => res.json())
+      .then((res) => setGoogleToken(res.access_token));
+  }, [code]);
+
+  // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
+  useEffect(() => {
     fetch(`${SERVER}/login/`, {
       method: 'POST',
       cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ token: response.accessToken }),
+      body: JSON.stringify({ token: googleToken }),
     })
       .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        setToken(response.token.access);
+      .then((res) => {
+        console.log(res);
+        dispatch(setName({ name: res.user.username as string }));
+        dispatch(setToken({ token: res.token.access as string }));
+        setModalOpen(false);
       });
-  };
-
-  if (token != null) {
-    GoogleToken = token;
-  }
-
-  const onFailure = (error: any) => {
-    console.log(error);
-  };
+  }, [googleToken]);
 
   return (
-    <GoogleLogin
-      clientId={clientID}
-      //   buttonText="   Google 아이디로 로그인   "
-      responseType={'id_token'}
-      onSuccess={OnSuccess}
-      onFailure={onFailure}
-      isSignedIn={false}
-      render={(renderProps: any) => (
-        <GoogleCustomButton
-          onClick={renderProps.onClick}
-          disabled={renderProps.disabled}
-        >
-          <ImgContainer width="38px">
-            <Img src={google} />
-          </ImgContainer>
-          <TypoGraphy
-            text="Google 계정으로 로그인"
-            color="#515151"
-            size="input"
-          />
-        </GoogleCustomButton>
-      )}
-    />
+    <GoogleCustomButton onClick={googleSocialLogin}>
+      <ImgContainer width="38px">
+        <Img src={google} />
+      </ImgContainer>
+      <TypoGraphy text="Google 계정으로 로그인" color="#515151" size="input" />
+    </GoogleCustomButton>
   );
 };
 
-export { GoogleButton, GoogleToken };
+export { GoogleButton };
 
 const GoogleCustomButton = styled.button`
   display: flex;
