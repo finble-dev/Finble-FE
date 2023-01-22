@@ -1,8 +1,7 @@
 import TypoGraphy from '../../../components/Typography';
-import styled from 'styled-components';
 import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
-import mainSub2 from '../../../assets/img/main/mainSub2.png';
-import mainSub3 from '../../../assets/img/main/mainSub3.png';
+import mainSub2 from '../../../assets/img/main/mainSub2.svg';
+import mainSub3 from '../../../assets/img/main/mainSub3.svg';
 
 const Section3 = () => {
   return (

@@ -248,7 +248,8 @@ const Experiment = () => {
                 <>
                   <TipLine />
                   <AnswerRow>
-                    <ImgQA src={a} />
+                    <ImgQA src={a} style={{ marginTop: '-40px' }} />
+
                     <TextWrap
                       lineHeight={46}
                       style={{
@@ -404,8 +405,8 @@ const AnswerRow = styled.div`
 `;
 
 const ImgQA = styled.img`
-  width: 23px;
-  height: 23px;
+  width: 29px;
+  height: 30px;
   cursor: pointer;
 `;
 
@@ -424,7 +425,6 @@ const MoreWrapper = styled.div`
   width: 1200px;
   height: 304px;
   border-radius: 20px;
-  // padding: 41px 0 64px 0;
   margin-top: 44px;
 `;
 

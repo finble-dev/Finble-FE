@@ -6,7 +6,7 @@ import {
   Img,
   ImgContainer,
 } from '../../../assets/styles/styles';
-import graph1 from '../../../assets/img/lab/graph1.png';
+import graph1 from '../../../assets/img/lab/graph1.gif';
 import graph2 from '../../../assets/img/lab/graph2.png';
 
 const Intro = () => {
@@ -74,9 +74,9 @@ const Intro = () => {
         </Column>
 
         {/* right img */}
-        <ImgContainer width="532px">
-          <Img src={graph1} />
-        </ImgContainer>
+        {/* <ImgContainer width="532px"> */}
+        <Img src={graph1} style={{ width: '532px' }} />
+        {/* </ImgContainer> */}
       </Box>
 
       {/* second box */}
@@ -147,7 +147,7 @@ const list1 = [
 ];
 
 const list2 = [
-  [['black', "투자 실험을 통해 내 자산을 여러 '바구니'에 나눠보며"]],
+  [['black', '투자 실험을 통해 내 자산을 여러 "바구니"에 나눠보며']],
   [
     ['blue', '위험도는 낮추고, 수익률은 안정적'],
     ['black', '으로 만들 수 있어요.'],
