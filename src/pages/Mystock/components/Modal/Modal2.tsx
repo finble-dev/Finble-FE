@@ -51,7 +51,7 @@ const Modal2 = ({ name, market, symbol }: InputType) => {
       cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
       body: sendData,
     })
