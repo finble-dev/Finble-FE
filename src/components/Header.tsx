@@ -3,7 +3,7 @@ import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import { Link } from 'react-router-dom';
 import { Btn60 } from './Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import LoginModal from './LoginModal';
 import { nameState } from '../store/slice/userSlice';
 import { useSelector } from 'react-redux';
@@ -19,19 +19,69 @@ const Header = () => {
     dispatch(setToken({ token: '' }));
   };
 
+  const [path, setPath] = useState('/');
+
   return (
     <Wrapper>
       <Container>
         <Row>
-          <Link to="/">
+          <Link
+            to="/"
+            onClick={() => {
+              setPath('/');
+            }}
+          >
             <Logo src={logo} />
           </Link>
-          <Link to="/stock">
-            <Typography text="내 주식" size="b2" />
-          </Link>
-          <Link to="/lab">
-            <Typography text="투자실험실" size="b2" />
-          </Link>
+          <Column>
+            {path === '/stock' ? (
+              <>
+                <Link
+                  to="/stock"
+                  onClick={() => {
+                    setPath('/stock');
+                  }}
+                >
+                  <Typography text="내 주식" size="b2" />
+                </Link>
+                <Line />
+              </>
+            ) : (
+              <Link
+                to="/stock"
+                onClick={() => {
+                  setPath('/stock');
+                }}
+              >
+                <Typography text="내 주식" size="b2" />
+              </Link>
+            )}
+          </Column>
+
+          <Column>
+            {path === '/lab' ? (
+              <>
+                <Link
+                  to="/lab"
+                  onClick={() => {
+                    setPath('/lab');
+                  }}
+                >
+                  <Typography text="투자실험실" size="b2" />
+                </Link>
+                <Line />
+              </>
+            ) : (
+              <Link
+                to="/lab"
+                onClick={() => {
+                  setPath('/lab');
+                }}
+              >
+                <Typography text="투자실험실" size="b2" />
+              </Link>
+            )}
+          </Column>
         </Row>
         {name !== '' ? (
           <Row gap="1rem">
@@ -41,9 +91,9 @@ const Header = () => {
             </div>
           </Row>
         ) : (
-          <Link to="/stock" onClick={() => setModalOpen(true)}>
+          <div onClick={() => setModalOpen(true)}>
             <Btn60 type="login" text="회원가입 / 로그인" />
-          </Link>
+          </div>
         )}
 
         {/* modal */}
@@ -78,7 +128,23 @@ const Logo = styled.img`
 
 const Row = styled.div<{ gap?: string }>`
   display: flex;
-  gap: ${(props) => props.gap || '65.77px'};
+  gap: ${(props) => props.gap || '35.77px'};
   align-items: center;
   height: 100%;
+`;
+
+const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 0px 0px 0px;
+  height: 100%;
+  width: 110px;
+`;
+
+const Line = styled.div`
+  width: 100%;
+  height: 4px;
+  background-color: #6792f8;
 `;

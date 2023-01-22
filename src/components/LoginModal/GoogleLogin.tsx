@@ -19,7 +19,7 @@ const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
 const GoogleButton = ({ setModalOpen }: any) => {
   const [code, setCode] = useState(''); // 1회용 auth code
   const [googleToken, setGoogleToken] = useState(''); // 구글에서 받은 access token
-  const name = useSelector(nameState);
+
   const token = useSelector(tokenState);
   const dispatch = useDispatch();
 
@@ -63,7 +63,6 @@ const GoogleButton = ({ setModalOpen }: any) => {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
         dispatch(setName({ name: res.user.username as string }));
         dispatch(setToken({ token: res.token.access as string }));
         setModalOpen(false);

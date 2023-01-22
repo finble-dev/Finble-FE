@@ -3,38 +3,69 @@ import { TextWrap } from '../../../../assets/styles/styles';
 import TypoGraphy from '../../../../components/Typography';
 import Input from '../../../../components/Input';
 import SearchListBox from '../SearchListBox';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal2 from './Modal2';
+import { SERVER } from '../../../../network/config';
+import { tokenState } from '../../../../store/slice/userSlice';
+import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 const data: any[] = [
-  { name: '삼성물산', symbol: '03423', category: '한국주식' },
-  { name: '애플', symbol: '03423', category: '외국주식' },
-  { name: '삼성생명', symbol: '03423', category: '한국주식' },
-  { name: '삼성제약', symbol: '03423', category: '한국주식' },
-  { name: '테슬라', symbol: '03423', category: '외국주식' },
-  { name: '삼성공조', symbol: '03423', category: '한국주식' },
-  { name: '삼성전기', symbol: '03423', category: '한국주식' },
-  { name: '삼성전자', symbol: '03423', category: '한국주식' },
-  { name: '삼성화재', symbol: '03423', category: '한국주식' },
+  {
+    symbol: 'AAPL',
+    market: 'US',
+    name: '애플',
+    sector: '첨단 기술',
+  },
+  {
+    symbol: 'ABBV',
+    market: 'US',
+    name: '애브비',
+    sector: '헬스케어',
+  },
+  {
+    symbol: 'ABT',
+    market: 'US',
+    name: '애보트 래버러토리스',
+    sector: '헬스케어',
+  },
 ];
 
 const Modal = () => {
-  const [name, setName] = useState('');
-  const [category, setCategory] = useState('');
+  const [stockName, setStockName] = useState('');
+  const [market, setMarket] = useState('');
+  const [symbol, setSymbol] = useState('');
   const [click, setclick] = useState(false);
+  const [search, setSearch] = useState('');
+
+  const token = useSelector(tokenState);
 
   const onClick = (i: any) => {
-    setName(i.name);
-    setCategory(i.category);
+    setStockName(i.name);
+    setMarket(i.market);
+    setSymbol(i.symbol);
     setclick(true);
   };
+
+  // 검색 api 연결
+  /*useEffect(() => {
+    fetch(`${SERVER}/search/`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: token,
+      },
+      body: JSON.stringify({ search: search }),
+    })
+      .then((res) => res.json())
+      .then((res) => console.log(res));
+  }, [search]);*/
 
   return (
     <>
       {!click ? (
         <>
           <InputWrap>
-            <Input type="search" />
+            <Input type="search" setSearch={setSearch} />
           </InputWrap>
 
           {data.length === 0 ? (
@@ -47,8 +78,8 @@ const Modal = () => {
             </TextWrap>
           ) : (
             <SearchResult>
-              {data.map((i) => (
-                <div key={i.index} onClick={() => onClick(i)}>
+              {data.map((i, index) => (
+                <div key={index} onClick={() => onClick(i)}>
                   <SearchListBox name={i.name} symbol={i.symbol} />
                 </div>
               ))}
@@ -56,7 +87,7 @@ const Modal = () => {
           )}
         </>
       ) : (
-        <Modal2 name={name} category={category} />
+        <Modal2 name={stockName} market={market} symbol={symbol} />
       )}
     </>
   );

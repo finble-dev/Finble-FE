@@ -2,20 +2,23 @@ import styled from 'styled-components';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TypoGraphy from './Typography';
+import { useState } from 'react';
 
 interface input {
   type: string;
   name?: string;
-  category?: string;
+  market?: string;
+  setSearch?: any;
 }
 
-const Input = ({ type, name, category }: input) => {
+const Input = ({ type, name, market, setSearch }: input) => {
   let placeholder, unit;
+
   if (type === 'search') placeholder = '종목 검색 예) 카카오, 테슬라, SPY';
   else if (type === 'price') {
     placeholder = '예) 78.000';
-    if (category === '한국주식') unit = '₩';
-    else unit = '$';
+    if (market === 'US') unit = '$';
+    else unit = '₩';
   } else if (type === 'number') {
     unit = '주';
     placeholder = '예) 1.2';
@@ -32,7 +35,10 @@ const Input = ({ type, name, category }: input) => {
       {type.includes('enter') ? (
         <TypoGraphy text={name} size="input" />
       ) : (
-        <InputArea placeholder={placeholder} />
+        <InputArea
+          placeholder={placeholder}
+          onChange={(e) => setSearch(e.target.value)}
+        />
       )}
 
       <TypoGraphy text={unit} color="var(--type-gray-1)" size="input" />

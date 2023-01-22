@@ -14,7 +14,8 @@ import { useSelector } from 'react-redux';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const name = useSelector(nameState);
+  const name = useSelector(nameState); // 성 + 이름
+  const firstName = name[1] + name[2]; // 이름
 
   //임시
   const [diagonsis, setDiagonsis] = useState(true);
@@ -34,7 +35,7 @@ const MyStock = () => {
           <Container>
             <Title>
               <div>
-                <TypoGraphy text="민성님의 포트폴리오" size="t1" />
+                <TypoGraphy text={firstName + '님의 포트폴리오'} size="t1" />
                 <TextWrap padding="15px 0 40px 0">
                   <TypoGraphy
                     text="보유 중인 주식을 입력하고 내 투자 현황까지 진단 받아보세요."
