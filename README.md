@@ -1,7 +1,7 @@
 # Finble-FE
 
 ### 배포링크
-https://main.d37n21f9h5uzp9.amplifyapp.com/lab
+https://main.d37n21f9h5uzp9.amplifyapp.com
 
 ### 실행 및 빌드
 ```
