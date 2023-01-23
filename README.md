@@ -1,7 +1,7 @@
 # Finble-FE
 
 ### 배포링크
-http://finble.s3-website.ap-northeast-2.amazonaws.com/
+https://main.d37n21f9h5uzp9.amplifyapp.com/lab
 
 ### 실행 및 빌드
 ```
@@ -10,11 +10,7 @@ yarn start
 
 # 빌드
 yarn build
-
-# 빌드 후 배포
-aws s3 sync ./build s3://finble --profile=[IAM 유저명]
 ```
-[배포 참고링크](https://velog.io/@krkorklo58/AWS-S3%EB%A1%9C-React-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0)
 
 ### 개발 툴
 React + TypeScript + Redux
