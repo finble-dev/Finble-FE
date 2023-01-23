@@ -47,7 +47,10 @@ const GoogleButton = ({ setModalOpen }: any) => {
       },
       body: data,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log('code', res);
+        return res.json();
+      })
       .then((res) => setGoogleToken(res.access_token));
   }, [code]);
 
@@ -64,6 +67,7 @@ const GoogleButton = ({ setModalOpen }: any) => {
     })
       .then((response) => response.json())
       .then((res) => {
+        console.log('googleToken', res);
         dispatch(setName({ name: res.user.username as string }));
         dispatch(setToken({ token: res.token.access as string }));
         setModalOpen(false);
