@@ -1,12 +1,36 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { SERVER } from '../../network/config';
+import { useAppSelect } from '../../store/configStore.hooks';
+import { tokenState } from '../../store/slice/userSlice';
 import Section1 from './section/Section1';
 import Section2 from './section/Section2';
 
 const StockDiagnosis = () => {
+  const token = useAppSelect(tokenState);
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    fetch(`${SERVER}/portfolio/analysis/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => setData(res.data));
+  }, []);
+
   return (
     <Container>
-      <Section1 />
-      <Section2 />
+      {data != null ? (
+        <>
+          <Section1 data={data} />
+          <Section2 />
+        </>
+      ) : (
+        <>loading..</>
+      )}
     </Container>
   );
 };

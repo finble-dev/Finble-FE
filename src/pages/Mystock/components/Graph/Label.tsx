@@ -3,37 +3,49 @@ import TypoGraphy from '../../../../components/Typography';
 
 interface label {
   color: string;
-  name: string;
-  cate: string;
-  rate: string;
+  name?: string;
+  sector?: string;
+  rate?: string;
 }
 
-const Label = ({ color, name, cate, rate }: label) => {
+const StockLabel = ({ color, name, sector, rate }: label) => {
   return (
     <Container>
       <Left>
         <ColorBox color={color} />
         <TypoGraphy text={name} size="b3" color="var(--type-gray-1)" />
-        <TypoGraphy text={cate} size="b4" color="var(--type-gray-4)" />
+        <TypoGraphy text={sector} size="b4" color="var(--type-gray-4)" />
       </Left>
       <TypoGraphy text={rate + '%'} size="b4" color="var(--type-gray-1)" />
     </Container>
   );
 };
 
-export default Label;
+const SectorLabel = ({ color, sector, rate }: label) => {
+  return (
+    <Container width="auto">
+      <Left>
+        <ColorBox color={color} width={19} />
+        <TypoGraphy text={sector} size="b3" color="var(--type-gray-2)" />
+        <TypoGraphy text={rate + '%'} size="b3" color="var(--type-gray-2)" />
+      </Left>
+    </Container>
+  );
+};
 
-const Container = styled.div`
+export { StockLabel, SectorLabel };
+
+const Container = styled.div<{ width?: string }>`
   display: flex;
   justify-content: space-between;
   height: 33px;
   align-items: center;
-  width: 228px;
+  width: ${(props) => props.width || '228px'};
 `;
 
-const ColorBox = styled.div<{ color: string }>`
-  width: 13px;
-  height: 33px;
+const ColorBox = styled.div<{ color: string; width?: number }>`
+  width: ${(props) => props.width || 13}px;
+  height: ${(props) => props.width || 33}px;
   background: ${(props) => props.color || 'black'};
 `;
 
