@@ -20,17 +20,7 @@ const MyStock = () => {
   const token = useSelector(tokenState);
   const name = useSelector(nameState); // 성 + 이름
   const firstName = name[1] + name[2]; // 이름
-
-  //임시
-  const [diagonsis, setDiagonsis] = useState(true);
-  let link, button;
-  if (diagonsis) {
-    link = '/diagnosis';
-    button = 'check';
-  } else {
-    link = '/stock';
-    button = 'disable_check';
-  }
+  let total = 0;
 
   useEffect(() => {
     fetch(`${SERVER}/portfolio/`, {
@@ -44,6 +34,21 @@ const MyStock = () => {
         setData(res.data);
       });
   });
+
+  // 내 주식 진단하기 버튼 활성화
+  let link, button;
+  if (Array.from(data).length != 0) {
+    link = '/diagnosis';
+    button = 'check';
+  } else {
+    link = '/stock';
+    button = 'disable_check';
+  }
+
+  // 총 자산 계산
+  for (var i = 0; i < Array.from(data).length; i++) {
+    total = total + data[i].present_val;
+  }
 
   return (
     <>
@@ -75,8 +80,15 @@ const MyStock = () => {
                   />
                 </TextWrap>
                 <TextRow>
-                  <TypoGraphy text="0&nbsp;" size="t1" />
-                  <TypoGraphy text="원" size="t1" color="var(--type-gray-2)" />
+                  <TypoGraphy
+                    text={'' + total.toLocaleString('ko-KR')}
+                    size="t1"
+                  />
+                  <TypoGraphy
+                    text="&nbsp;원"
+                    size="t1"
+                    color="var(--type-gray-2)"
+                  />
                 </TextRow>
               </Box>
               <Box height="100%">
@@ -87,7 +99,7 @@ const MyStock = () => {
                   <Btn10 type="big_add" text="+ 추가하기" />
                 </div>
 
-                {data === undefined ? (
+                {Array.from(data).length === 0 ? (
                   <TextWrap align="center" padding="100px 0 0 0">
                     <TypoGraphy
                       text="아직 추가된 종목이 없어요"
@@ -136,7 +148,7 @@ const MyStock = () => {
                   <Img src={closeIcon} />
                 </div>
               </TitleWrap>
-              <Modal />
+              <Modal setModalOpen={setModalOpen} />
             </ModalOpen>
           </ReactModal>
         </Wrap>

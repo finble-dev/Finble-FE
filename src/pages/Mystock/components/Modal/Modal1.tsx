@@ -9,28 +9,7 @@ import { SERVER } from '../../../../network/config';
 import { tokenState } from '../../../../store/slice/userSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
-// const data: any[] = [
-//   // {
-//   //   symbol: 'AAPL',
-//   //   market: 'US',
-//   //   name: '애플',
-//   //   sector: '첨단 기술',
-//   // },
-//   // {
-//   //   symbol: 'ABBV',
-//   //   market: 'US',
-//   //   name: '애브비',
-//   //   sector: '헬스케어',
-//   // },
-//   // {
-//   //   symbol: 'ABT',
-//   //   market: 'US',
-//   //   name: '애보트 래버러토리스',
-//   //   sector: '헬스케어',
-//   // },
-// ];
-
-const Modal = () => {
+const Modal = ({ setModalOpen }: { setModalOpen: any }) => {
   const [stockName, setStockName] = useState('');
   const [market, setMarket] = useState('');
   const [symbol, setSymbol] = useState('');
@@ -90,7 +69,12 @@ const Modal = () => {
           )}
         </>
       ) : (
-        <Modal2 name={stockName} market={market} symbol={symbol} />
+        <Modal2
+          name={stockName}
+          market={market}
+          symbol={symbol}
+          setModalOpen={setModalOpen}
+        />
       )}
     </>
   );

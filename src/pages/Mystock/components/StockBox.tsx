@@ -2,15 +2,34 @@ import styled from 'styled-components';
 import { Img, ImgContainer } from '../../../assets/styles/styles';
 import del from '../../../assets/img/lab/del.svg';
 import TypoGraphy from '../../../components/Typography';
+import { SERVER } from '../../../network/config';
+import { useAppSelect } from '../../../store/configStore.hooks';
+import { tokenState } from '../../../store/slice/userSlice';
 
 const StockBox = ({ stock }: { stock: any }) => {
+  const token = useAppSelect(tokenState);
+
   const price = parseInt(stock.present_val).toLocaleString('ko-KR');
   const gain = parseInt(stock.gain).toLocaleString('ko-KR');
   let profit_rate = stock.profit_rate.toFixed(2);
 
+  const DeleteStock = (id: number) => {
+    fetch(`${SERVER}/portfolio/`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id: id }),
+    });
+  };
+
   return (
     <Container>
-      <ImgContainer width="28px">
+      <ImgContainer
+        width="28px"
+        onClick={() => DeleteStock(stock.portfolio.id)}
+      >
         <Img src={del} />
       </ImgContainer>
       <BlueBox>
