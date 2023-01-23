@@ -9,26 +9,26 @@ import { SERVER } from '../../../../network/config';
 import { tokenState } from '../../../../store/slice/userSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
-const data: any[] = [
-  {
-    symbol: 'AAPL',
-    market: 'US',
-    name: '애플',
-    sector: '첨단 기술',
-  },
-  {
-    symbol: 'ABBV',
-    market: 'US',
-    name: '애브비',
-    sector: '헬스케어',
-  },
-  {
-    symbol: 'ABT',
-    market: 'US',
-    name: '애보트 래버러토리스',
-    sector: '헬스케어',
-  },
-];
+// const data: any[] = [
+//   // {
+//   //   symbol: 'AAPL',
+//   //   market: 'US',
+//   //   name: '애플',
+//   //   sector: '첨단 기술',
+//   // },
+//   // {
+//   //   symbol: 'ABBV',
+//   //   market: 'US',
+//   //   name: '애브비',
+//   //   sector: '헬스케어',
+//   // },
+//   // {
+//   //   symbol: 'ABT',
+//   //   market: 'US',
+//   //   name: '애보트 래버러토리스',
+//   //   sector: '헬스케어',
+//   // },
+// ];
 
 const Modal = () => {
   const [stockName, setStockName] = useState('');
@@ -36,6 +36,7 @@ const Modal = () => {
   const [symbol, setSymbol] = useState('');
   const [click, setclick] = useState(false);
   const [search, setSearch] = useState('');
+  const [data, setData] = useState([] as any);
 
   const token = useSelector(tokenState);
 
@@ -47,18 +48,20 @@ const Modal = () => {
   };
 
   // 검색 api 연결
-  /*useEffect(() => {
+  useEffect(() => {
     fetch(`${SERVER}/search/`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ search: search }),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
-  }, [search]);*/
+      .then((res) => {
+        setData(res);
+      });
+  }, [search]);
 
   return (
     <>
@@ -78,7 +81,7 @@ const Modal = () => {
             </TextWrap>
           ) : (
             <SearchResult>
-              {data.map((i, index) => (
+              {data.map((i: any, index: number) => (
                 <div key={index} onClick={() => onClick(i)}>
                   <SearchListBox name={i.name} symbol={i.symbol} />
                 </div>
