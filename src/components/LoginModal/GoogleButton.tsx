@@ -7,21 +7,17 @@ import { SERVER } from '../../network/config';
 import { useGoogleLogin } from '@react-oauth/google';
 
 import { setName, setToken } from '../../store/slice/userSlice';
-import { useSelector } from 'react-redux';
-import { nameState, tokenState } from '../../store/slice/userSlice';
 import { useDispatch } from 'react-redux';
 
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
 const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
+const redirect_uri: string = process.env.REACT_APP_REDIRECT_URL as string;
 
 // let googleToken = ''; //리덕스 사용 예정
 
 const GoogleButton = ({ setModalOpen }: any) => {
   const [code, setCode] = useState(''); // 1회용 auth code
   const [googleToken, setGoogleToken] = useState(''); // 구글에서 받은 access token
-
-  const token = useSelector(tokenState);
-  const dispatch = useDispatch();
 
   const googleSocialLogin = useGoogleLogin({
     onSuccess: (response) => setCode(response.code), // 1회용 auth code 발급
@@ -36,9 +32,13 @@ const GoogleButton = ({ setModalOpen }: any) => {
       code: code,
       client_id: client_id,
       client_secret: client_secret,
-      redirect_uri: 'http://localhost:3000',
+      redirect_uri: redirect_uri,
+      // redirect_uri: 'https://front.finble.net/',
+      // redirect_uri: 'http://localhost:3000',
       grant_type: 'authorization_code',
     });
+
+    console.log(redirect_uri);
 
     fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
@@ -47,10 +47,14 @@ const GoogleButton = ({ setModalOpen }: any) => {
       },
       body: data,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log('code', res);
+        return res.json();
+      })
       .then((res) => setGoogleToken(res.access_token));
   }, [code]);
 
+  const dispatch = useDispatch();
   // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
   useEffect(() => {
     fetch(`${SERVER}/login/`, {
@@ -63,6 +67,7 @@ const GoogleButton = ({ setModalOpen }: any) => {
     })
       .then((response) => response.json())
       .then((res) => {
+        console.log('googleToken', res);
         dispatch(setName({ name: res.user.username as string }));
         dispatch(setToken({ token: res.token.access as string }));
         setModalOpen(false);
