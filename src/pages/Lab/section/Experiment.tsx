@@ -14,7 +14,11 @@ import modalImg from '../../../assets/img/lab/캐릭터.png';
 import { ETF } from '../../../interface/interface';
 import { Link } from 'react-router-dom';
 
-import { nameState, tokenState } from '../../../store/slice/userSlice';
+import {
+  nameState,
+  tokenState,
+  firstNameState,
+} from '../../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
 import { SERVER } from '../../../network/config';
 
@@ -40,7 +44,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     [{ symbol: 'GLD', flag: false }],
   ]);
   const [modalOpen, setModalOpen] = useState(false);
-  const name = useSelector(nameState);
+  const name = useSelector(firstNameState);
   const token = useSelector(tokenState);
   const [retainStock, setRetainStock] = useState([]);
   const [addedStock, setAddedStock] = useState([]);
@@ -82,6 +86,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     })
       .then((response) => response.json())
       .then((res) => {
+        console.log(res);
         // 유저 보유 종목 & 추가 종목 불러오기
         setRetainStock(res.data_add);
         setAddedStock(res.data_retain);

@@ -6,7 +6,7 @@ import { Img, ImgContainer } from '../../assets/styles/styles';
 import { SERVER } from '../../network/config';
 import { useGoogleLogin } from '@react-oauth/google';
 
-import { setName, setToken } from '../../store/slice/userSlice';
+import { setName, setToken, setFirstName } from '../../store/slice/userSlice';
 import { useDispatch } from 'react-redux';
 
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
@@ -60,7 +60,9 @@ const GoogleButton = ({ setModalOpen }: any) => {
     })
       .then((response) => response.json())
       .then((res) => {
+        console.log(res);
         dispatch(setName({ name: res.user.username as string }));
+        dispatch(setFirstName({ firstName: res.user.first_name as string }));
         dispatch(setToken({ token: res.token.access as string }));
         setModalOpen(false);
       });

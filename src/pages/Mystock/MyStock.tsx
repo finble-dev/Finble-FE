@@ -9,7 +9,11 @@ import { useEffect, useState } from 'react';
 import Modal from './components/Modal/Modal1';
 import { Link } from 'react-router-dom';
 
-import { nameState, tokenState } from '../../store/slice/userSlice';
+import {
+  nameState,
+  tokenState,
+  firstNameState,
+} from '../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
 import { SERVER } from '../../network/config';
 import StockBox from './components/StockBox';
@@ -19,7 +23,7 @@ const MyStock = () => {
   const [data, setData] = useState([] as any);
   const token = useSelector(tokenState);
   const name = useSelector(nameState); // 성 + 이름
-  const firstName = name[1] + name[2]; // 이름
+  const firstName = useSelector(firstNameState); // 이름
   let total = 0;
 
   useEffect(() => {
@@ -33,6 +37,7 @@ const MyStock = () => {
         .then((res) => res.json())
         .then((res) => {
           setData(res.data);
+          console.log(res);
         });
     }
   });
