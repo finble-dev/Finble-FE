@@ -9,7 +9,6 @@ import { ETFItem } from '../components/ETFItem';
 // assets
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
-import { myStock } from '../../../assets/myStock';
 import modalImg from '../../../assets/img/lab/캐릭터.png';
 // interface
 import { ETF } from '../../../interface/interface';
@@ -26,99 +25,102 @@ interface exp {
 
 const Experiment = ({ isExp, setIsExp }: exp) => {
   const [toggleFlag, setToggleFlag] = useState(false);
+  const [expNum, setExpNum] = useState(0);
+  // 해외, 채권, 금 카테고리 선택 여부
+  const [cateFlag, setCateFlag] = useState([true, false, false]);
+  const [ETFFlag, setETFFlag] = useState([
+    [
+      { symbol: 'SPY', flag: false },
+      { symbol: 'QQQ', flag: false },
+    ],
+    [
+      { symbol: 'IEF', flag: false },
+      { symbol: 'TLT', flag: false },
+    ],
+    [{ symbol: 'GLD', flag: false }],
+  ]);
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);
   const token = useSelector(tokenState);
+  const [retainStock, setRetainStock] = useState([]);
+  const [addedStock, setAddedStock] = useState([]);
+  const [totalPer, setTotal] = useState(0);
 
+  const setFlag = (stockList: any) => {
+    let newList = [];
+
+    for (let i = 0; i < ETFFlag.length; i++) {
+      let newItem = [];
+      for (let j = 0; j < ETFFlag[i].length; j++) {
+        if (
+          stockList.findIndex((item: any) => item === ETFFlag[i][j].symbol) !==
+          -1
+        ) {
+          newItem.push({
+            symbol: ETFFlag[i][j].symbol,
+            flag: true,
+          });
+        } else {
+          newItem.push({
+            symbol: ETFFlag[i][j].symbol,
+            flag: false,
+          });
+        }
+      }
+      newList.push(newItem);
+    }
+    setETFFlag(newList);
+  };
+
+  // 첫 렌더링 시 유저 포트폴리오 가져오고 modal flag 설정
   useEffect(() => {
     fetch(`${SERVER}/test-portfolio/`, {
       headers: {
-        Authorization: token,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
       },
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        // 유저 보유 종목 & 추가 종목 불러오기
+        setRetainStock(res.data_add);
+        setAddedStock(res.data_retain);
+        let symbolList = [];
+
+        // 모달창 유무 설정
+        if (res.data_add === ([] as any)) setModalOpen(true);
+
+        // 새로운 total 비율 설정
+        let newTotal = 0 as number;
+        for (let i = 0; i < res.data_add.length; i++) {
+          symbolList.push(res.data_add[i].stock_detail.symbol);
+          newTotal += Number(res.data_add[i].portfolio.ratio);
+        }
+        for (let i = 0; i < res.data_retain.length; i++) {
+          symbolList.push(res.data_retain[i].stock_detail.symbol);
+          newTotal += Number(res.data_retain[i].portfolio.ratio);
+        }
+        setTotal(newTotal);
+        setFlag(symbolList);
+      })
+      .catch((err) => console.log(err));
+  });
+
+  const changeMine = (id: number, event: any) => {
+    fetch(`${SERVER}/test-portfolio/`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ id: id, ratio: event.target.value }),
     })
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
       })
       .catch((err) => console.log(err));
-  }, []);
-
-  const [expNum, setExpNum] = useState(0);
-  // 해외, 채권, 금 카테고리 선택 여부
-  const [cateFlag, setCateFlag] = useState([true, false, false]);
-  const [ETFFlag, setETFFlag] = useState([
-    [false, false],
-    [false, false],
-    [false],
-  ]);
-  const changeFlag = (listNum: number, itemNum: number) => {
-    let newList = [];
-
-    for (let i = 0; i < ETFFlag.length; i++) {
-      let newItem = [];
-      for (let j = 0; j < ETFFlag[i].length; j++) {
-        if (i === listNum && j === itemNum) {
-          newItem.push(!ETFFlag[i][j]);
-        } else {
-          newItem.push(ETFFlag[i][j]);
-        }
-      }
-      newList.push(newItem);
-    }
-
-    setETFFlag(newList);
   };
-
-  const [ETFValue, setETFValue] = useState([[0, 0], [0, 0], [0]]);
-
-  const changeETFValue = (listNum: number, itemNum: number, e: any) => {
-    let newList = [];
-
-    for (let i = 0; i < ETFValue.length; i++) {
-      let newItem = [];
-      for (let j = 0; j < ETFValue[i].length; j++) {
-        if (i === listNum && j === itemNum) {
-          newItem.push(e.target.value);
-        } else {
-          newItem.push(ETFValue[i][j]);
-        }
-      }
-      newList.push(newItem);
-    }
-
-    setETFValue(newList);
-  };
-
-  const [myStk, setMyStk] = useState([{ name: '카카오', per: 0 }]) as any;
-  useEffect(() => {
-    if (myStock.length === 0) setModalOpen(true);
-    else setMyStk(myStock);
-  }, []);
-  const changeMine = (num: number, event: any) => {
-    let newStk = [] as any;
-
-    myStk.map((item: { name: string; per: number }, idx: number) =>
-      idx === num
-        ? newStk.push({ name: item.name, per: event.target.value })
-        : newStk.push({ name: item.name, per: item.per })
-    );
-
-    setMyStk(newStk);
-  };
-
-  const [totalPer, setTotal] = useState(0);
-
-  useEffect(() => {
-    let newTotal = 0 as number;
-    ETFValue.map((items: any, listNum: number) =>
-      items.map(
-        (item: any, itemNum: number) =>
-          (newTotal += Number(ETFValue[listNum][itemNum]))
-      )
-    );
-    myStk.map((item: any, idx: number) => (newTotal += Number(item.per)));
-    setTotal(newTotal);
-  }, [ETFValue, myStk]);
 
   const onClickBtn = (idx: number) => {
     let newList = [];
@@ -189,15 +191,16 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
 
         <Row
           style={{ marginTop: '44px' }}
-          blurFlag={myStock.length === 0 ? true : false}
+          blurFlag={retainStock.length === 0 ? true : false}
         >
+          {/* 선택한 ETF 버튼따라 list 보여줌 */}
           <Box>
             <Row>
               {btn.map((item: any, idx: number) => (
                 <div
                   onClick={() => onClickBtn(idx)}
                   style={{ marginRight: '10px' }}
-                  key={idx}
+                  key={`btn_${idx}`}
                 >
                   {cateFlag[idx] === true ? (
                     <Btn60 text={item.name} type={'outline_able'} />
@@ -210,7 +213,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
 
             {cateFlag.map((item: any, idx: number) =>
               item ? (
-                <div key={idx}>
+                <div key={`cateFlag_0_${idx}`}>
                   <TypoGraphy
                     text={btn[idx].text1}
                     color="var(--type-gray-2)"
@@ -223,7 +226,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                   />
                 </div>
               ) : (
-                <div key={idx}></div>
+                <div key={`cateFlag_1_${idx}`}></div>
               )
             )}
             {ETFList.map((itemList: Array<ETF>, listNum: number) =>
@@ -231,18 +234,19 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                 itemList.map((item: ETF, itemNum: number) => (
                   <ETFItem
                     item={item}
-                    changeFlag={changeFlag}
                     ETFFlag={ETFFlag}
                     listNum={listNum}
                     itemNum={itemNum}
-                    key={itemNum}
+                    key={`ETFLIST_${listNum}_${itemNum}`}
                   />
                 ))
               ) : (
-                <div key={listNum}></div>
+                <div key={`ETFLIST_${listNum}`}></div>
               )
             )}
           </Box>
+
+          {/* 보유종목, 추가종목 박스 */}
           <Box>
             <TypoGraphy text="보유 종목" size="small" />
             <SubBox>
@@ -259,53 +263,51 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                     size="b3"
                   />
                 </Row>
-                {myStk.map(
-                  (item: { name: string; per: number }, idx: number) => (
-                    <Row
-                      style={{
-                        marginBottom: '32px',
-                        justifyContent: 'space-between',
-                      }}
-                      key={idx}
-                    >
-                      <TypoGraphy text={item.name} size="b2" />
-                      <InputBox>
-                        <InputArea
-                          value={myStk[idx].per}
-                          onChange={(e) => {
-                            changeMine(idx, e);
+                <>
+                  {retainStock !== undefined ? (
+                    <>
+                      {retainStock.map((item: any, idx: number) => (
+                        <Row
+                          style={{
+                            marginBottom: '32px',
+                            justifyContent: 'space-between',
                           }}
-                        />
-                        <TypoGraphy
-                          text="%"
-                          size="input"
-                          color="var(--type-gray-3)"
-                        />
-                      </InputBox>
-                    </Row>
-                  )
-                )}
+                          key={`myStk_${idx}`}
+                        >
+                          <TypoGraphy text={item.stock_detail.name} size="b2" />
+                          <InputBox>
+                            <InputArea
+                              value={item.portfolio.ratio}
+                              onChange={(e) => {
+                                changeMine(item.portfolio.id, e);
+                              }}
+                            />
+                            <TypoGraphy
+                              text="%"
+                              size="input"
+                              color="var(--type-gray-3)"
+                            />
+                          </InputBox>
+                        </Row>
+                      ))}
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                </>
               </RetainBox>
               <Line />
               <TextWrap padding="0 0 20px 0">
                 <TypoGraphy text="추가 종목" size="small" />
               </TextWrap>
-              {ETFList.map((items: any, listNum: number) =>
-                items.map((item: any, itemNum: number) =>
-                  ETFFlag[listNum][itemNum] ? (
-                    <AddedItem
-                      listNum={listNum}
-                      itemNum={itemNum}
-                      ETFValue={ETFValue}
-                      changeETFValue={changeETFValue}
-                      changeFlag={changeFlag}
-                      key={itemNum}
-                    />
-                  ) : (
-                    <div key={listNum}></div>
-                  )
-                )
-              )}
+              {addedStock.map((item: any, idx: number) => (
+                <AddedItem
+                  item={item}
+                  changeMine={changeMine}
+                  // changeFlag={changeFlag}
+                  key={`ETFLIST2_${idx}`}
+                />
+              ))}
             </SubBox>
             <Footer>
               {totalPer === 100 ? (

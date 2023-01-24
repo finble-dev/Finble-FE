@@ -91,7 +91,7 @@ const Lab = () => {
                 {list1.map((items: any, itemsIdx: number) => (
                   <TextRow
                     align="center"
-                    key={itemsIdx}
+                    key={`Lab_list1_${itemsIdx}`}
                     style={{ height: '34px' }}
                   >
                     {items.map((item: any, itemIdx: number) =>
@@ -100,14 +100,14 @@ const Lab = () => {
                           text={item[1]}
                           size="b2"
                           color="var(--type-gray-2)"
-                          key={itemIdx}
+                          key={`Lab_list1_0_${itemIdx}`}
                         />
                       ) : (
                         <TypoGraphy
                           text={item[1]}
                           color="var(--main-blue)"
                           size="b2"
-                          key={itemIdx}
+                          key={`Lab_list1_1_${itemIdx}`}
                         />
                       )
                     )}
