@@ -9,6 +9,10 @@ import { EarnBar } from '../components/EarnBar';
 import { Line } from 'react-chartjs-2';
 import { myData, newData } from '../../../assets/graphData';
 
+import { tokenState } from '../../../store/slice/userSlice';
+import { useSelector } from 'react-redux';
+import { SERVER } from '../../../network/config';
+
 import q from '../../../assets/img/lab/q.png';
 import a from '../../../assets/img/lab/a.png';
 import up from '../../../assets/img/lab/up.png';
@@ -36,6 +40,8 @@ ChartJS.register(
 );
 
 const Experiment = () => {
+  const token = useSelector(tokenState);
+  const [email, setEmail] = useState('');
   const [modalFlag, setModalFlag] = useState(false);
   // 투자원금
   const [current, setCurrent] = useState('2,626,302');
@@ -138,6 +144,22 @@ const Experiment = () => {
       });
     }
   }, []);
+
+  const saveEmail = (email: string) => {
+    fetch(`${SERVER}/contact/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ contact: email }),
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Container>
@@ -279,13 +301,20 @@ const Experiment = () => {
           style={{ marginTop: '20px' }}
         />
         <Row>
-          <Input placeholder="이메일 또는 전화번호 입력하기" />
+          <Input
+            placeholder="이메일 또는 전화번호 입력하기"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
           {inform ? (
             <Btn10 type="inform" text="완료" />
           ) : (
             <div
               onClick={() => {
                 setInform(true);
+                saveEmail(email);
               }}
             >
               <Btn10 type="inform" text="소식 받기" />
