@@ -26,9 +26,22 @@ ChartJS.register(
   Legend
 );
 
-const Section2 = () => {
+const Section2 = ({ data }: { data: any }) => {
   const [label, setLabel] = useState([] as Array<string>);
   const [status, setStatus] = useState('위험');
+  const [profit, setProfit] = useState(0);
+
+  let profitGap = parseInt(data.portfolio_profit) - parseInt(data.kospi_profit);
+  let profitText = '낮은';
+  if (profitGap > 0) {
+    profitText = '높은';
+  } else if (profitGap == 0) {
+    profitText = '같은';
+  }
+
+  let maxProfitGap =
+    parseInt(data.portfolio_max_fall) - parseInt(data.kospi_max_fall);
+
   const WhiteSmallBoxTitle = [
     {
       title: '내 포트폴리오',
@@ -101,10 +114,22 @@ const Section2 = () => {
         <TextWrap lineHeight={40} padding="16px 0 44px 0">
           <TextRow>
             <TypoGraphy text="시장보다&nbsp;" size="t2" />
-            <TypoGraphy text="13%p" color="var(--main-blue)" size="t2" />
-            <TypoGraphy text="&nbsp;낮은 수익률을 냈어요" size="t2" />
+            <TypoGraphy
+              text={`${profitGap}%p`}
+              color="var(--main-blue)"
+              size="t2"
+            />
+            <TypoGraphy
+              text={`\u00A0${profitText} 수익률을 냈어요`}
+              size="t2"
+            />
           </TextRow>
-          <TypoGraphy text="내 포트폴리오 -42%,  코스피 -29%" size="t2" />
+          <TypoGraphy
+            text={`내 포트폴리오 ${parseInt(
+              data.portfolio_profit
+            )}%,  코스피 ${parseInt(data.kospi_profit)}%`}
+            size="t2"
+          />
         </TextWrap>
 
         {/* line graph box */}
@@ -128,7 +153,7 @@ const Section2 = () => {
         <TextRow>
           <TypoGraphy text="가장 많이 떨어진 시기에는 시장보다 약" size="t2" />
           <TypoGraphy
-            text="&nbsp;14%p&nbsp;"
+            text={`\u00A0${maxProfitGap}%p\u00A0`}
             size="t2"
             color="var(--main-blue)"
           />
@@ -141,11 +166,21 @@ const Section2 = () => {
 
         {/* white boxes */}
         <WhiteBoxWrap>
-          <WhiteSmallBox title="내 포트폴리오" status={status} />
+          <WhiteSmallBox
+            title="내 포트폴리오"
+            status={status}
+            max_fall={data.portfolio_max_fall}
+            max_loss={data.portfolio_max_loss}
+          />
           <VS>
             <TypoGraphy text="VS" size="t3" color="var(--main-blue)" />
           </VS>
-          <WhiteSmallBox title="코스피" status="" />
+          <WhiteSmallBox
+            title="코스피"
+            status=""
+            max_fall={data.kospi_max_fall}
+            max_loss={data.kospi_max_loss}
+          />
         </WhiteBoxWrap>
 
         <StepBox step={2} />

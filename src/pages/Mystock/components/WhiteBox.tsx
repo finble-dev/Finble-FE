@@ -14,9 +14,11 @@ import { useState } from 'react';
 interface box {
   title: string;
   status?: string;
+  max_fall: number;
+  max_loss: string;
 }
 
-const WhiteSmallBox = ({ title, status }: box) => {
+const WhiteSmallBox = ({ title, status, max_fall, max_loss }: box) => {
   let color;
   const [display, setDisplay] = useState(false);
 
@@ -41,7 +43,11 @@ const WhiteSmallBox = ({ title, status }: box) => {
           <ImgContainer width="20px">
             <Img src={ArrowDown} />
           </ImgContainer>
-          <TypoGraphy text="34.52%&nbsp;" color="var(--main-blue)" size="t2" />
+          <TypoGraphy
+            text={`${max_fall.toFixed(2)}%`}
+            color="var(--main-blue)"
+            size="t2"
+          />
           <TypoGraphy
             text="( 최대낙폭 )"
             color="var(--type-gray-2)"
@@ -50,7 +56,7 @@ const WhiteSmallBox = ({ title, status }: box) => {
         </TextRow>
         <TextRow style={{ alignItems: 'center', gap: '10px', height: '36px' }}>
           <TypoGraphy
-            text="-₩ 1,243,000 "
+            text={`-₩ ${parseInt(max_loss).toLocaleString('ko-KR')}`}
             color="var(--type-gray-2)"
             size="t3"
           />
