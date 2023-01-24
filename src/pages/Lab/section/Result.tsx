@@ -27,7 +27,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { faBlackTie } from '@fortawesome/free-brands-svg-icons';
 import StepBox from '../../../components/StepBox';
 
 ChartJS.register(

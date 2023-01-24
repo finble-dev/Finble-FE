@@ -34,8 +34,6 @@ const GoogleButton = ({ setModalOpen }: any) => {
       grant_type: 'authorization_code',
     });
 
-    console.log(redirect_uri);
-
     fetch('https://oauth2.googleapis.com/token', {
       method: 'POST',
       headers: {
@@ -44,7 +42,9 @@ const GoogleButton = ({ setModalOpen }: any) => {
       body: data,
     })
       .then((res) => res.json())
-      .then((res) => setGoogleToken(res.access_token));
+      .then((res) => {
+        setGoogleToken(res.access_token);
+      });
   }, [code]);
 
   const dispatch = useDispatch();
@@ -60,7 +60,6 @@ const GoogleButton = ({ setModalOpen }: any) => {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
         dispatch(setName({ name: res.user.username as string }));
         dispatch(setFirstName({ firstName: res.user.first_name as string }));
         dispatch(setToken({ token: res.token.access as string }));

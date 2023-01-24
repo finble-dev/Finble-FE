@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
+import { useEffect, useState } from 'react';
+import StepBox from '../../../components/StepBox';
+import { WhiteBox, WhiteSmallBox } from '../components/WhiteBox';
 import TypoGraphy from '../../../components/Typography';
 
 import { Line } from 'react-chartjs-2';
@@ -10,12 +13,9 @@ import {
   PointElement,
   LineElement,
   Tooltip,
+  Colors,
   Legend,
 } from 'chart.js';
-import { myData, newData } from '../../../assets/graphData';
-import { useEffect, useState } from 'react';
-import { WhiteBox, WhiteSmallBox } from '../components/WhiteBox';
-import StepBox from '../../../components/StepBox';
 
 ChartJS.register(
   CategoryScale,
@@ -23,14 +23,22 @@ ChartJS.register(
   PointElement,
   LineElement,
   Tooltip,
-  Legend
+  Legend,
+  Colors
 );
 
 const Section2 = ({ data }: { data: any }) => {
-  const [label, setLabel] = useState([] as Array<string>);
-  const [status, setStatus] = useState('위험');
-  const [profit, setProfit] = useState(0);
+  // 그래프 라벨
+  const [label, setLabel] = useState([
+    data.graph_kospi[0].date.slice(0, 7).replace('-', '.\u00A0'),
+  ] as any);
+  // 코스피, 포트폴리오 그래프데이터
+  const [kospiData, setKospiData] = useState([data.graph_kospi[0]] as any);
+  const [portfolioData, setPortfolioData] = useState([
+    data.graph_portfolio[0],
+  ] as any);
 
+  // 수익률 비교
   let profitGap = parseInt(data.portfolio_profit) - parseInt(data.kospi_profit);
   let profitText = '낮은';
   if (profitGap > 0) {
@@ -39,48 +47,47 @@ const Section2 = ({ data }: { data: any }) => {
     profitText = '같은';
   }
 
+  // 내 포트폴리오 상태 (위험/안전)
+  let status = '위험';
   let maxProfitGap =
     parseInt(data.portfolio_max_fall) - parseInt(data.kospi_max_fall);
+  if (maxProfitGap > 0) {
+    status = '위험';
+  } else {
+    status = '안전';
+  }
 
-  const WhiteSmallBoxTitle = [
-    {
-      title: '내 포트폴리오',
-      status: status,
-    },
-    {
-      title: '코스피',
-      status: '',
-    },
-    ,
-  ];
-
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth();
-  let indexArray: number[] = [];
-
+  // 그래프
+  let i = 0;
   useEffect(() => {
-    setLabel([]);
-
-    // let newMyData = myData.filter(
-    //   (item: { date: number; data: number },index:number) =>
-    //     Math.floor(item.date / 100) ==
-    //     ((currentYear % 100) - 1) * 100 + (currentMonth + 1)
-    //   // let newLabel = label;
-    // );
-
-    myData.map(
-      (item: { date: number; data: number }, index: number) => {
-        if (
-          Math.floor(item.date / 100) ==
-          ((currentYear % 100) - 1) * 100 + (currentMonth + 1)
-        ) {
-          indexArray.push(index);
+    i++;
+    if (i >= 2) {
+      data.graph_kospi.map(
+        (item: { date: string; data: number }, index: number) => {
+          if (
+            index != 0 &&
+            item.date[6] != data.graph_kospi[index - 1].date[6]
+          ) {
+            setKospiData((label: []) => [...label, item]);
+            setLabel((label: []) => [
+              ...label,
+              item.date.slice(0, 7).replace('-', '.\u00A0'),
+            ]);
+          }
         }
-        // Math.floor(item.date / 100) ==
-        //   ((currentYear % 100) - 1) * 100 + (currentMonth + 1);
-      }
-      // let newLabel = label;
-    );
+      );
+
+      data.graph_portfolio.map(
+        (item: { date: string; data: number }, index: number) => {
+          if (
+            index != 0 &&
+            item.date[6] != data.graph_portfolio[index - 1].date[6]
+          ) {
+            setPortfolioData((label: any) => [...label, item]);
+          }
+        }
+      );
+    }
   }, []);
 
   const graphData = {
@@ -88,13 +95,17 @@ const Section2 = ({ data }: { data: any }) => {
     datasets: [
       {
         label: '내 포트폴리오',
-        data: myData.map((item: { date: number; data: number }) => item.data),
+        data: portfolioData.map(
+          (item: { date: number; data: number }) => item.data
+        ),
         borderColor: 'rgb(103, 146, 248)',
         pointStyle: false,
       },
       {
         label: '코스피',
-        data: newData.map((item: { date: number; data: number }) => item.data),
+        data: kospiData.map(
+          (item: { date: number; data: number }) => item.data
+        ),
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
       },
@@ -157,10 +168,26 @@ const Section2 = ({ data }: { data: any }) => {
             size="t2"
             color="var(--main-blue)"
           />
-          <TypoGraphy text="더 떨어져서" size="t2" />
+          {maxProfitGap > 0 ? (
+            <TypoGraphy text="더 떨어져서" size="t2" />
+          ) : (
+            <TypoGraphy text="덜 떨어져서" size="t2" />
+          )}
         </TextRow>
         <TextRow>
-          <TypoGraphy text="위험도가 높다" size="t2" color="var(--main-blue)" />
+          {maxProfitGap > 0 ? (
+            <TypoGraphy
+              text="위험도가 높다"
+              size="t2"
+              color="var(--main-blue)"
+            />
+          ) : (
+            <TypoGraphy
+              text="위험도가 낮다"
+              size="t2"
+              color="var(--main-blue)"
+            />
+          )}
           <TypoGraphy text="고 할 수 있어요" size="t2" />
         </TextRow>
 
@@ -198,7 +225,7 @@ const options = {
       display: true,
       align: 'start',
       title: {
-        color: 'black',
+        color: 'green',
       },
       labels: {
         boxHeight: 2,
@@ -209,6 +236,7 @@ const options = {
       bodySpacing: 5,
       usePointStyle: true,
     },
+    colors: { enabled: true },
   },
 
   scales: {
