@@ -1,6 +1,7 @@
 export const ETFList = [
   [
     {
+      id: 23,
       name: 'SPY',
       intro: 'SPDR S&P 500 ETF Trust',
       detail: [
@@ -12,6 +13,7 @@ export const ETFList = [
       img: '/img/lab/해외.svg',
     },
     {
+      id: 24,
       name: 'QQQ',
       intro: 'Invesco QQQ Trust',
       detail: [
@@ -25,6 +27,7 @@ export const ETFList = [
   ],
   [
     {
+      id: 25,
       name: 'IEF',
       intro: 'iShares 7-10 Year Treasury Bond ETF',
       detail: [
@@ -35,7 +38,8 @@ export const ETFList = [
       img: '/img/lab/채권.svg',
     },
     {
-      name: 'TLF',
+      id: 26,
+      name: 'TLT',
       intro: 'iShares 20+ Year Treasury Bond ETF',
       detail: [
         '만기 20년 이상의 미국 장기 국채에 투자하는 ETF에요. 10년 이상',
@@ -48,6 +52,7 @@ export const ETFList = [
   ],
   [
     {
+      id: 27,
       name: 'GLD',
       intro: 'SPDR Gold Shares',
       detail: [

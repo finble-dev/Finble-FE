@@ -36,16 +36,20 @@ const Intro = () => {
 
           <TextWrap lineHeight={34}>
             {list1.map((items: any, itemsIdx: number) => (
-              <TextRow lineHeight={34} key={itemsIdx}>
+              <TextRow lineHeight={34} key={`list1_${itemsIdx}`}>
                 {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
+                    <TypoGraphy
+                      text={item[1]}
+                      size="b1"
+                      key={`list1_0_${itemIdx}`}
+                    />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
-                      key={itemIdx}
+                      key={`list1_1_${itemIdx}`}
                     />
                   )
                 )}
@@ -55,16 +59,20 @@ const Intro = () => {
 
           <TextWrap lineHeight={34} padding="30px 0 0 0">
             {list2.map((items: any, itemsIdx: number) => (
-              <TextRow lineHeight={34} key={itemsIdx}>
+              <TextRow lineHeight={34} key={`list2_${itemsIdx}`}>
                 {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
+                    <TypoGraphy
+                      text={item[1]}
+                      size="b1"
+                      key={`list2_0_${itemIdx}`}
+                    />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
-                      key={itemIdx}
+                      key={`list2_1_${itemIdx}`}
                     />
                   )
                 )}
@@ -97,16 +105,20 @@ const Intro = () => {
 
           <TextWrap lineHeight={34}>
             {list3.map((items: any, itemsIdx: number) => (
-              <TextRow lineHeight={34} key={itemsIdx}>
+              <TextRow lineHeight={34} key={`list3_${itemsIdx}`}>
                 {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
+                    <TypoGraphy
+                      text={item[1]}
+                      size="b1"
+                      key={`list3_0_${itemIdx}`}
+                    />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
-                      key={itemIdx}
+                      key={`list3_1_${itemIdx}`}
                     />
                   )
                 )}
@@ -116,16 +128,20 @@ const Intro = () => {
 
           <TextWrap lineHeight={34} padding="20px 0 0 0">
             {list4.map((items: any, itemsIdx: number) => (
-              <TextRow lineHeight={34} key={itemsIdx}>
+              <TextRow lineHeight={34} key={`list4_${itemsIdx}`}>
                 {items.map((item: any, itemIdx: number) =>
                   item[0] === 'black' ? (
-                    <TypoGraphy text={item[1]} size="b1" key={itemIdx} />
+                    <TypoGraphy
+                      text={item[1]}
+                      size="b1"
+                      key={`list4_0_${itemIdx}`}
+                    />
                   ) : (
                     <TypoGraphy
                       text={item[1]}
                       color="var(--main-blue)"
                       size="b1"
-                      key={itemIdx}
+                      key={`list4_1_${itemIdx}`}
                     />
                   )
                 )}
