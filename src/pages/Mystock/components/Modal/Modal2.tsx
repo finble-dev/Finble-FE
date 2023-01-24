@@ -11,9 +11,10 @@ interface InputType {
   name: string;
   market: string;
   symbol: string;
+  setModalOpen: any;
 }
 
-const Modal2 = ({ name, market, symbol }: InputType) => {
+const Modal2 = ({ name, market, symbol, setModalOpen }: InputType) => {
   const token = useSelector(tokenState);
   const [price, setPrice] = useState('');
   const [num, setNum] = useState('');
@@ -51,17 +52,15 @@ const Modal2 = ({ name, market, symbol }: InputType) => {
       cache: 'no-cache',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
       body: sendData,
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
+        setModalOpen(false);
       });
   };
-
-  console.log(sendData);
 
   return (
     <Container>

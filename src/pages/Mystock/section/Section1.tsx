@@ -4,22 +4,20 @@ import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import Label from '../components/Graph/Label';
+import { SectorLabel, StockLabel } from '../components/Graph/Label';
+import { useAppSelect } from '../../../store/configStore.hooks';
+import { nameState } from '../../../store/slice/userSlice';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Section1 = () => {
-  const backgroundColor = ['#6792F8', '#FFE07E', '#4FEDAE'];
-  const data = [
-    { name: '카카오', cate: 'IT', rate: '60.0' },
-    { name: '애플', cate: '첨단 기술', rate: '30.0' },
-    { name: '테슬라', cate: '첨단 기술', rate: '10.0' },
-  ];
+const Section1 = ({ data }: any) => {
+  const name = useAppSelect(nameState)[1] + useAppSelect(nameState)[2];
+  const backgroundColor = ['#6792F8', '#FFE07E', '#4FEDAE', '#FF5852'];
   const graphData = {
     labels: [],
     datasets: [
       {
         // label: '# of Votes',
-        data: data.map((i) => i.rate),
+        data: data.portfolio_ratio.map((i: { ratio: number }) => i.ratio),
         backgroundColor: backgroundColor,
         borderWidth: 0,
         cutout: '55%',
@@ -27,12 +25,15 @@ const Section1 = () => {
     ],
   };
 
-  const [assets, setAssets] = useState(['3,348,916', '3,348,916']);
+  const [assets, setAssets] = useState([
+    data.present_val_sum.toLocaleString('ko-KR'),
+    data.invested_val_sum.toLocaleString('ko-KR'),
+  ]);
 
   const content = [
     {
       color: 'var(--main-blue)',
-      text: 'IT주',
+      text: data.sector_ratio[0].sector + '주',
     },
     {
       color: 'var(--type-black)',
@@ -40,7 +41,7 @@ const Section1 = () => {
     },
     {
       color: 'var(--main-blue)',
-      text: '첨단 기술주',
+      text: data.sector_ratio[1].sector + '주',
     },
     {
       color: 'var(--type-black)',
@@ -54,7 +55,7 @@ const Section1 = () => {
         {/* title */}
         <TextWrap padding="0 0 7px 0">
           <TypoGraphy
-            text="민성님의 주식은 어떻게 이루어졌을까요?"
+            text={name + '님의 주식은 어떻게 이루어졌을까요?'}
             color="var(--type-gray-2)"
             size="t3"
           />
@@ -106,12 +107,12 @@ const Section1 = () => {
             <DoughnutGraphWrapper>
               <Doughnut data={graphData} width="280px" height="280px" />
               <LabelWrapper>
-                {data.map((i: any, index: number) => (
-                  <Label
+                {data.portfolio_ratio.map((i: any, index: number) => (
+                  <StockLabel
                     color={backgroundColor[index]}
-                    name={i.name}
-                    cate={i.cate}
-                    rate={i.rate}
+                    name={i.stock.name}
+                    sector={i.stock.sector}
+                    rate={i.ratio.toFixed(1)}
                   />
                 ))}
               </LabelWrapper>
@@ -124,10 +125,19 @@ const Section1 = () => {
               color="var(--type-gray-2)"
             />
             <BarGraphWrapper>
-              {data.map((i, index: number) => (
-                <BarGraph color={backgroundColor[index]} width={i.rate} />
+              {data.sector_ratio.map((i: any, index: number) => (
+                <BarGraph color={backgroundColor[index]} width={i.ratio} />
               ))}
             </BarGraphWrapper>
+            <LabelWrapper padding="0 15px">
+              {data.sector_ratio.map((i: any, index: number) => (
+                <SectorLabel
+                  color={backgroundColor[index]}
+                  rate={'' + parseInt(i.ratio)}
+                  sector={i.sector}
+                />
+              ))}
+            </LabelWrapper>
           </SubContainer>
         </WhiteBox>
       </Container>
@@ -170,12 +180,13 @@ const DoughnutGraphWrapper = styled.div`
   margin: 0 0 15px 0;
   gap: 35px;
 `;
-const LabelWrapper = styled.div`
+const LabelWrapper = styled.div<{ padding?: string }>`
   display: flex;
   flex-wrap: wrap;
   height: fit-content;
   column-gap: 23px;
   row-gap: 15px;
+  padding: ${(props) => props.padding || 'none'};
 `;
 
 const BarGraphWrapper = styled.div`
