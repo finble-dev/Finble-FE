@@ -107,13 +107,17 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
   });
 
   const changeMine = (id: number, event: any) => {
+    let data = JSON.stringify({ id: id, ratio: event.target.value });
+    if (event.target.value === '') {
+      data = JSON.stringify({ id: id, ratio: 0 });
+    }
     fetch(`${SERVER}/test-portfolio/`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ id: id, ratio: event.target.value }),
+      body: data,
     })
       .then((response) => response.json())
       .then((res) => {
