@@ -5,12 +5,12 @@ import TypoGraphy from '../../../components/Typography';
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { SectorLabel, StockLabel } from '../components/Graph/Label';
-import { useAppSelect } from '../../../store/configStore.hooks';
-import { nameState } from '../../../store/slice/userSlice';
+import { useSelector } from 'react-redux';
+import { firstNameState } from '../../../store/slice/userSlice';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Section1 = ({ data }: any) => {
-  const name = useAppSelect(nameState)[1] + useAppSelect(nameState)[2];
+  const name = useSelector(firstNameState);
   const backgroundColor = ['#6792F8', '#FFE07E', '#4FEDAE', '#FF5852'];
   const graphData = {
     labels: [],

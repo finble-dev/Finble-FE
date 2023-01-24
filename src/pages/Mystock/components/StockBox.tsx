@@ -30,7 +30,7 @@ const StockBox = ({ stock }: { stock: any }) => {
         width="28px"
         onClick={() => DeleteStock(stock.portfolio.id)}
       >
-        <Img src={del} />
+        <Img src={del} style={{ cursor: 'pointer' }} />
       </ImgContainer>
       <BlueBox>
         <div>
