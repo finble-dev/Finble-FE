@@ -23,16 +23,18 @@ const MyStock = () => {
   let total = 0;
 
   useEffect(() => {
-    fetch(`${SERVER}/portfolio/`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setData(res.data);
-      });
+    if (name != '') {
+      fetch(`${SERVER}/portfolio/`, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          setData(res.data);
+        });
+    }
   });
 
   // 내 주식 진단하기 버튼 활성화
