@@ -26,7 +26,7 @@ const StockDiagnosis = () => {
       {data != null ? (
         <>
           <Section1 data={data} />
-          <Section2 />
+          <Section2 data={data} />
         </>
       ) : (
         <>loading..</>
