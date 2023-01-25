@@ -106,8 +106,13 @@ export default Header;
 
 const Wrapper = styled.div`
   display: flex;
+  position: fixed;
+  z-index: 99;
+  top: 0;
+  right: 0;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff;
   width: 100%;
   height: 70px;
 `;

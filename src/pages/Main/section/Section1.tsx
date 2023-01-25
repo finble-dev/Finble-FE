@@ -13,7 +13,7 @@ const Section1 = () => {
           text="주식창을 볼 때마다 심장이 철렁했다면?"
           size="h2"
           color="var(--type-gray-2)"
-          style={{ marginBottom: '40px' }}
+          style={{ marginBottom: '30px' }}
         />
         <TextWrap lineHeight={55} padding="0 0 50px 0">
           <TypoGraphy

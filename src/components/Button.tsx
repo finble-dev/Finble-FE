@@ -67,8 +67,10 @@ const Btn60Container = styled.div<btn>`
       ? 'var(--main-blue)'
       : 'var(--type-white)'};
   border: ${(props) =>
-    props.type === 'login' || props.type === 'outline_disable'
-      ? '1px solid var(--type-gray-4)'
+    props.type === 'login'
+      ? '1px solid var(--main-blue)'
+      : props.type === 'outline_disable'
+      ? '2px solid var(--type-gray-4)'
       : props.type === 'outline_able'
       ? '2px solid var(--main-blue)'
       : 'none'};

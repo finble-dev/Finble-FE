@@ -92,7 +92,7 @@ const Container = styled.div`
   margin-top: 20px;
   background: #f6f8ff;
   border-radius: 10px;
-  padding: 30px 35px;
+  padding: 26px 30px;
 `;
 
 const Column = styled.div`
@@ -104,7 +104,6 @@ const Column = styled.div`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  // justify-content: space-between;
   margin-bottom: 17px;
 `;
 

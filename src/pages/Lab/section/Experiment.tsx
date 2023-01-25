@@ -14,11 +14,7 @@ import modalImg from '../../../assets/img/lab/캐릭터.png';
 import { ETF } from '../../../interface/interface';
 import { Link } from 'react-router-dom';
 
-import {
-  nameState,
-  tokenState,
-  firstNameState,
-} from '../../../store/slice/userSlice';
+import { tokenState, firstNameState } from '../../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
 import { SERVER } from '../../../network/config';
 
@@ -86,10 +82,10 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         // 유저 보유 종목 & 추가 종목 불러오기
-        setRetainStock(res.data_add);
-        setAddedStock(res.data_retain);
+        setRetainStock(res.data_retain);
+        setAddedStock(res.data_add);
         let symbolList = [];
 
         // 모달창 유무 설정
@@ -126,7 +122,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     })
       .then((response) => response.json())
       .then((res) => {
-        console.log(res);
+        // console.log(res);
       })
       .catch((err) => console.log(err));
   };
@@ -145,6 +141,22 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
       window.scrollTo({ top: 2400, left: 0, behavior: 'smooth' });
     }
   }, [expNum]);
+
+  const getResult = () => {
+    console.log('실험중 ... ');
+
+    fetch(`${SERVER}/test-portfolio/analysis/`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Container>
@@ -349,6 +361,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               if (totalPer === 100) {
                 setIsExp(true);
                 setExpNum(expNum + 1);
+                getResult();
               }
             }}
           >

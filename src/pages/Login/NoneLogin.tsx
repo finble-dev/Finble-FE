@@ -12,7 +12,7 @@ const NoneLogin = () => {
     <Container>
       <Wrapper>
         <TypoGraphy text="앗, 로그인부터!" size="h1" />
-        <TextWrap padding="40px 0 50px 0">
+        <TextWrap padding="40px 0 50px 0" lineHeight={34}>
           <TypoGraphy
             text="로그인/회원가입 이후 내 포트폴리오를 입력할 수 있어요."
             size="t3"

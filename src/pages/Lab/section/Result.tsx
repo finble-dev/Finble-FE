@@ -15,8 +15,8 @@ import { SERVER } from '../../../network/config';
 
 import q from '../../../assets/img/lab/q.png';
 import a from '../../../assets/img/lab/a.png';
-import up from '../../../assets/img/lab/up.png';
-import down from '../../../assets/img/lab/down.png';
+import up from '../../../assets/img/lab/up.svg';
+import down from '../../../assets/img/lab/down.svg';
 
 import {
   Chart as ChartJS,
@@ -260,9 +260,9 @@ const Experiment = () => {
                   }}
                 >
                   {item.flag ? (
-                    <ImgToggle src={down} />
-                  ) : (
                     <ImgToggle src={up} />
+                  ) : (
+                    <ImgToggle src={down} />
                   )}
                 </div>
               </QuestionRow>

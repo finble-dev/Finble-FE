@@ -87,12 +87,12 @@ const Lab = () => {
               {/* </Row> */}
               <img src={modalImg} />
 
-              <TextWrap lineHeight={34} padding="32px 0 0 0">
+              <TextWrap lineHeight={30} padding="32px 0 0 0">
                 {list1.map((items: any, itemsIdx: number) => (
                   <TextRow
                     align="center"
                     key={`Lab_list1_${itemsIdx}`}
-                    style={{ height: '34px' }}
+                    style={{ height: '30px' }}
                   >
                     {items.map((item: any, itemIdx: number) =>
                       item[0] === 'black' ? (
