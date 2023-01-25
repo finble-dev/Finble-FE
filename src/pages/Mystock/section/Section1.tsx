@@ -25,6 +25,15 @@ const Section1 = ({ data }: any) => {
     ],
   };
 
+  let sectorText1, sectorText2;
+  if (Array.from(data.sector_ratio).length > 1) {
+    sectorText1 = '와 \u00A0';
+    sectorText2 = data.sector_ratio[1].sector + '주';
+  } else {
+    sectorText1 = '';
+    sectorText2 = '';
+  }
+
   const [assets, setAssets] = useState([
     data.present_val_sum.toLocaleString('ko-KR'),
     data.invested_val_sum.toLocaleString('ko-KR'),
@@ -37,11 +46,11 @@ const Section1 = ({ data }: any) => {
     },
     {
       color: 'var(--type-black)',
-      text: '와 \u00A0',
+      text: sectorText1,
     },
     {
       color: 'var(--main-blue)',
-      text: data.sector_ratio[1].sector + '주',
+      text: sectorText2,
     },
     {
       color: 'var(--type-black)',

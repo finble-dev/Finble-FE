@@ -2,11 +2,14 @@ import styled from 'styled-components';
 import TypoGraphy from './Typography';
 import StepBoxBg from '../assets/img/stepBoxBg.png';
 import { Link } from 'react-router-dom';
+import { firstNameState } from '../store/slice/userSlice';
+import { useSelector } from 'react-redux';
 
 const StepBox = ({ step }: { step: number }) => {
   let text1, text2, arrow;
+  const firstName = useSelector(firstNameState);
   if (step == 2) {
-    text1 = '민성님의 투자 현황을 알았으니';
+    text1 = `${firstName}님의 투자 현황을 알았으니`;
     text2 = '이제 위험도를 낮추러 가볼까요?';
     arrow = '투자 실험하러 가기 > ';
   } else if (step == 3) {

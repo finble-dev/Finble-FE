@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
+import { useEffect, useState } from 'react';
+import StepBox from '../../../components/StepBox';
+import { WhiteBox, WhiteSmallBox } from '../components/WhiteBox';
 import TypoGraphy from '../../../components/Typography';
 
 import { Line } from 'react-chartjs-2';
@@ -10,12 +13,9 @@ import {
   PointElement,
   LineElement,
   Tooltip,
+  Colors,
   Legend,
 } from 'chart.js';
-import { myData, newData } from '../../../assets/graphData';
-import { useEffect, useState } from 'react';
-import { WhiteBox, WhiteSmallBox } from '../components/WhiteBox';
-import StepBox from '../../../components/StepBox';
 
 ChartJS.register(
   CategoryScale,
@@ -23,51 +23,71 @@ ChartJS.register(
   PointElement,
   LineElement,
   Tooltip,
-  Legend
+  Legend,
+  Colors
 );
 
-const Section2 = () => {
-  const [label, setLabel] = useState([] as Array<string>);
-  const [status, setStatus] = useState('위험');
-  const WhiteSmallBoxTitle = [
-    {
-      title: '내 포트폴리오',
-      status: status,
-    },
-    {
-      title: '코스피',
-      status: '',
-    },
-    ,
-  ];
+const Section2 = ({ data }: { data: any }) => {
+  // 그래프 라벨
+  const [label, setLabel] = useState([
+    data.graph_kospi[0].date.slice(0, 7).replace('-', '.\u00A0'),
+  ] as any);
+  // 코스피, 포트폴리오 그래프데이터
+  const [kospiData, setKospiData] = useState([data.graph_kospi[0]] as any);
+  const [portfolioData, setPortfolioData] = useState([
+    data.graph_portfolio[0],
+  ] as any);
 
-  const currentYear = new Date().getFullYear();
-  const currentMonth = new Date().getMonth();
-  let indexArray: number[] = [];
+  // 수익률 비교
+  let profitGap = parseInt(data.portfolio_profit) - parseInt(data.kospi_profit);
+  let profitText = '낮은';
+  if (profitGap > 0) {
+    profitText = '높은';
+  } else if (profitGap == 0) {
+    profitText = '같은';
+  }
 
+  // 내 포트폴리오 상태 (위험/안전)
+  let status = '위험';
+  let maxProfitGap =
+    parseInt(data.portfolio_max_fall) - parseInt(data.kospi_max_fall);
+  if (maxProfitGap > 0) {
+    status = '위험';
+  } else {
+    status = '안전';
+  }
+
+  // 그래프
+  let i = 0;
   useEffect(() => {
-    setLabel([]);
-
-    // let newMyData = myData.filter(
-    //   (item: { date: number; data: number },index:number) =>
-    //     Math.floor(item.date / 100) ==
-    //     ((currentYear % 100) - 1) * 100 + (currentMonth + 1)
-    //   // let newLabel = label;
-    // );
-
-    myData.map(
-      (item: { date: number; data: number }, index: number) => {
-        if (
-          Math.floor(item.date / 100) ==
-          ((currentYear % 100) - 1) * 100 + (currentMonth + 1)
-        ) {
-          indexArray.push(index);
+    i++;
+    if (i >= 2) {
+      data.graph_kospi.map(
+        (item: { date: string; data: number }, index: number) => {
+          if (
+            index != 0 &&
+            item.date[6] != data.graph_kospi[index - 1].date[6]
+          ) {
+            setKospiData((label: []) => [...label, item]);
+            setLabel((label: []) => [
+              ...label,
+              item.date.slice(0, 7).replace('-', '.\u00A0'),
+            ]);
+          }
         }
-        // Math.floor(item.date / 100) ==
-        //   ((currentYear % 100) - 1) * 100 + (currentMonth + 1);
-      }
-      // let newLabel = label;
-    );
+      );
+
+      data.graph_portfolio.map(
+        (item: { date: string; data: number }, index: number) => {
+          if (
+            index != 0 &&
+            item.date[6] != data.graph_portfolio[index - 1].date[6]
+          ) {
+            setPortfolioData((label: any) => [...label, item]);
+          }
+        }
+      );
+    }
   }, []);
 
   const graphData = {
@@ -75,13 +95,17 @@ const Section2 = () => {
     datasets: [
       {
         label: '내 포트폴리오',
-        data: myData.map((item: { date: number; data: number }) => item.data),
+        data: portfolioData.map(
+          (item: { date: number; data: number }) => item.data
+        ),
         borderColor: 'rgb(103, 146, 248)',
         pointStyle: false,
       },
       {
         label: '코스피',
-        data: newData.map((item: { date: number; data: number }) => item.data),
+        data: kospiData.map(
+          (item: { date: number; data: number }) => item.data
+        ),
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
       },
@@ -101,10 +125,22 @@ const Section2 = () => {
         <TextWrap lineHeight={40} padding="16px 0 44px 0">
           <TextRow>
             <TypoGraphy text="시장보다&nbsp;" size="t2" />
-            <TypoGraphy text="13%p" color="var(--main-blue)" size="t2" />
-            <TypoGraphy text="&nbsp;낮은 수익률을 냈어요" size="t2" />
+            <TypoGraphy
+              text={`${profitGap}%p`}
+              color="var(--main-blue)"
+              size="t2"
+            />
+            <TypoGraphy
+              text={`\u00A0${profitText} 수익률을 냈어요`}
+              size="t2"
+            />
           </TextRow>
-          <TypoGraphy text="내 포트폴리오 -42%,  코스피 -29%" size="t2" />
+          <TypoGraphy
+            text={`내 포트폴리오 ${parseInt(
+              data.portfolio_profit
+            )}%,  코스피 ${parseInt(data.kospi_profit)}%`}
+            size="t2"
+          />
         </TextWrap>
 
         {/* line graph box */}
@@ -128,24 +164,50 @@ const Section2 = () => {
         <TextRow>
           <TypoGraphy text="가장 많이 떨어진 시기에는 시장보다 약" size="t2" />
           <TypoGraphy
-            text="&nbsp;14%p&nbsp;"
+            text={`\u00A0${maxProfitGap}%p\u00A0`}
             size="t2"
             color="var(--main-blue)"
           />
-          <TypoGraphy text="더 떨어져서" size="t2" />
+          {maxProfitGap > 0 ? (
+            <TypoGraphy text="더 떨어져서" size="t2" />
+          ) : (
+            <TypoGraphy text="덜 떨어져서" size="t2" />
+          )}
         </TextRow>
         <TextRow>
-          <TypoGraphy text="위험도가 높다" size="t2" color="var(--main-blue)" />
+          {maxProfitGap > 0 ? (
+            <TypoGraphy
+              text="위험도가 높다"
+              size="t2"
+              color="var(--main-blue)"
+            />
+          ) : (
+            <TypoGraphy
+              text="위험도가 낮다"
+              size="t2"
+              color="var(--main-blue)"
+            />
+          )}
           <TypoGraphy text="고 할 수 있어요" size="t2" />
         </TextRow>
 
         {/* white boxes */}
         <WhiteBoxWrap>
-          <WhiteSmallBox title="내 포트폴리오" status={status} />
+          <WhiteSmallBox
+            title="내 포트폴리오"
+            status={status}
+            max_fall={data.portfolio_max_fall}
+            max_loss={data.portfolio_max_loss}
+          />
           <VS>
             <TypoGraphy text="VS" size="t3" color="var(--main-blue)" />
           </VS>
-          <WhiteSmallBox title="코스피" status="" />
+          <WhiteSmallBox
+            title="코스피"
+            status=""
+            max_fall={data.kospi_max_fall}
+            max_loss={data.kospi_max_loss}
+          />
         </WhiteBoxWrap>
 
         <StepBox step={2} />
@@ -163,7 +225,7 @@ const options = {
       display: true,
       align: 'start',
       title: {
-        color: 'black',
+        color: 'green',
       },
       labels: {
         boxHeight: 2,
@@ -174,6 +236,7 @@ const options = {
       bodySpacing: 5,
       usePointStyle: true,
     },
+    colors: { enabled: true },
   },
 
   scales: {
