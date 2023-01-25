@@ -39,6 +39,19 @@ const GlobalStyles = createGlobalStyle`
     --fw-small: 700;
     --fw-input: 400;
 
+    /* font-size
+    --fs-h1: 30px;
+    --fs-h2: 24px;
+    --fs-t1: 32px;
+    --fs-t2: 28px;
+    --fs-t3: 20px;
+    --fs-b1: 18px;
+    --fs-b2: 14px;
+    --fs-b3: 12px;
+    --fs-b4: 10px;
+    --fs-small: 14px;
+    --fs-input: 18px;*/
+
     // font-size
     --fs-h1: 34px;
     --fs-h2: 28px;

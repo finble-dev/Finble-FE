@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
@@ -10,14 +10,35 @@ import { firstNameState } from '../../../store/slice/userSlice';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Section1 = ({ data }: any) => {
+  const [stock, setStock] = useState(data.portfolio_ratio);
+  const [sector, setPortfolio] = useState(data.sector_ratio);
   const name = useSelector(firstNameState);
-  const backgroundColor = ['#6792F8', '#FFE07E', '#4FEDAE', '#FF5852'];
+
+  useEffect(() => {
+    if (stock.length > 7) {
+      let leftRatio = 0;
+      for (var i = 7; i < stock.length; i++) {
+        leftRatio += stock[i].ratio;
+      }
+    }
+  }, []);
+
+  const backgroundColor = [
+    '#6792F8',
+    '#FFE07E',
+    '#4FEDAE',
+    '#A574EE',
+    '#3F4658',
+    '#20CBDD',
+    '#A5A5A5',
+    '#5EC596',
+  ];
   const graphData = {
     labels: [],
     datasets: [
       {
         // label: '# of Votes',
-        data: data.portfolio_ratio.map((i: { ratio: number }) => i.ratio),
+        data: stock.map((i: { ratio: number }) => i.ratio),
         backgroundColor: backgroundColor,
         borderWidth: 0,
         cutout: '55%',
@@ -70,8 +91,8 @@ const Section1 = ({ data }: any) => {
           />
         </TextWrap>
         <TextRow>
-          {content.map((i) => (
-            <TypoGraphy text={i.text} color={i.color} size="t2" />
+          {content.map((i: any, index: number) => (
+            <TypoGraphy text={i.text} color={i.color} size="t2" key={index} />
           ))}
         </TextRow>
 
@@ -118,6 +139,7 @@ const Section1 = ({ data }: any) => {
               <LabelWrapper>
                 {data.portfolio_ratio.map((i: any, index: number) => (
                   <StockLabel
+                    key={index}
                     color={backgroundColor[index]}
                     name={i.stock.name}
                     sector={i.stock.sector}
@@ -134,13 +156,18 @@ const Section1 = ({ data }: any) => {
               color="var(--type-gray-2)"
             />
             <BarGraphWrapper>
-              {data.sector_ratio.map((i: any, index: number) => (
-                <BarGraph color={backgroundColor[index]} width={i.ratio} />
+              {sector.map((i: any, index: number) => (
+                <BarGraph
+                  key={index}
+                  color={backgroundColor[index]}
+                  width={i.ratio}
+                />
               ))}
             </BarGraphWrapper>
             <LabelWrapper padding="0 15px">
-              {data.sector_ratio.map((i: any, index: number) => (
+              {sector.map((i: any, index: number) => (
                 <SectorLabel
+                  key={index}
                   color={backgroundColor[index]}
                   rate={'' + parseInt(i.ratio)}
                   sector={i.sector}
