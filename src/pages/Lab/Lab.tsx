@@ -11,6 +11,7 @@ import { Img, TextRow, TextWrap } from '../../assets/styles/styles';
 import TypoGraphy from '../../components/Typography';
 import closeIcon from '../../assets/icons/close.svg';
 import modalImg from '../../assets/img/lab/modalImg.png';
+import { initData } from './initData';
 
 import { nameState } from '../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
@@ -33,6 +34,7 @@ const Lab = () => {
   const [modalOpen, setModalOpen] = useState(true);
   const [isExp, setIsExp] = useState(false);
   const name = useSelector(nameState);
+  const [data, setData] = useState(initData);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -42,8 +44,13 @@ const Lab = () => {
       {name !== '' ? (
         <Container>
           <Intro />
-          <Experiment isExp={isExp} setIsExp={setIsExp} />
-          {isExp ? <Result /> : <></>}
+          <Experiment
+            isExp={isExp}
+            setIsExp={setIsExp}
+            data={data}
+            setData={setData}
+          />
+          {data != initData ? <Result data={data} /> : <></>}
           <ReactModal
             ariaHideApp={false}
             isOpen={modalOpen}
