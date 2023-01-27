@@ -7,6 +7,7 @@ import { nameState, tokenState } from '../../store/slice/userSlice';
 import Section1 from './section/Section1';
 import Section2 from './section/Section2';
 import { initData } from './initData';
+import Header from '../../components/Header';
 
 const StockDiagnosis = () => {
   const token = useAppSelect(tokenState);
@@ -28,6 +29,8 @@ const StockDiagnosis = () => {
 
   return (
     <Container>
+      <Header />
+      <div style={{ marginTop: '70px' }}></div>
       {data != initData ? (
         <>
           <Section1 data={data} />

@@ -5,11 +5,14 @@ import noneLoginBg from '../../assets/img/noneLoginBg.png';
 import { useState } from 'react';
 import { TextWrap } from '../../assets/styles/styles';
 import LoginModal from '../../components/LoginModal';
+import Header from '../../components/Header';
 const NoneLogin = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
     <Container>
+      <Header />
+      <div style={{ marginTop: '70px' }}></div>
       <Wrapper>
         <TypoGraphy text="앗, 로그인부터!" size="h1" />
         <TextWrap padding="40px 0 50px 0" lineHeight={34}>

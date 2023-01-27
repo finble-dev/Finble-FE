@@ -17,6 +17,7 @@ import {
 import { useSelector } from 'react-redux';
 import { SERVER } from '../../network/config';
 import StockBox from './components/StockBox';
+import Header from '../../components/Header';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -58,6 +59,8 @@ const MyStock = () => {
 
   return (
     <>
+      <Header />
+      <div style={{ marginTop: '70px' }}></div>
       {name !== '' ? (
         <Wrap>
           <Container>

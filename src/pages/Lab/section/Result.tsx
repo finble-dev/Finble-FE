@@ -494,6 +494,7 @@ const Input = styled.input`
   outline: none;
   margin-right: 18px;
   padding: 18px;
+  font-size: 14px;
 
   &::placeholder {
     color: var(--type-gray-4);

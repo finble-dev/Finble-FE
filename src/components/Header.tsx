@@ -9,6 +9,7 @@ import { nameState } from '../store/slice/userSlice';
 import { useSelector } from 'react-redux';
 import { setName, setToken } from '../store/slice/userSlice';
 import { useDispatch } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,65 +20,40 @@ const Header = () => {
     dispatch(setToken({ token: '' }));
   };
 
-  const [path, setPath] = useState('/');
+  const path = useLocation();
 
   return (
     <Wrapper>
       <Container>
         <Row>
-          <Link
-            to="/"
-            onClick={() => {
-              setPath('/');
-            }}
-          >
+          <Link to="/">
             <Logo src={logo} />
           </Link>
           <Column>
-            {path === '/stock' ? (
+            {path.pathname === '/stock' || path.pathname === '/diagnosis' ? (
               <>
-                <Link
-                  to="/stock"
-                  onClick={() => {
-                    setPath('/stock');
-                  }}
-                >
+                <Link to="/stock">
                   <Typography text="내 주식" size="b2" />
                 </Link>
                 <Line />
               </>
             ) : (
-              <Link
-                to="/stock"
-                onClick={() => {
-                  setPath('/stock');
-                }}
-              >
+              <Link to="/stock">
                 <Typography text="내 주식" size="b2" />
               </Link>
             )}
           </Column>
 
           <Column>
-            {path === '/lab' ? (
+            {path.pathname === '/lab' ? (
               <>
-                <Link
-                  to="/lab"
-                  onClick={() => {
-                    setPath('/lab');
-                  }}
-                >
+                <Link to="/lab">
                   <Typography text="투자실험실" size="b2" />
                 </Link>
                 <Line />
               </>
             ) : (
-              <Link
-                to="/lab"
-                onClick={() => {
-                  setPath('/lab');
-                }}
-              >
+              <Link to="/lab">
                 <Typography text="투자실험실" size="b2" />
               </Link>
             )}
