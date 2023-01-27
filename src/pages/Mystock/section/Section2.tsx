@@ -28,16 +28,6 @@ ChartJS.register(
 );
 
 const Section2 = ({ data }: { data: any }) => {
-  // 그래프 라벨
-  const [label, setLabel] = useState([
-    // data.graph_kospi[0].date.slice(0, 7).replace('-', '.\u00A0'),
-  ] as any);
-  // 코스피, 포트폴리오 그래프데이터
-  const [kospiData, setKospiData] = useState([data.graph_kospi[0]] as any);
-  const [portfolioData, setPortfolioData] = useState([
-    data.graph_portfolio[0],
-  ] as any);
-
   // 수익률 비교
   let profitGap = parseInt(data.portfolio_profit) - parseInt(data.kospi_profit);
   let profitText = '낮은';
@@ -58,46 +48,46 @@ const Section2 = ({ data }: { data: any }) => {
   }
 
   // 그래프
-  let i = 0;
-  useEffect(() => {
-    i++;
-    if (i >= 2) {
-      data.graph_kospi.map(
-        (item: { date: string; data: number }, index: number) => {
-          if (
-            index != 0 &&
-            item.date[6] != data.graph_kospi[index - 1].date[6]
-          ) {
-            setKospiData((label: any) => [...label, item]);
-            setLabel((label: []) => [
-              ...label,
-              item.date.slice(0, 7).replace('-', '.\u00A0'),
-            ]);
-          } else {
-            setLabel((label: []) => [...label, '']);
-          }
-        }
-      );
+  // let i = 0;
+  // useEffect(() => {
+  //   i++;
+  //   if (i >= 2) {
+  //     data.graph_kospi.map(
+  //       (item: { date: string; data: number }, index: number) => {
+  //         if (
+  //           index != 0 &&
+  //           item.date[6] != data.graph_kospi[index - 1].date[6]
+  //         ) {
+  //           setKospiData((label: any) => [...label, item]);
+  //           setLabel((label: []) => [
+  //             ...label,
+  //             item.date.slice(0, 7).replace('-', '.\u00A0'),
+  //           ]);
+  //         } else {
+  //           setLabel((label: []) => [...label, '']);
+  //         }
+  //       }
+  //     );
 
-      data.graph_portfolio.map(
-        (item: { date: string; data: number }, index: number) => {
-          if (
-            index != 0 &&
-            item.date[6] != data.graph_portfolio[index - 1].date[6]
-          ) {
-            setPortfolioData((label: any) => [...label, item]);
-          }
-        }
-      );
-    }
-  }, []);
+  //     data.graph_portfolio.map(
+  //       (item: { date: string; data: number }, index: number) => {
+  //         if (
+  //           index != 0 &&
+  //           item.date[6] != data.graph_portfolio[index - 1].date[6]
+  //         ) {
+  //           setPortfolioData((label: any) => [...label, item]);
+  //         }
+  //       }
+  //     );
+  //   }
+  // }, []);
 
-  let newlabel1 = data.graph_kospi.map(
-    (i: { date: number; data: number }) => '' + i.date //.slice(0, 7).replace('-', '.\u00A0')
+  let newlabel = data.graph_kospi.map((i: { date: number; data: number }) =>
+    ('' + i.date).slice(0, 7).replace('-', '.\u00A0')
   );
 
   const graphData = {
-    labels: newlabel1,
+    labels: newlabel,
     datasets: [
       {
         label: '내 포트폴리오',
@@ -134,7 +124,13 @@ const Section2 = ({ data }: { data: any }) => {
       tooltip: {
         padding: 10,
         bodySpacing: 5,
+        background: '#3B3B3B',
         usePointStyle: true,
+        callback: {
+          label: function () {
+            return '';
+          },
+        },
       },
       colors: { enabled: true },
     },
@@ -150,15 +146,12 @@ const Section2 = ({ data }: { data: any }) => {
         grid: {
           display: false,
         },
-        // ticks: {
-        //   callback(val: number, index: number): any {
-        //     var newthis = this as any;
-        //     return newlabel1[index][8] + newlabel1[index][9] ===
-        //       '' + new Date().getDate() // && typeof val === 'number'
-        //       ? newthis.getLabelForValue(val)
-        //       : '';
-        //   },
-        // },
+        ticks: {
+          callback(val: number, index: number): any {
+            var newthis = this as any;
+            return index % 2 == 0 ? newthis.getLabelForValue(val) : '';
+          },
+        },
         align: '0', // x축 값의 회전 각도를 설정할 수 있어요.
         padding: 0, // x축 값의 상하 패딩을 설정할 수 있어요.
       },
