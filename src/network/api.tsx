@@ -12,19 +12,16 @@ export const getTestPortfolio = async (token: any) => {
 };
 
 export const deleteTestPortfolio = async (token: any, id: number) => {
-  console.log('삭제 시작!!');
   await fetch(`${SERVER}/test-portfolio/`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ id: id }),
-  });
-  // .then((response) => response.json())
-  // .then((res) => {
-  //   console.log('삭제 결과 : ', res);
-  // });
+    body: JSON.stringify({
+      id: id,
+    }),
+  }).catch((err) => console.log(err));
 };
 
 export const postTestPortfolio = async (token: any, symbol: string) => {
@@ -49,14 +46,8 @@ export const patchTestPortfolio = async (
 ) => {
   let data = JSON.stringify({
     id: id,
-    ratio: ratio,
+    ratio: ratio === '' || 0 ? null : ratio,
   });
-  if (ratio === 0) {
-    data = JSON.stringify({
-      id: id,
-      ratio: null,
-    });
-  }
 
   const res = await fetch(`${SERVER}/test-portfolio/`, {
     method: 'PATCH',
@@ -85,4 +76,20 @@ export const getTestAnalysis = async (token: any) => {
     });
 
   return res;
+};
+
+export const postEmail = async (token: any, email: string) => {
+  await fetch(`${SERVER}/contact/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ contact: email }),
+  })
+    .then((response) => response.json())
+    .then((res) => {
+      console.log('유저 이메일 저장 : ', res);
+    })
+    .catch((err) => console.log(err));
 };

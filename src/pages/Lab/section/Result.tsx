@@ -28,6 +28,7 @@ import {
   Legend,
 } from 'chart.js';
 import StepBox from '../../../components/StepBox';
+import { postEmail } from '../../../network/api';
 
 ChartJS.register(
   CategoryScale,
@@ -177,20 +178,13 @@ const Result = ({ data }: any) => {
     ],
   } as any;
 
-  const saveEmail = (email: string) => {
-    fetch(`${SERVER}/contact/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ contact: email }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+  const saveEmail = async (email: string) => {
+    if (email.includes('@')) {
+      (await postEmail(token, email)) as any;
+      setInform(true);
+    } else {
+      alert('유효한 이메일 주소를 입력해주세요!');
+    }
   };
 
   return (
@@ -351,7 +345,6 @@ const Result = ({ data }: any) => {
           ) : (
             <div
               onClick={() => {
-                setInform(true);
                 saveEmail(email);
               }}
             >

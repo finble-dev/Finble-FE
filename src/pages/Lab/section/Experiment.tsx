@@ -120,19 +120,8 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   };
 
   // 보유 종목 비중 수정
-  const changeMine = (id: number, event: any) => {
-    let data = JSON.stringify({ id: id, ratio: event.target.value });
-    if (event.target.value === '') {
-      data = JSON.stringify({ id: id, ratio: null });
-    }
-    fetch(`${SERVER}/test-portfolio/`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: data,
-    });
+  const changeMine = async (id: number, e: any) => {
+    const patchRes = await patchTestPortfolio(token, id, e.target.value);
   };
 
   // ETF 카테고리 선택
@@ -148,7 +137,8 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   // 실험하기
   const getResult = async () => {
     setHundred(true);
-    console.log('함수 시작');
+    console.log();
+    console.log('---- 종목 편집 시작 -----');
     // 현재 유저 데이터 가져오기
     const data_add = (await getTestPortfolio(token)).data_add;
     console.log('이전 데이터 : ', data_add);
@@ -177,7 +167,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
       }
     }
 
-    console.log('실험 시작');
+    console.log('---- 실험 시작 -----');
 
     const anaRes = await getTestAnalysis(token);
     console.log('실험 결과 : ', anaRes);
