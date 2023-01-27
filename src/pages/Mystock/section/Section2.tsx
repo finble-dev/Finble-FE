@@ -30,7 +30,7 @@ ChartJS.register(
 const Section2 = ({ data }: { data: any }) => {
   // 그래프 라벨
   const [label, setLabel] = useState([
-    data.graph_kospi[0].date.slice(0, 7).replace('-', '.\u00A0'),
+    // data.graph_kospi[0].date.slice(0, 7).replace('-', '.\u00A0'),
   ] as any);
   // 코스피, 포트폴리오 그래프데이터
   const [kospiData, setKospiData] = useState([data.graph_kospi[0]] as any);
@@ -68,11 +68,13 @@ const Section2 = ({ data }: { data: any }) => {
             index != 0 &&
             item.date[6] != data.graph_kospi[index - 1].date[6]
           ) {
-            setKospiData((label: []) => [...label, item]);
+            setKospiData((label: any) => [...label, item]);
             setLabel((label: []) => [
               ...label,
               item.date.slice(0, 7).replace('-', '.\u00A0'),
             ]);
+          } else {
+            setLabel((label: []) => [...label, '']);
           }
         }
       );
@@ -90,12 +92,16 @@ const Section2 = ({ data }: { data: any }) => {
     }
   }, []);
 
+  let newlabel1 = data.graph_kospi.map(
+    (i: { date: number; data: number }) => '' + i.date //.slice(0, 7).replace('-', '.\u00A0')
+  );
+
   const graphData = {
-    labels: label,
+    labels: newlabel1,
     datasets: [
       {
         label: '내 포트폴리오',
-        data: portfolioData.map(
+        data: data.graph_portfolio.map(
           (item: { date: number; data: number }) => item.data
         ),
         borderColor: 'rgb(103, 146, 248)',
@@ -103,13 +109,60 @@ const Section2 = ({ data }: { data: any }) => {
       },
       {
         label: '코스피',
-        data: kospiData.map(
+        data: data.graph_kospi.map(
           (item: { date: number; data: number }) => item.data
         ),
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
       },
     ],
+  } as any;
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true,
+        align: 'start',
+        title: {
+          color: 'green',
+        },
+        labels: {
+          boxHeight: 2,
+        },
+      },
+      tooltip: {
+        padding: 10,
+        bodySpacing: 5,
+        usePointStyle: true,
+      },
+      colors: { enabled: true },
+    },
+
+    scales: {
+      y: {
+        id: 'yAxes',
+        display: true,
+      },
+      x: {
+        id: 'xAxes',
+        display: true,
+        grid: {
+          display: false,
+        },
+        // ticks: {
+        //   callback(val: number, index: number): any {
+        //     var newthis = this as any;
+        //     return newlabel1[index][8] + newlabel1[index][9] ===
+        //       '' + new Date().getDate() // && typeof val === 'number'
+        //       ? newthis.getLabelForValue(val)
+        //       : '';
+        //   },
+        // },
+        align: '0', // x축 값의 회전 각도를 설정할 수 있어요.
+        padding: 0, // x축 값의 상하 패딩을 설정할 수 있어요.
+      },
+    },
   } as any;
 
   return (
@@ -217,42 +270,6 @@ const Section2 = ({ data }: { data: any }) => {
 };
 
 export default Section2;
-
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: true,
-      align: 'start',
-      title: {
-        color: 'green',
-      },
-      labels: {
-        boxHeight: 2,
-      },
-    },
-    tooltip: {
-      padding: 10,
-      bodySpacing: 5,
-      usePointStyle: true,
-    },
-    colors: { enabled: true },
-  },
-
-  scales: {
-    y: {
-      id: 'yAxes',
-      display: true,
-    },
-    x: {
-      id: 'xAxes',
-      display: true,
-      grid: {
-        display: false,
-      },
-    },
-  },
-} as any;
 
 const Wrap = styled.div`
   width: 100%;

@@ -77,7 +77,7 @@ const MyStock = () => {
               </BtnWrapper>
             </Title>
             <BoxContainer>
-              <Box height="224px">
+              <Box height="224px" padding={27}>
                 <TextWrap padding="22px 0 20px 0">
                   <TypoGraphy
                     text="총 자산"
@@ -87,7 +87,7 @@ const MyStock = () => {
                 </TextWrap>
                 <TextRow>
                   <TypoGraphy
-                    text={'' + total.toLocaleString('ko-KR')}
+                    text={'' + Math.floor(total).toLocaleString('ko-KR')}
                     size="t1"
                   />
                   <TypoGraphy
@@ -97,11 +97,14 @@ const MyStock = () => {
                   />
                 </TextRow>
               </Box>
-              <Box height="100%">
-                <TextWrap padding="22px 0 20px 0">
+              <Box height="100%" padding={0}>
+                <TextWrap padding="22px 27px 20px 27px">
                   <TypoGraphy text="보유 종목 입력" size="small" />
                 </TextWrap>
-                <div onClick={() => setModalOpen(true)}>
+                <div
+                  onClick={() => setModalOpen(true)}
+                  style={{ padding: '0 27px' }}
+                >
                   <Btn10 type="big_add" text="+ 추가하기" />
                 </div>
 
@@ -133,6 +136,7 @@ const MyStock = () => {
               overlay: {
                 position: 'fixed',
                 background: 'rgba(0, 0, 0, 0.3)',
+                zIndex: 10000,
               },
               content: {
                 margin: 'auto',
@@ -168,7 +172,7 @@ export default MyStock;
 
 const Wrap = styled.div`
   width: 100%;
-  height: calc(100vh - 70px);
+  height: 100%;
   background: var(--type-gray-6);
   display: flex;
   justify-content: center;
@@ -188,24 +192,26 @@ const BtnWrapper = styled(Link)`
 
 const BoxContainer = styled.div`
   width: 100%;
-  height: 100%;
+  height: 710px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 `;
-const Box = styled.div<{ height?: string }>`
+const Box = styled.div<{ height?: string; padding?: number }>`
   background: var(--type-white);
   width: 590px;
   height: ${(props) => props.height || 'auto'};
   border-radius: 10px;
-  padding: 0 27px;
+  padding: 0 ${(props) => props.padding || 0}px;
 `;
 const StockListWrap = styled.div`
   overflow: auto;
-  padding: 10px 0;
+  height: 460px;
+  margin: 15px 0;
+  padding: 0 11px 0 27px;
 
   &::-webkit-scrollbar {
-    width: 18px;
+    width: 16px;
   }
   &::-webkit-scrollbar-thumb {
     height: 124px;

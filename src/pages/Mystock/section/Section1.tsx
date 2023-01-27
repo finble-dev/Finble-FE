@@ -14,15 +14,6 @@ const Section1 = ({ data }: any) => {
   const [sector, setPortfolio] = useState(data.sector_ratio);
   const name = useSelector(firstNameState);
 
-  useEffect(() => {
-    if (stock.length > 7) {
-      let leftRatio = 0;
-      for (var i = 7; i < stock.length; i++) {
-        leftRatio += stock[i].ratio;
-      }
-    }
-  }, []);
-
   const backgroundColor = [
     '#6792F8',
     '#FFE07E',
@@ -30,8 +21,8 @@ const Section1 = ({ data }: any) => {
     '#A574EE',
     '#3F4658',
     '#20CBDD',
-    '#A5A5A5',
     '#5EC596',
+    '#A5A5A5',
   ];
   const graphData = {
     labels: [],
@@ -46,6 +37,11 @@ const Section1 = ({ data }: any) => {
     ],
   };
 
+  const [assets, setAssets] = useState([
+    Math.floor(data.present_val_sum).toLocaleString('ko-KR'),
+    Math.floor(data.invested_val_sum).toLocaleString('ko-KR'),
+  ]);
+
   let sectorText1, sectorText2;
   if (Array.from(data.sector_ratio).length > 1) {
     sectorText1 = '와 \u00A0';
@@ -54,11 +50,6 @@ const Section1 = ({ data }: any) => {
     sectorText1 = '';
     sectorText2 = '';
   }
-
-  const [assets, setAssets] = useState([
-    data.present_val_sum.toLocaleString('ko-KR'),
-    data.invested_val_sum.toLocaleString('ko-KR'),
-  ]);
 
   const content = [
     {
@@ -137,15 +128,25 @@ const Section1 = ({ data }: any) => {
             <DoughnutGraphWrapper>
               <Doughnut data={graphData} width="280px" height="280px" />
               <LabelWrapper>
-                {data.portfolio_ratio.map((i: any, index: number) => (
-                  <StockLabel
-                    key={index}
-                    color={backgroundColor[index]}
-                    name={i.stock.name}
-                    sector={i.stock.sector}
-                    rate={i.ratio.toFixed(1)}
-                  />
-                ))}
+                {data.portfolio_ratio.map((i: any, index: number) =>
+                  index <= 6 ? (
+                    <StockLabel
+                      key={index}
+                      color={backgroundColor[index]}
+                      name={i.stock.name}
+                      sector={i.stock.sector}
+                      rate={i.ratio.toFixed(1)}
+                    />
+                  ) : (
+                    <StockLabel
+                      key={index}
+                      color={backgroundColor[index]}
+                      name={i.stock}
+                      sector=""
+                      rate={i.ratio.toFixed(1)}
+                    />
+                  )
+                )}
               </LabelWrapper>
             </DoughnutGraphWrapper>
 
