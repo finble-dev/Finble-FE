@@ -33,15 +33,15 @@ const StockBox = ({ stock }: { stock: any }) => {
         <Img src={del} style={{ cursor: 'pointer' }} />
       </ImgContainer>
       <BlueBox>
-        <div>
+        <TextWrap>
           <TypoGraphy text={stock.stock_detail.name} size="b2" />
           <TypoGraphy
             text={stock.portfolio.quantity + '주'}
             color="var(--type-gray-2)"
             size="b2"
           />
-        </div>
-        <div style={{ textAlign: 'right' }}>
+        </TextWrap>
+        <TextWrap align="right">
           <TypoGraphy
             text={price + '\u00A0원'}
             color="var(--type-gray-2)"
@@ -52,7 +52,7 @@ const StockBox = ({ stock }: { stock: any }) => {
             color="#4492F7"
             size="b2"
           />
-        </div>
+        </TextWrap>
       </BlueBox>
     </Container>
   );
@@ -63,15 +63,24 @@ export default StockBox;
 const Container = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 17px;
 `;
 
 const BlueBox = styled.div`
   background: #f6f8ff;
   width: 100%;
+  height: 103px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 20px;
-  margin: 8px 0;
+  padding: 30px 22px;
+  margin: 11px 0;
   border-radius: 10px;
+`;
+
+const TextWrap = styled.div<{ align?: string }>`
+  text-align: ${(props) => props.align || 'left'};
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 `;

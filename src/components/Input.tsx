@@ -16,7 +16,7 @@ const Input = ({ type, name, market, setSearch }: input) => {
 
   if (type === 'search') placeholder = '종목 검색 예) 카카오, 테슬라, SPY';
   else if (type === 'price') {
-    placeholder = '예) 78.000';
+    placeholder = '예) 78000';
     if (market === 'US') unit = '$';
     else unit = '₩';
   } else if (type === 'number') {
