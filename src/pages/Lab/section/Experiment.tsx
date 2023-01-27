@@ -10,6 +10,8 @@ import { ETFItem } from '../components/ETFItem';
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
 import modalImg from '../../../assets/img/lab/캐릭터.png';
+import { initData } from '../initData';
+
 // interface
 import { ETF } from '../../../interface/interface';
 import { Link } from 'react-router-dom';
@@ -17,53 +19,73 @@ import { Link } from 'react-router-dom';
 import { tokenState, firstNameState } from '../../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
 import { SERVER } from '../../../network/config';
+import {
+  deleteTestPortfolio,
+  getTestAnalysis,
+  getTestPortfolio,
+  patchTestPortfolio,
+  postTestPortfolio,
+} from '../../../network/api';
 
 interface exp {
   isExp?: boolean;
   setIsExp?: any;
+  data?: any;
+  setData: React.Dispatch<React.SetStateAction<null>>;
 }
 
-const Experiment = ({ isExp, setIsExp }: exp) => {
+const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   const [toggleFlag, setToggleFlag] = useState(false);
-  const [expNum, setExpNum] = useState(0);
+  // const [expNum, setExpNum] = useState(0);
   // 해외, 채권, 금 카테고리 선택 여부
   const [cateFlag, setCateFlag] = useState([true, false, false]);
   const [ETFFlag, setETFFlag] = useState([
     [
-      { symbol: 'SPY', flag: false },
-      { symbol: 'QQQ', flag: false },
+      { symbol: 'SPY', flag: false, ratio: 0 },
+      { symbol: 'QQQ', flag: false, ratio: 0 },
     ],
     [
-      { symbol: 'IEF', flag: false },
-      { symbol: 'TLT', flag: false },
+      { symbol: 'IEF', flag: false, ratio: 0 },
+      { symbol: 'TLT', flag: false, ratio: 0 },
     ],
-    [{ symbol: 'GLD', flag: false }],
+    [{ symbol: 'GLD', flag: false, ratio: 0 }],
   ]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
+  const [retainStock, setRetainStock] = useState([] as any);
+  const [cnt, setCnt] = useState(0);
+  const [isHundred, setHundred] = useState(true);
+
   const name = useSelector(firstNameState);
   const token = useSelector(tokenState);
-  const [retainStock, setRetainStock] = useState([]);
-  const [addedStock, setAddedStock] = useState([]);
-  const [totalPer, setTotal] = useState(0);
 
-  const setFlag = (stockList: any) => {
+  // 첫 렌더링 시 유저 포트폴리오 가져오고 modal flag 설정
+  useEffect(() => {
+    async function getPorfolio() {
+      const res = (await getTestPortfolio(token)) as any;
+      if (res.data_retain === ([] as any)) setModalOpen(true);
+      setModalOpen(false);
+      setRetainStock(res.data_retain);
+    }
+    getPorfolio();
+  }, [cnt]);
+
+  // ETF 추가/삭제
+  const onChangeETF = (listNum: number, itemNum: number) => {
     let newList = [];
-
     for (let i = 0; i < ETFFlag.length; i++) {
       let newItem = [];
       for (let j = 0; j < ETFFlag[i].length; j++) {
-        if (
-          stockList.findIndex((item: any) => item === ETFFlag[i][j].symbol) !==
-          -1
-        ) {
+        if (i === listNum && j == itemNum) {
           newItem.push({
             symbol: ETFFlag[i][j].symbol,
-            flag: true,
+            flag: !ETFFlag[i][j].flag,
+            ratio: ETFFlag[i][j].ratio,
           });
         } else {
           newItem.push({
             symbol: ETFFlag[i][j].symbol,
-            flag: false,
+            flag: ETFFlag[i][j].flag,
+            ratio: ETFFlag[i][j].ratio,
           });
         }
       }
@@ -72,61 +94,37 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     setETFFlag(newList);
   };
 
-  // 첫 렌더링 시 유저 포트폴리오 가져오고 modal flag 설정
-  useEffect(() => {
-    fetch(`${SERVER}/test-portfolio/`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        // console.log(res);
-        // 유저 보유 종목 & 추가 종목 불러오기
-        setRetainStock(res.data_retain);
-        setAddedStock(res.data_add);
-        let symbolList = [];
-
-        // 모달창 유무 설정
-        if (res.data_add === ([] as any)) setModalOpen(true);
-
-        // 새로운 total 비율 설정
-        let newTotal = 0 as number;
-        for (let i = 0; i < res.data_add.length; i++) {
-          symbolList.push(res.data_add[i].stock_detail.symbol);
-          newTotal += Number(res.data_add[i].portfolio.ratio);
+  // ETF 비중 수정
+  const onChangeRatio = (listNum: number, itemNum: number, ratio: number) => {
+    let newList = [];
+    for (let i = 0; i < ETFFlag.length; i++) {
+      let newItem = [];
+      for (let j = 0; j < ETFFlag[i].length; j++) {
+        if (i === listNum && j == itemNum) {
+          newItem.push({
+            symbol: ETFFlag[i][j].symbol,
+            flag: ETFFlag[i][j].flag,
+            ratio: ratio,
+          });
+        } else {
+          newItem.push({
+            symbol: ETFFlag[i][j].symbol,
+            flag: ETFFlag[i][j].flag,
+            ratio: ETFFlag[i][j].ratio,
+          });
         }
-        for (let i = 0; i < res.data_retain.length; i++) {
-          symbolList.push(res.data_retain[i].stock_detail.symbol);
-          newTotal += Number(res.data_retain[i].portfolio.ratio);
-        }
-        setTotal(newTotal);
-        setFlag(symbolList);
-      })
-      .catch((err) => console.log(err));
-  });
-
-  const changeMine = (id: number, event: any) => {
-    let data = JSON.stringify({ id: id, ratio: event.target.value });
-    if (event.target.value === '') {
-      data = JSON.stringify({ id: id, ratio: 0 });
+      }
+      newList.push(newItem);
     }
-    fetch(`${SERVER}/test-portfolio/`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: data,
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        // console.log(res);
-      })
-      .catch((err) => console.log(err));
+    setETFFlag(newList);
   };
 
+  // 보유 종목 비중 수정
+  const changeMine = async (id: number, e: any) => {
+    const patchRes = await patchTestPortfolio(token, id, e.target.value);
+  };
+
+  // ETF 카테고리 선택
   const onClickBtn = (idx: number) => {
     let newList = [];
     for (let i = 0; i < 3; i++) {
@@ -136,26 +134,57 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
     setCateFlag(newList);
   };
 
-  useEffect(() => {
-    if (isExp) {
-      window.scrollTo({ top: 2400, left: 0, behavior: 'smooth' });
+  // 실험하기
+  const getResult = async () => {
+    setHundred(true);
+    console.log();
+    console.log('---- 종목 편집 시작 -----');
+    // 현재 유저 데이터 가져오기
+    const data_add = (await getTestPortfolio(token)).data_add;
+    console.log('이전 데이터 : ', data_add);
+
+    // 유저가 이전에 추가했던 종목 삭제
+    for (let i = 0; i < data_add.length; i++) {
+      console.log('삭제하고 싶은 id : ', data_add[i].portfolio.id);
+      await deleteTestPortfolio(token, data_add[i].portfolio.id);
     }
-  }, [expNum]);
 
-  const getResult = () => {
-    console.log('실험중 ... ');
+    // 유저가 새로 추가한 종목 추가
+    for (let i = 0; i < ETFFlag.length; i++) {
+      for (let j = 0; j < ETFFlag[i].length; j++) {
+        if (ETFFlag[i][j].flag) {
+          const id = (await postTestPortfolio(token, ETFFlag[i][j].symbol)).id;
+          console.log('추가한 id', id);
 
-    fetch(`${SERVER}/test-portfolio/analysis/`, {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
+          const patchRes = await patchTestPortfolio(
+            token,
+            id,
+            ETFFlag[i][j].ratio
+          );
+
+          console.log('비율 수정 : ', patchRes);
+        }
+      }
+    }
+
+    console.log('---- 실험 시작 -----');
+
+    const anaRes = await getTestAnalysis(token);
+    console.log('실험 결과 : ', anaRes);
+
+    if (anaRes.status === 200) {
+      setData(anaRes.data);
+      setTimeout(
+        () => window.scrollTo({ top: 2400, left: 0, behavior: 'smooth' }),
+        1000
+      );
+    } else if ((anaRes.message = "test portfolio's ratio is None")) {
+      setHundred(false);
+      setIsExp(false);
+    } else {
+      setIsExp(false);
+      alert(anaRes.message);
+    }
   };
 
   return (
@@ -256,6 +285,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                   <ETFItem
                     item={item}
                     ETFFlag={ETFFlag}
+                    onChangeETF={onChangeETF}
                     listNum={listNum}
                     itemNum={itemNum}
                     key={`ETFLIST_${listNum}_${itemNum}`}
@@ -301,6 +331,7 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                               value={item.portfolio.ratio}
                               onChange={(e) => {
                                 changeMine(item.portfolio.id, e);
+                                setCnt(cnt + 1);
                               }}
                             />
                             <TypoGraphy
@@ -321,17 +352,25 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
               <TextWrap padding="0 0 20px 0">
                 <TypoGraphy text="추가 종목" size="small" />
               </TextWrap>
-              {addedStock.map((item: any, idx: number) => (
-                <AddedItem
-                  item={item}
-                  changeMine={changeMine}
-                  // changeFlag={changeFlag}
-                  key={`ETFLIST2_${idx}`}
-                />
-              ))}
+              {ETFFlag.map((items: any, listIdx: number) =>
+                items.map((item: any, itemIdx: number) =>
+                  ETFFlag[listIdx][itemIdx].flag ? (
+                    <AddedItem
+                      ETFFlag={ETFFlag}
+                      listNum={listIdx}
+                      itemNum={itemIdx}
+                      onChangeETF={onChangeETF}
+                      onChangeRatio={onChangeRatio}
+                      key={`ETFLIST2_${itemIdx}`}
+                    />
+                  ) : (
+                    <></>
+                  )
+                )
+              )}
             </SubBox>
             <Footer>
-              {totalPer === 100 ? (
+              {/* {totalPer === 100 ? (
                 <TypoGraphy
                   text="합이 100%가 되어야 합니다."
                   size="b2"
@@ -345,12 +384,23 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
                   color="red"
                   style={{ marginRight: '11px' }}
                 />
+              )} */}
+
+              {isHundred ? (
+                <></>
+              ) : (
+                <TypoGraphy
+                  text="합이 100%가 되어야 합니다."
+                  size="b2"
+                  color="red"
+                  style={{ marginRight: '11px' }}
+                />
               )}
 
-              <InputBox>
+              {/* <InputBox>
                 <InputArea value={totalPer} />
                 <TypoGraphy text="%" size="input" color="var(--type-gray-3)" />
-              </InputBox>
+              </InputBox> */}
             </Footer>
           </Box>
         </Row>
@@ -358,15 +408,16 @@ const Experiment = ({ isExp, setIsExp }: exp) => {
         <ButtonContainer>
           <div
             onClick={() => {
-              if (totalPer === 100) {
-                setIsExp(true);
-                setExpNum(expNum + 1);
-                getResult();
-              }
+              setIsExp(true);
+              getResult();
             }}
           >
             {isExp ? (
-              <Btn10 text={'실험 다시 해보기'} type="check" />
+              data === initData ? (
+                <Btn10 text={'실험하는중...'} type="checking" />
+              ) : (
+                <Btn10 text={'실험 다시 해보기'} type="check" />
+              )
             ) : (
               <Btn10 text={'실험 결과 확인하기'} type="check" />
             )}

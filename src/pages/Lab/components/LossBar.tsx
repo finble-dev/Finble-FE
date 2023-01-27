@@ -1,11 +1,17 @@
 import styled from 'styled-components';
 import TypoGraphy from '../../../components/Typography';
 
-export const LossBar = ({ last, cur }: { last: number; cur: number }) => {
+export const LossBar = ({
+  original,
+  test,
+}: {
+  original: number;
+  test: number;
+}) => {
   return (
     <Container>
       <LastBar />
-      <CurBar height={(last / cur) * 110} />
+      <CurBar height={(test / original) * 110} />
       <Column>
         <TypoGraphy text="기존" size="b4" style={{ height: 'auto' }} />
         <TypoGraphy text="포트폴리오" size="b4" style={{ height: 'auto' }} />
