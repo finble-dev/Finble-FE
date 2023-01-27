@@ -19,7 +19,6 @@ export const ETFItem = ({
   listNum,
   itemNum,
 }: ETFItem) => {
-  // console.log(listNum, itemNum);
   return (
     <Container>
       <Row style={{ justifyContent: 'space-between' }}>

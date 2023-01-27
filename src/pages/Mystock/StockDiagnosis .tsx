@@ -6,11 +6,12 @@ import { useAppSelect } from '../../store/configStore.hooks';
 import { nameState, tokenState } from '../../store/slice/userSlice';
 import Section1 from './section/Section1';
 import Section2 from './section/Section2';
+import { initData } from './initData';
 
 const StockDiagnosis = () => {
   const token = useAppSelect(tokenState);
   const name = useSelector(nameState); // 성 + 이름
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(initData);
 
   useEffect(() => {
     if (name != '') {
@@ -27,7 +28,7 @@ const StockDiagnosis = () => {
 
   return (
     <Container>
-      {data != null ? (
+      {data != initData ? (
         <>
           <Section1 data={data} />
           <Section2 data={data} />
