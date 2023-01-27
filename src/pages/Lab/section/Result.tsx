@@ -15,8 +15,8 @@ import { SERVER } from '../../../network/config';
 
 import q from '../../../assets/img/lab/q.png';
 import a from '../../../assets/img/lab/a.png';
-import up from '../../../assets/img/lab/up.png';
-import down from '../../../assets/img/lab/down.png';
+import up from '../../../assets/img/lab/up.svg';
+import down from '../../../assets/img/lab/down.svg';
 
 import {
   Chart as ChartJS,
@@ -28,6 +28,7 @@ import {
   Legend,
 } from 'chart.js';
 import StepBox from '../../../components/StepBox';
+import { postEmail } from '../../../network/api';
 
 ChartJS.register(
   CategoryScale,
@@ -38,40 +39,95 @@ ChartJS.register(
   Legend
 );
 
-const Experiment = () => {
+const Result = ({ data }: any) => {
   const token = useSelector(tokenState);
   const [email, setEmail] = useState('');
-  const [modalFlag, setModalFlag] = useState(false);
-  // 투자원금
-  const [current, setCurrent] = useState('2,626,302');
   // 최종금액
   const [total, setTotal] = useState('11,345,623');
   // 연평균 수익률
-  const [year, setYear] = useState(28);
-  const [yearPercent, setYearPercent] = useState(4);
-  //최대 낙폭
-  const [loss, setLoss] = useState(15);
-  const [lossPercent, setLossPercent] = useState(17);
+  const [text1, setText1] = useState('낮아졌고');
+  // 최대 낙폭
+  const [text2, setText2] = useState('줄어들었어요');
   // tip flag
   const [q1, setQ1] = useState(false);
   const [q2, setQ2] = useState(false);
 
   const [inform, setInform] = useState(false);
+  const [label, setLabel] = useState([] as Array<string>);
+  let i = 0;
+  useEffect(() => {
+    console.log(data);
+    if (
+      Math.floor(data.original_portfolio_profit) <
+      Math.floor(data.test_portfolio_profit)
+    ) {
+      setText1('높아졌고');
+    }
+    if (
+      Math.floor(data.original_portfolio_max_fall) <
+      Math.floor(data.test_portfolio_max_fall)
+    )
+      setText2('커졌어요');
+
+    // 라벨 세팅
+
+    i++;
+    let lastYear = '1999';
+    if (i >= 2) {
+      console.log('라벨링 시작');
+      // 라벨 초기화
+      setLabel([]);
+
+      data.graph_original_portfolio.map(
+        // 처음부터 끝까지 탐색하면서
+        (item: { date: string; data: number }) => {
+          const year = item.date.substring(0, 4);
+          let newLabel = label;
+
+          if (year != lastYear) {
+            newLabel.push(year);
+            lastYear = year;
+          } else {
+            newLabel.push('');
+          }
+
+          setLabel(newLabel);
+        }
+      );
+    }
+  }, [data]);
 
   const list1 = [
     [['black', `10년 동안 테스트했을 때`]],
     [
       ['blue', '연평균 수익률'],
-      ['black', `은 ${year}%로 ${yearPercent}%p 낮아졌고`],
+      [
+        'black',
+        `은 ${Math.floor(data.test_portfolio_profit)}%로 ${
+          Math.floor(data.original_portfolio_profit) -
+          Math.floor(data.test_portfolio_profit)
+        }%p ${text1}`,
+      ],
     ],
     [
       ['blue', '최대 낙폭'],
-      ['black', `은 ${loss}%로 ${lossPercent}%p 줄어들었어요`],
+      [
+        'black',
+        `은 ${Math.floor(data.test_portfolio_max_fall)}%로 ${
+          Math.floor(data.original_portfolio_max_fall) -
+          Math.floor(data.test_portfolio_max_fall)
+        }%p ${text2}`,
+      ],
     ],
   ];
 
   const list2 = [
-    [['black', `현재 투자원금인 ${current}원을 10년간 투자했다면`]],
+    [
+      [
+        'black',
+        `현재 투자원금인 ${data.present_val_sum}원을 10년간 투자했다면`,
+      ],
+    ],
     [
       ['black', '최종 금액은\u00A0'],
       // ['blue', ` ${total}원(+${Math.floor(total / current) * 100}%)`],
@@ -100,64 +156,35 @@ const Experiment = () => {
     },
   ];
 
-  const [label, setLabel] = useState([] as Array<string>);
-
   const graphData = {
     labels: label,
     datasets: [
       {
         label: '기존 포트폴리오',
-        data: myData.map((item: { date: number; data: number }) => item.data),
+        data: data.graph_original_portfolio.map(
+          (item: { date: string; data: number }) => Math.floor(item.data)
+        ),
         borderColor: 'rgb(103, 146, 248)',
         pointStyle: false,
       },
       {
         label: '새로 만든 포트폴리오',
-        data: newData.map((item: { date: number; data: number }) => item.data),
+        data: data.graph_test_portfolio.map(
+          (item: { date: string; data: number }) => Math.floor(item.data)
+        ),
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
       },
     ],
   } as any;
 
-  let i = 0;
-
-  useEffect(() => {
-    i++;
-    let lastYear = 0;
-    if (i >= 2) {
-      setLabel([]);
-      myData.map((item: { date: number; data: number }) => {
-        const year = Math.floor(item.date / 10000);
-        let newLabel = label;
-        // newLabel.push('20' + year.toString());
-
-        if (year != lastYear) {
-          newLabel.push('20' + year.toString());
-          lastYear = year;
-        } else {
-          newLabel.push('');
-        }
-
-        setLabel(newLabel);
-      });
+  const saveEmail = async (email: string) => {
+    if (email.includes('@')) {
+      (await postEmail(token, email)) as any;
+      setInform(true);
+    } else {
+      alert('유효한 이메일 주소를 입력해주세요!');
     }
-  }, []);
-
-  const saveEmail = (email: string) => {
-    fetch(`${SERVER}/contact/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ contact: email }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
   };
 
   return (
@@ -194,11 +221,17 @@ const Experiment = () => {
           <TextRow>
             <BarGraphWrapper>
               <TypoGraphy text="연평균 수익률" size="b2" />
-              <EarnBar cur={32} last={28} />
+              <EarnBar
+                cur={Math.floor(data.test_portfolio_profit)}
+                last={Math.floor(data.original_portfolio_profit)}
+              />
             </BarGraphWrapper>
             <BarGraphWrapper>
               <TypoGraphy text="최대 낙폭" size="b2" />
-              <LossBar cur={32} last={15} />
+              <LossBar
+                test={Math.floor(data.test_portfolio_max_fall)}
+                original={Math.floor(data.original_portfolio_max_fall)}
+              />
             </BarGraphWrapper>
           </TextRow>
         </TextRow>
@@ -259,9 +292,9 @@ const Experiment = () => {
                   }}
                 >
                   {item.flag ? (
-                    <ImgToggle src={down} />
-                  ) : (
                     <ImgToggle src={up} />
+                  ) : (
+                    <ImgToggle src={down} />
                   )}
                 </div>
               </QuestionRow>
@@ -312,7 +345,6 @@ const Experiment = () => {
           ) : (
             <div
               onClick={() => {
-                setInform(true);
                 saveEmail(email);
               }}
             >
@@ -324,7 +356,7 @@ const Experiment = () => {
     </Container>
   );
 };
-export default Experiment;
+export default Result;
 
 const options = {
   responsive: true,

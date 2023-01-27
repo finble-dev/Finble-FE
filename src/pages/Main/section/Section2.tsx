@@ -7,12 +7,12 @@ import {
   TextRow,
   TextWrap,
 } from '../../../assets/styles/styles';
-import mainSub from '../../../assets/img/main/mainSub1.png';
+import mainSub from '../../../assets/img/main/mainSub1.svg';
 
 const Section2 = () => {
   return (
     <Container>
-      <TextWrap lineHeight={66} padding="148px 0 120px 0" align="center">
+      <TextWrap lineHeight={55} padding="148px 0 120px 0" align="center">
         <TypoGraphy text="끝없이 떨어지던 작년 주식 시장," size="h1" />
         <TypoGraphy text="혹시 크게 스트레스 받진 않았나요?" size="h1" />
       </TextWrap>

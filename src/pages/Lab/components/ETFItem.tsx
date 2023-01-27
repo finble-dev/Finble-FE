@@ -3,39 +3,23 @@ import { TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
 import { ETF } from '../../../interface/interface';
 import { Btn10 } from '../../../components/Button';
-import { ETFList } from '../../../assets/ETFList';
-
-import { SERVER } from '../../../network/config';
-import { tokenState } from '../../../store/slice/userSlice';
-import { useSelector } from 'react-redux';
 
 interface ETFItem {
   item: ETF;
-  // changeFlag: (listNum: number, itemNum: number) => void;
   ETFFlag: Array<Array<{ symbol: string; flag: boolean }>>;
+  onChangeETF: any;
   listNum: number;
   itemNum: number;
 }
 
-export const ETFItem = ({ item, ETFFlag, listNum, itemNum }: ETFItem) => {
-  const token = useSelector(tokenState);
-  const addETF = (symbol: string) => {
-    fetch(`${SERVER}/test-portfolio/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        symbol: symbol,
-      }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  };
+export const ETFItem = ({
+  item,
+  ETFFlag,
+  onChangeETF,
+  listNum,
+  itemNum,
+}: ETFItem) => {
+  // console.log(listNum, itemNum);
   return (
     <Container>
       <Row style={{ justifyContent: 'space-between' }}>
@@ -56,7 +40,7 @@ export const ETFItem = ({ item, ETFFlag, listNum, itemNum }: ETFItem) => {
         ) : (
           <div
             onClick={() => {
-              addETF(ETFList[listNum][itemNum].name);
+              onChangeETF(listNum, itemNum);
             }}
           >
             <Btn10 text={'추가하기'} type="add" />
@@ -92,7 +76,7 @@ const Container = styled.div`
   margin-top: 20px;
   background: #f6f8ff;
   border-radius: 10px;
-  padding: 30px 35px;
+  padding: 26px 30px;
 `;
 
 const Column = styled.div`
@@ -104,7 +88,6 @@ const Column = styled.div`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  // justify-content: space-between;
   margin-bottom: 17px;
 `;
 

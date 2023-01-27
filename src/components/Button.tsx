@@ -29,7 +29,7 @@ const Btn10 = ({ text, type }: btn) => {
   if (type === 'add') textColor = 'var(--main-blue)';
   else if (type === 'disable_add' || type === 'disable_check')
     textColor = 'var(--type-gray-4)';
-  else if (type === 'check' || type === 'inform')
+  else if (type === 'check' || type === 'inform' || type == 'checking')
     textColor = 'var(--type-white)';
   else if (type === 'big_add') {
     textColor = 'var(--main-blue)';
@@ -67,8 +67,10 @@ const Btn60Container = styled.div<btn>`
       ? 'var(--main-blue)'
       : 'var(--type-white)'};
   border: ${(props) =>
-    props.type === 'login' || props.type === 'outline_disable'
-      ? '1px solid var(--type-gray-4)'
+    props.type === 'login'
+      ? '1px solid var(--main-blue)'
+      : props.type === 'outline_disable'
+      ? '2px solid var(--type-gray-4)'
       : props.type === 'outline_able'
       ? '2px solid var(--main-blue)'
       : 'none'};
@@ -86,7 +88,9 @@ const Btn10Container = styled.div<btn>`
       ? '39px 200px'
       : props.type === 'add' || props.type === 'disable_add'
       ? '11px 15px'
-      : props.type === 'check' || props.type === 'disable_check'
+      : props.type === 'check' ||
+        props.type === 'checking' ||
+        props.type === 'disable_check'
       ? '14px 40px'
       : '14px 20px'};
 
@@ -95,6 +99,8 @@ const Btn10Container = styled.div<btn>`
       ? 'transparent'
       : props.type === 'check'
       ? 'var(--main-blue)'
+      : props.type === 'checking'
+      ? '#C2D4FE'
       : props.type === 'add'
       ? '#DEE7FD'
       : props.type === 'disable_check' || props.type === 'disable_add'

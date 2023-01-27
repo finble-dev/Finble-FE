@@ -3,49 +3,35 @@ import del from '../../../assets/img/lab/del.svg';
 import { ETFList } from '../../../assets/ETFList';
 import TypoGraphy from '../../../components/Typography';
 
-import { SERVER } from '../../../network/config';
-import { tokenState } from '../../../store/slice/userSlice';
-import { useSelector } from 'react-redux';
-
 interface addedItem {
-  item: any;
-  changeMine: (id: number, event: any) => void;
-  // changeFlag: (listNum: number, itemNum: number) => void;
+  listNum: number;
+  itemNum: number;
+  ETFFlag: any;
+  onChangeRatio: any;
+  onChangeETF: any;
 }
 
-export const AddedItem = ({ item, changeMine }: addedItem) => {
+export const AddedItem = ({
+  listNum,
+  itemNum,
+  ETFFlag,
+  onChangeETF,
+  onChangeRatio,
+}: addedItem) => {
   let img;
   for (let i = 0; i < ETFList.length; i++) {
     for (let j = 0; j < ETFList[i].length; j++) {
-      if (ETFList[i][j].name == item.stock_detail.symbol) {
+      if (listNum === i && itemNum === j) {
         img = ETFList[i][j].img;
       }
     }
   }
-  const token = useSelector(tokenState);
-  const delETF = () => {
-    fetch(`${SERVER}/test-portfolio/`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        id: item.portfolio.id,
-      }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  };
   return (
     <Container>
       <Img
         src={del}
         onClick={() => {
-          delETF();
+          onChangeETF(listNum, itemNum);
         }}
       />
       <Box>
@@ -53,13 +39,13 @@ export const AddedItem = ({ item, changeMine }: addedItem) => {
           <Profile src={img} />
           <Column>
             <TypoGraphy
-              text={item.stock_detail.symbol}
+              text={ETFFlag[listNum][itemNum].symbol}
               color="var(--main-blue)"
               size="t3"
               style={{ marginBottom: '5px' }}
             />
             <TypoGraphy
-              text={item.stock_detail.name}
+              text={ETFFlag[listNum][itemNum].symbol}
               color="var(--type-gray-2)"
               size="b4"
             />
@@ -68,9 +54,10 @@ export const AddedItem = ({ item, changeMine }: addedItem) => {
 
         <InputBox>
           <InputArea
-            value={item.portfolio.ratio}
+            value={ETFFlag[listNum][itemNum].ratio}
             onChange={(e) => {
-              changeMine(item.portfolio.id, e);
+              // changeMine(item.portfolio.id, e);
+              onChangeRatio(listNum, itemNum, e.target.value);
             }}
           />
           <TypoGraphy text="%" size="input" color="var(--type-gray-3)" />
