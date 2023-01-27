@@ -35,7 +35,6 @@ export const postTestPortfolio = async (token: any, symbol: string) => {
   }).then((res) => {
     return res.json();
   });
-
   return res;
 };
 
@@ -73,7 +72,8 @@ export const getTestAnalysis = async (token: any) => {
     .then((response) => response.json())
     .then((res) => {
       return res;
-    });
+    })
+    .catch((err) => console.log(err));
 
   return res;
 };

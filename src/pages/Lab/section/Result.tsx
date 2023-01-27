@@ -7,11 +7,9 @@ import { LossBar } from '../components/LossBar';
 import { EarnBar } from '../components/EarnBar';
 
 import { Line } from 'react-chartjs-2';
-import { myData, newData } from '../../../assets/graphData';
 
 import { tokenState } from '../../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
-import { SERVER } from '../../../network/config';
 
 import q from '../../../assets/img/lab/q.png';
 import a from '../../../assets/img/lab/a.png';
@@ -103,35 +101,35 @@ const Result = ({ data }: any) => {
       ['blue', '연평균 수익률'],
       [
         'black',
-        `은 ${Math.floor(data.test_portfolio_profit)}%로 ${
-          Math.floor(data.original_portfolio_profit) -
-          Math.floor(data.test_portfolio_profit)
-        }%p ${text1}`,
+        `은 ${Math.floor(data.test_portfolio_profit)}%로 ${Math.abs(
+          Math.floor(data.test_portfolio_profit) -
+            Math.floor(data.original_portfolio_profit)
+        )}%p ${text1}`,
       ],
     ],
     [
       ['blue', '최대 낙폭'],
       [
         'black',
-        `은 ${Math.floor(data.test_portfolio_max_fall)}%로 ${
+        `은 ${Math.floor(data.test_portfolio_max_fall)}%로 ${Math.abs(
           Math.floor(data.original_portfolio_max_fall) -
-          Math.floor(data.test_portfolio_max_fall)
-        }%p ${text2}`,
+            Math.floor(data.test_portfolio_max_fall)
+        )}%p ${text2}`,
       ],
     ],
   ];
 
   const list2 = [
-    [
-      [
-        'black',
-        `현재 투자원금인 ${data.present_val_sum}원을 10년간 투자했다면`,
-      ],
-    ],
+    [['black', `현재 투자원금인 ${data.invest_val_sum}원을 10년간 투자했다면`]],
     [
       ['black', '최종 금액은\u00A0'],
       // ['blue', ` ${total}원(+${Math.floor(total / current) * 100}%)`],
-      ['blue', ` ${total}원(+332%)`],
+      [
+        'blue',
+        ` ${Math.floor(data.final_val_test)}원(+${
+          Math.floor(data.final_val_test / data.invest_val_sum) * 100
+        }%)`,
+      ],
       ['black', '이 되었을 거에요.'],
     ],
   ];
@@ -157,7 +155,9 @@ const Result = ({ data }: any) => {
   ];
 
   const graphData = {
-    labels: label,
+    labels: data.graph_original_portfolio.map((item: any) =>
+      item.date.substring(0, 7)
+    ),
     datasets: [
       {
         label: '기존 포트폴리오',
