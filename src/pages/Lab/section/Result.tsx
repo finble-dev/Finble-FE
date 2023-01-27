@@ -51,48 +51,46 @@ const Result = ({ data }: any) => {
   const [q2, setQ2] = useState(false);
 
   const [inform, setInform] = useState(false);
-  const [label, setLabel] = useState([] as Array<string>);
+  // const [label, setLabel] = useState([] as Array<string>);
   let i = 0;
   useEffect(() => {
-    console.log(data);
     if (
-      Math.floor(data.original_portfolio_profit) <
-      Math.floor(data.test_portfolio_profit)
+      Math.ceil(data.original_portfolio_profit) <
+      Math.ceil(data.test_portfolio_profit)
     ) {
       setText1('높아졌고');
     }
     if (
-      Math.floor(data.original_portfolio_max_fall) <
-      Math.floor(data.test_portfolio_max_fall)
+      Math.ceil(data.original_portfolio_max_fall) <
+      Math.ceil(data.test_portfolio_max_fall)
     )
       setText2('커졌어요');
 
     // 라벨 세팅
 
-    i++;
-    let lastYear = '1999';
-    if (i >= 2) {
-      console.log('라벨링 시작');
-      // 라벨 초기화
-      setLabel([]);
+    // i++;
+    // let lastYear = '1999';
+    // if (i >= 2) {
+    //   // 라벨 초기화
+    //   setLabel([]);
 
-      data.graph_original_portfolio.map(
-        // 처음부터 끝까지 탐색하면서
-        (item: { date: string; data: number }) => {
-          const year = item.date.substring(0, 4);
-          let newLabel = label;
+    //   data.graph_original_portfolio.map(
+    //     // 처음부터 끝까지 탐색하면서
+    //     (item: { date: string; data: number }) => {
+    //       const year = item.date.substring(0, 4);
+    //       let newLabel = label;
 
-          if (year != lastYear) {
-            newLabel.push(year);
-            lastYear = year;
-          } else {
-            newLabel.push('');
-          }
+    //       if (year != lastYear) {
+    //         newLabel.push(year);
+    //         lastYear = year;
+    //       } else {
+    //         newLabel.push('');
+    //       }
 
-          setLabel(newLabel);
-        }
-      );
-    }
+    //       setLabel(newLabel);
+    //     }
+    //   );
+    // }
   }, [data]);
 
   const list1 = [
@@ -101,9 +99,9 @@ const Result = ({ data }: any) => {
       ['blue', '연평균 수익률'],
       [
         'black',
-        `은 ${Math.floor(data.test_portfolio_profit)}%로 ${Math.abs(
-          Math.floor(data.test_portfolio_profit) -
-            Math.floor(data.original_portfolio_profit)
+        `은 ${Math.ceil(data.test_portfolio_profit)}%로 ${Math.abs(
+          Math.ceil(data.test_portfolio_profit) -
+            Math.ceil(data.original_portfolio_profit)
         )}%p ${text1}`,
       ],
     ],
@@ -111,9 +109,9 @@ const Result = ({ data }: any) => {
       ['blue', '최대 낙폭'],
       [
         'black',
-        `은 ${Math.floor(data.test_portfolio_max_fall)}%로 ${Math.abs(
-          Math.floor(data.original_portfolio_max_fall) -
-            Math.floor(data.test_portfolio_max_fall)
+        `은 ${Math.ceil(data.test_portfolio_max_fall)}%로 ${Math.abs(
+          Math.ceil(data.original_portfolio_max_fall) -
+            Math.ceil(data.test_portfolio_max_fall)
         )}%p ${text2}`,
       ],
     ],
@@ -123,12 +121,11 @@ const Result = ({ data }: any) => {
     [['black', `현재 투자원금인 ${data.invest_val_sum}원을 10년간 투자했다면`]],
     [
       ['black', '최종 금액은\u00A0'],
-      // ['blue', ` ${total}원(+${Math.floor(total / current) * 100}%)`],
       [
         'blue',
-        ` ${Math.floor(data.final_val_test)}원(+${
-          Math.floor(data.final_val_test / data.invest_val_sum) * 100
-        }%)`,
+        ` ${Math.ceil(data.final_val_test)}원(+${Math.ceil(
+          (data.final_val_test / data.invest_val_sum) * 100
+        )}%)`,
       ],
       ['black', '이 되었을 거에요.'],
     ],
@@ -162,7 +159,7 @@ const Result = ({ data }: any) => {
       {
         label: '기존 포트폴리오',
         data: data.graph_original_portfolio.map(
-          (item: { date: string; data: number }) => Math.floor(item.data)
+          (item: { date: string; data: number }) => Math.ceil(item.data)
         ),
         borderColor: 'rgb(103, 146, 248)',
         pointStyle: false,
@@ -170,7 +167,7 @@ const Result = ({ data }: any) => {
       {
         label: '새로 만든 포트폴리오',
         data: data.graph_test_portfolio.map(
-          (item: { date: string; data: number }) => Math.floor(item.data)
+          (item: { date: string; data: number }) => Math.ceil(item.data)
         ),
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
@@ -222,15 +219,15 @@ const Result = ({ data }: any) => {
             <BarGraphWrapper>
               <TypoGraphy text="연평균 수익률" size="b2" />
               <EarnBar
-                cur={Math.floor(data.test_portfolio_profit)}
-                last={Math.floor(data.original_portfolio_profit)}
+                cur={Math.ceil(data.test_portfolio_profit)}
+                last={Math.ceil(data.original_portfolio_profit)}
               />
             </BarGraphWrapper>
             <BarGraphWrapper>
               <TypoGraphy text="최대 낙폭" size="b2" />
               <LossBar
-                test={Math.floor(data.test_portfolio_max_fall)}
-                original={Math.floor(data.original_portfolio_max_fall)}
+                test={Math.ceil(data.test_portfolio_max_fall)}
+                original={Math.ceil(data.original_portfolio_max_fall)}
               />
             </BarGraphWrapper>
           </TextRow>

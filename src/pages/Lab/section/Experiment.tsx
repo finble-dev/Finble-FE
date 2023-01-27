@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 
 import { tokenState, firstNameState } from '../../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
-import { SERVER } from '../../../network/config';
+
 import {
   deleteTestPortfolio,
   getTestAnalysis,
@@ -137,15 +137,11 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   // 실험하기
   const getResult = async () => {
     setHundred(true);
-    console.log();
-    console.log('---- 종목 편집 시작 -----');
     // 현재 유저 데이터 가져오기
     const data_add = (await getTestPortfolio(token)).data_add;
-    console.log('이전 데이터 : ', data_add);
 
     // 유저가 이전에 추가했던 종목 삭제
     for (let i = 0; i < data_add.length; i++) {
-      console.log('삭제하고 싶은 id : ', data_add[i].portfolio.id);
       await deleteTestPortfolio(token, data_add[i].portfolio.id);
     }
 
@@ -154,15 +150,12 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
       for (let j = 0; j < ETFFlag[i].length; j++) {
         if (ETFFlag[i][j].flag) {
           const id = (await postTestPortfolio(token, ETFFlag[i][j].symbol)).id;
-          console.log('추가한 id', id);
 
           const patchRes = await patchTestPortfolio(
             token,
             id,
             ETFFlag[i][j].ratio
           );
-
-          console.log('비율 수정 : ', patchRes);
         }
       }
     }
