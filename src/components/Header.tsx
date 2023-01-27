@@ -5,18 +5,33 @@ import { Link } from 'react-router-dom';
 import { Btn60 } from './Button';
 import { useEffect, useState } from 'react';
 import LoginModal from './LoginModal';
-import { nameState } from '../store/slice/userSlice';
+import { nameState, tokenState } from '../store/slice/userSlice';
 import { useSelector } from 'react-redux';
 import { setName, setToken } from '../store/slice/userSlice';
 import { useDispatch } from 'react-redux';
+import { SERVER } from '../network/config';
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);
+  const token = useSelector(tokenState);
   const dispatch = useDispatch();
+
   const logout = () => {
-    dispatch(setName({ name: '' }));
-    dispatch(setToken({ token: '' }));
+    fetch(`${SERVER}/logout/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        dispatch(setName({ name: '' }));
+        dispatch(setToken({ token: '' }));
+      })
+      .catch((err) => console.log(err));
   };
 
   const [path, setPath] = useState('/');
