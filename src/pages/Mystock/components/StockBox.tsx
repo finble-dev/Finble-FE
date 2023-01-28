@@ -4,7 +4,7 @@ import del from '../../../assets/img/lab/del.svg';
 import TypoGraphy from '../../../components/Typography';
 import { SERVER } from '../../../network/config';
 import { useAppSelect } from '../../../store/configStore.hooks';
-import { tokenState } from '../../../store/slice/userSlice';
+import { tokenState } from '../../../store/slice/tokenSlice';
 
 const StockBox = ({ stock }: { stock: any }) => {
   const token = useAppSelect(tokenState);

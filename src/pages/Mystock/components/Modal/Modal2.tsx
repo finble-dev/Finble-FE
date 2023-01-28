@@ -5,7 +5,7 @@ import { Btn60 } from '../../../../components/Button';
 import Input from '../../../../components/Input';
 import TypoGraphy from '../../../../components/Typography';
 import { SERVER } from '../../../../network/config';
-import { tokenState } from '../../../../store/slice/userSlice';
+import { tokenState } from '../../../../store/slice/tokenSlice';
 
 interface InputType {
   name: string;

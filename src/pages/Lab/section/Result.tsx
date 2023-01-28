@@ -8,7 +8,7 @@ import { EarnBar } from '../components/EarnBar';
 
 import { Line } from 'react-chartjs-2';
 
-import { tokenState } from '../../../store/slice/userSlice';
+import { tokenState } from '../../../store/slice/tokenSlice';
 import { useSelector } from 'react-redux';
 
 import q from '../../../assets/img/lab/q.png';

@@ -3,21 +3,36 @@ import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import { Link } from 'react-router-dom';
 import { Btn60 } from './Button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import LoginModal from './LoginModal';
-import { nameState } from '../store/slice/userSlice';
+import { nameState, setName } from '../store/slice/userSlice';
 import { useSelector } from 'react-redux';
-import { setName, setToken } from '../store/slice/userSlice';
+import { setToken, tokenState } from '../store/slice/tokenSlice';
 import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { SERVER } from '../network/config';
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);
+  const token = useSelector(tokenState);
   const dispatch = useDispatch();
+
   const logout = () => {
-    dispatch(setName({ name: '' }));
-    dispatch(setToken({ token: '' }));
+    fetch(`${SERVER}/logout/`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        dispatch(setName({ name: '' }));
+        dispatch(setToken({ token: '' }));
+      })
+      .catch((err) => console.log(err));
   };
 
   const path = useLocation();

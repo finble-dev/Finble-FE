@@ -9,37 +9,32 @@ import { useEffect, useState } from 'react';
 import Modal from './components/Modal/Modal1';
 import { Link } from 'react-router-dom';
 
-import {
-  nameState,
-  tokenState,
-  firstNameState,
-} from '../../store/slice/userSlice';
+import { nameState, firstNameState } from '../../store/slice/userSlice';
+import { tokenState } from '../../store/slice/tokenSlice';
 import { useSelector } from 'react-redux';
-import { SERVER } from '../../network/config';
 import StockBox from './components/StockBox';
 import Header from '../../components/Header';
+import { getPortfolio } from '../../network/api';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [data, setData] = useState([] as any);
+  const [totalGain, setTotalGain] = useState(0);
+  const [totalRate, setTotalRate] = useState(0);
   const token = useSelector(tokenState);
   const name = useSelector(nameState); // 성 + 이름
   const firstName = useSelector(firstNameState); // 이름
   let total = 0;
 
-  useEffect(() => {
+  const getPortfolioAPI = async () => {
     if (name != '') {
-      fetch(`${SERVER}/portfolio/`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setData(res.data);
-        });
+      await getPortfolio(token, setData, setTotalGain, setTotalRate);
     }
+  };
+
+  // // 포트폴리오 조회 api 연결
+  useEffect(() => {
+    getPortfolioAPI();
   });
 
   // 내 주식 진단하기 버튼 활성화
@@ -56,6 +51,8 @@ const MyStock = () => {
   for (var i = 0; i < Array.from(data).length; i++) {
     total = total + data[i].present_val;
   }
+
+  console.log(data);
 
   return (
     <>
@@ -99,6 +96,15 @@ const MyStock = () => {
                     color="var(--type-gray-2)"
                   />
                 </TextRow>
+                <TextWrap padding="5px 0">
+                  <TypoGraphy
+                    text={`${totalGain.toLocaleString(
+                      'ko-KR'
+                    )}원 (${totalRate.toFixed(1)}%)`}
+                    size="12px"
+                    color="var(--type-gray-2)"
+                  />
+                </TextWrap>
               </Box>
               <Box height="100%" padding={0}>
                 <TextWrap padding="22px 27px 20px 27px">
