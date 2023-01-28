@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';

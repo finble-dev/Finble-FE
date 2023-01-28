@@ -1,29 +1,23 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { SERVER } from '../../network/config';
 import { useAppSelect } from '../../store/configStore.hooks';
-import { nameState, tokenState } from '../../store/slice/userSlice';
+import { tokenState } from '../../store/slice/tokenSlice';
+import { nameState } from '../../store/slice/userSlice';
 import Section1 from './section/Section1';
 import Section2 from './section/Section2';
 import { initData } from './initData';
-import Header from '../../components/Header';
+import { getPortfolioAnalysis } from '../../network/api';
 
 const StockDiagnosis = () => {
   const token = useAppSelect(tokenState);
   const name = useSelector(nameState); // 성 + 이름
   const [data, setData] = useState(initData);
 
+  // 포트폴리오 진단 api 연결
   useEffect(() => {
     if (name != '') {
-      fetch(`${SERVER}/portfolio/analysis/`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => setData(res.data));
+      getPortfolioAnalysis(token, setData);
     }
   }, []);
 

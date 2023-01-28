@@ -6,7 +6,7 @@ import SearchListBox from '../SearchListBox';
 import { useEffect, useState } from 'react';
 import Modal2 from './Modal2';
 import { SERVER } from '../../../../network/config';
-import { tokenState } from '../../../../store/slice/userSlice';
+import { tokenState } from '../../../../store/slice/tokenSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
 
 const Modal = ({ setModalOpen }: { setModalOpen: any }) => {
