@@ -10,9 +10,14 @@ import {
   setFirstName,
   setExpiration,
 } from '../../store/slice/userSlice';
-import { setToken } from '../../store/slice/tokenSlice';
+import {
+  refreshTokenState,
+  setRefreshToken,
+  setToken,
+} from '../../store/slice/tokenSlice';
 import { useDispatch } from 'react-redux';
 import { SERVER } from '../../network/config';
+import { useSelector } from 'react-redux';
 
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
 const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
@@ -54,6 +59,7 @@ const GoogleButton = ({ setModalOpen }: any) => {
   }, [code]);
 
   const dispatch = useDispatch();
+  const refreshToken = useSelector(refreshTokenState);
   // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
   useEffect(() => {
     fetch(`${SERVER}/login/`, {
@@ -70,6 +76,10 @@ const GoogleButton = ({ setModalOpen }: any) => {
         dispatch(setName({ name: res.user.name as string }));
         dispatch(setFirstName({ firstName: res.user.first_name as string }));
         dispatch(setToken({ token: res.token.access as string }));
+        dispatch(
+          setRefreshToken({ refreshToken: res.token.refresh as string })
+        );
+        console.log(refreshToken);
         setModalOpen(false);
         dispatch(
           setExpiration({
