@@ -9,12 +9,7 @@ import GlobalStyles from './assets/styles/Globalstyles';
 import StockDiagnosis from './pages/Mystock/StockDiagnosis ';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { useSelector } from 'react-redux';
-import {
-  expirationState,
-  refreshFlagState,
-  setExpiration,
-  setRefreshFlag,
-} from './store/slice/userSlice';
+import { expirationState, setExpiration } from './store/slice/userSlice';
 import { refreshTokenState } from './store/slice/tokenSlice';
 import { SERVER } from './network/config';
 import { useDispatch } from 'react-redux';
