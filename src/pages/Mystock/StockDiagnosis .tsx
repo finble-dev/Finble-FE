@@ -8,6 +8,7 @@ import Section1 from './section/Section1';
 import Section2 from './section/Section2';
 import { initData } from './initData';
 import { getPortfolioAnalysis } from '../../network/api';
+import Header from '../../components/Header';
 
 const StockDiagnosis = () => {
   const token = useAppSelect(tokenState);
