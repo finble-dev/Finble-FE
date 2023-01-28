@@ -14,6 +14,7 @@ import { tokenState } from '../../store/slice/tokenSlice';
 import { useSelector } from 'react-redux';
 import StockBox from './components/StockBox';
 import { getPortfolio } from '../../network/api';
+import Header from '../../components/Header';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
