@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 import logo from '../assets/logo.svg';
 import Typography from './Typography';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Btn60 } from './Button';
 import { useState } from 'react';
 import LoginModal from './LoginModal';
