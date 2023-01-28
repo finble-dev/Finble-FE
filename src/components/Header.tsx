@@ -9,6 +9,7 @@ import { nameState, setName } from '../store/slice/userSlice';
 import { tokenState, setToken } from '../store/slice/tokenSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVER } from '../network/config';
+
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);

@@ -9,6 +9,7 @@ import {
   setName,
   setFirstName,
   setExpiration,
+  nameState,
 } from '../../store/slice/userSlice';
 import {
   refreshTokenState,
@@ -18,6 +19,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { SERVER } from '../../network/config';
 import { useSelector } from 'react-redux';
+import { getRefresh, Login } from '../../network/api';
 
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
 const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
@@ -60,34 +62,37 @@ const GoogleButton = ({ setModalOpen }: any) => {
 
   const dispatch = useDispatch();
   const refreshToken = useSelector(refreshTokenState);
+  const name = useSelector(nameState);
   // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
   useEffect(() => {
-    fetch(`${SERVER}/login/`, {
-      method: 'POST',
-      cache: 'no-cache',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ token: googleToken }),
-    })
-      .then((response) => response.json())
-      .then((res) => {
-        console.log(res);
-        dispatch(setName({ name: res.user.name as string }));
-        dispatch(setFirstName({ firstName: res.user.first_name as string }));
-        dispatch(setToken({ token: res.token.access as string }));
-        dispatch(
-          setRefreshToken({ refreshToken: res.token.refresh as string })
-        );
-        console.log(refreshToken);
-        setModalOpen(false);
-        dispatch(
-          setExpiration({
-            expiration: Date.parse(res.token.expiration_time) as number,
-          })
-        );
-      })
-      .catch((err) => console.log(err));
+    async function login() {
+      const res = (await Login(googleToken)) as any;
+
+      dispatch(setName({ name: res.user.name as string }));
+      dispatch(setFirstName({ firstName: res.user.first_name as string }));
+      dispatch(setToken({ token: res.token.access as string }));
+      dispatch(setRefreshToken({ refreshToken: res.token.refresh as string }));
+      setModalOpen(false);
+      dispatch(
+        setExpiration({
+          expiration: Date.parse(res.token.expiration_time) as number,
+        })
+      );
+
+      console.log('로그인 결과 : ', res);
+      console.log('로그인 후 이름 : ', name);
+      console.log('로그인 후 토큰 : ', refreshToken);
+    }
+
+    login();
+
+    let i = 0;
+
+    setTimeout(async function () {
+      const res = (await getRefresh(refreshToken)) as any;
+      console.log(`${i}, refreshToken : `, res);
+      i++;
+    }, 10000);
   }, [googleToken]);
 
   return (

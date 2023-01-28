@@ -1,48 +1,44 @@
 import { SERVER } from './config';
 
-// // google access token 발급
-// export const getGoogleToken = async (data: any, setGoogleToken: any) => {
-//   await fetch('https://oauth2.googleapis.com/token', {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: data,
-//   })
-//     .then((res) => res.json())
-//     .then((res) => {
-//       setGoogleToken(res.access_token);
-//     })
-//     .catch((err) => console.log(err));
-// };
+// Login api (finble access token 발급)
+export const Login = async (googleToken: string) => {
+  const res = await fetch(`${SERVER}/login/`, {
+    method: 'POST',
+    cache: 'no-cache',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ token: googleToken }),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => console.log(err));
+  return res;
+};
 
-// // Login api (finble access token 발급)
-// export const Login = async (
-//   googleToken: string,
-//   setName: any,
-//   setFirstName: any,
-//   setToken: any,
-//   setModalOpen: any
-// ) => {
+export const getRefresh = async (refreshToken: string) => {
+  const res = await fetch(`${SERVER}/login/refresh/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ refresh: refreshToken }),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => console.log(err));
+  // .then((res) => res.json())
+  // .then((res) => {
+  //   ret
+  //   console.log(res);
+  //   dispatch(setExpiration({ expiration: now + 300000 }));
+  //   console.log('새로운 ex:   ' + expiration);
+  // })
 
-//   await fetch(`${SERVER}/login/`, {
-//     method: 'POST',
-//     cache: 'no-cache',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ token: googleToken }),
-//   })
-//     .then((response) => response.json())
-//     .then((res) => {
-//       console.log(res);
-//       dispatch(setName({ name: res.user.name as string }));
-//       dispatch(setFirstName({ firstName: res.user.first_name as string }));
-//       dispatch(setToken({ token: res.token.access as string }));
-//       setModalOpen(false);
-//     })
-//     .catch((err) => console.log(err));
-// };
+  return res;
+};
 
 // 내 포트폴리오 조회
 export const getPortfolio = async (
