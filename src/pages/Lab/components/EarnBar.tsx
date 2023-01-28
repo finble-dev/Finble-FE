@@ -1,11 +1,27 @@
 import styled from 'styled-components';
 import TypoGraphy from '../../../components/Typography';
 
-export const EarnBar = ({ last, cur }: { last: number; cur: number }) => {
+export const EarnBar = ({
+  original,
+  test,
+}: {
+  original: number;
+  test: number;
+}) => {
+  if (original < 0) {
+    console.log(original + Math.abs(original - test) / 110);
+  } else {
+    console.log(original - Math.abs(original - test) / 110);
+  }
   return (
     <Container>
       <LastBar />
-      <CurBar height={(cur / last) * 110} />
+      {original < 0 ? (
+        <CurBar height={original + Math.abs(original - test) / 110} />
+      ) : (
+        <CurBar height={original - Math.abs(original - test) / 110} />
+      )}
+
       <Column>
         <TypoGraphy text="기존" size="b4" style={{ height: 'auto' }} />
         <TypoGraphy text="포트폴리오" size="b4" style={{ height: 'auto' }} />

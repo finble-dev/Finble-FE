@@ -49,10 +49,8 @@ const Result = ({ data }: any) => {
   // tip flag
   const [q1, setQ1] = useState(false);
   const [q2, setQ2] = useState(false);
-
   const [inform, setInform] = useState(false);
-  // const [label, setLabel] = useState([] as Array<string>);
-  let i = 0;
+  const [label, setLabel] = useState([]);
   useEffect(() => {
     if (
       Math.ceil(data.original_portfolio_profit) <
@@ -66,31 +64,19 @@ const Result = ({ data }: any) => {
     )
       setText2('커졌어요');
 
-    // 라벨 세팅
-
-    // i++;
-    // let lastYear = '1999';
-    // if (i >= 2) {
-    //   // 라벨 초기화
-    //   setLabel([]);
-
-    //   data.graph_original_portfolio.map(
-    //     // 처음부터 끝까지 탐색하면서
-    //     (item: { date: string; data: number }) => {
-    //       const year = item.date.substring(0, 4);
-    //       let newLabel = label;
-
-    //       if (year != lastYear) {
-    //         newLabel.push(year);
-    //         lastYear = year;
-    //       } else {
-    //         newLabel.push('');
-    //       }
-
-    //       setLabel(newLabel);
-    //     }
-    //   );
-    // }
+    if (
+      data.graph_original_portfolio.length > data.graph_test_portfolio.length
+    ) {
+      setLabel(
+        data.graph_original_portfolio.map((item: any) =>
+          item.date.substring(0, 7)
+        )
+      );
+    } else {
+      setLabel(
+        data.graph_test_portfolio.map((item: any) => item.date.substring(0, 7))
+      );
+    }
   }, [data]);
 
   const list1 = [
@@ -219,8 +205,8 @@ const Result = ({ data }: any) => {
             <BarGraphWrapper>
               <TypoGraphy text="연평균 수익률" size="b2" />
               <EarnBar
-                cur={Math.ceil(data.test_portfolio_profit)}
-                last={Math.ceil(data.original_portfolio_profit)}
+                test={Math.ceil(data.test_portfolio_profit)}
+                original={Math.ceil(data.original_portfolio_profit)}
               />
             </BarGraphWrapper>
             <BarGraphWrapper>
@@ -494,6 +480,7 @@ const Input = styled.input`
   outline: none;
   margin-right: 18px;
   padding: 18px;
+  font-size: 14px;
 
   &::placeholder {
     color: var(--type-gray-4);

@@ -63,9 +63,10 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   useEffect(() => {
     async function getPorfolio() {
       const res = (await getTestPortfolio(token)) as any;
-      if (res.data_retain === ([] as any)) setModalOpen(true);
-      setModalOpen(false);
-      setRetainStock(res.data_retain);
+      if (res.data_retain.length != 0) {
+        setModalOpen(false);
+        setRetainStock(res.data_retain);
+      }
     }
     getPorfolio();
   }, [cnt]);
@@ -364,22 +365,6 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
               )}
             </SubBox>
             <Footer>
-              {/* {totalPer === 100 ? (
-                <TypoGraphy
-                  text="합이 100%가 되어야 합니다."
-                  size="b2"
-                  color="var(--type-gray-2)"
-                  style={{ marginRight: '11px' }}
-                />
-              ) : (
-                <TypoGraphy
-                  text="합이 100%가 되어야 합니다."
-                  size="b2"
-                  color="red"
-                  style={{ marginRight: '11px' }}
-                />
-              )} */}
-
               {isHundred ? (
                 <></>
               ) : (
@@ -390,11 +375,6 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
                   style={{ marginRight: '11px' }}
                 />
               )}
-
-              {/* <InputBox>
-                <InputArea value={totalPer} />
-                <TypoGraphy text="%" size="input" color="var(--type-gray-3)" />
-              </InputBox> */}
             </Footer>
           </Box>
         </Row>
