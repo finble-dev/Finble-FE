@@ -149,6 +149,7 @@ const Result = ({ data }: any) => {
         ),
         borderColor: 'rgb(103, 146, 248)',
         pointStyle: false,
+        spanGaps: false,
       },
       {
         label: '새로 만든 포트폴리오',
@@ -157,6 +158,7 @@ const Result = ({ data }: any) => {
         ),
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
+        spanGaps: false,
       },
     ],
   } as any;
