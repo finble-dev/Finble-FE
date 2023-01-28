@@ -1,7 +1,3 @@
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { refreshTokenState, setRefreshToken } from '../store/slice/tokenSlice';
-import { setExpiration } from '../store/slice/userSlice';
 import { SERVER } from './config';
 
 // Login api (finble access token 발급)
@@ -33,13 +29,6 @@ export const getRefresh = async (refreshToken: string) => {
       return res.json();
     })
     .catch((err) => console.log(err));
-  // .then((res) => res.json())
-  // .then((res) => {
-  //   ret
-  //   console.log(res);
-  //   dispatch(setExpiration({ expiration: now + 300000 }));
-  //   console.log('새로운 ex:   ' + expiration);
-  // })
 
   return res;
 };
