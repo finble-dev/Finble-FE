@@ -51,8 +51,6 @@ const MyStock = () => {
     total = total + data[i].present_val;
   }
 
-  console.log(data);
-
   return (
     <>
       {name !== '' ? (
