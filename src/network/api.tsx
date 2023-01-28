@@ -17,6 +17,7 @@ export const Login = async (googleToken: string) => {
   return res;
 };
 
+// refresh token 연결 (access token 재발급)
 export const getRefresh = async (refreshToken: string) => {
   const res = await fetch(`${SERVER}/login/refresh/`, {
     method: 'POST',
@@ -29,13 +30,6 @@ export const getRefresh = async (refreshToken: string) => {
       return res.json();
     })
     .catch((err) => console.log(err));
-  // .then((res) => res.json())
-  // .then((res) => {
-  //   ret
-  //   console.log(res);
-  //   dispatch(setExpiration({ expiration: now + 300000 }));
-  //   console.log('새로운 ex:   ' + expiration);
-  // })
 
   return res;
 };
