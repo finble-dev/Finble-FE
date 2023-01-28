@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
-import { useEffect, useState } from 'react';
 import StepBox from '../../../components/StepBox';
 import { WhiteBox, WhiteSmallBox } from '../components/WhiteBox';
 import TypoGraphy from '../../../components/Typography';
@@ -95,6 +94,7 @@ const Section2 = ({ data }: { data: any }) => {
           (item: { date: number; data: number }) => item.data
         ),
         borderColor: 'rgb(103, 146, 248)',
+        borderWidth: 4,
         pointStyle: false,
       },
       {
@@ -102,6 +102,7 @@ const Section2 = ({ data }: { data: any }) => {
         data: data.graph_kospi.map(
           (item: { date: number; data: number }) => item.data
         ),
+        borderWidth: 4,
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
       },
@@ -110,6 +111,7 @@ const Section2 = ({ data }: { data: any }) => {
 
   const options = {
     responsive: true,
+
     plugins: {
       legend: {
         display: true,
@@ -118,7 +120,7 @@ const Section2 = ({ data }: { data: any }) => {
           color: 'green',
         },
         labels: {
-          boxHeight: 2,
+          boxHeight: 3,
         },
       },
       tooltip: {
@@ -134,23 +136,27 @@ const Section2 = ({ data }: { data: any }) => {
       },
       colors: { enabled: true },
     },
-
     scales: {
       y: {
         id: 'yAxes',
-        display: true,
+        grid: { color: '#909090' },
+        ticks: {
+          fontSize: 10,
+          fontColor: '#909090',
+        },
       },
       x: {
         id: 'xAxes',
-        display: true,
-        grid: {
-          display: false,
-        },
+        grid: { display: false },
         ticks: {
           callback(val: number, index: number): any {
             var newthis = this as any;
-            return index % 2 == 0 ? newthis.getLabelForValue(val) : '';
+            return newlabel[index] != newlabel[index - 1]
+              ? newthis.getLabelForValue(val)
+              : '';
           },
+          fontColor: '#909090',
+          fontSize: 10,
         },
         align: '0', // x축 값의 회전 각도를 설정할 수 있어요.
         padding: 0, // x축 값의 상하 패딩을 설정할 수 있어요.

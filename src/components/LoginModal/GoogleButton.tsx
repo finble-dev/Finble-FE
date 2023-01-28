@@ -3,11 +3,16 @@ import styled from 'styled-components';
 import TypoGraphy from '../Typography';
 import google from '../../assets/icons/google.svg';
 import { Img, ImgContainer } from '../../assets/styles/styles';
-import { SERVER } from '../../network/config';
 import { useGoogleLogin } from '@react-oauth/google';
 
-import { setName, setToken, setFirstName } from '../../store/slice/userSlice';
+import {
+  setName,
+  setFirstName,
+  setExpiration,
+} from '../../store/slice/userSlice';
+import { setToken } from '../../store/slice/tokenSlice';
 import { useDispatch } from 'react-redux';
+import { SERVER } from '../../network/config';
 
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
 const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
@@ -44,7 +49,8 @@ const GoogleButton = ({ setModalOpen }: any) => {
       .then((res) => res.json())
       .then((res) => {
         setGoogleToken(res.access_token);
-      });
+      })
+      .catch((err) => console.log(err));
   }, [code]);
 
   const dispatch = useDispatch();
@@ -65,7 +71,13 @@ const GoogleButton = ({ setModalOpen }: any) => {
         dispatch(setFirstName({ firstName: res.user.first_name as string }));
         dispatch(setToken({ token: res.token.access as string }));
         setModalOpen(false);
-      });
+        dispatch(
+          setExpiration({
+            expiration: Date.parse(res.token.expiration_time) as number,
+          })
+        );
+      })
+      .catch((err) => console.log(err));
   }, [googleToken]);
 
   return (

@@ -16,7 +16,8 @@ import { initData } from '../initData';
 import { ETF } from '../../../interface/interface';
 import { Link } from 'react-router-dom';
 
-import { tokenState, firstNameState } from '../../../store/slice/userSlice';
+import { firstNameState } from '../../../store/slice/userSlice';
+import { tokenState } from '../../../store/slice/tokenSlice';
 import { useSelector } from 'react-redux';
 
 import {

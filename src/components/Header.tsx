@@ -3,12 +3,11 @@ import logo from '../assets/logo.svg';
 import Typography from './Typography';
 import { Link } from 'react-router-dom';
 import { Btn60 } from './Button';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import LoginModal from './LoginModal';
-import { nameState, tokenState } from '../store/slice/userSlice';
-import { useSelector } from 'react-redux';
-import { setName, setToken } from '../store/slice/userSlice';
-import { useDispatch } from 'react-redux';
+import { nameState, setName } from '../store/slice/userSlice';
+import { tokenState, setToken } from '../store/slice/tokenSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { SERVER } from '../network/config';
 
 const Header = () => {

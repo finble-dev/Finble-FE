@@ -9,14 +9,11 @@ import { useEffect, useState } from 'react';
 import Modal from './components/Modal/Modal1';
 import { Link } from 'react-router-dom';
 
-import {
-  nameState,
-  tokenState,
-  firstNameState,
-} from '../../store/slice/userSlice';
+import { nameState, firstNameState } from '../../store/slice/userSlice';
+import { tokenState } from '../../store/slice/tokenSlice';
 import { useSelector } from 'react-redux';
-import { SERVER } from '../../network/config';
 import StockBox from './components/StockBox';
+import { getPortfolio } from '../../network/api';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -26,20 +23,12 @@ const MyStock = () => {
   const firstName = useSelector(firstNameState); // 이름
   let total = 0;
 
+  // 포트폴리오 조회 api 연결
   useEffect(() => {
     if (name != '') {
-      fetch(`${SERVER}/portfolio/`, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          setData(res.data);
-        });
+      getPortfolio(token, setData);
     }
-  });
+  }, []);
 
   // 내 주식 진단하기 버튼 활성화
   let link, button;
