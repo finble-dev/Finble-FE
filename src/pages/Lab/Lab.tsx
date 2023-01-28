@@ -15,6 +15,7 @@ import { initData } from './initData';
 
 import { nameState } from '../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
+import Header from '../../components/Header';
 
 const list1 = [
   [
@@ -41,6 +42,8 @@ const Lab = () => {
   }, []);
   return (
     <>
+      <Header />
+      <div style={{ marginTop: '70px' }}></div>
       {name !== '' ? (
         <Container>
           <Intro />

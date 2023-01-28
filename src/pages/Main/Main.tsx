@@ -6,6 +6,7 @@ import Footer from './section/Footer';
 import Section4 from './section/Section4';
 
 import { useEffect } from 'react';
+import Header from '../../components/Header';
 
 const Main = () => {
   useEffect(() => {
@@ -13,6 +14,8 @@ const Main = () => {
   }, []);
   return (
     <Container>
+      <Header />
+      <div style={{ marginTop: '70px' }}></div>
       <Section1 />
       <Section2 />
       <Section3 />
