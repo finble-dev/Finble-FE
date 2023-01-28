@@ -104,7 +104,14 @@ const Result = ({ data }: any) => {
   ];
 
   const list2 = [
-    [['black', `현재 투자원금인 ${data.invest_val_sum}원을 10년간 투자했다면`]],
+    [
+      [
+        'black',
+        `현재 투자원금인 ${Math.ceil(
+          data.invest_val_sum
+        )}원을 10년간 투자했다면`,
+      ],
+    ],
     [
       ['black', '최종 금액은\u00A0'],
       [
