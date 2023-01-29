@@ -110,7 +110,7 @@ const Result = ({ data }: any) => {
       [
         'black',
         `현재 투자원금인 ${Math.ceil(
-          data.invest_val_sum
+          data.present_val_sum
         )}원을 10년간 투자했다면`,
       ],
     ],
