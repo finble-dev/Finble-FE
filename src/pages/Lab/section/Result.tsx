@@ -51,6 +51,8 @@ const Result = ({ data }: any) => {
   const [q2, setQ2] = useState(false);
   const [inform, setInform] = useState(false);
   const [label, setLabel] = useState([]);
+
+  console.log(data);
   useEffect(() => {
     if (
       Math.ceil(data.original_portfolio_profit) <
@@ -85,9 +87,9 @@ const Result = ({ data }: any) => {
       ['blue', '연평균 수익률'],
       [
         'black',
-        `은 ${Math.ceil(data.test_portfolio_profit)}%로 ${Math.abs(
-          Math.ceil(data.test_portfolio_profit) -
-            Math.ceil(data.original_portfolio_profit)
+        `은 ${Math.ceil(data.annual_profit_test)}%로 ${Math.abs(
+          Math.ceil(data.annual_profit_test) -
+            Math.ceil(data.annual_profit_original)
         )}%p ${text1}`,
       ],
     ],
@@ -96,8 +98,8 @@ const Result = ({ data }: any) => {
       [
         'black',
         `은 ${Math.ceil(data.test_portfolio_max_fall)}%로 ${Math.abs(
-          Math.ceil(data.original_portfolio_max_fall) -
-            Math.ceil(data.test_portfolio_max_fall)
+          Math.ceil(data.test_portfolio_max_fall) -
+            Math.ceil(data.original_portfolio_max_fall)
         )}%p ${text2}`,
       ],
     ],
@@ -214,8 +216,8 @@ const Result = ({ data }: any) => {
             <BarGraphWrapper>
               <TypoGraphy text="연평균 수익률" size="b2" />
               <EarnBar
-                test={Math.ceil(data.test_portfolio_profit)}
-                original={Math.ceil(data.original_portfolio_profit)}
+                test={Math.ceil(data.annual_profit_test)}
+                original={Math.ceil(data.annual_profit_original)}
               />
             </BarGraphWrapper>
             <BarGraphWrapper>

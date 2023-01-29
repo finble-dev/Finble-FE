@@ -14,17 +14,15 @@ export const initData = {
     },
   ],
 
-  invest_val_sum: 1,
-  final_val_test: 1,
-
   annual_profit_original: 1,
   annual_profit_test: 1,
-
-  original_portfolio_profit: 1,
+  final_val_test: 1,
+  invest_val_sum: 1,
   original_portfolio_max_fall: 1,
   original_portfolio_max_loss: 1,
-
-  test_portfolio_profit: 1,
+  original_portfolio_profit: 1,
+  present_val_sum: 1,
   test_portfolio_max_fall: 1,
   test_portfolio_max_loss: 1,
+  test_portfolio_profit: 1,
 } as any;

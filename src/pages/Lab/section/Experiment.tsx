@@ -37,7 +37,7 @@ interface exp {
 
 const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   const [toggleFlag, setToggleFlag] = useState(false);
-  // const [expNum, setExpNum] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   // 해외, 채권, 금 카테고리 선택 여부
   const [cateFlag, setCateFlag] = useState([true, false, false]);
   const [ETFFlag, setETFFlag] = useState([
@@ -180,6 +180,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
       setIsExp(false);
       alert(anaRes.message);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -366,7 +367,12 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
             </SubBox>
             <Footer>
               {isHundred ? (
-                <></>
+                <TypoGraphy
+                  text="합이 100%가 되어야 합니다."
+                  size="b2"
+                  color="grey"
+                  style={{ marginRight: '11px' }}
+                />
               ) : (
                 <TypoGraphy
                   text="합이 100%가 되어야 합니다."
@@ -383,16 +389,19 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
           <div
             onClick={() => {
               setIsExp(true);
+              setIsLoading(true);
               getResult();
             }}
           >
             {isExp ? (
-              data === initData ? (
+              // 첫 실험을 했을 때
+              isLoading ? (
                 <Btn10 text={'실험하는중...'} type="checking" />
               ) : (
                 <Btn10 text={'실험 다시 해보기'} type="check" />
               )
             ) : (
+              // 첫 실험 전일 때
               <Btn10 text={'실험 결과 확인하기'} type="check" />
             )}
           </div>

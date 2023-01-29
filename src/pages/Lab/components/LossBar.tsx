@@ -10,8 +10,8 @@ export const LossBar = ({
 }) => {
   return (
     <Container>
-      <LastBar />
-      <CurBar height={(test / original) * 110} />
+      <LastBar height={original} />
+      <CurBar height={test} />
       <Column>
         <TypoGraphy text="기존" size="b4" style={{ height: 'auto' }} />
         <TypoGraphy text="포트폴리오" size="b4" style={{ height: 'auto' }} />
@@ -49,13 +49,12 @@ const Line = styled.div`
   margin-left: 5px;
 `;
 
-const LastBar = styled.div`
+const LastBar = styled.div<{ height: number }>`
   position: absolute;
   top: 20px;
   left: 47px;
-
   width: 39px;
-  height: 110px;
+  height: ${(props) => props.height}px;
   background-color: #ffaeae;
   border-radius: 0px 0px 4px 4px;
 `;

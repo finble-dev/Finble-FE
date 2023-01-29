@@ -8,20 +8,11 @@ export const EarnBar = ({
   original: number;
   test: number;
 }) => {
-  if (original < 0) {
-    console.log(original + Math.abs(original - test) / 110);
-  } else {
-    console.log(original - Math.abs(original - test) / 110);
-  }
+  console.log('earn', test, original);
   return (
     <Container>
-      <LastBar />
-      {original < 0 ? (
-        <CurBar height={original + Math.abs(original - test) / 110} />
-      ) : (
-        <CurBar height={original - Math.abs(original - test) / 110} />
-      )}
-
+      <LastBar height={original} />
+      <CurBar height={test} />
       <Column>
         <TypoGraphy text="기존" size="b4" style={{ height: 'auto' }} />
         <TypoGraphy text="포트폴리오" size="b4" style={{ height: 'auto' }} />
@@ -59,13 +50,12 @@ const Line = styled.div`
   margin-left: 5px;
 `;
 
-const LastBar = styled.div`
+const LastBar = styled.div<{ height: number }>`
   position: absolute;
   bottom: 50px;
   left: 47px;
-
   width: 39px;
-  height: 110px;
+  height: ${(props) => props.height}px;
   background-color: #c2d4fe;
   border-radius: 4px 4px 0px 0px;
 `;
