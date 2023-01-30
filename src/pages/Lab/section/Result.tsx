@@ -40,8 +40,6 @@ ChartJS.register(
 const Result = ({ data }: any) => {
   const token = useSelector(tokenState);
   const [email, setEmail] = useState('');
-  // 최종금액
-  const [total, setTotal] = useState('11,345,623');
   // 연평균 수익률
   const [text1, setText1] = useState('낮아졌고');
   // 최대 낙폭
@@ -50,7 +48,7 @@ const Result = ({ data }: any) => {
   const [q1, setQ1] = useState(false);
   const [q2, setQ2] = useState(false);
   const [inform, setInform] = useState(false);
-  const [label, setLabel] = useState([]);
+  const [totalPer, setTotalPer] = useState('최종금액Per');
 
   console.log(data);
   useEffect(() => {
@@ -63,21 +61,17 @@ const Result = ({ data }: any) => {
     if (
       Math.ceil(data.original_portfolio_max_fall) <
       Math.ceil(data.test_portfolio_max_fall)
-    )
-      setText2('커졌어요');
-
-    if (
-      data.graph_original_portfolio.length > data.graph_test_portfolio.length
     ) {
-      setLabel(
-        data.graph_original_portfolio.map((item: any) =>
-          item.date.substring(0, 7)
-        )
-      );
+      setText2('커졌어요');
+    }
+    let per = Math.ceil(
+      ((data.final_val_test - data.present_val_sum) / data.present_val_sum) *
+        100
+    );
+    if (per >= 0) {
+      setTotalPer('+' + String(per));
     } else {
-      setLabel(
-        data.graph_test_portfolio.map((item: any) => item.date.substring(0, 7))
-      );
+      setTotalPer(String(per));
     }
   }, [data]);
 
@@ -116,12 +110,7 @@ const Result = ({ data }: any) => {
     ],
     [
       ['black', '최종 금액은\u00A0'],
-      [
-        'blue',
-        ` ${Math.ceil(data.final_val_test)}원(+${Math.ceil(
-          (data.final_val_test / data.invest_val_sum) * 100
-        )}%)`,
-      ],
+      ['blue', ` ${Math.ceil(data.final_val_test)}원(${totalPer}%)`],
       ['black', '이 되었을 거에요.'],
     ],
   ];
