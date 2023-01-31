@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
+import {
+  Container,
+  Img,
+  ImgContainer,
+  TextRow,
+  TextWrap,
+} from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
 import mainSub4 from '../../../assets/img/main/mainSub4.svg';
 import mainSub5 from '../../../assets/img/main/mainSub5.svg';
@@ -8,7 +14,7 @@ const Section4 = () => {
   return (
     <Wrapper>
       <Container>
-        <TextWrap lineHeight={60} align="center">
+        <TextWrap lineHeight={45} align="center" padding="0 0 55px 0">
           <TypoGraphy text="먼저 본인의 투자 현황을 입력하고" size="h1" />
           <TextRow align="center">
             <TypoGraphy
@@ -19,10 +25,10 @@ const Section4 = () => {
             <TypoGraphy text="을 알아보세요!" size="h1" />
           </TextRow>
         </TextWrap>
-        <TextRow style={{ marginTop: '100px', marginLeft: '-35px' }}>
-          <img src={mainSub4} />
-          <img src={mainSub5} style={{ marginLeft: '-60px' }} />
-        </TextRow>
+        <ImgContainer width="100%" height="100%" style={{ gap: 0 }}>
+          <Img width="540px" src={mainSub4} />
+          <Img width="530px" src={mainSub5} />
+        </ImgContainer>
       </Container>
     </Wrapper>
   );

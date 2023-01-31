@@ -1,13 +1,18 @@
 import TypoGraphy from '../../../components/Typography';
-import { Container, TextRow, TextWrap } from '../../../assets/styles/styles';
+import {
+  Container,
+  ImgContainer,
+  Img,
+  TextRow,
+  TextWrap,
+} from '../../../assets/styles/styles';
 import mainSub2 from '../../../assets/img/main/mainSub2.svg';
 import mainSub3 from '../../../assets/img/main/mainSub3.svg';
 
 const Section3 = () => {
   return (
-    <Container>
-      <div style={{ marginTop: '-158px' }}></div>
-      <TextWrap lineHeight={60} align="center" padding="185px 0 0 0">
+    <Container padding="180px 0 218px 0">
+      <TextWrap lineHeight={45} align="center">
         <TypoGraphy text="마음 편히 주식 투자하는 방법," size="h1" />
         <TextRow align="center">
           <TypoGraphy text="핀블의 '" size="h1" />
@@ -15,7 +20,7 @@ const Section3 = () => {
           <TypoGraphy text="'을 소개합니다." size="h1" />
         </TextRow>
       </TextWrap>
-      <TextWrap lineHeight={36} align="center" padding="45px 0 120px 0">
+      <TextWrap lineHeight={20} align="center" padding="45px 0 120px 0">
         <TextRow align="center">
           <TypoGraphy
             text="가상의 투자 결과"
@@ -31,10 +36,11 @@ const Section3 = () => {
         />
       </TextWrap>
       <TextRow>
-        <img src={mainSub2} style={{ marginRight: '20px' }} />
-        <img src={mainSub3} />
+        <ImgContainer width="100%" height="100%" style={{ gap: '20px' }}>
+          <Img width="520px" src={mainSub2} />
+          <Img width="520px" src={mainSub3} />
+        </ImgContainer>
       </TextRow>
-      <div style={{ marginBottom: '218px' }}></div>
     </Container>
   );
 };

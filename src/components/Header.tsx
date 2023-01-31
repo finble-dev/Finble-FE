@@ -15,6 +15,7 @@ const Header = () => {
   const name = useSelector(nameState);
   const token = useSelector(tokenState);
   const dispatch = useDispatch();
+  let link, text;
 
   const logout = () => {
     fetch(`${SERVER}/logout/`, {
@@ -34,12 +35,26 @@ const Header = () => {
   };
 
   const path = useLocation();
+  // let stock_line, lab_line;
+
+  // if (path.pathname === '/stock' || path.pathname === '/diagnosis') {
+  //   stock_line = 'block';
+  //   lab_line = 'none';
+  // } else if (path.pathname === '/lab') {
+  //   stock_line = 'none';
+  //   lab_line = 'block';
+  // }
+
+  // const header = [
+  //   { link: '/stock', name: '내 주식', display: stock_line },
+  //   { link: '/lab', name: '투자실험실', display: lab_line },
+  // ];
 
   return (
     <Wrapper>
       <Container>
         <Row>
-          <Link to="/">
+          <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
             <Logo src={logo} />
           </Link>
           <Column>
@@ -71,9 +86,20 @@ const Header = () => {
               </Link>
             )}
           </Column>
+          {/* <Row gap="64px">
+            {header.map((i) => (
+              <>
+                <Link to={i.link}>
+                  <Typography text={i.name} size="b2" />
+                </Link>
+                <Line display={i.display} />
+              </>
+            ))}
+          </Row> */}
         </Row>
+
         {name !== '' ? (
-          <Row gap="1rem">
+          <Row gap="15px">
             <Typography text={`${name}님`} size="b2" />
             <div onClick={logout}>
               <Btn60 type="login" text="로그아웃" />
@@ -103,7 +129,7 @@ const Wrapper = styled.div`
   align-items: center;
   background-color: #ffffff;
   width: 100%;
-  height: 70px;
+  height: 50px;
 `;
 
 const Container = styled.div`
@@ -111,18 +137,18 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1060px;
   height: 100%;
 `;
 
 const Logo = styled.img`
-  height: 32px;
-  width: 106px;
+  height: 26px;
+  width: 88px;
 `;
 
 const Row = styled.div<{ gap?: string }>`
   display: flex;
-  gap: ${(props) => props.gap || '35.77px'};
+  gap: ${(props) => props.gap || '64px'};
   align-items: center;
   height: 100%;
 `;
@@ -131,14 +157,15 @@ const Column = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 25px 0px 0px 0px;
+  justify-content: center;
   height: 100%;
-  width: 110px;
 `;
 
-const Line = styled.div`
-  width: 100%;
+const Line = styled.div<{ display?: string }>`
+  width: 91px;
   height: 4px;
+  // display: ${(props) => props.display || 'none'};
+  position: absolute;
+  margin: 48px 0 0 0;
   background-color: #6792f8;
 `;

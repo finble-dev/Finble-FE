@@ -13,15 +13,13 @@ const Section1 = () => {
           text="주식창을 볼 때마다 심장이 철렁했다면?"
           size="h2"
           color="var(--type-gray-2)"
-          style={{ marginBottom: '30px' }}
         />
-        <TextWrap lineHeight={55} padding="0 0 50px 0">
+        <TextWrap lineHeight={45} padding="25px 0 50px 0">
           <TypoGraphy
             text="편안하게 투자할 수 있도록"
             size="h1"
             color="var(--type-black)"
           />
-
           <TextRow>
             <TypoGraphy text="핀블" size="h1" color="var(--main-blue)" />
             <TypoGraphy
@@ -55,7 +53,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1060px;
 `;
 
 const BtnWrapper = styled(Link)`

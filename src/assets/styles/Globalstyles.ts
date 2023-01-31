@@ -39,31 +39,18 @@ const GlobalStyles = createGlobalStyle`
     --fw-small: 700;
     --fw-input: 400;
 
-    /* font-size
-    --fs-h1: 30px;
+    // font-size
+    --fs-h1: 28px;
     --fs-h2: 24px;
-    --fs-t1: 32px;
-    --fs-t2: 28px;
+    --fs-t1: 28px;
+    --fs-t2: 24px;
     --fs-t3: 20px;
     --fs-b1: 18px;
-    --fs-b2: 14px;
+    --fs-b2: 16px;
     --fs-b3: 12px;
     --fs-b4: 10px;
-    --fs-small: 14px;
-    --fs-input: 18px;*/
-
-    // font-size
-    --fs-h1: 34px;
-    --fs-h2: 28px;
-    --fs-t1: 36px;
-    --fs-t2: 32px;
-    --fs-t3: 24px;
-    --fs-b1: 22px;
-    --fs-b2: 18px;
-    --fs-b3: 16px;
-    --fs-b4: 14px;
-    --fs-small: 18px;
-    --fs-input: 22px;
+    --fs-small: 16px;
+    --fs-input: 18px;
   }
 `;
 

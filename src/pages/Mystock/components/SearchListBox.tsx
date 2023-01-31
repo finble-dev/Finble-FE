@@ -20,9 +20,15 @@ export default SearchListBox;
 
 const Container = styled.div`
   width: 100%;
-  height: 60px;
-  line-height: 35px;
+  height: 71px;
+  gap: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
+  border-radius: 10px;
+
+  &:hover {
+    background: rgba(103, 146, 248, 0.1);
+  }
 `;

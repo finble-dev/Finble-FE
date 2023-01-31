@@ -55,7 +55,7 @@ const MyStock = () => {
   return (
     <>
       <Header />
-      <div style={{ marginTop: '70px' }}></div>
+      <div style={{ marginTop: '50px' }}></div>
       {name !== '' ? (
         <Wrap>
           <Container>

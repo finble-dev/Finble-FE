@@ -26,7 +26,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 400px;
+  height: 318px;
   background: url(${mainSub6});
   background-position: center center;
   background-size: cover;
@@ -35,7 +35,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  max-width: 1200px;
+  max-width: 1060px;
   display: flex;
   flex-direction: column;
   justify-content: center;

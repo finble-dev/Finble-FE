@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 
 // Container
-const Container = styled.div`
+const Container = styled.div<{ padding?: string }>`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  max-width: 1200px;
+  max-width: 1060px;
+  padding: ${(props) => props.padding || '0px'};
 `;
 
 const Row = styled.div<{ lineHeight?: number }>`
@@ -42,8 +43,8 @@ const ImgContainer = styled.div<{ width?: string; height?: string }>`
   align-items: flex-end;
   justify-contents: center;
 `;
-const Img = styled.img`
-  width: 100%;
+const Img = styled.img<{ width?: string }>`
+  width: ${(props) => props.width || '100%'};
 `;
 
 export { Container, ImgContainer, Img, TextWrap, TextRow, Row };
