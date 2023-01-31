@@ -43,7 +43,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 50px);
   background-color: #f6f8fe;
   background-image: url(${noneLoginBg});
   background-position: center center;
@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 1204px;
   padding-top: 220px;
-  max-width: 1200px;
+  max-width: 1060px;
 `;
 
 const BtnWrapper = styled.div`

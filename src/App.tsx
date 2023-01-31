@@ -19,7 +19,7 @@ function App() {
           <BrowserRouter>
             <GoogleOAuthProvider clientId={clientID}>
               {/* <Header />
-              <div style={{ marginTop: '70px' }}></div> */}
+              <div style={{ marginTop: '50px' }}></div> */}
               <Routes>
                 <Route path="/" element={<Main />} />
                 <Route path="/stock" element={<MyStock />} />

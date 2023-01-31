@@ -15,7 +15,7 @@ const Main = () => {
   return (
     <Container>
       <Header />
-      <div style={{ marginTop: '70px' }}></div>
+      <div style={{ marginTop: '50px' }}></div>
       <Section1 />
       <Section2 />
       <Section3 />

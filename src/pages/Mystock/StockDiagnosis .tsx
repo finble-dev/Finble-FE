@@ -25,7 +25,7 @@ const StockDiagnosis = () => {
   return (
     <Container>
       <Header />
-      <div style={{ marginTop: '70px' }}></div>
+      <div style={{ marginTop: '50px' }}></div>
       {data != initData ? (
         <>
           <Section1 data={data} />
