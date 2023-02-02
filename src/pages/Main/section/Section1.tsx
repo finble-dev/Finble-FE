@@ -14,7 +14,7 @@ const Section1 = () => {
           size="h2"
           color="var(--type-gray-2)"
         />
-        <TextWrap lineHeight={45} padding="25px 0 50px 0">
+        <TextWrap lineHeight={45} padding="16px 0 42px 0">
           <TypoGraphy
             text="편안하게 투자할 수 있도록"
             size="h1"
@@ -43,8 +43,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 733px;
-  background-image: url(${mainBg});
+  height: 535px;
+  background: linear-gradient(270.04deg, #f6f8fe 18.96%, #eaefff 99.95%);
+  // background-image: url(${mainBg});
   background-size: cover;
   background-position: center center;
 `;

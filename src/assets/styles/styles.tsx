@@ -6,7 +6,7 @@ const Container = styled.div<{ padding?: string }>`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  max-width: 1060px;
+  max-width: 920px;
   padding: ${(props) => props.padding || '0px'};
 `;
 

@@ -11,7 +11,7 @@ import mainSub3 from '../../../assets/img/main/mainSub3.svg';
 
 const Section3 = () => {
   return (
-    <Container padding="180px 0 218px 0">
+    <Container padding="191px 0 107px 0">
       <TextWrap lineHeight={45} align="center">
         <TypoGraphy text="마음 편히 주식 투자하는 방법," size="h1" />
         <TextRow align="center">
@@ -20,7 +20,7 @@ const Section3 = () => {
           <TypoGraphy text="'을 소개합니다." size="h1" />
         </TextRow>
       </TextWrap>
-      <TextWrap lineHeight={20} align="center" padding="45px 0 120px 0">
+      <TextWrap lineHeight={20} align="center" padding="27px 0 44px 0">
         <TextRow align="center">
           <TypoGraphy
             text="가상의 투자 결과"
@@ -36,9 +36,9 @@ const Section3 = () => {
         />
       </TextWrap>
       <TextRow>
-        <ImgContainer width="100%" height="100%" style={{ gap: '20px' }}>
-          <Img width="520px" src={mainSub2} />
-          <Img width="520px" src={mainSub3} />
+        <ImgContainer width="100%" height="100%" style={{ gap: '23px' }}>
+          <Img width="calc((100% - 23px) / 2)" src={mainSub2} />
+          <Img width="calc((100% - 23px) / 2)" src={mainSub3} />
         </ImgContainer>
       </TextRow>
     </Container>

@@ -14,7 +14,7 @@ const Section4 = () => {
   return (
     <Wrapper>
       <Container>
-        <TextWrap lineHeight={45} align="center" padding="0 0 55px 0">
+        <TextWrap lineHeight={45} align="center" padding="0 0 56px 0">
           <TypoGraphy text="먼저 본인의 투자 현황을 입력하고" size="h1" />
           <TextRow align="center">
             <TypoGraphy
@@ -25,9 +25,9 @@ const Section4 = () => {
             <TypoGraphy text="을 알아보세요!" size="h1" />
           </TextRow>
         </TextWrap>
-        <ImgContainer width="100%" height="100%" style={{ gap: 0 }}>
-          <Img width="540px" src={mainSub4} />
-          <Img width="530px" src={mainSub5} />
+        <ImgContainer width="100%" height="100%">
+          <Img width="calc((100% - 23px) / 2)" src={mainSub4} />
+          <Img width="calc((100% - 23px) / 2 + 2px)" src={mainSub5} />
         </ImgContainer>
       </Container>
     </Wrapper>
@@ -40,7 +40,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 185px 0;
   background: #f6f8ff;
   width: 100%;
+  padding: 115px 0;
 `;
