@@ -57,36 +57,37 @@ const Header = () => {
           <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
             <Logo src={logo} />
           </Link>
-          <Column>
-            {path.pathname === '/stock' || path.pathname === '/diagnosis' ? (
-              <>
+          <Row gap="0">
+            <Column>
+              {path.pathname === '/stock' || path.pathname === '/diagnosis' ? (
+                <>
+                  <Link to="/stock">
+                    <Typography text="내 주식" size="b2" />
+                  </Link>
+                  <Line />
+                </>
+              ) : (
                 <Link to="/stock">
                   <Typography text="내 주식" size="b2" />
                 </Link>
-                <Line />
-              </>
-            ) : (
-              <Link to="/stock">
-                <Typography text="내 주식" size="b2" />
-              </Link>
-            )}
-          </Column>
+              )}
+            </Column>
 
-          <Column>
-            {path.pathname === '/lab' ? (
-              <>
+            <Column>
+              {path.pathname === '/lab' ? (
+                <>
+                  <Link to="/lab">
+                    <Typography text="투자실험실" size="b2" />
+                  </Link>
+                  <Line />
+                </>
+              ) : (
                 <Link to="/lab">
                   <Typography text="투자실험실" size="b2" />
                 </Link>
-                <Line />
-              </>
-            ) : (
-              <Link to="/lab">
-                <Typography text="투자실험실" size="b2" />
-              </Link>
-            )}
-          </Column>
-          {/* <Row gap="64px">
+              )}
+            </Column>
+            {/* <Row gap="64px">
             {header.map((i) => (
               <>
                 <Link to={i.link}>
@@ -96,6 +97,7 @@ const Header = () => {
               </>
             ))}
           </Row> */}
+          </Row>
         </Row>
 
         {name !== '' ? (
@@ -148,7 +150,7 @@ const Logo = styled.img`
 
 const Row = styled.div<{ gap?: string }>`
   display: flex;
-  gap: ${(props) => props.gap || '64px'};
+  gap: ${(props) => props.gap || '35px'};
   align-items: center;
   height: 100%;
 `;
@@ -159,6 +161,7 @@ const Column = styled.div`
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 91px;
 `;
 
 const Line = styled.div<{ display?: string }>`
