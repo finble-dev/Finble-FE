@@ -9,8 +9,8 @@ const Footer = () => {
   return (
     <Container>
       <Wrapper>
-        <TextWrap padding="0 0 40px 0">
-          <TypoGraphy text="편안한 주식, 핀블과 함께 시작해보세요!" size="h1" />
+        <TextWrap padding="0 0 26px 0">
+          <TypoGraphy text="편안한 주식, 핀블과 함께 시작해보세요!" size="h2" />
         </TextWrap>
         <Link to="/lab">
           <Btn60 type="able" text="지금 바로 시작하기" />
@@ -26,8 +26,9 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 318px;
-  background: url(${mainSub6});
+  height: 248px;
+  // background: url(${mainSub6});
+  background: linear-gradient(95.87deg, #c2d4fe 17.05%, #8baeff 90.04%);
   background-position: center center;
   background-size: cover;
 `;
