@@ -55,7 +55,9 @@ const Btn60Container = styled.div<btn>`
   padding: ${(props) =>
     props.type === 'login'
       ? '8px 16px'
-      : props.type === 'able' || props.type === 'disable'
+      : props.type === 'able'
+      ? '16px 60px'
+      : props.type === 'disable'
       ? '16px 78px'
       : props.type === 'outline_disable' || props.type === 'outline_able'
       ? '14px 35px'
