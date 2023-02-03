@@ -62,19 +62,21 @@ export default StockBox;
 
 const Container = styled.div`
   display: flex;
+  justify-content: flex-start;
   align-items: center;
-  gap: 17px;
+  width: 430px;
+  gap: 15px;
 `;
 
 const BlueBox = styled.div`
   background: #f6f8ff;
-  width: 100%;
-  height: 103px;
+  width: 402px;
+  height: 89px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 30px 22px;
-  margin: 11px 0;
+  margin: 7.5px 0;
   border-radius: 10px;
 `;
 

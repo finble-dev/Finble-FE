@@ -58,11 +58,11 @@ const MyStock = () => {
       <div style={{ marginTop: '50px' }}></div>
       {name !== '' ? (
         <Wrap>
-          <Container>
+          <Container maxWidth={992}>
             <Title>
               <div>
-                <TypoGraphy text={firstName + '님의 포트폴리오'} size="t1" />
-                <TextWrap padding="15px 0 40px 0">
+                <TypoGraphy text={firstName + '님의 포트폴리오'} size="h2" />
+                <TextWrap padding="6px 0 37px 0">
                   <TypoGraphy
                     text="보유 중인 주식을 입력하고 내 투자 현황까지 진단 받아보세요."
                     color="var(--type-gray-2)"
@@ -75,8 +75,8 @@ const MyStock = () => {
               </BtnWrapper>
             </Title>
             <BoxContainer>
-              <Box height="224px" padding={27}>
-                <TextWrap padding="22px 0 20px 0">
+              <Box height="224px" padding={30}>
+                <TextWrap padding="20px 0 15px 0">
                   <TypoGraphy
                     text="총 자산"
                     size="b3"
@@ -179,9 +179,9 @@ export default MyStock;
 
 const Wrap = styled.div`
   width: 100%;
-  height: 100%;
   background: var(--type-gray-6);
   display: flex;
+  height: calc(100vh - 50px);
   justify-content: center;
   align-items: center;
   padding: 68px 0;
@@ -199,21 +199,26 @@ const BtnWrapper = styled(Link)`
 
 const BoxContainer = styled.div`
   width: 100%;
-  height: 710px;
+  height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  max-height: 779px;
+  overflow: hidden;
 `;
 const Box = styled.div<{ height?: string; padding?: number }>`
   background: var(--type-white);
-  width: 590px;
+  width: 489px;
   height: ${(props) => props.height || 'auto'};
   border-radius: 10px;
   padding: 0 ${(props) => props.padding || 0}px;
+  border: 1px solid var(--type-gray-5);
+  overflow: hidden;
 `;
 const StockListWrap = styled.div`
   overflow: auto;
-  height: 460px;
+  height: calc(100% - 210px);
+  max-height: 550px;
   margin: 15px 0;
   padding: 0 11px 0 27px;
 

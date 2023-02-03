@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 // Container
-const Container = styled.div<{ padding?: string }>`
+const Container = styled.div<{ padding?: string; maxWidth?: number }>`
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  max-width: 920px;
+  max-width: ${(props) => props.maxWidth || 920}px;
   padding: ${(props) => props.padding || '0px'};
 `;
 

@@ -72,7 +72,7 @@ const Section1 = ({ data }: any) => {
 
   return (
     <Wrap>
-      <Container>
+      <Container maxWidth={938}>
         {/* title */}
         <TextWrap padding="0 0 7px 0">
           <TypoGraphy
