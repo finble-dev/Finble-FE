@@ -89,19 +89,19 @@ export default Modal2;
 
 const Container = styled.div`
   width: 100%;
-  height: 600px;
+  height: 540px;
   display: flex;
   flex-direction: column;
-  padding: 0 34px;
+  padding: 0 26px;
 `;
 
 const Wrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 470px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 40px 0 85px 0;
+  padding: 26px 0 86px 0;
 `;
 
 const InputWrapper = styled.div`
@@ -109,5 +109,5 @@ const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 10px;
+  gap: 15px;
 `;

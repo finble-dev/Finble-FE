@@ -147,8 +147,8 @@ const MyStock = () => {
               },
               content: {
                 margin: 'auto',
-                width: '544px',
-                height: '714px',
+                width: '437px',
+                height: '598px',
                 background: 'var(--type-white)',
                 display: 'flex',
                 justifyContent: 'flex-start',
@@ -250,5 +250,5 @@ const TitleWrap = styled.div`
   justify-content: space-between;
   width: 100%;
   height: 100%;
-  padding: 33px 34px 0px 34px;
+  padding: 25px 26px 0px 26px;
 `;

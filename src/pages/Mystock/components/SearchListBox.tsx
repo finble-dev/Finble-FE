@@ -27,6 +27,7 @@ const Container = styled.div`
   align-items: flex-start;
   justify-content: center;
   border-radius: 10px;
+  padding: 0 6px;
 
   &:hover {
     background: rgba(103, 146, 248, 0.1);

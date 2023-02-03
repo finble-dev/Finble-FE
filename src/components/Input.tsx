@@ -51,25 +51,29 @@ export default Input;
 const InputBox = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  height: 50px;
   width: 100%;
-  padding: 15px 17px;
-  border: 2px solid var(--type-gray-5);
+  gap: 13px;
+  padding: 11px 15px;
+  border: 1px solid var(--type-gray-5);
   border-radius: 10px;
 
   &:focus-within {
-    border: 2px solid var(--main-blue);
+    border: 1px solid var(--main-blue);
   }
 `;
 
 const InputArea = styled.input`
+  font-size: var(--fs-b2);
   width: 100%;
-  font-size: var(--fs-input);
-  font-weight: var(--fw-input);
+  font-weight: var(--fw-b2);
   border: none;
   outline: none;
+  display: flex;
+  align-items: center;
 
   &::placeholder {
     color: var(--type-gray-5);
+    font-size: var(--fs-b2);
   }
 `;

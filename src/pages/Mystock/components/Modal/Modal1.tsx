@@ -84,26 +84,26 @@ export default Modal;
 
 const InputWrap = styled.div`
   width: 100%;
-  padding: 52px 34px 0 34px;
+  padding: 25px 26px 0 26px;
 `;
 const SearchResult = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 3px;
 
   width: 100%;
-  height: 480px;
+  height: 410px;
   overflow-y: auto;
-  margin: 28px 0;
-  padding: 0 0 0 34px;
+  margin: 19px 0;
+  padding: 0 12px 0 21px;
 
   &::-webkit-scrollbar {
-    width: 18px;
+    width: 9px;
   }
   &::-webkit-scrollbar-thumb {
-    height: 124px;
+    height: 90px;
     background-color: #ccd8ff;
-    border-radius: 12px;
+    border-radius: 10px;
   }
   &::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
