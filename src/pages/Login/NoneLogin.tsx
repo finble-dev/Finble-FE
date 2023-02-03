@@ -1,7 +1,6 @@
 import TypoGraphy from '../../components/Typography';
 import { Btn60 } from '../../components/Button';
 import styled from 'styled-components';
-import noneLoginBg from '../../assets/img/noneLoginBg.png';
 import { useState } from 'react';
 import { TextWrap } from '../../assets/styles/styles';
 import LoginModal from '../../components/LoginModal';
@@ -15,7 +14,7 @@ const NoneLogin = () => {
       <div style={{ marginTop: '70px' }}></div>
       <Wrapper>
         <TypoGraphy text="앗, 로그인부터!" size="h1" />
-        <TextWrap padding="40px 0 50px 0" lineHeight={34}>
+        <TextWrap padding="40px 0 50px 0" lineHeight={29.2}>
           <TypoGraphy
             text="로그인/회원가입 이후 내 포트폴리오를 입력할 수 있어요."
             size="t3"
@@ -45,16 +44,13 @@ const Container = styled.div`
   width: 100%;
   height: calc(100vh - 50px);
   background-color: #f6f8fe;
-  background-image: url(${noneLoginBg});
-  background-position: center center;
-  background-size: cover;
 `;
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 1204px;
-  padding-top: 220px;
+  padding-top: 295px;
   max-width: 1060px;
 `;
 
