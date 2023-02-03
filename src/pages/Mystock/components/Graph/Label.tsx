@@ -25,7 +25,7 @@ const SectorLabel = ({ color, sector, rate }: label) => {
   return (
     <Container width="auto">
       <Left>
-        <ColorBox color={color} width={19} />
+        <ColorBox color={color} width={13} />
         <TypoGraphy text={sector} size="b3" color="var(--type-gray-2)" />
         <TypoGraphy text={rate + '%'} size="b3" color="var(--type-gray-2)" />
       </Left>
@@ -38,14 +38,14 @@ export { StockLabel, SectorLabel };
 const Container = styled.div<{ width?: string }>`
   display: flex;
   justify-content: space-between;
-  height: 33px;
+  height: 29px;
   align-items: center;
-  width: ${(props) => props.width || '228px'};
+  width: ${(props) => props.width || '185px'};
 `;
 
 const ColorBox = styled.div<{ color: string; width?: number }>`
-  width: ${(props) => props.width || 13}px;
-  height: ${(props) => props.width || 33}px;
+  width: ${(props) => props.width || 11}px;
+  height: ${(props) => props.width || 29}px;
   background: ${(props) => props.color || 'black'};
 `;
 

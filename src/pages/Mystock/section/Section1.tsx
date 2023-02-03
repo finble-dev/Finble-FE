@@ -32,7 +32,7 @@ const Section1 = ({ data }: any) => {
         data: stock.map((i: { ratio: number }) => i.ratio),
         backgroundColor: backgroundColor,
         borderWidth: 0,
-        cutout: '55%',
+        cutout: '65%',
       },
     ],
   };
@@ -93,10 +93,10 @@ const Section1 = ({ data }: any) => {
           <SubContainer width={30}>
             <TypoGraphy text="총 자산" size="b3" color="var(--type-gray-2)" />
             <TextRow lineHeight={85}>
-              <TypoGraphy text={assets[0]} size="t1" />
+              <TypoGraphy text={assets[0]} size="30px" />
               <TypoGraphy
                 text="&nbsp;원"
-                size="t1"
+                size="30px"
                 color="var(--type-gray-2)"
               />
             </TextRow>
@@ -106,7 +106,7 @@ const Section1 = ({ data }: any) => {
                 size="b3"
                 color="var(--type-gray-2)"
               />
-              <TextRow lineHeight={50}>
+              <TextRow lineHeight={42}>
                 <TypoGraphy text={assets[1]} size="b1" />
                 <TypoGraphy
                   text="&nbsp;원"
@@ -122,11 +122,11 @@ const Section1 = ({ data }: any) => {
             {/* 종목별 graph */}
             <TypoGraphy
               text="종목별 비중"
-              size="b3"
+              size="b2"
               color="var(--type-gray-2)"
             />
             <DoughnutGraphWrapper>
-              <Doughnut data={graphData} width="280px" height="280px" />
+              <Doughnut data={graphData} width="270px" height="270px" />
               <LabelWrapper>
                 {data.portfolio_ratio.map((i: any, index: number) =>
                   index <= 6 ? (
@@ -153,7 +153,7 @@ const Section1 = ({ data }: any) => {
             {/* 섹터별 graph */}
             <TypoGraphy
               text="섹터별 비중"
-              size="b3"
+              size="b2"
               color="var(--type-gray-2)"
             />
             <BarGraphWrapper>
@@ -198,7 +198,7 @@ const WhiteBox = styled.div`
   padding: 30px 20px;
   background: var(--type-white);
   border-radius: 20px;
-  margin: 44px 0 0 0;
+  margin: 37px 0 0 0;
   display: flex;
 `;
 
@@ -211,11 +211,11 @@ const SubContainer = styled.div<{ border?: string; width?: number }>`
 const DoughnutGraphWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 280px;
+  height: 180px;
   justify-content: space-between;
-  padding: 20px 0 20px 10px;
+  padding: 10px 0 20px 10px;
   margin: 0 0 15px 0;
-  gap: 35px;
+  gap: 25px;
 `;
 const LabelWrapper = styled.div<{ padding?: string }>`
   display: flex;
@@ -229,8 +229,8 @@ const LabelWrapper = styled.div<{ padding?: string }>`
 const BarGraphWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 20px;
-  margin: 20px 15px;
+  height: 14px;
+  margin: 15px 0 10px 15px;
 `;
 const BarGraph = styled.div<{ width: string; color: string }>`
   width: ${(props) => props.width || '0'}%;

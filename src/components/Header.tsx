@@ -9,13 +9,13 @@ import { nameState, setName } from '../store/slice/userSlice';
 import { tokenState, setToken } from '../store/slice/tokenSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVER } from '../network/config';
+import { TextRow } from '../assets/styles/styles';
 
 const Header = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);
   const token = useSelector(tokenState);
   const dispatch = useDispatch();
-  let link, text;
 
   const logout = () => {
     fetch(`${SERVER}/logout/`, {
@@ -102,7 +102,10 @@ const Header = () => {
 
         {name !== '' ? (
           <Row gap="15px">
-            <Typography text={`${name}님`} size="b2" />
+            <TextRow style={{ width: 'auto' }}>
+              <Typography text={`${name}`} size="small" />
+              <Typography text="&nbsp;님" size="b2" />
+            </TextRow>
             <div onClick={logout}>
               <Btn60 type="login" text="로그아웃" />
             </div>

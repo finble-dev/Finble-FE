@@ -4,6 +4,7 @@ import StepBoxBg from '../assets/img/stepBoxBg.png';
 import { Link } from 'react-router-dom';
 import { firstNameState } from '../store/slice/userSlice';
 import { useSelector } from 'react-redux';
+import { TextWrap } from '../assets/styles/styles';
 
 const StepBox = ({ step }: { step: number }) => {
   let text1, text2, arrow;
@@ -23,10 +24,10 @@ const StepBox = ({ step }: { step: number }) => {
       <TypoGraphy text={'Step ' + step} color="var(--type-white)" size="h2" />
 
       <SubContainer>
-        <Column>
+        <TextWrap lineHeight={35}>
           <TypoGraphy text={text1} color="var(--type-white)" size="t2" />
           <TypoGraphy text={text2} color="var(--type-white)" size="t2" />
-        </Column>
+        </TextWrap>
 
         {step === 2 ? (
           <Link to="/lab">
@@ -61,13 +62,14 @@ export default StepBox;
 const StepWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-image: url(${StepBoxBg});
+  // background-image: url(${StepBoxBg});
+  background: var(--main-blue);
   background-position: center center;
   background-size: cover;
-  width: 1200px;
-  height: 242px;
+  width: 100%;
+  height: 171px;
   border-radius: 20px;
-  padding: 40px 32px;
+  padding: 22px 32px;
   margin-top: 120px;
 `;
 

@@ -174,7 +174,7 @@ const Section2 = ({ data }: { data: any }) => {
           size="t3"
           color="var(--type-gray-2)"
         />
-        <TextWrap lineHeight={40} padding="16px 0 44px 0">
+        <TextWrap lineHeight={35} padding="16px 0 44px 0">
           <TextRow>
             <TypoGraphy text="시장보다&nbsp;" size="t2" />
             <TypoGraphy
@@ -196,24 +196,24 @@ const Section2 = ({ data }: { data: any }) => {
         </TextWrap>
 
         {/* line graph box */}
-        <WhiteBox>
+        <WhiteBox padding="16px 24px">
           <TypoGraphy text="투자 결과" size="b2" color="var(--type-gray-1)" />
           <Line
             data={graphData}
             options={options}
-            style={{ width: '1093px', height: '542px', padding: '20px' }}
+            style={{ width: '1093px', height: '542px', padding: '10px' }}
           />
         </WhiteBox>
 
         {/* section2-2 */}
-        <TextWrap padding="120px 0 16px 0">
+        <TextWrap padding="55px 0 17px 0">
           <TypoGraphy
             text="이만큼 떨어지기도 했어요"
             size="t3"
             color="var(--type-gray-2)"
           />
         </TextWrap>
-        <TextRow>
+        <TextRow lineHeight={35}>
           <TypoGraphy text="가장 많이 떨어진 시기에는 시장보다 약" size="t2" />
           <TypoGraphy
             text={`\u00A0${maxProfitGap}%p\u00A0`}
@@ -252,7 +252,7 @@ const Section2 = ({ data }: { data: any }) => {
             max_loss={data.portfolio_max_loss}
           />
           <VS>
-            <TypoGraphy text="VS" size="t3" color="var(--main-blue)" />
+            <TypoGraphy text="VS" size="17px" color="var(--main-blue)" />
           </VS>
           <WhiteSmallBox
             title="코스피"
@@ -277,7 +277,7 @@ const Wrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 120px 0;
+  padding: 80px 0;
 `;
 
 const WhiteBoxWrap = styled.div`
@@ -293,6 +293,6 @@ const VS = styled.div`
   justify-content: center;
   align-items: center;
   background: #dee7fd;
-  width: 55px;
-  height: 55px;
+  width: 42px;
+  height: 42px;
 `;
