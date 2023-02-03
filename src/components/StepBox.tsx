@@ -19,8 +19,13 @@ const StepBox = ({ step }: { step: number }) => {
     arrow = '다시 만들기 > ';
   }
 
+  let margin;
+  if (step === 2) {
+    margin = 0;
+  }
+
   return (
-    <StepWrapper>
+    <StepWrapper margin={margin}>
       <TypoGraphy text={'Step ' + step} color="var(--type-white)" size="h2" />
 
       <SubContainer>
@@ -59,7 +64,7 @@ const StepBox = ({ step }: { step: number }) => {
 
 export default StepBox;
 
-const StepWrapper = styled.div`
+const StepWrapper = styled.div<{ margin?: number }>`
   display: flex;
   flex-direction: column;
   // background-image: url(${StepBoxBg});
@@ -70,7 +75,7 @@ const StepWrapper = styled.div`
   height: 171px;
   border-radius: 20px;
   padding: 22px 32px;
-  margin-top: 120px;
+  margin-top: ${(props) => props.margin || 120}px;
 `;
 
 const SubContainer = styled.div`
@@ -78,12 +83,4 @@ const SubContainer = styled.div`
   height: 100%;
   justify-content: space-between;
   align-items: end;
-`;
-
-const Column = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 0 15px 0;
-  line-height: 40px;
 `;
