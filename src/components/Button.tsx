@@ -87,7 +87,7 @@ const Btn10Container = styled.div<btn>`
 
   padding: ${(props) =>
     props.type === 'big_add'
-      ? '39px 200px'
+      ? '28px 148px'
       : props.type === 'add' || props.type === 'disable_add'
       ? '11px 15px'
       : props.type === 'check' ||
