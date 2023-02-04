@@ -503,7 +503,7 @@ const Column = styled.div<{ padding?: string }>`
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  width: 1005px;
+  width: 1000px;
   padding: ${(props) => props.padding || 0};
 `;
 
