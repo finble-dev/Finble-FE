@@ -7,20 +7,20 @@ const ModalContent = ({ setModalOpen }: any) => {
   return (
     <>
       <TypoGraphy text="시작하기" size="t1" />
-      <TextWrap lineHeight={35.04} padding="44px 0 40px 0" align="center">
+      <TextWrap lineHeight={30} padding="20px 0 22px 0" align="center">
         <TypoGraphy
           text="주린이들을 위한 분산 투자 가이드, 핀블"
-          size="t3"
+          size="b1"
           color="var(--type-gray-2)"
         />
         <TypoGraphy
           text="포트폴리오 분석을 시작해보세요"
-          size="t3"
+          size="b1"
           color="var(--type-gray-2)"
         />
       </TextWrap>
       <GoogleButton setModalOpen={setModalOpen} />
-      <TextWrap lineHeight={21} padding="40px 0 0 0" align="center">
+      <TextWrap lineHeight={21} padding="23px 0 0 0" align="center">
         <TypoGraphy
           text="로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며,"
           size="b3"

@@ -16,8 +16,8 @@ const LoginModal = ({ modalOpen, setModalOpen }: any) => {
         },
         content: {
           margin: 'auto',
-          width: '815px',
-          height: '495px',
+          width: '613px',
+          height: '348px',
           background: 'var(--type-white)',
           display: 'flex',
           justifyContent: 'center',
