@@ -65,7 +65,6 @@ const GoogleButton = ({ setModalOpen }: any) => {
     }
 
     async function login() {
-      console.log('googleToken : ', googleToken);
       const res = (await Login(googleToken)) as any;
       const refreshToken = await res.token.refresh;
 
@@ -81,16 +80,14 @@ const GoogleButton = ({ setModalOpen }: any) => {
       setTimeout(extendTime, expireTime, refreshToken);
     }
 
-    if (googleToken !== undefined || googleToken !== '') {
+    if (googleToken != undefined || googleToken != '') {
       login();
     }
   }, [googleToken]);
 
   return (
     <GoogleCustomButton onClick={googleSocialLogin}>
-      <ImgContainer width="38px">
-        <Img src={google} />
-      </ImgContainer>
+      <Img src={google} style={{ width: '38px', marginRight: '30px' }} />
       <TypoGraphy text="Google 계정으로 로그인" color="#515151" size="input" />
     </GoogleCustomButton>
   );
@@ -104,6 +101,10 @@ const GoogleCustomButton = styled.button`
   justify-content: center;
   padding: 16px 78px;
   gap: 10px;
+  cursor: pointer;
+
+  width: 447px;
+  height: 70px;
 
   background: #ffffff;
   box-shadow: 0px 0px 18.0573px rgba(0, 0, 0, 0.15);

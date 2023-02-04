@@ -54,7 +54,7 @@ const Btn60Container = styled.div<btn>`
 
   padding: ${(props) =>
     props.type === 'login'
-      ? '9px 16px'
+      ? '7px 14px'
       : props.type === 'able'
       ? '16px 60px'
       : props.type === 'disable'
@@ -94,6 +94,8 @@ const Btn10Container = styled.div<btn>`
         props.type === 'checking' ||
         props.type === 'disable_check'
       ? '14px 40px'
+      : props.type === 'inform'
+      ? '8px 14px'
       : '14px 20px'};
 
   background: ${(props) =>
