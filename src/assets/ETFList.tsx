@@ -3,7 +3,7 @@ export const ETFList = [
     {
       id: 23,
       name: 'SPY',
-      intro: 'SPDR S&P 500 ETF Trust',
+      intro: 'SPDR SP 500 ETF Trust',
       detail: [
         "미국 500개 대형기업이 포함된 지수인 'Ss&P500'을 추종하는",
         'ETF에요. 미국 경제 전체에 투자한다고 할 수 있어요. ',

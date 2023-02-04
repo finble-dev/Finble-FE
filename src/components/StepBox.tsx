@@ -59,7 +59,7 @@ const StepBox = ({ step }: { step: number }) => {
 
 export default StepBox;
 
-const StepWrapper = styled.div`
+const StepWrapper = styled.div<{step?:number}>`
   display: flex;
   flex-direction: column;
   // background-image: url(${StepBoxBg});

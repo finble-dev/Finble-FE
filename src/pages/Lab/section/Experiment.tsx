@@ -52,23 +52,12 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   ]);
   const [modalOpen, setModalOpen] = useState(true);
   const [retainStock, setRetainStock] = useState([] as any);
+  const [retainList, setRetainList] = useState([] as Array<string>);
   const [cnt, setCnt] = useState(0);
   const [isHundred, setHundred] = useState(true);
 
   const name = useSelector(firstNameState);
   const token = useSelector(tokenState);
-
-  // 첫 렌더링 시 유저 포트폴리오 가져오고 modal flag 설정
-  useEffect(() => {
-    async function getPorfolio() {
-      const res = (await getTestPortfolio(token)) as any;
-      if (res.data_retain.length != 0) {
-        setModalOpen(false);
-        setRetainStock(res.data_retain);
-      }
-    }
-    getPorfolio();
-  }, [cnt]);
 
   // ETF 추가/삭제
   const onChangeETF = (listNum: number, itemNum: number) => {
@@ -94,6 +83,31 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
     }
     setETFFlag(newList);
   };
+
+  // 첫 렌더링 시 유저 포트폴리오 가져오고 modal flag 설정
+  useEffect(() => {
+    async function getPorfolio() {
+      const res = (await getTestPortfolio(token)) as any;
+      if (res.data_retain.length != 0) {
+        setModalOpen(false);
+        setRetainStock(res.data_retain);
+      }
+      let newRetainList = [] as Array<string>;
+      res.data_retain.map((items: any) =>
+        newRetainList.push(items.stock_detail.name)
+      );
+      setRetainList(newRetainList);
+      for (let i = 0; i < ETFList.length; i++) {
+        for (let j = 0; j < ETFList[i].length; j++) {
+          if (newRetainList.includes(ETFList[i][j].intro)) {
+            onChangeETF(i, j);
+          }
+        }
+      }
+      console.log(newRetainList);
+    }
+    getPorfolio();
+  }, [cnt]);
 
   // ETF 비중 수정
   const onChangeRatio = (listNum: number, itemNum: number, ratio: number) => {
@@ -358,7 +372,8 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
               </TextWrap>
               {ETFFlag.map((items: any, listIdx: number) =>
                 items.map((item: any, itemIdx: number) =>
-                  ETFFlag[listIdx][itemIdx].flag ? (
+                  ETFFlag[listIdx][itemIdx].flag &&
+                  !retainList.includes(ETFList[listIdx][itemIdx].intro) ? (
                     <AddedItem
                       ETFFlag={ETFFlag}
                       listNum={listIdx}
