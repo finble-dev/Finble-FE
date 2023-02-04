@@ -7,14 +7,15 @@ import {
   ImgContainer,
 } from '../../../assets/styles/styles';
 import graph1 from '../../../assets/img/lab/graph1.gif';
-import graph2 from '../../../assets/img/lab/graph2.png';
+// import graph2 from '../../../assets/img/lab/intro_graph.svg';
+import graph2 from '../../../assets/img/lab/intro_graph2.png';
 
 const Intro = () => {
   return (
     <Container>
       {/* title */}
       <TypoGraphy text="투자 실험실" color="var(--main-blue)" size="t3" />
-      <TextWrap align="center" lineHeight={55} padding="10px 0 15px 0">
+      <TextWrap align="center" lineHeight={45} padding="14px 0 60px 0">
         <TypoGraphy text="마음 편히 주식 투자하는 방법," size="h1" />
         <TextRow>
           <TypoGraphy text="핀블의 ‘" size="h1" />
@@ -26,8 +27,8 @@ const Intro = () => {
       {/* first box */}
       <Box>
         {/* left text */}
-        <Column>
-          <TextWrap lineHeight={52} padding="0 0 45px 0">
+        <Column style={{ marginLeft: '48px' }}>
+          <TextWrap padding="0 0 17px 0">
             <TextRow align="center">
               <TypoGraphy text="투자 실험" color="var(--main-blue)" size="h2" />
               <TypoGraphy text=", 왜 필요한 걸까요?" size="h2" />
@@ -57,7 +58,7 @@ const Intro = () => {
             ))}
           </TextWrap>
 
-          <TextWrap lineHeight={26} padding="30px 0 0 0">
+          <TextWrap lineHeight={26} padding="16.99px 0 0 0">
             {list2.map((items: any, itemsIdx: number) => (
               <TextRow lineHeight={26} key={`list2_${itemsIdx}`}>
                 {items.map((item: any, itemIdx: number) =>
@@ -83,20 +84,20 @@ const Intro = () => {
 
         {/* right img */}
         {/* <ImgContainer width="532px"> */}
-        <Img src={graph1} style={{ width: '343px' }} />
+        <Img src={graph1} style={{ width: '343px', marginRight: '62px' }} />
         {/* </ImgContainer> */}
       </Box>
 
       {/* second box */}
-      <Box>
+      <Box
+        style={{ marginTop: '26px', height: '314px', justifyContent: 'start' }}
+      >
         {/* right img */}
-        <ImgContainer width="241px">
-          <Img src={graph2} />
-        </ImgContainer>
+        <Img style={{ width: '241px', marginLeft: '67px' }} src={graph2} />
 
         {/* left text */}
-        <Column padding="0 0 0 90px">
-          <TextWrap lineHeight={52} padding="0 0 25px 0">
+        <Column padding="0 0 0 63px">
+          <TextWrap lineHeight={52} padding="0 0 17px 0">
             <TextRow align="center">
               <TypoGraphy text="투자 실험" color="var(--main-blue)" size="h2" />
               <TypoGraphy text="은 어떻게 하나요?" size="h2" />
@@ -126,7 +127,7 @@ const Intro = () => {
             ))}
           </TextWrap>
 
-          <TextWrap lineHeight={26} padding="20px 0 0 0">
+          <TextWrap lineHeight={26} padding="17px 0 0 0">
             {list4.map((items: any, itemsIdx: number) => (
               <TextRow lineHeight={26} key={`list4_${itemsIdx}`}>
                 {items.map((item: any, itemIdx: number) =>
@@ -205,19 +206,18 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   background: #f7f8fa;
-  padding: 109px 0 100px 0;
+  padding: ${70 + 50}px 0 90px 0;
 `;
 
 const Box = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 854px;
   height: 280px;
   background: #ffffff;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 20px;
-  margin: 27px 0;
 `;
 
 const Column = styled.div<{ padding?: string }>`

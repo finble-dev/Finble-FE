@@ -57,7 +57,7 @@ const Lab = () => {
           <ReactModal
             ariaHideApp={false}
             isOpen={modalOpen}
-            onRequestClose={() => setModalOpen(false)}
+            // onRequestClose={() => setModalOpen(false)}
             style={{
               overlay: {
                 position: 'fixed',

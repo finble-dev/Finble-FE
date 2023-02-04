@@ -22,7 +22,7 @@ const expireTime = 1740000; // 29분
 
 const GoogleButton = ({ setModalOpen }: any) => {
   const [code, setCode] = useState(''); // 1회용 auth code
-  const [googleToken, setGoogleToken] = useState(''); // 구글에서 받은 access token
+  const [googleToken, setGoogleToken] = useState('' as string); // 구글에서 받은 access token
   const dispatch = useDispatch();
 
   const googleSocialLogin = useGoogleLogin({
@@ -60,15 +60,12 @@ const GoogleButton = ({ setModalOpen }: any) => {
   useEffect(() => {
     async function extendTime(refreshToken: string) {
       const res = (await getRefresh(refreshToken)) as any;
-      // console.log(` refreshToken : `, res);
-      // console.log('now : ', now);
-      // console.log('받은 access', res.access);
-      // console.log('저장한 access', token);
       dispatch(setToken({ token: res.access as string }));
       setTimeout(extendTime, expireTime, refreshToken);
     }
 
     async function login() {
+      console.log('googleToken : ', googleToken);
       const res = (await Login(googleToken)) as any;
       const refreshToken = await res.token.refresh;
 
@@ -81,12 +78,12 @@ const GoogleButton = ({ setModalOpen }: any) => {
           expiration: Date.parse(res.token.expiration_time) as number,
         })
       );
-
-      // console.log('로그인 결과 : ', res);
       setTimeout(extendTime, expireTime, refreshToken);
     }
 
-    login();
+    if (googleToken !== undefined || googleToken !== '') {
+      login();
+    }
   }, [googleToken]);
 
   return (
