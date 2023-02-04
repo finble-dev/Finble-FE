@@ -24,6 +24,10 @@ const StockBox = ({ stock }: { stock: any }) => {
     });
   };
 
+  let color;
+  if (stock.gain < 0) color = '#4492F7';
+  else if (stock.gain >= 0) color = '#FF5852';
+
   return (
     <Container>
       <ImgContainer
@@ -49,7 +53,7 @@ const StockBox = ({ stock }: { stock: any }) => {
           />
           <TypoGraphy
             text={gain + '(' + profit_rate + '%)'}
-            color="#4492F7"
+            color={color}
             size="b2"
           />
         </TextWrap>
