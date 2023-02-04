@@ -103,14 +103,19 @@ const Result = ({ data }: any) => {
     [
       [
         'black',
-        `현재 투자원금인 ${Math.ceil(
-          data.present_val_sum
+        `현재 투자원금인 ${Math.ceil(data.present_val_sum).toLocaleString(
+          'ko-KR'
         )}원을 10년간 투자했다면`,
       ],
     ],
     [
       ['black', '최종 금액은\u00A0'],
-      ['blue', ` ${Math.ceil(data.final_val_test)}원(${totalPer}%)`],
+      [
+        'blue',
+        ` ${Math.ceil(data.final_val_test).toLocaleString(
+          'ko-KR'
+        )}원(${totalPer}%)`,
+      ],
       ['black', '이 되었을 거에요.'],
     ],
   ];
@@ -172,28 +177,26 @@ const Result = ({ data }: any) => {
 
   return (
     <Container>
-      <Column>
-        <TypoGraphy text="투자 실험 결과" size="h1" />
+      <Column padding="85px 0 76px 0">
         <TextRow
           style={{
             justifyContent: 'space-between',
-            alignContent: 'center',
-            maxWidth: '1200px',
-            marginTop: '20px',
+            marginBottom: '79px',
           }}
         >
-          <Column style={{ marginTop: '0px' }}>
-            <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
+          <Column style={{ justifyContent: 'start' }}>
+            <TypoGraphy text="투자 실험 결과" size="h1" />
+            <TextWrap lineHeight={29} padding="14px 0 0 0">
               {list1.map((items: any, idx: number) => (
-                <TextRow lineHeight={40}>
+                <TextRow lineHeight={29}>
                   {items.map((item: any, idx: number) =>
                     item[0] === 'black' ? (
-                      <TypoGraphy text={item[1]} size="t2" />
+                      <TypoGraphy text={item[1]} size="t3" />
                     ) : (
                       <TypoGraphy
                         text={item[1]}
                         color="var(--main-blue)"
-                        size="t2"
+                        size="t3"
                       />
                     )
                   )}
@@ -203,14 +206,14 @@ const Result = ({ data }: any) => {
           </Column>
           <TextRow>
             <BarGraphWrapper>
-              <TypoGraphy text="연평균 수익률" size="b2" />
+              <TypoGraphy text="연평균 수익률" size="b1" />
               <EarnBar
                 test={Math.ceil(data.annual_profit_test)}
                 original={Math.ceil(data.annual_profit_original)}
               />
             </BarGraphWrapper>
             <BarGraphWrapper>
-              <TypoGraphy text="최대 낙폭" size="b2" />
+              <TypoGraphy text="최대 낙폭" size="b1" />
               <LossBar
                 test={Math.ceil(data.test_portfolio_max_fall)}
                 original={Math.ceil(data.original_portfolio_max_fall)}
@@ -223,17 +226,17 @@ const Result = ({ data }: any) => {
           style={{ justifyContent: 'space-between', maxWidth: '1200px' }}
         >
           <Column>
-            <TextWrap lineHeight={40} style={{ marginBottom: '32px' }}>
+            <TextWrap lineHeight={29} style={{ marginBottom: '32px' }}>
               {list2.map((items: any, idx: number) => (
-                <TextRow lineHeight={40}>
+                <TextRow lineHeight={29}>
                   {items.map((item: any, idx: number) =>
                     item[0] === 'black' ? (
-                      <TypoGraphy text={item[1]} size="t2" />
+                      <TypoGraphy text={item[1]} size="t3" />
                     ) : (
                       <TypoGraphy
                         text={item[1]}
                         color="var(--main-blue)"
-                        size="t2"
+                        size="t3"
                       />
                     )
                   )}
@@ -246,15 +249,18 @@ const Result = ({ data }: any) => {
           <Line
             data={graphData}
             options={options}
-            style={{ width: '1093px', height: '542px', padding: '20px' }}
+            style={{ width: '910px', height: '400px' }}
           />
         </LineGraphWrapper>
-        <Column>
-          <TypoGraphy
-            text="더 나은 투자 전략을 만들기 위한 TIP"
-            size="t2"
-            style={{ marginBottom: '35px' }}
-          />
+        <Column padding="99px 0 0 0">
+          <TipContainer>
+            <TypoGraphy
+              text="더 나은 투자 전략을 만들기 위한 TIP"
+              size="t2"
+              style={{ display: 'flex', alignItems: 'center' }}
+            />
+          </TipContainer>
+
           {question.map((item: any, idx: number) => (
             <>
               <TipLine />
@@ -303,6 +309,7 @@ const Result = ({ data }: any) => {
               )}
             </>
           ))}
+          <TipLine />
         </Column>
       </Column>
 
@@ -313,7 +320,7 @@ const Result = ({ data }: any) => {
           text="아직 핀블은 베타 버전이에요. 정식으로 출시하면 알려드릴게요!"
           size="b1"
           color="var(--type-gray-2)"
-          style={{ marginTop: '20px' }}
+          style={{ marginTop: '10px' }}
         />
         <Row>
           <Input
@@ -382,49 +389,50 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 120px;
+  margin-bottom: 76px;
 `;
 
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 49px;
+  margin-top: 38px;
 `;
 
-const Column = styled.div`
+const Column = styled.div<{ padding?: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  width: 1200px;
-  margin-top: 120px;
+  width: 1000px;
+  padding: ${(props) => props.padding || 0};
 `;
 
 const BarGraphWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 272px;
-  height: 276px;
-  background: #ebf0fe;
+  width: 234px;
+  height: 233px;
+  background: #ffffff;
   border-radius: 10px;
-  margin-left: 30px;
-  padding: 17px 25px;
+  border: 0.6px solid #dadada;
+  margin-left: 23px;
+  padding: 14px 20px;
 `;
 
 const LineGraphWrapper = styled.div`
   display: flex;
   justify-content: center;
-  width: 1200px;
-  height: 600px;
+  width: 1000px;
+  height: 448px;
   padding: 24px 24px;
   background: #ffffff;
-  border-radius: 19.9997px;
+  border-radius: 17px;
 `;
 
 const TipLine = styled.div`
   background-color: #dadada;
   height: 1px;
-  width: 1200px;
+  width: 1000px;
 `;
 
 const QuestionRow = styled.div`
@@ -433,8 +441,8 @@ const QuestionRow = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 91px;
-  padding: 0 25px;
+  height: 79px;
+  padding: 0 40px;
 `;
 
 const AnswerRow = styled.div`
@@ -454,9 +462,20 @@ const ImgQA = styled.img`
 `;
 
 const ImgToggle = styled.img`
-  width: 19.6px;
-  height: 9.8px;
+  width: 20px;
+  height: 10px;
   cursor: pointer;
+`;
+
+const TipContainer = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 35px;
+  background-color: #dee7fd;
+  width: 388px;
+  height: 49px;
+  border-radius: 32px 32px 32px 7px;
 `;
 
 const MoreWrapper = styled.div`
@@ -465,15 +484,15 @@ const MoreWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ebf0fe;
-  width: 1200px;
-  height: 304px;
+  width: 1000px;
+  height: 237px;
   border-radius: 20px;
-  margin-top: 44px;
+  margin-top: 42px;
 `;
 
 const Input = styled.input`
-  width: 480px;
-  height: 51px;
+  width: 400px;
+  height: 40px;
   background: #dee7fd;
   border-radius: 10px;
   border: none;

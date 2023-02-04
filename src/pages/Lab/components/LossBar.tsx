@@ -12,18 +12,9 @@ export const LossBar = ({
     <Container>
       <LastBar height={original} />
       <CurBar height={test} />
-      <Column>
-        <TypoGraphy text="기존" size="b4" style={{ height: 'auto' }} />
-        <TypoGraphy text="포트폴리오" size="b4" style={{ height: 'auto' }} />
-      </Column>
-      <Column style={{ left: '115px' }}>
-        <TypoGraphy text="새로 만든" size="b4" style={{ height: 'auto' }} />
-        <TypoGraphy text="포트폴리오" size="b4" style={{ height: 'auto' }} />
-      </Column>
-      <LineWrapper>
-        <TypoGraphy text="0" size="b4" color="var(--type-gray-2)" />
-        <Line />
-      </LineWrapper>
+      <Original>기존</Original>
+      <Portfolio>포트폴리오</Portfolio>
+      <Line />
     </Container>
   );
 };
@@ -33,26 +24,21 @@ const Container = styled.div`
   height: 228px;
 `;
 
-const LineWrapper = styled.div`
+const Line = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 20px;
-  height: 1px;
-`;
-
-const Line = styled.div`
-  display: flex;
-  height: 1px;
-  width: 194px;
-  background-color: #818181;
-  margin-left: 5px;
+  top: 29px;
+  left: 8px;
+  height: 0.6px;
+  width: 175px;
+  background-color: #909090;
 `;
 
 const LastBar = styled.div<{ height: number }>`
   position: absolute;
-  top: 20px;
-  left: 47px;
+  top: 29px;
+  left: 39px;
   width: 39px;
   height: ${(props) => props.height}px;
   background-color: #ffaeae;
@@ -61,8 +47,8 @@ const LastBar = styled.div<{ height: number }>`
 
 const CurBar = styled.div<{ height: number }>`
   position: absolute;
-  top: 20px;
-  left: 127px;
+  top: 29px;
+  right: 39px;
 
   width: 39px;
   height: ${(props) => props.height}px;
@@ -70,12 +56,33 @@ const CurBar = styled.div<{ height: number }>`
   border-radius: 0px 0px 4px 4px;
 `;
 
-const Column = styled.div`
+const Original = styled.div`
   position: absolute;
+  size: 14px;
+  bottom: 2px;
+  left: 42px;
+  color: #a5a5a5;
+
   display: flex;
-  flex-direction: column;
   align-items: center;
-  line-height: 17px;
-  bottom: 10px;
-  left: 35px;
+  justify-content: center;
+  height: 26px;
+`;
+
+const Portfolio = styled.div`
+  size: 14px;
+  font-weight: 600;
+  color: #6792f8;
+  background-color: #ebf0fe;
+  width: 77px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+
+  position: absolute;
+  bottom: 2px;
+  left: 95px;
 `;
