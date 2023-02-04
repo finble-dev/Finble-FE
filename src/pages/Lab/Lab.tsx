@@ -43,7 +43,7 @@ const Lab = () => {
   return (
     <>
       <Header />
-      <div style={{ marginTop: '50px' }}></div>
+      {/* <div style={{ marginTop: '50px' }}></div> */}
       {name !== '' ? (
         <Container>
           <Intro />
@@ -65,8 +65,8 @@ const Lab = () => {
               },
               content: {
                 margin: 'auto',
-                width: '815px',
-                height: '495px',
+                width: '612px',
+                height: '348px',
                 background: 'var(--type-white)',
                 display: 'flex',
                 justifyContent: 'flex-start',
@@ -78,26 +78,30 @@ const Lab = () => {
             <ModalOpen>
               <TitleWrap>
                 <div onClick={() => setModalOpen(false)}>
-                  <Img src={closeIcon} />
+                  <img
+                    src={closeIcon}
+                    style={{ height: '19px', width: '19px', cursor: 'pointer' }}
+                  />
                 </div>
               </TitleWrap>
-              {/* <Row style={{ marginTop: '-32px' }}> */}
-              <TextRow>
+              <TextRow style={{ marginTop: '-20px' }}>
                 <TypoGraphy
                   text="투자 실험"
                   size="t2"
                   color="var(--main-blue)"
                 />
-                <TypoGraphy
-                  text="이 무엇인가요?"
-                  size="t2"
-                  style={{ marginBottom: '16px' }}
-                />
+                <TypoGraphy text="이 무엇인가요?" size="t2" />
               </TextRow>
-              {/* </Row> */}
-              <img src={modalImg} />
+              <img
+                src={modalImg}
+                style={{
+                  height: '130px',
+                  marginTop: '10px',
+                  marginBottom: '10px',
+                }}
+              />
 
-              <TextWrap lineHeight={30} padding="32px 0 0 0">
+              <TextWrap lineHeight={30}>
                 {list1.map((items: any, itemsIdx: number) => (
                   <TextRow
                     align="center"

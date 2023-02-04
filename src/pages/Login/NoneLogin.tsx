@@ -14,7 +14,7 @@ const NoneLogin = () => {
       <div style={{ marginTop: '70px' }}></div>
       <Wrapper>
         <TypoGraphy text="앗, 로그인부터!" size="h1" />
-        <TextWrap padding="40px 0 50px 0" lineHeight={29.2}>
+        <TextWrap padding="13px 0 40px 0" lineHeight={29.2}>
           <TypoGraphy
             text="로그인/회원가입 이후 내 포트폴리오를 입력할 수 있어요."
             size="t3"
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 1204px;
-  padding-top: 295px;
+  padding-top: 249px;
   max-width: 1060px;
 `;
 
