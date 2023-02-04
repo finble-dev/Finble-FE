@@ -32,7 +32,7 @@ const list1 = [
 ];
 
 const Lab = () => {
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
   const [isExp, setIsExp] = useState(false);
   const name = useSelector(nameState);
   const [data, setData] = useState(initData);

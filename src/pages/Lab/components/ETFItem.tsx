@@ -21,11 +21,11 @@ export const ETFItem = ({
 }: ETFItem) => {
   return (
     <Container>
-      <Row style={{ justifyContent: 'space-between' }}>
+      <Row padding="7px 0 4px 0" style={{ justifyContent: 'space-between' }}>
         <Row>
           <Profile src={item.img} />
           <Column>
-            <TypoGraphy text={item.name} size="t3" />
+            <TypoGraphy text={item.name} size="b1" />
             <TypoGraphy
               text={item.intro}
               color="var(--type-gray-2)"
@@ -46,7 +46,7 @@ export const ETFItem = ({
           </div>
         )}
       </Row>
-      <TextWrap lineHeight={26}>
+      <TextWrap lineHeight={26} padding="0 0 4px 0">
         {item.detail.map((item: string, idx: number) => (
           <TypoGraphy
             text={item}
@@ -56,12 +56,7 @@ export const ETFItem = ({
           />
         ))}
       </TextWrap>
-      <TypoGraphy
-        text={item.hashTag}
-        color="var(--main-blue)"
-        size="b2"
-        style={{ marginTop: '23px' }}
-      />
+      <TypoGraphy text={item.hashTag} color="var(--main-blue)" size="b3" />
     </Container>
   );
 };
@@ -69,13 +64,13 @@ export const ETFItem = ({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  width: 531px;
-  height: 259px;
-  margin-top: 20px;
+  justify-content: start;
+  width: 438px;
+  height: 190px;
+  padding: 14.5px 19px;
+  margin-bottom: 16px;
   background: #f6f8ff;
   border-radius: 10px;
-  padding: 26px 30px;
 `;
 
 const Column = styled.div`
@@ -84,13 +79,13 @@ const Column = styled.div`
   margin-left: 17px;
 `;
 
-const Row = styled.div`
+const Row = styled.div<{ padding?: string }>`
   display: flex;
   flex-direction: row;
-  margin-bottom: 17px;
+  padding: ${(props) => props.padding || 0};
 `;
 
 const Profile = styled.img`
-  height: 58px;
-  width: 58px;
+  height: 50px;
+  width: 50px;
 `;

@@ -60,7 +60,7 @@ const Btn60Container = styled.div<btn>`
       : props.type === 'disable'
       ? '16px 78px'
       : props.type === 'outline_disable' || props.type === 'outline_able'
-      ? '14px 35px'
+      ? '8px 24px'
       : '20px 206px'};
   background: ${(props) =>
     props.type === 'login'

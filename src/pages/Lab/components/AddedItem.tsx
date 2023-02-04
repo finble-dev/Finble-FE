@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import del from '../../../assets/img/lab/del.svg';
 import { ETFList } from '../../../assets/ETFList';
 import TypoGraphy from '../../../components/Typography';
+import { TextWrap } from '../../../assets/styles/styles';
 
 interface addedItem {
   listNum: number;
@@ -45,7 +46,7 @@ export const AddedItem = ({
               style={{ marginBottom: '5px' }}
             />
             <TypoGraphy
-              text={ETFFlag[listNum][itemNum].symbol}
+              text={ETFList[listNum][itemNum].intro}
               color="var(--type-gray-2)"
               size="b4"
             />
@@ -70,32 +71,30 @@ export const AddedItem = ({
 const Container = styled.div`
   display: flex;
   align-items: center;
-  height: 103px;
-  margin-bottom: 22px;
+  height: 90px;
+  margin-bottom: 12px;
 `;
 
 const Box = styled.div`
   display: flex;
   width: 495.6px;
-  height: 103px;
   align-items: center;
   justify-content: space-between;
-  padding: 21px;
-
+  padding: 19px 16px;
   background: #f6f8ff;
   border-radius: 10px;
 `;
 
 const Img = styled.img`
-  height: 28px;
-  width: 28px;
+  height: 25px;
+  width: 23px;
   margin-right: 18px;
   cursor: pointer;
 `;
 
 const Profile = styled.img`
-  height: 58px;
-  width: 58px;
+  height: 51px;
+  width: 51px;
   margin-right: 18px;
 `;
 
@@ -111,8 +110,8 @@ const Column = styled.div`
 const InputBox = styled.div`
   display: flex;
   align-items: center;
-  width: 89px;
-  height: 38px;
+  width: 90px;
+  height: 31px;
   background: #ffffff;
   border: 0.910972px solid #dedede;
   border-radius: 5.46583px;

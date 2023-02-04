@@ -10,7 +10,6 @@ import { ETFItem } from '../components/ETFItem';
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
 import modalImg from '../../../assets/img/lab/캐릭터.png';
-import { initData } from '../initData';
 
 // interface
 import { ETF } from '../../../interface/interface';
@@ -185,9 +184,9 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
 
   return (
     <Container>
-      <Column>
+      <Column padding="74px 0 83px 0">
         <TypoGraphy text="투자 실험하기" size="h1" />
-        <TextWrap lineHeight={30} padding="25px 0">
+        <TextWrap lineHeight={30} padding="30px 0 22px 0">
           <TypoGraphy
             text={`${name}님의 편안한 투자를 위해 대표적인 ETF들을 선별해봤어요.`}
             color="var(--type-gray-1)"
@@ -236,12 +235,12 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
         )}
 
         <Row
-          style={{ marginTop: '44px' }}
+          style={{ marginTop: '48px' }}
           blurFlag={retainStock.length === 0 ? true : false}
         >
           {/* 선택한 ETF 버튼따라 list 보여줌 */}
           <Box>
-            <Row>
+            <Row padding="0 0 12px 0">
               {btn.map((item: any, idx: number) => (
                 <div
                   onClick={() => onClickBtn(idx)}
@@ -259,7 +258,11 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
 
             {cateFlag.map((item: any, idx: number) =>
               item ? (
-                <div key={`cateFlag_0_${idx}`}>
+                <TextWrap
+                  key={`cateFlag_0_${idx}`}
+                  padding="12px 0 10px 0"
+                  lineHeight={21}
+                >
                   <TypoGraphy
                     text={btn[idx].text1}
                     color="var(--type-gray-2)"
@@ -270,7 +273,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
                     color="var(--type-gray-2)"
                     size="b3"
                   />
-                </div>
+                </TextWrap>
               ) : (
                 <div key={`cateFlag_1_${idx}`}></div>
               )
@@ -298,7 +301,12 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
             <TypoGraphy text="보유 종목" size="small" />
             <SubBox>
               <RetainBox>
-                <Row style={{ justifyContent: 'space-between' }}>
+                <Row
+                  style={{
+                    justifyContent: 'space-between',
+                    marginBottom: '15px',
+                  }}
+                >
                   <TypoGraphy
                     text="종목 이름"
                     color="var(--type-gray-2)"
@@ -316,7 +324,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
                       {retainStock.map((item: any, idx: number) => (
                         <Row
                           style={{
-                            marginBottom: '32px',
+                            marginBottom: '17px',
                             justifyContent: 'space-between',
                           }}
                           key={`myStk_${idx}`}
@@ -345,7 +353,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
                 </>
               </RetainBox>
               <Line />
-              <TextWrap padding="0 0 20px 0">
+              <TextWrap padding="15px 0 20px 0">
                 <TypoGraphy text="추가 종목" size="small" />
               </TextWrap>
               {ETFFlag.map((items: any, listIdx: number) =>
@@ -475,10 +483,10 @@ const Container = styled.div`
   background: #dfe9ff;
 `;
 
-const Row = styled.div<{ blurFlag?: boolean }>`
+const Row = styled.div<{ blurFlag?: boolean; padding?: string }>`
   display: flex;
   flex-direction: row;
-  margin-bottom: 21px;
+  padding: ${(props) => props.padding || 0}
   filter: ${(props) => (props.blurFlag === true ? 'blur(10px)' : 'blur(0px)')};
 `;
 
@@ -490,29 +498,28 @@ const Footer = styled.div`
   align-items: center;
 `;
 
-const Column = styled.div`
+const Column = styled.div<{ padding?: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
-  width: 1200px;
-  margin-top: 120px;
-  margin-bottom: 120px;
+  width: 1005px;
+  padding: ${(props) => props.padding || 0};
 `;
 
 const Box = styled.div`
-  width: 591px;
-  height: 730px;
+  width: 490px;
+  height: 655px;
 
   background: #ffffff;
   border-radius: 10px;
   margin-right: 22px;
-  padding: 24px 30px;
+  padding: 26px 24px;
 `;
 
 const SubBox = styled.div`
-  width: 562px;
-  height: 610px;
+  width: 100%;
+  height: 528px;
 
   overflow: auto;
   ::-webkit-scrollbar {
@@ -531,29 +538,28 @@ const SubBox = styled.div`
 const RetainBox = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 18px;
+  padding: 18px 13px 0 13px;
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1200px;
-  margin-top: 100px;
+  width: 1005px;
+  margin-top: 75px;
 `;
 
 const Line = styled.div`
   height: 1px;
   width: 100%;
   background-color: #dedede;
-  margin-bottom: 21px;
 `;
 
 const InputBox = styled.div`
   display: flex;
   align-items: center;
-  width: 89px;
-  height: 38px;
+  width: 85px;
+  height: 31px;
   background: #ffffff;
   border: 0.910972px solid #dedede;
   border-radius: 5.46583px;
