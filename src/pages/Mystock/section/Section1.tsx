@@ -14,6 +14,8 @@ const Section1 = ({ data }: any) => {
   const [sector, setPortfolio] = useState(data.sector_ratio);
   const name = useSelector(firstNameState);
 
+  console.log(data.portfolio_ratio);
+
   const backgroundColor = [
     '#6792F8',
     '#FFE07E',
@@ -126,26 +128,42 @@ const Section1 = ({ data }: any) => {
               color="var(--type-gray-2)"
             />
             <DoughnutGraphWrapper>
-              <Doughnut data={graphData} width="270px" height="270px" />
+              <DoughnutBox>
+                <Doughnut data={graphData} width="150px" height="150px" />
+              </DoughnutBox>
               <LabelWrapper>
-                {data.portfolio_ratio.map((i: any, index: number) =>
-                  index <= 6 ? (
-                    <StockLabel
-                      key={index}
-                      color={backgroundColor[index]}
-                      name={i.stock.name}
-                      sector={i.stock.sector}
-                      rate={i.ratio.toFixed(1)}
-                    />
-                  ) : (
-                    <StockLabel
-                      key={index}
-                      color={backgroundColor[index]}
-                      name={i.stock}
-                      sector=""
-                      rate={i.ratio.toFixed(1)}
-                    />
-                  )
+                {data.portfolio_ratio.map(
+                  (
+                    i: {
+                      stock: { name: string; sector: string };
+                      ratio: number;
+                    },
+                    index: number
+                  ) =>
+                    index <= 6 ? (
+                      <StockLabel
+                        key={index}
+                        color={backgroundColor[index]}
+                        name={i.stock.name}
+                        sector={i.stock.sector}
+                        rate={i.ratio.toFixed(1)}
+                      />
+                    ) : (
+                      <StockLabel
+                        key={index}
+                        color={backgroundColor[index]}
+                        name={i.stock.name}
+                        sector=""
+                        rate={i.ratio.toFixed(1)}
+                      />
+                    )
+                  // <StockLabel
+                  //   key={index}
+                  //   color={backgroundColor[index]}
+                  //   name={i.stock.name}
+                  //   sector={i.stock.sector}
+                  //   rate={i.ratio.toFixed(1)}
+                  // />
                 )}
               </LabelWrapper>
             </DoughnutGraphWrapper>
@@ -216,6 +234,10 @@ const DoughnutGraphWrapper = styled.div`
   padding: 10px 0 20px 10px;
   margin: 0 0 15px 0;
   gap: 25px;
+`;
+const DoughnutBox = styled.div`
+  width: 150px;
+  height: 150px;
 `;
 const LabelWrapper = styled.div<{ padding?: string }>`
   display: flex;

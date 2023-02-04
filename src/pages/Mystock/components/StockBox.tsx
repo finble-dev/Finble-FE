@@ -24,9 +24,14 @@ const StockBox = ({ stock }: { stock: any }) => {
     });
   };
 
-  let color;
-  if (stock.gain < 0) color = '#4492F7';
-  else if (stock.gain >= 0) color = '#FF5852';
+  let color, mark;
+  if (stock.gain < 0) {
+    color = '#4492F7';
+    mark = '';
+  } else if (stock.gain >= 0) {
+    color = '#FF5852';
+    mark = '+';
+  }
 
   return (
     <Container>
@@ -52,7 +57,7 @@ const StockBox = ({ stock }: { stock: any }) => {
             size="b2"
           />
           <TypoGraphy
-            text={gain + '(' + profit_rate + '%)'}
+            text={`${mark}${gain}(${profit_rate}%)`}
             color={color}
             size="b2"
           />
