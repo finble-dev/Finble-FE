@@ -65,7 +65,6 @@ const GoogleButton = ({ setModalOpen }: any) => {
     }
 
     async function login() {
-      console.log('googleToken : ', googleToken);
       const res = (await Login(googleToken)) as any;
       const refreshToken = await res.token.refresh;
 
@@ -81,7 +80,7 @@ const GoogleButton = ({ setModalOpen }: any) => {
       setTimeout(extendTime, expireTime, refreshToken);
     }
 
-    if (googleToken !== undefined || googleToken !== '') {
+    if (googleToken != undefined || googleToken != '') {
       login();
     }
   }, [googleToken]);
@@ -102,6 +101,7 @@ const GoogleCustomButton = styled.button`
   justify-content: center;
   padding: 16px 78px;
   gap: 10px;
+  cursor: pointer;
 
   width: 447px;
   height: 70px;

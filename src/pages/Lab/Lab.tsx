@@ -32,7 +32,7 @@ const list1 = [
 ];
 
 const Lab = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(true);
   const [isExp, setIsExp] = useState(false);
   const name = useSelector(nameState);
   const [data, setData] = useState(initData);
@@ -57,7 +57,7 @@ const Lab = () => {
           <ReactModal
             ariaHideApp={false}
             isOpen={modalOpen}
-            // onRequestClose={() => setModalOpen(false)}
+            onRequestClose={() => setModalOpen(false)}
             style={{
               overlay: {
                 position: 'fixed',
@@ -77,12 +77,18 @@ const Lab = () => {
           >
             <ModalOpen>
               <TitleWrap>
-                <div onClick={() => setModalOpen(false)}>
-                  <img
-                    src={closeIcon}
-                    style={{ height: '19px', width: '19px', cursor: 'pointer' }}
-                  />
-                </div>
+                <img
+                  src={closeIcon}
+                  style={{
+                    height: '19px',
+                    width: '19px',
+                    cursor: 'pointer',
+                    zIndex: 99,
+                  }}
+                  onClick={() => {
+                    setModalOpen(false);
+                  }}
+                />
               </TitleWrap>
               <TextRow style={{ marginTop: '-20px' }}>
                 <TypoGraphy

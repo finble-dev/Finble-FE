@@ -27,7 +27,6 @@ const Header = () => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         dispatch(setName({ name: '' }));
         dispatch(setToken({ token: '' }));
       })

@@ -28,7 +28,7 @@ const LoginModal = ({ modalOpen, setModalOpen }: any) => {
     >
       <ModalOpen>
         <IconWrapper onClick={() => setModalOpen(false)}>
-          <Img src={closeIcon} />
+          <Img src={closeIcon} style={{ cursor: 'pointer' }} />
         </IconWrapper>
         <ModalContent setModalOpen={setModalOpen} />
       </ModalOpen>
