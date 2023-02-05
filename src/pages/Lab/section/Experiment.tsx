@@ -59,18 +59,6 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   const name = useSelector(firstNameState);
   const token = useSelector(tokenState);
 
-  // 첫 렌더링 시 유저 포트폴리오 가져오고 modal flag 설정
-  useEffect(() => {
-    async function getPorfolio() {
-      const res = (await getTestPortfolio(token)) as any;
-      if (res.data_retain.length != 0) {
-        setModalOpen(false);
-        setRetainStock(res.data_retain);
-      }
-    }
-    getPorfolio();
-  }, [cnt]);
-
   // ETF 추가/삭제
   const onChangeETF = (listNum: number, itemNum: number) => {
     let newList = [];
@@ -104,7 +92,6 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
         setModalOpen(false);
         setRetainStock(res.data_retain);
       }
-
       // 보유 종목 이름만 가져와서 리스트로 만들기
       let newRetainList = [] as Array<string>;
       res.data_retain.map((items: any) =>

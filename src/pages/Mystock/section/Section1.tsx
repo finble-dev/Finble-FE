@@ -14,6 +14,8 @@ const Section1 = ({ data }: any) => {
   const [sector, setPortfolio] = useState(data.sector_ratio);
   const name = useSelector(firstNameState);
 
+  console.log(data.portfolio_ratio);
+
   const backgroundColor = [
     '#6792F8',
     '#FFE07E',
@@ -45,7 +47,10 @@ const Section1 = ({ data }: any) => {
   let sectorText1, sectorText2;
   if (Array.from(data.sector_ratio).length > 1) {
     sectorText1 = '와 \u00A0';
-    sectorText2 = data.sector_ratio[1].sector + '주';
+    sectorText2 =
+      data.sector_ratio[1].sector === 'ETF'
+        ? data.sector_ratio[1].sector
+        : `${data.sector_ratio[1].sector}주`;
   } else {
     sectorText1 = '';
     sectorText2 = '';
@@ -54,7 +59,10 @@ const Section1 = ({ data }: any) => {
   const content = [
     {
       color: 'var(--main-blue)',
-      text: data.sector_ratio[0].sector + '주',
+      text:
+        data.sector_ratio[0].sector === 'ETF'
+          ? data.sector_ratio[0].sector
+          : `${data.sector_ratio[0].sector}주`,
     },
     {
       color: 'var(--type-black)',
@@ -126,23 +134,40 @@ const Section1 = ({ data }: any) => {
               color="var(--type-gray-2)"
             />
             <DoughnutGraphWrapper>
-              <Doughnut data={graphData} width="270px" height="270px" />
+              <DoughnutBox>
+                <Doughnut data={graphData} width="150px" height="150px" />
+              </DoughnutBox>
               <LabelWrapper>
-                {data.portfolio_ratio.map((i: any, index: number) =>
-                  index <= 6 ? (
+                {data.portfolio_ratio.map(
+                  (
+                    i: {
+                      stock: { name: string; sector: string };
+                      ratio: number;
+                    },
+                    index: number
+                  ) => (
+                    // index <= 6 ? (
+                    //   <StockLabel
+                    //     key={index}
+                    //     color={backgroundColor[index]}
+                    //     name={i.stock.name}
+                    //     sector={i.stock.sector}
+                    //     rate={i.ratio.toFixed(1)}
+                    //   />
+                    // ) : (
+                    //   <StockLabel
+                    //     key={index}
+                    //     color={backgroundColor[index]}
+                    //     name={i.stock.name}
+                    //     sector=""
+                    //     rate={i.ratio.toFixed(1)}
+                    //   />
+                    // )
                     <StockLabel
                       key={index}
                       color={backgroundColor[index]}
                       name={i.stock.name}
                       sector={i.stock.sector}
-                      rate={i.ratio.toFixed(1)}
-                    />
-                  ) : (
-                    <StockLabel
-                      key={index}
-                      color={backgroundColor[index]}
-                      name={i.stock}
-                      sector=""
                       rate={i.ratio.toFixed(1)}
                     />
                   )
@@ -216,6 +241,10 @@ const DoughnutGraphWrapper = styled.div`
   padding: 10px 0 20px 10px;
   margin: 0 0 15px 0;
   gap: 25px;
+`;
+const DoughnutBox = styled.div`
+  width: 150px;
+  height: 150px;
 `;
 const LabelWrapper = styled.div<{ padding?: string }>`
   display: flex;
