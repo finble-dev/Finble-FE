@@ -7,13 +7,13 @@ import {
   TextWrap,
 } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
-import mainSub4 from '../../../assets/img/main/mainSub4.svg';
-import mainSub5 from '../../../assets/img/main/mainSub5.svg';
+import mainSub4 from '../../../assets/img/main/section4/mainSub4.svg';
+import mainSub5 from '../../../assets/img/main/section4/mainSub5.svg';
 
 const Section4 = () => {
   return (
     <Wrapper>
-      <Container>
+      <Container maxWidth={839}>
         <TextWrap lineHeight={45} align="center" padding="0 0 56px 0">
           <TypoGraphy text="먼저 본인의 투자 현황을 입력하고" size="h1" />
           <TextRow align="center">
@@ -26,8 +26,11 @@ const Section4 = () => {
           </TextRow>
         </TextWrap>
         <ImgContainer width="100%" height="100%">
-          <Img width="calc((100% - 23px) / 2)" src={mainSub4} />
-          <Img width="calc((100% - 23px) / 2 + 2px)" src={mainSub5} />
+          <Img /*width="calc((100% - 23px) / 2)"*/ width="50%" src={mainSub4} />
+          <Img
+            /*width="calc((100% - 23px) / 2 + 2px)"*/ width="50%"
+            src={mainSub5}
+          />
         </ImgContainer>
       </Container>
     </Wrapper>

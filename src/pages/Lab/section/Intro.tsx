@@ -7,7 +7,7 @@ import {
   ImgContainer,
 } from '../../../assets/styles/styles';
 import graph1 from '../../../assets/img/lab/graph1.gif';
-// import graph2 from '../../../assets/img/lab/intro_graph.svg';
+// import {ReactComponent as graph2} from '../../../assets/img/lab/intro_graph.svg';
 import graph2 from '../../../assets/img/lab/graph2.png';
 
 const Intro = () => {

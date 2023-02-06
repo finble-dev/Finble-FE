@@ -141,7 +141,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  max-width: 1060px;
+  max-width: 1000px;
   height: 100%;
 `;
 

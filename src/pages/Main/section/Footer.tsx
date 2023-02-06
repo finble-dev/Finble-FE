@@ -26,7 +26,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 248px;
+  height: 225px;
   // background: url(${mainSub6});
   background: linear-gradient(95.87deg, #c2d4fe 17.05%, #8baeff 90.04%);
   background-position: center center;
@@ -36,7 +36,7 @@ const Container = styled.div`
 const Wrapper = styled.div`
   width: 100%;
   height: 100%;
-  max-width: 1060px;
+  max-width: 1000px;
   display: flex;
   flex-direction: column;
   justify-content: center;

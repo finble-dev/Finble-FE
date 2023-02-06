@@ -51,7 +51,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   width: 1204px;
   padding-top: 249px;
-  max-width: 1060px;
+  max-width: 1000px;
 `;
 
 const BtnWrapper = styled.div`

@@ -94,7 +94,7 @@ const Section2 = ({ data }: { data: any }) => {
           (item: { date: number; data: number }) => item.data
         ),
         borderColor: 'rgb(103, 146, 248)',
-        borderWidth: 4,
+        borderWidth: 3,
         pointStyle: false,
       },
       {
@@ -102,7 +102,7 @@ const Section2 = ({ data }: { data: any }) => {
         data: data.graph_kospi.map(
           (item: { date: number; data: number }) => item.data
         ),
-        borderWidth: 4,
+        borderWidth: 3,
         borderColor: 'rgb(255, 88, 82)',
         pointStyle: false,
       },

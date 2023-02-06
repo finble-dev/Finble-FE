@@ -46,6 +46,7 @@ const Modal2 = ({ name, market, symbol, setModalOpen }: InputType) => {
     quantity: num,
   });
 
+  console.log(token);
   const onClick = () => {
     fetch(`${SERVER}/portfolio/`, {
       method: 'POST',
@@ -56,7 +57,10 @@ const Modal2 = ({ name, market, symbol, setModalOpen }: InputType) => {
       },
       body: sendData,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) res.json();
+      })
       .then((res) => {
         setModalOpen(false);
       });

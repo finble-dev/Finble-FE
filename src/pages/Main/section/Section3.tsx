@@ -6,13 +6,15 @@ import {
   TextRow,
   TextWrap,
 } from '../../../assets/styles/styles';
-import mainSub2 from '../../../assets/img/main/mainSub2.svg';
-import mainSub3 from '../../../assets/img/main/mainSub3.svg';
+import mainSub2 from '../../../assets/img/main/section3/mainSub2.svg';
+import mainSub3 from '../../../assets/img/main/section3/mainSub3.svg';
+import Icon from '../../../assets/img/main/section3/Icon.svg';
 
 const Section3 = () => {
   return (
-    <Container padding="191px 0 107px 0">
+    <Container padding="191px 0 107px 0" maxWidth={839}>
       <TextWrap lineHeight={45} align="center">
+        <Img src={Icon} width="65px" height="44px" />
         <TypoGraphy text="마음 편히 주식 투자하는 방법," size="h1" />
         <TextRow align="center">
           <TypoGraphy text="핀블의 '" size="h1" />

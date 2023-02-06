@@ -223,7 +223,7 @@ const Result = ({ data }: any) => {
         </TextRow>
 
         <TextRow
-          style={{ justifyContent: 'space-between', maxWidth: '1200px' }}
+          style={{ justifyContent: 'space-between', maxWidth: '1000px' }}
         >
           <Column>
             <TextWrap lineHeight={29} style={{ marginBottom: '32px' }}>

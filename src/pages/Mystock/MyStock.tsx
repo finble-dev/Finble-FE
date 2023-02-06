@@ -58,7 +58,7 @@ const MyStock = () => {
       <div style={{ marginTop: '50px' }}></div>
       {name !== '' ? (
         <Wrap>
-          <Container maxWidth={992}>
+          <Container maxWidth={1000}>
             <Title>
               <div>
                 <TypoGraphy text={firstName + '님의 포트폴리오'} size="h2" />
@@ -212,7 +212,7 @@ const Box = styled.div<{ height?: string; padding?: number }>`
   height: ${(props) => props.height || 'auto'};
   border-radius: 10px;
   padding: 0 ${(props) => props.padding || 0}px;
-  border: 1px solid var(--type-gray-5);
+  border: 0.6px solid var(--type-gray-5);
   overflow: hidden;
 `;
 const StockListWrap = styled.div`
