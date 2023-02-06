@@ -223,12 +223,12 @@ const StockListWrap = styled.div`
   padding: 0 11px 0 27px;
 
   &::-webkit-scrollbar {
-    width: 16px;
+    width: 9px;
   }
   &::-webkit-scrollbar-thumb {
-    height: 124px;
+    height: 90px;
     background-color: #ccd8ff;
-    border-radius: 12px;
+    border-radius: 10px;
   }
   &::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
