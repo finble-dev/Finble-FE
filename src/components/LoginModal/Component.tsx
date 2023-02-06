@@ -6,8 +6,8 @@ import { GoogleButton } from './GoogleButton';
 const ModalContent = ({ setModalOpen }: any) => {
   return (
     <>
-      <TypoGraphy text="시작하기" size="t1" />
-      <TextWrap lineHeight={30} padding="20px 0 22px 0" align="center">
+      <TypoGraphy text="시작하기" size="t2" />
+      <TextWrap lineHeight={26} padding="20px 0 26px 0" align="center">
         <TypoGraphy
           text="주린이들을 위한 분산 투자 가이드, 핀블"
           size="b1"
@@ -20,7 +20,7 @@ const ModalContent = ({ setModalOpen }: any) => {
         />
       </TextWrap>
       <GoogleButton setModalOpen={setModalOpen} />
-      <TextWrap lineHeight={21} padding="23px 0 0 0" align="center">
+      <TextWrap lineHeight={21} padding="30px 0 0 0" align="center">
         <TypoGraphy
           text="로그인은 개인 정보 보호 정책 및 서비스 약관에 동의하는 것을 의미하며,"
           size="b3"

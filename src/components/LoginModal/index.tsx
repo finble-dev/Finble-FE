@@ -16,7 +16,7 @@ const LoginModal = ({ modalOpen, setModalOpen }: any) => {
         },
         content: {
           margin: 'auto',
-          width: '613px',
+          width: '612px',
           height: '348px',
           background: 'var(--type-white)',
           display: 'flex',
@@ -28,7 +28,12 @@ const LoginModal = ({ modalOpen, setModalOpen }: any) => {
     >
       <ModalOpen>
         <IconWrapper onClick={() => setModalOpen(false)}>
-          <Img src={closeIcon} style={{ cursor: 'pointer' }} />
+          <Img
+            src={closeIcon}
+            width="19px"
+            height="19px"
+            style={{ cursor: 'pointer' }}
+          />
         </IconWrapper>
         <ModalContent setModalOpen={setModalOpen} />
       </ModalOpen>

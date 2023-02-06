@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TypoGraphy from '../Typography';
 import google from '../../assets/icons/google.svg';
-import { Img, ImgContainer } from '../../assets/styles/styles';
+import { Img } from '../../assets/styles/styles';
 import { useGoogleLogin } from '@react-oauth/google';
 
 import {
@@ -87,7 +87,7 @@ const GoogleButton = ({ setModalOpen }: any) => {
 
   return (
     <GoogleCustomButton onClick={googleSocialLogin}>
-      <Img src={google} style={{ width: '38px', marginRight: '30px' }} />
+      <Img src={google} width="29px" height="29px" />
       <TypoGraphy text="Google 계정으로 로그인" color="#515151" size="input" />
     </GoogleCustomButton>
   );
@@ -99,12 +99,12 @@ const GoogleCustomButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 78px;
-  gap: 10px;
+  padding: 13px 56px;
+  gap: 20px;
   cursor: pointer;
 
-  width: 447px;
-  height: 70px;
+  width: 377px;
+  height: 60px;
 
   background: #ffffff;
   box-shadow: 0px 0px 18.0573px rgba(0, 0, 0, 0.15);
