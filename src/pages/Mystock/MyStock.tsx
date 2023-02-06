@@ -53,7 +53,7 @@ const MyStock = () => {
   }
 
   return (
-    <>
+    <TotalWrap>
       <Header />
       <div style={{ marginTop: '50px' }}></div>
       {name !== '' ? (
@@ -172,10 +172,14 @@ const MyStock = () => {
       ) : (
         <NoneLogin />
       )}
-    </>
+    </TotalWrap>
   );
 };
 export default MyStock;
+
+const TotalWrap = styled.div`
+  margin-right: 0px;
+`;
 
 const Wrap = styled.div`
   width: 100%;

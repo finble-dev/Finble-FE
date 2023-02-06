@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { SERVER } from '../network/config';
 import { TextRow } from '../assets/styles/styles';
 
-const Header = () => {
+const Header = ({ paddingFlag }: { paddingFlag?: boolean }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);
   const token = useSelector(tokenState);
@@ -49,8 +49,17 @@ const Header = () => {
   //   { link: '/lab', name: '투자실험실', display: lab_line },
   // ];
 
+  let padding;
+  if (
+    path.pathname === '/stock' ||
+    (path.pathname === '/lab' && name === '') ||
+    paddingFlag === true
+  )
+    padding = '8.5px';
+  else padding = '0px';
+
   return (
-    <Wrapper>
+    <Wrapper padding={padding}>
       <Container>
         <Row>
           <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
@@ -123,7 +132,7 @@ const Header = () => {
 };
 export default Header;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ padding?: string }>`
   display: flex;
   position: fixed;
   z-index: 99;
@@ -135,6 +144,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 50px;
   filter: drop-shadow(0px 2px 3px rgba(0, 0, 0, 0.03));
+  padding-right: ${(props) => props.padding || 0};
 `;
 
 const Container = styled.div`

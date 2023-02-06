@@ -23,9 +23,14 @@ const StockDiagnosis = () => {
     }
   }, []);
 
+  //스크롤바
+  let paddingFlag;
+  if (data != initData) paddingFlag = false;
+  else paddingFlag = true;
+
   return (
     <Container>
-      <Header />
+      <Header paddingFlag={paddingFlag} />
       <div style={{ marginTop: '50px' }}></div>
       {data != initData ? (
         <>
