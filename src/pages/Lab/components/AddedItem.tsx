@@ -116,14 +116,14 @@ const InputBox = styled.div`
   border: 0.910972px solid #dedede;
   border-radius: 5.46583px;
   padding: 15px 10px;
-  font-size: var(--fs-input);
-  font-weight: var(--fw-input);
+  font-size: var(--fs-b2);
+  font-weight: var(--fw-b2);
 `;
 
 const InputArea = styled.input`
   width: 100%;
-  font-size: var(--fs-input);
-  font-weight: var(--fw-input);
+  font-size: var(--fs-b2);
+  font-weight: var(--fw-b2);
   border: none;
   outline: none;
 

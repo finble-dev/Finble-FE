@@ -206,14 +206,14 @@ const Result = ({ data }: any) => {
           </Column>
           <TextRow>
             <BarGraphWrapper>
-              <TypoGraphy text="연평균 수익률" size="b1" />
+              <TypoGraphy text="연평균 수익률" size="b2" />
               <EarnBar
                 test={Math.ceil(data.annual_profit_test)}
                 original={Math.ceil(data.annual_profit_original)}
               />
             </BarGraphWrapper>
             <BarGraphWrapper>
-              <TypoGraphy text="최대 낙폭" size="b1" />
+              <TypoGraphy text="최대 낙폭" size="b2" />
               <LossBar
                 test={Math.ceil(data.test_portfolio_max_fall)}
                 original={Math.ceil(data.original_portfolio_max_fall)}
@@ -291,10 +291,13 @@ const Result = ({ data }: any) => {
                 <>
                   <TipLine />
                   <AnswerRow>
-                    <ImgQA src={a} style={{ marginTop: '-40px' }} />
+                    <ImgQA
+                      src={a}
+                      style={{ marginTop: '-25px', marginLeft: '15px' }}
+                    />
 
                     <TextWrap
-                      lineHeight={46}
+                      lineHeight={30}
                       style={{
                         marginLeft: '30px',
                       }}
@@ -416,7 +419,7 @@ const BarGraphWrapper = styled.div`
   border-radius: 10px;
   border: 0.6px solid #dadada;
   margin-left: 23px;
-  padding: 14px 20px;
+  padding: 10px 20px;
 `;
 
 const LineGraphWrapper = styled.div`
@@ -425,6 +428,7 @@ const LineGraphWrapper = styled.div`
   width: 1000px;
   height: 448px;
   padding: 24px 24px;
+  border: 0.6px solid #dadada;
   background: #ffffff;
   border-radius: 17px;
 `;
@@ -450,7 +454,7 @@ const AnswerRow = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
-  height: 136px;
+  height: 122px;
   background-color: rgba(218, 218, 218, 0.4);
   padding: 0 25px;
 `;
@@ -497,7 +501,7 @@ const Input = styled.input`
   border-radius: 10px;
   border: none;
   outline: none;
-  margin-right: 18px;
+  margin-right: 15px;
   padding: 18px;
   font-size: 14px;
 

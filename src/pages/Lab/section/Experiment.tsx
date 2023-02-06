@@ -9,7 +9,7 @@ import { ETFItem } from '../components/ETFItem';
 // assets
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import { ETFList } from '../../../assets/ETFList';
-import modalImg from '../../../assets/img/lab/캐릭터.png';
+import modalImg from '../../../assets/img/lab/modalImg.svg';
 
 // interface
 import { ETF } from '../../../interface/interface';
@@ -216,7 +216,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
     <Container>
       <Column padding="74px 0 83px 0">
         <TypoGraphy text="투자 실험하기" size="h1" />
-        <TextWrap lineHeight={30} padding="30px 0 22px 0">
+        <TextWrap lineHeight={26} padding="30px 0 22px 0">
           <TypoGraphy
             text={`${name}님의 편안한 투자를 위해 대표적인 ETF들을 선별해봤어요.`}
             color="var(--type-gray-1)"
@@ -370,7 +370,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
                             />
                             <TypoGraphy
                               text="%"
-                              size="input"
+                              size="b2"
                               color="var(--type-gray-3)"
                             />
                           </InputBox>
@@ -543,7 +543,6 @@ const Column = styled.div<{ padding?: string }>`
 const Box = styled.div`
   width: 490px;
   height: 655px;
-
   background: #ffffff;
   border-radius: 10px;
   margin-right: 22px;
@@ -553,7 +552,6 @@ const Box = styled.div`
 const SubBox = styled.div`
   width: 100%;
   height: 528px;
-
   overflow: auto;
   ::-webkit-scrollbar {
     width: 10px;
@@ -597,17 +595,16 @@ const InputBox = styled.div`
   border: 0.910972px solid #dedede;
   border-radius: 5.46583px;
   padding: 15px 10px;
-  font-size: var(--fs-input);
-  font-weight: var(--fw-input);
+  font-size: var(--fs-b2);
+  font-weight: var(--fw-b2);
 `;
 
 const InputArea = styled.input`
   width: 100%;
-  font-size: var(--fs-input);
-  font-weight: var(--fw-input);
+  font-size: var(--fs-b2);
+  font-weight: var(--fw-b2);
   border: none;
   outline: none;
-
   &::placeholder {
     color: var(--type-gray-5);
   }

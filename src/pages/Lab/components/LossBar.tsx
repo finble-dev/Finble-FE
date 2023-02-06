@@ -28,7 +28,7 @@ const Line = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 29px;
+  top: 15px;
   left: 8px;
   height: 0.6px;
   width: 175px;
@@ -37,7 +37,7 @@ const Line = styled.div`
 
 const LastBar = styled.div<{ height: number }>`
   position: absolute;
-  top: 29px;
+  top: 15px;
   left: 39px;
   width: 39px;
   height: ${(props) => props.height}px;
@@ -47,7 +47,7 @@ const LastBar = styled.div<{ height: number }>`
 
 const CurBar = styled.div<{ height: number }>`
   position: absolute;
-  top: 29px;
+  top: 15px;
   right: 39px;
 
   width: 39px;
@@ -74,8 +74,8 @@ const Portfolio = styled.div`
   font-weight: 600;
   color: #6792f8;
   background-color: #ebf0fe;
-  width: 77px;
-  height: 26px;
+  width: 92px;
+  height: 32px;
 
   display: flex;
   align-items: center;
@@ -83,6 +83,6 @@ const Portfolio = styled.div`
   border-radius: 5px;
 
   position: absolute;
-  bottom: 2px;
-  left: 95px;
+  bottom: 0px;
+  left: 90px;
 `;
