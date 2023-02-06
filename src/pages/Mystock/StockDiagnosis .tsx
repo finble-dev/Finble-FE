@@ -6,9 +6,10 @@ import { tokenState } from '../../store/slice/tokenSlice';
 import { nameState } from '../../store/slice/userSlice';
 import Section1 from './section/Section1';
 import Section2 from './section/Section2';
-import { initData } from './initData';
+import { initData } from './components/initData';
 import { getPortfolioAnalysis } from '../../network/api';
 import Header from '../../components/Header';
+import Loading from './Loading';
 
 const StockDiagnosis = () => {
   const token = useAppSelect(tokenState);
@@ -32,7 +33,7 @@ const StockDiagnosis = () => {
           <Section2 data={data} />
         </>
       ) : (
-        <>loading..</>
+        <Loading />
       )}
     </Container>
   );
