@@ -77,8 +77,8 @@ const Portfolio = styled.div`
   font-weight: 600;
   color: #6792f8;
   background-color: #ebf0fe;
-  width: 77px;
-  height: 26px;
+  width: 92px;
+  height: 32px;
 
   display: flex;
   align-items: center;
@@ -86,6 +86,6 @@ const Portfolio = styled.div`
   border-radius: 5px;
 
   position: absolute;
-  bottom: 2px;
-  left: 95px;
+  bottom: 0px;
+  left: 90px;
 `;

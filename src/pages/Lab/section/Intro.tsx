@@ -210,7 +210,7 @@ const Box = styled.div`
   width: 854px;
   height: 280px;
   background: #ffffff;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border: 0.6px solid #dadada;
   border-radius: 20px;
 `;
 

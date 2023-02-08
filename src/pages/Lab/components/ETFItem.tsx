@@ -75,8 +75,10 @@ const Container = styled.div`
 
 const Column = styled.div`
   display: flex;
+  height: 50px;
   flex-direction: column;
-  margin-left: 17px;
+  justify-content: center;
+  margin-left: 12px;
 `;
 
 const Row = styled.div<{ padding?: string }>`

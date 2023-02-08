@@ -10,7 +10,7 @@ import { Img, TextRow, TextWrap } from '../../assets/styles/styles';
 
 import TypoGraphy from '../../components/Typography';
 import closeIcon from '../../assets/icons/close.svg';
-import modalImg from '../../assets/img/lab/modalImg.png';
+import modalImg from '../../assets/img/lab/modalImg.svg';
 import { initData } from './initData';
 
 import { nameState } from '../../store/slice/userSlice';
@@ -90,7 +90,7 @@ const Lab = () => {
                   }}
                 />
               </TitleWrap>
-              <TextRow style={{ marginTop: '-20px' }}>
+              <TextRow style={{ marginTop: '-15px' }}>
                 <TypoGraphy
                   text="투자 실험"
                   size="t2"
@@ -101,18 +101,17 @@ const Lab = () => {
               <img
                 src={modalImg}
                 style={{
-                  height: '130px',
-                  marginTop: '10px',
-                  marginBottom: '10px',
+                  height: '189px',
+                  marginTop: '-20px',
                 }}
               />
 
-              <TextWrap lineHeight={30}>
+              <TextWrap lineHeight={26}>
                 {list1.map((items: any, itemsIdx: number) => (
                   <TextRow
                     align="center"
                     key={`Lab_list1_${itemsIdx}`}
-                    style={{ height: '30px' }}
+                    style={{ height: '26px' }}
                   >
                     {items.map((item: any, itemIdx: number) =>
                       item[0] === 'black' ? (
