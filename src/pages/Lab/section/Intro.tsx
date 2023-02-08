@@ -1,14 +1,8 @@
 import TypoGraphy from '../../../components/Typography';
 import styled from 'styled-components';
-import {
-  TextRow,
-  TextWrap,
-  Img,
-  ImgContainer,
-} from '../../../assets/styles/styles';
+import { TextRow, TextWrap, Img } from '../../../assets/styles/styles';
 import graph1 from '../../../assets/img/lab/graph1.gif';
-// import {ReactComponent as graph2} from '../../../assets/img/lab/intro_graph.svg';
-import graph2 from '../../../assets/img/lab/graph2.png';
+import graph2 from '../../../assets/img/lab/intro_graph.svg';
 
 const Intro = () => {
   return (

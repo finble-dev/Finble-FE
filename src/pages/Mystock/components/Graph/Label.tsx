@@ -16,7 +16,7 @@ const StockLabel = ({ color, name, sector, rate }: label) => {
         <TypoGraphy text={name} size="b3" color="var(--type-gray-1)" />
         <TypoGraphy text={sector} size="b4" color="var(--type-gray-4)" />
       </Left>
-      <TypoGraphy text={rate + '%'} size="b4" color="var(--type-gray-1)" />
+      <TypoGraphy text={rate + '%'} size="b3" color="var(--type-gray-1)" />
     </Container>
   );
 };
