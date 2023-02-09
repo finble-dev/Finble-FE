@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TextWrap } from '../../../assets/styles/styles';
+import { TextRow, TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
 import { ETF } from '../../../interface/interface';
 import { Btn10 } from '../../../components/Button';
@@ -21,7 +21,7 @@ export const ETFItem = ({
 }: ETFItem) => {
   return (
     <Container>
-      <Row padding="7px 0 4px 0" style={{ justifyContent: 'space-between' }}>
+      <Row padding="4px 0" style={{ justifyContent: 'space-between' }}>
         <Row>
           <Profile src={item.img} />
           <Column>
@@ -46,7 +46,7 @@ export const ETFItem = ({
           </div>
         )}
       </Row>
-      <TextWrap lineHeight={26} padding="0 0 4px 0">
+      <TextWrap lineHeight={26} padding="4px 0" style={{ height: '85px' }}>
         {item.detail.map((item: string, idx: number) => (
           <TypoGraphy
             text={item}
@@ -83,8 +83,8 @@ const Column = styled.div`
 
 const Row = styled.div<{ padding?: string }>`
   display: flex;
-  flex-direction: row;
   padding: ${(props) => props.padding || 0};
+  align-items: center;
 `;
 
 const Profile = styled.img`
