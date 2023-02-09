@@ -16,6 +16,7 @@ import { initData } from './initData';
 import { nameState } from '../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
 import Header from '../../components/Header';
+import { useCookies } from 'react-cookie';
 
 const list1 = [
   [
@@ -37,9 +38,33 @@ const Lab = () => {
   const name = useSelector(nameState);
   const [data, setData] = useState(initData);
 
+  // cookie
+  const [appCookies, setAppCookies] = useCookies();
+  const [hasCookie, setHasCookie] = useState(true);
+  console.log(appCookies);
+
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, []);
+
+  //팝업 하루동안 보지않기
+  const getExpiredDate = (days: number) => {
+    const date = new Date();
+    date.setDate(date.getDate() + days);
+    return date;
+  };
+  const closeModalUntilExpires = () => {
+    if (!appCookies) return;
+
+    const expires = getExpiredDate(1);
+    setAppCookies('MODAL_EXPIRES', true, { path: '/', expires });
+  };
+  useEffect(() => {
+    if (appCookies['MODAL_EXPIRES']) return;
+    console.log(appCookies['MODAL_EXPIRES']);
+    setHasCookie(true);
+  }, []);
+
   return (
     <>
       <Header />
@@ -56,7 +81,7 @@ const Lab = () => {
           {data != initData ? <Result data={data} /> : <></>}
           <ReactModal
             ariaHideApp={false}
-            isOpen={modalOpen}
+            isOpen={modalOpen && !hasCookie}
             onRequestClose={() => setModalOpen(false)}
             style={{
               overlay: {
@@ -66,22 +91,23 @@ const Lab = () => {
               content: {
                 margin: 'auto',
                 width: '612px',
-                height: '348px',
+                // height: '348px',
+                height: '400px',
                 background: 'var(--type-white)',
                 display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
+                justifyContent: 'center',
+                alignItems: 'center',
                 borderRadius: '20px',
               },
             }}
           >
             <ModalOpen>
               <TitleWrap>
-                <img
+                <Img
                   src={closeIcon}
+                  width="19px"
+                  height="19px"
                   style={{
-                    height: '19px',
-                    width: '19px',
                     cursor: 'pointer',
                     zIndex: 99,
                   }}
@@ -98,13 +124,7 @@ const Lab = () => {
                 />
                 <TypoGraphy text="이 무엇인가요?" size="t2" />
               </TextRow>
-              <img
-                src={modalImg}
-                style={{
-                  height: '189px',
-                  marginTop: '-20px',
-                }}
-              />
+              <Img src={modalImg} height="188px" />
 
               <TextWrap lineHeight={26}>
                 {list1.map((items: any, itemsIdx: number) => (
@@ -133,6 +153,14 @@ const Lab = () => {
                   </TextRow>
                 ))}
               </TextWrap>
+              <CheckWrap>
+                <input type="checkbox" onClick={closeModalUntilExpires} />
+                <TypoGraphy
+                  text="하루동안 보지않기"
+                  color="var(--type-gray-1)"
+                  size="b3"
+                />
+              </CheckWrap>
             </ModalOpen>
           </ReactModal>
         </Container>
@@ -169,4 +197,12 @@ const TitleWrap = styled.div`
   width: 100%;
   height: 100%;
   // padding: 0 0 40px 0;
+`;
+
+const CheckWrap = styled.div`
+  display: flex;
+  align-itmes: flex-end;
+  justify-content: center;
+  gap: 5px;
+  padding: 25px 0 0 0;
 `;
