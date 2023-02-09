@@ -41,7 +41,6 @@ const Lab = () => {
   // cookie
   const [appCookies, setAppCookies] = useCookies();
   const [hasCookie, setHasCookie] = useState(true);
-  console.log(appCookies);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -91,18 +90,27 @@ const Lab = () => {
               content: {
                 margin: 'auto',
                 width: '612px',
-                // height: '348px',
-                height: '400px',
+                height: '362px',
+                // height: '400px',
                 background: 'var(--type-white)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderRadius: '20px',
+                padding: '15px 20px 20px 20px',
               },
             }}
           >
             <ModalOpen>
               <TitleWrap>
+                <CheckWrap>
+                  <input type="checkbox" onClick={closeModalUntilExpires} />
+                  <TypoGraphy
+                    text="하루동안 보지않기"
+                    color="var(--type-gray-1)"
+                    size="b3"
+                  />
+                </CheckWrap>
                 <Img
                   src={closeIcon}
                   width="19px"
@@ -131,7 +139,7 @@ const Lab = () => {
                   <TextRow
                     align="center"
                     key={`Lab_list1_${itemsIdx}`}
-                    style={{ height: '26px' }}
+                    lineHeight={26}
                   >
                     {items.map((item: any, itemIdx: number) =>
                       item[0] === 'black' ? (
@@ -153,14 +161,6 @@ const Lab = () => {
                   </TextRow>
                 ))}
               </TextWrap>
-              <CheckWrap>
-                <input type="checkbox" onClick={closeModalUntilExpires} />
-                <TypoGraphy
-                  text="하루동안 보지않기"
-                  color="var(--type-gray-1)"
-                  size="b3"
-                />
-              </CheckWrap>
             </ModalOpen>
           </ReactModal>
         </Container>
@@ -193,9 +193,11 @@ const ModalOpen = styled.div`
 const TitleWrap = styled.div`
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: space-between;
   width: 100%;
   height: 100%;
+  z-index: 99;
+  padding: 0 0 5px 0;
   // padding: 0 0 40px 0;
 `;
 
@@ -204,5 +206,5 @@ const CheckWrap = styled.div`
   align-itmes: flex-end;
   justify-content: center;
   gap: 5px;
-  padding: 25px 0 0 0;
+  // padding: 25px 0 0 0;
 `;
