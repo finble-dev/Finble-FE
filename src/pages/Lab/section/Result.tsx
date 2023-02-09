@@ -27,6 +27,7 @@ import {
 } from 'chart.js';
 import StepBox from '../../../components/StepBox';
 import { postEmail } from '../../../network/api';
+import { GraphLabel } from '../../Mystock/components/Graph/Label';
 
 ChartJS.register(
   CategoryScale,
@@ -142,7 +143,7 @@ const Result = ({ data }: any) => {
 
   const graphData = {
     labels: data.graph_original_portfolio.map((item: any) =>
-      item.date.substring(0, 7)
+      item.date.substring(0, 7).replace('-', '.')
     ),
     datasets: [
       {
@@ -246,11 +247,18 @@ const Result = ({ data }: any) => {
           </Column>
         </TextRow>
         <LineGraphWrapper>
-          <Line
-            data={graphData}
-            options={options}
-            style={{ width: '910px', height: '400px' }}
-          />
+          <div style={{ width: '100%', padding: '0 0 0 30px' }}>
+            <GraphLabel page="lab" />
+          </div>
+          <LineGraph>
+            <Line
+              data={graphData}
+              options={options}
+              width="910px"
+              height="390px"
+              style={{ padding: '10px 0' }}
+            />
+          </LineGraph>
         </LineGraphWrapper>
         <Column padding="99px 0 0 0">
           <TipContainer>
@@ -355,13 +363,10 @@ const options = {
   responsive: true,
   plugins: {
     legend: {
-      display: true,
+      display: false,
       align: 'start',
       title: {
         color: 'black',
-      },
-      labels: {
-        boxHeight: 2,
       },
     },
     tooltip: {
@@ -424,13 +429,24 @@ const BarGraphWrapper = styled.div`
 
 const LineGraphWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  width: 1000px;
+  align-items: center;
+  width: 100%;
   height: 448px;
-  padding: 24px 24px;
+  padding: 22px 0;
   border: 0.6px solid #dadada;
   background: #ffffff;
   border-radius: 17px;
+`;
+
+const LineGraph = styled.div`
+  width: 910px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 `;
 
 const TipLine = styled.div`

@@ -15,6 +15,7 @@ import {
   Colors,
   Legend,
 } from 'chart.js';
+import { GraphLabel } from '../components/Graph/Label';
 
 ChartJS.register(
   CategoryScale,
@@ -111,31 +112,26 @@ const Section2 = ({ data }: { data: any }) => {
 
   const options = {
     responsive: true,
-
     plugins: {
       legend: {
-        display: true,
+        display: false,
         align: 'start',
-        title: {
-          color: 'green',
-        },
-        labels: {
-          boxHeight: 3,
-        },
+        // position: {
+        //   left: 100,
+        // },
       },
       tooltip: {
         padding: 10,
         bodySpacing: 5,
         background: '#3B3B3B',
         usePointStyle: true,
-        callback: {
-          label: function () {
-            return '';
-          },
-        },
       },
-      colors: { enabled: true },
     },
+    // layout: {
+    //   padding: {
+    //     top: 50,
+    //   },
+    // },
     scales: {
       y: {
         id: 'yAxes',
@@ -198,6 +194,7 @@ const Section2 = ({ data }: { data: any }) => {
         {/* line graph box */}
         <WhiteBox padding="16px 24px">
           <TypoGraphy text="투자 결과" size="b2" color="var(--type-gray-1)" />
+          <GraphLabel page="myStock" />
           <Line
             data={graphData}
             options={options}
