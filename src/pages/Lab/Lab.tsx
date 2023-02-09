@@ -62,7 +62,7 @@ const Lab = () => {
   useEffect(() => {
     if (appCookies['MODAL_EXPIRES']) return;
     console.log(appCookies['MODAL_EXPIRES']);
-    setHasCookie(true);
+    setHasCookie(false);
   }, []);
 
   return (
