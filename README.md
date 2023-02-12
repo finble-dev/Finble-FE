@@ -1,5 +1,8 @@
 # Finble-FE
 
+### 개요
+https://github.com/finble-dev
+
 ### 배포링크
 https://front.finble.net/
 
@@ -30,48 +33,24 @@ yarn install  <br/>
 
 ### 머지 규칙
 1. 기능 단위 pr
-2. 코드리뷰 필요없는 간단한 pr || 긴급한 pr은 즉시 머지 가능
-   - 예외 제외하고는 리뷰어 코드리뷰후 머지
+2. 리뷰어 코드리뷰후 머지
+   예외 ) bug fix
 
 ### 파일구조
 
+```
+|-- src
+|   |-- assets
+|   |-- components
+|   |-- interface
+|   |-- network
+|   |-- pages
+|   |-- store
+|   |-- types
+|
+|-- App.tsx
+|-- index.tsx
 
-#  <p align="center">  Finble
-주린이를 위한 주식 관리 포트폴리오 서비스
-
-## <p align="center"> ✌️Introduce
-
-## <p align="center"> 🌈 Member</p>
-
-### Frontend
-
-|안채연|오지은|
-|:-:|:---:|
-|<img src="https://avatars.githubusercontent.com/u/90609254?v=4" alt="chaeyeonan" width="100" height="100">|<img src="https://avatars.githubusercontent.com/u/100078144?v=4" alt="yesolthee" width="100" height="100">
-|[chaeyeonan](https://github.com/chaeyeonan)|[JeeeunOh](https://github.com/JeeeunOh)|
-
-### Backend
-
-|안혜진|이정현|
-|:-:|:--:|
-|<img src="https://avatars.githubusercontent.com/u/86006389?v=4" alt="minsu20" width="100" height="100">|<img src="https://avatars.githubusercontent.com/u/61726631?v=4" alt="friendshipkim97" width="100" height="100">|
-[geniee44](https://github.com/geniee44)|[Jeong-Hyeon-Lee](https://github.com/Jeong-Hyeon-Lee)|
-
-## <p align="center"> ✔️Function </p>
-1. 
-2.
-3. 
-4.
-5. 
-
-## <p align="center"> 🏗 Project Architecture </p>
-
-
-## <p align="center"> 🛠 Tech Stacks </p>
-
-### <p align="center"> Front-end </p>
-
-### <p align="center"> Back-end </p>
-
+```
 
 
