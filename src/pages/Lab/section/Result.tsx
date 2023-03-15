@@ -51,7 +51,6 @@ const Result = ({ data }: any) => {
   const [inform, setInform] = useState(false);
   const [totalPer, setTotalPer] = useState('최종금액Per');
 
-  console.log(data);
   useEffect(() => {
     if (
       Math.ceil(data.original_portfolio_profit) <

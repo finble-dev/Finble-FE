@@ -14,8 +14,6 @@ const Section1 = ({ data }: any) => {
   const [sector, setPortfolio] = useState(data.sector_ratio);
   const name = useSelector(firstNameState);
 
-  console.log(data.portfolio_ratio);
-
   const backgroundColor = [
     '#6792F8',
     '#FFE07E',
