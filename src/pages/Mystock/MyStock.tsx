@@ -15,6 +15,7 @@ import { useSelector } from 'react-redux';
 import StockBox from './components/StockBox';
 import Header from '../../components/Header';
 import { getPortfolio } from '../../network/api';
+import { Cookies } from 'react-cookie';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -24,6 +25,8 @@ const MyStock = () => {
   const token = useSelector(tokenState);
   const name = useSelector(nameState); // 성 + 이름
   const firstName = useSelector(firstNameState); // 이름
+  const cookies = new Cookies().get('LOGIN_EXPIRES');
+
   let total = 0;
 
   const getPortfolioAPI = async () => {
@@ -56,122 +59,124 @@ const MyStock = () => {
     <TotalWrap>
       <Header />
       <div style={{ marginTop: '50px' }}></div>
-      {name !== '' ? (
-        <Wrap>
-          <Container maxWidth={1000}>
-            <Title>
-              <div>
-                <TypoGraphy text={firstName + '님의 포트폴리오'} size="h2" />
-                <TextWrap padding="6px 0 37px 0">
-                  <TypoGraphy
-                    text="보유 중인 주식을 입력하고 내 투자 현황까지 진단 받아보세요."
-                    color="var(--type-gray-2)"
-                    size="b1"
-                  />
-                </TextWrap>
-              </div>
-              <BtnWrapper to={link}>
-                <Btn10 text="내 주식 진단받기 >" type={button} />
-              </BtnWrapper>
-            </Title>
-            <BoxContainer>
-              <Box height="224px" padding={30}>
-                <TextWrap padding="20px 0 15px 0">
-                  <TypoGraphy
-                    text="총 자산"
-                    size="b3"
-                    color="var(--type-gray-2)"
-                  />
-                </TextWrap>
-                <TextRow>
-                  <TypoGraphy
-                    text={'' + Math.floor(total).toLocaleString('ko-KR')}
-                    size="t1"
-                  />
-                  <TypoGraphy
-                    text="&nbsp;원"
-                    size="t1"
-                    color="var(--type-gray-2)"
-                  />
-                </TextRow>
-                <TextWrap padding="5px 0">
-                  <TypoGraphy
-                    text={`${totalGain.toLocaleString(
-                      'ko-KR'
-                    )}원 (${totalRate.toFixed(1)}%)`}
-                    size="12px"
-                    color="var(--type-gray-2)"
-                  />
-                </TextWrap>
-              </Box>
-              <Box height="100%" padding={0}>
-                <TextWrap padding="22px 27px 20px 27px">
-                  <TypoGraphy text="보유 종목 입력" size="small" />
-                </TextWrap>
-                <div
-                  onClick={() => setModalOpen(true)}
-                  style={{ padding: '0 27px' }}
-                >
-                  <Btn10 type="big_add" text="+ 추가하기" />
-                </div>
-
-                {Array.from(data).length === 0 ? (
-                  <TextWrap align="center" padding="100px 0 0 0">
+      {
+        /*name !== ''*/ cookies !== undefined ? (
+          <Wrap>
+            <Container maxWidth={1000}>
+              <Title>
+                <div>
+                  <TypoGraphy text={firstName + '님의 포트폴리오'} size="h2" />
+                  <TextWrap padding="6px 0 37px 0">
                     <TypoGraphy
-                      text="아직 추가된 종목이 없어요"
-                      size="b2"
-                      color="var(--type-gray-4)"
+                      text="보유 중인 주식을 입력하고 내 투자 현황까지 진단 받아보세요."
+                      color="var(--type-gray-2)"
+                      size="b1"
                     />
                   </TextWrap>
-                ) : (
-                  <StockListWrap>
-                    {data.map((i: any, index: number) => (
-                      <StockBox stock={i} key={index} />
-                    ))}
-                  </StockListWrap>
-                )}
-              </Box>
-            </BoxContainer>
-          </Container>
-
-          {/* modal */}
-          <ReactModal
-            ariaHideApp={false}
-            isOpen={modalOpen}
-            onRequestClose={() => setModalOpen(false)}
-            style={{
-              overlay: {
-                position: 'fixed',
-                background: 'rgba(0, 0, 0, 0.3)',
-                zIndex: 10000,
-              },
-              content: {
-                margin: 'auto',
-                width: '437px',
-                height: '598px',
-                background: 'var(--type-white)',
-                display: 'flex',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                borderRadius: '20px',
-                padding: 0,
-              },
-            }}
-          >
-            <ModalOpen>
-              <TitleWrap>
-                <TypoGraphy text="종목 추가하기" size="t3" />
-                <div onClick={() => setModalOpen(false)}>
-                  <Img src={closeIcon} />
                 </div>
-              </TitleWrap>
-              <Modal setModalOpen={setModalOpen} />
-            </ModalOpen>
-          </ReactModal>
-        </Wrap>
-      ) : (
-        <NoneLogin />
-      )}
+                <BtnWrapper to={link}>
+                  <Btn10 text="내 주식 진단받기 >" type={button} />
+                </BtnWrapper>
+              </Title>
+              <BoxContainer>
+                <Box height="224px" padding={30}>
+                  <TextWrap padding="20px 0 15px 0">
+                    <TypoGraphy
+                      text="총 자산"
+                      size="b3"
+                      color="var(--type-gray-2)"
+                    />
+                  </TextWrap>
+                  <TextRow>
+                    <TypoGraphy
+                      text={'' + Math.floor(total).toLocaleString('ko-KR')}
+                      size="t1"
+                    />
+                    <TypoGraphy
+                      text="&nbsp;원"
+                      size="t1"
+                      color="var(--type-gray-2)"
+                    />
+                  </TextRow>
+                  <TextWrap padding="5px 0">
+                    <TypoGraphy
+                      text={`${totalGain.toLocaleString(
+                        'ko-KR'
+                      )}원 (${totalRate.toFixed(1)}%)`}
+                      size="12px"
+                      color="var(--type-gray-2)"
+                    />
+                  </TextWrap>
+                </Box>
+                <Box height="100%" padding={0}>
+                  <TextWrap padding="22px 27px 20px 27px">
+                    <TypoGraphy text="보유 종목 입력" size="small" />
+                  </TextWrap>
+                  <div
+                    onClick={() => setModalOpen(true)}
+                    style={{ padding: '0 27px' }}
+                  >
+                    <Btn10 type="big_add" text="+ 추가하기" />
+                  </div>
+
+                  {Array.from(data).length === 0 ? (
+                    <TextWrap align="center" padding="100px 0 0 0">
+                      <TypoGraphy
+                        text="아직 추가된 종목이 없어요"
+                        size="b2"
+                        color="var(--type-gray-4)"
+                      />
+                    </TextWrap>
+                  ) : (
+                    <StockListWrap>
+                      {data.map((i: any, index: number) => (
+                        <StockBox stock={i} key={index} />
+                      ))}
+                    </StockListWrap>
+                  )}
+                </Box>
+              </BoxContainer>
+            </Container>
+
+            {/* modal */}
+            <ReactModal
+              ariaHideApp={false}
+              isOpen={modalOpen}
+              onRequestClose={() => setModalOpen(false)}
+              style={{
+                overlay: {
+                  position: 'fixed',
+                  background: 'rgba(0, 0, 0, 0.3)',
+                  zIndex: 10000,
+                },
+                content: {
+                  margin: 'auto',
+                  width: '437px',
+                  height: '598px',
+                  background: 'var(--type-white)',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  borderRadius: '20px',
+                  padding: 0,
+                },
+              }}
+            >
+              <ModalOpen>
+                <TitleWrap>
+                  <TypoGraphy text="종목 추가하기" size="t3" />
+                  <div onClick={() => setModalOpen(false)}>
+                    <Img src={closeIcon} />
+                  </div>
+                </TitleWrap>
+                <Modal setModalOpen={setModalOpen} />
+              </ModalOpen>
+            </ReactModal>
+          </Wrap>
+        ) : (
+          <NoneLogin />
+        )
+      }
     </TotalWrap>
   );
 };

@@ -10,12 +10,15 @@ import { tokenState, setToken } from '../store/slice/tokenSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { SERVER } from '../network/config';
 import { TextRow } from '../assets/styles/styles';
+import { Cookies } from 'react-cookie';
 
 const Header = ({ paddingFlag }: { paddingFlag?: boolean }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const name = useSelector(nameState);
   const token = useSelector(tokenState);
   const dispatch = useDispatch();
+
+  const cookies = new Cookies().get('LOGIN_EXPIRES');
 
   const logout = () => {
     fetch(`${SERVER}/logout/`, {
@@ -26,7 +29,7 @@ const Header = ({ paddingFlag }: { paddingFlag?: boolean }) => {
       },
     })
       .then((res) => res.json())
-      .then((res) => {
+      .then(() => {
         dispatch(setName({ name: '' }));
         dispatch(setToken({ token: '' }));
       })
@@ -108,21 +111,23 @@ const Header = ({ paddingFlag }: { paddingFlag?: boolean }) => {
           </Row>
         </Row>
 
-        {name !== '' ? (
-          <Row gap="15px">
-            <TextRow style={{ width: 'auto' }}>
-              <Typography text={`${name}`} size="small" />
-              <Typography text="&nbsp;님" size="b2" />
-            </TextRow>
-            <div onClick={logout}>
-              <Btn60 type="login" text="로그아웃" />
+        {
+          /*name !== ''*/ cookies !== undefined ? (
+            <Row gap="15px">
+              <TextRow style={{ width: 'auto' }}>
+                <Typography text={`${name}`} size="small" />
+                <Typography text="&nbsp;님" size="b2" />
+              </TextRow>
+              <div onClick={logout}>
+                <Btn60 type="login" text="로그아웃" />
+              </div>
+            </Row>
+          ) : (
+            <div onClick={() => setModalOpen(true)}>
+              <Btn60 type="login" text="회원가입 / 로그인" />
             </div>
-          </Row>
-        ) : (
-          <div onClick={() => setModalOpen(true)}>
-            <Btn60 type="login" text="회원가입 / 로그인" />
-          </div>
-        )}
+          )
+        }
 
         {/* modal */}
         <LoginModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
