@@ -144,23 +144,6 @@ const Section1 = ({ data }: any) => {
                     },
                     index: number
                   ) => (
-                    // index <= 6 ? (
-                    //   <StockLabel
-                    //     key={index}
-                    //     color={backgroundColor[index]}
-                    //     name={i.stock.name}
-                    //     sector={i.stock.sector}
-                    //     rate={i.ratio.toFixed(1)}
-                    //   />
-                    // ) : (
-                    //   <StockLabel
-                    //     key={index}
-                    //     color={backgroundColor[index]}
-                    //     name={i.stock.name}
-                    //     sector=""
-                    //     rate={i.ratio.toFixed(1)}
-                    //   />
-                    // )
                     <StockLabel
                       key={index}
                       color={backgroundColor[index]}

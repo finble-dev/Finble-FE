@@ -47,41 +47,6 @@ const Section2 = ({ data }: { data: IInitData }) => {
     status = '안전';
   }
 
-  // 그래프
-  // let i = 0;
-  // useEffect(() => {
-  //   i++;
-  //   if (i >= 2) {
-  //     data.graph_kospi.map(
-  //       (item: { date: string; data: number }, index: number) => {
-  //         if (
-  //           index != 0 &&
-  //           item.date[6] != data.graph_kospi[index - 1].date[6]
-  //         ) {
-  //           setKospiData((label: any) => [...label, item]);
-  //           setLabel((label: []) => [
-  //             ...label,
-  //             item.date.slice(0, 7).replace('-', '.\u00A0'),
-  //           ]);
-  //         } else {
-  //           setLabel((label: []) => [...label, '']);
-  //         }
-  //       }
-  //     );
-
-  //     data.graph_portfolio.map(
-  //       (item: { date: string; data: number }, index: number) => {
-  //         if (
-  //           index != 0 &&
-  //           item.date[6] != data.graph_portfolio[index - 1].date[6]
-  //         ) {
-  //           setPortfolioData((label: any) => [...label, item]);
-  //         }
-  //       }
-  //     );
-  //   }
-  // }, []);
-
   let newlabel = data.graph_kospi.map((i: { date: string; data: number }) =>
     ('' + i.date).slice(0, 7).replace('-', '.\u00A0')
   );

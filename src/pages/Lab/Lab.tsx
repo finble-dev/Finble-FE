@@ -52,7 +52,6 @@ const Lab = () => {
   //팝업 하루동안 보지않기 (cookie)
   const getExpiredDate = (days: number) => {
     const date = new Date();
-    // date.setDate(date.getDate() + days);
     date.setMinutes(date.getMinutes() + days);
     return date;
   };
@@ -203,7 +202,6 @@ const TitleWrap = styled.div`
   height: 100%;
   z-index: 99;
   padding: 0 0 5px 0;
-  // padding: 0 0 40px 0;
 `;
 
 const CheckWrap = styled.div`
@@ -211,5 +209,4 @@ const CheckWrap = styled.div`
   align-itmes: flex-end;
   justify-content: center;
   gap: 5px;
-  // padding: 25px 0 0 0;
 `;
