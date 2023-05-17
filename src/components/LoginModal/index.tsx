@@ -3,7 +3,13 @@ import { IconWrapper, ModalContent, ModalOpen } from './Component';
 import closeIcon from '../../assets/icons/close.svg';
 import { Img } from '../../assets/styles/styles';
 
-const LoginModal = ({ modalOpen, setModalOpen }: any) => {
+const LoginModal = ({
+  modalOpen,
+  setModalOpen,
+}: {
+  modalOpen: boolean;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <ReactModal
       ariaHideApp={false}

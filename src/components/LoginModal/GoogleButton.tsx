@@ -18,9 +18,12 @@ import { useCookies } from 'react-cookie';
 const client_id: string = process.env.REACT_APP_CLIENT_ID as string;
 const client_secret: string = process.env.REACT_APP_CLIENT_SECRET as string;
 const redirect_uri: string = process.env.REACT_APP_REDIRECT_URL as string;
-// const expireTime = 1740000; // 29분
 
-const GoogleButton = ({ setModalOpen }: any) => {
+const GoogleButton = ({
+  setModalOpen,
+}: {
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const [code, setCode] = useState(''); // 1회용 auth code
   const [googleToken, setGoogleToken] = useState('' as string); // 구글에서 받은 access token
   const dispatch = useDispatch();
@@ -64,13 +67,7 @@ const GoogleButton = ({ setModalOpen }: any) => {
     return date;
   };
   const LoginUntilExpires = (refreshToken: string) => {
-    // if (!loginCookie) return;
     const expires = getExpiredDate(5);
-    console.log('로그인 성공');
-    // setAppCookies('LOGIN_EXPIRES', true, {
-    //   path: '/',
-    //   expires,
-    // });
     setAppCookies('LOGIN_EXPIRES', refreshToken, {
       path: '/',
       expires,
@@ -80,19 +77,10 @@ const GoogleButton = ({ setModalOpen }: any) => {
     if (appCookies['LOGIN_EXPIRES']) return;
   }, []);
 
-  console.log(appCookies);
-
   // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
   useEffect(() => {
-    async function extendTime(refreshToken: string) {
-      const res = (await getRefresh(refreshToken)) as any;
-      dispatch(setToken({ token: res.access as string }));
-      //setTimeout(extendTime, expireTime, refreshToken);
-    }
-
     async function login() {
       const res = (await Login(googleToken)) as any;
-      console.log(res);
       const refreshToken = await res?.token?.refresh;
 
       if (refreshToken !== undefined) {
@@ -108,10 +96,9 @@ const GoogleButton = ({ setModalOpen }: any) => {
           expiration: Date.parse(res.token.expiration_time) as number,
         })
       );
-      //setTimeout(extendTime, expireTime, refreshToken);
     }
 
-    if (googleToken != undefined || googleToken != '') {
+    if (googleToken !== undefined || googleToken !== '') {
       login();
     }
   }, [googleToken]);

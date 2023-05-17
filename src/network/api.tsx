@@ -1,3 +1,5 @@
+import { ISearchStock } from '../interface/interface';
+import { IInitData } from '../pages/Mystock/components/initData';
 import { SERVER } from './config';
 
 // Login api (finble access token 발급)
@@ -37,9 +39,9 @@ export const getRefresh = async (refreshToken: string) => {
 // 내 포트폴리오 조회
 export const getPortfolio = async (
   token: string,
-  setData: any,
-  setTotalGain: any,
-  setTotalRate: any
+  setData: React.Dispatch<React.SetStateAction<ISearchStock[]>>,
+  setTotalGain: React.Dispatch<React.SetStateAction<number>>,
+  setTotalRate: React.Dispatch<React.SetStateAction<number>>
 ) => {
   await fetch(`${SERVER}/portfolio/`, {
     headers: {
@@ -57,7 +59,10 @@ export const getPortfolio = async (
 };
 
 // 내 포트폴리오 진단결과 조회
-export const getPortfolioAnalysis = async (token: string, setData: any) => {
+export const getPortfolioAnalysis = async (
+  token: string,
+  setData: React.Dispatch<React.SetStateAction<IInitData>>
+) => {
   await fetch(`${SERVER}/portfolio/analysis/`, {
     headers: {
       'Content-Type': 'application/json',
@@ -69,7 +74,7 @@ export const getPortfolioAnalysis = async (token: string, setData: any) => {
     .catch((err) => console.log(err));
 };
 
-export const getTestPortfolio = async (token: any) => {
+export const getTestPortfolio = async (token: string) => {
   const res = await fetch(`${SERVER}/test-portfolio/`, {
     headers: {
       'Content-Type': 'application/json',
@@ -80,7 +85,7 @@ export const getTestPortfolio = async (token: any) => {
   return res;
 };
 
-export const deleteTestPortfolio = async (token: any, id: number) => {
+export const deleteTestPortfolio = async (token: string, id: number) => {
   await fetch(`${SERVER}/test-portfolio/`, {
     method: 'DELETE',
     headers: {
@@ -93,7 +98,7 @@ export const deleteTestPortfolio = async (token: any, id: number) => {
   }).catch((err) => console.log(err));
 };
 
-export const postTestPortfolio = async (token: any, symbol: string) => {
+export const postTestPortfolio = async (token: string, symbol: string) => {
   const res = await fetch(`${SERVER}/test-portfolio/`, {
     method: 'POST',
     headers: {
@@ -108,13 +113,13 @@ export const postTestPortfolio = async (token: any, symbol: string) => {
 };
 
 export const patchTestPortfolio = async (
-  token: any,
+  token: string,
   id: number,
-  ratio: any
+  ratio: number
 ) => {
   let data = JSON.stringify({
     id: id,
-    ratio: ratio === '' || 0 ? null : ratio,
+    ratio: ratio === 0 ? null : ratio,
   });
 
   const res = await fetch(`${SERVER}/test-portfolio/`, {
@@ -131,7 +136,7 @@ export const patchTestPortfolio = async (
   return res;
 };
 
-export const getTestAnalysis = async (token: any) => {
+export const getTestAnalysis = async (token: string) => {
   const res = await fetch(`${SERVER}/test-portfolio/analysis/`, {
     headers: {
       'Content-Type': 'application/json',
@@ -147,7 +152,7 @@ export const getTestAnalysis = async (token: any) => {
   return res;
 };
 
-export const postEmail = async (token: any, email: string) => {
+export const postEmail = async (token: string, email: string) => {
   await fetch(`${SERVER}/contact/`, {
     method: 'POST',
     headers: {
@@ -157,8 +162,5 @@ export const postEmail = async (token: any, email: string) => {
     body: JSON.stringify({ contact: email }),
   })
     .then((response) => response.json())
-    .then((res) => {
-      console.log('유저 이메일 저장 : ', res);
-    })
     .catch((err) => console.log(err));
 };

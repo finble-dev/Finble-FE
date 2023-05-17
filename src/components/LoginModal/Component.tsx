@@ -3,7 +3,11 @@ import { TextWrap } from '../../assets/styles/styles';
 import TypoGraphy from '../Typography';
 import { GoogleButton } from './GoogleButton';
 
-const ModalContent = ({ setModalOpen }: any) => {
+const ModalContent = ({
+  setModalOpen,
+}: {
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   return (
     <>
       <TypoGraphy text="시작하기" size="t2" />

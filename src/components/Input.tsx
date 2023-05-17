@@ -2,13 +2,12 @@ import styled from 'styled-components';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import TypoGraphy from './Typography';
-import { useState } from 'react';
 
 interface input {
   type: string;
   name?: string;
   market?: string;
-  setSearch?: any;
+  setSearch?: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const Input = ({ type, name, market, setSearch }: input) => {
@@ -34,11 +33,13 @@ const Input = ({ type, name, market, setSearch }: input) => {
 
       {type.includes('enter') ? (
         <TypoGraphy text={name} size="input" />
-      ) : (
+      ) : setSearch ? (
         <InputArea
           placeholder={placeholder}
           onChange={(e) => setSearch(e.target.value)}
         />
+      ) : (
+        <></>
       )}
 
       <TypoGraphy text={unit} color="var(--type-gray-1)" size="input" />

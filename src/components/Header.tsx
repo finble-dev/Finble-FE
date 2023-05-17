@@ -37,20 +37,6 @@ const Header = ({ paddingFlag }: { paddingFlag?: boolean }) => {
   };
 
   const path = useLocation();
-  // let stock_line, lab_line;
-
-  // if (path.pathname === '/stock' || path.pathname === '/diagnosis') {
-  //   stock_line = 'block';
-  //   lab_line = 'none';
-  // } else if (path.pathname === '/lab') {
-  //   stock_line = 'none';
-  //   lab_line = 'block';
-  // }
-
-  // const header = [
-  //   { link: '/stock', name: '내 주식', display: stock_line },
-  //   { link: '/lab', name: '투자실험실', display: lab_line },
-  // ];
 
   let padding;
   if (

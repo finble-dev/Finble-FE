@@ -16,6 +16,7 @@ import {
   Legend,
 } from 'chart.js';
 import { GraphLabel } from '../components/Graph/Label';
+import { IInitData } from '../components/initData';
 
 ChartJS.register(
   CategoryScale,
@@ -27,9 +28,9 @@ ChartJS.register(
   Colors
 );
 
-const Section2 = ({ data }: { data: any }) => {
+const Section2 = ({ data }: { data: IInitData }) => {
   // 수익률 비교
-  let profitGap = parseInt(data.portfolio_profit) - parseInt(data.kospi_profit);
+  let profitGap = data.portfolio_profit - data.kospi_profit;
   let profitText = '낮은';
   if (profitGap > 0) {
     profitText = '높은';
@@ -39,50 +40,14 @@ const Section2 = ({ data }: { data: any }) => {
 
   // 내 포트폴리오 상태 (위험/안전)
   let status = '위험';
-  let maxProfitGap =
-    parseInt(data.portfolio_max_fall) - parseInt(data.kospi_max_fall);
+  let maxProfitGap = data.portfolio_max_fall - data.kospi_max_fall;
   if (maxProfitGap > 0) {
     status = '위험';
   } else {
     status = '안전';
   }
 
-  // 그래프
-  // let i = 0;
-  // useEffect(() => {
-  //   i++;
-  //   if (i >= 2) {
-  //     data.graph_kospi.map(
-  //       (item: { date: string; data: number }, index: number) => {
-  //         if (
-  //           index != 0 &&
-  //           item.date[6] != data.graph_kospi[index - 1].date[6]
-  //         ) {
-  //           setKospiData((label: any) => [...label, item]);
-  //           setLabel((label: []) => [
-  //             ...label,
-  //             item.date.slice(0, 7).replace('-', '.\u00A0'),
-  //           ]);
-  //         } else {
-  //           setLabel((label: []) => [...label, '']);
-  //         }
-  //       }
-  //     );
-
-  //     data.graph_portfolio.map(
-  //       (item: { date: string; data: number }, index: number) => {
-  //         if (
-  //           index != 0 &&
-  //           item.date[6] != data.graph_portfolio[index - 1].date[6]
-  //         ) {
-  //           setPortfolioData((label: any) => [...label, item]);
-  //         }
-  //       }
-  //     );
-  //   }
-  // }, []);
-
-  let newlabel = data.graph_kospi.map((i: { date: number; data: number }) =>
+  let newlabel = data.graph_kospi.map((i: { date: string; data: number }) =>
     ('' + i.date).slice(0, 7).replace('-', '.\u00A0')
   );
 
@@ -92,7 +57,7 @@ const Section2 = ({ data }: { data: any }) => {
       {
         label: '내 포트폴리오',
         data: data.graph_portfolio.map(
-          (item: { date: number; data: number }) => item.data
+          (item: { date: string; data: number }) => item.data
         ),
         borderColor: 'rgb(103, 146, 248)',
         borderWidth: 3,
@@ -101,7 +66,7 @@ const Section2 = ({ data }: { data: any }) => {
       {
         label: '코스피',
         data: data.graph_kospi.map(
-          (item: { date: number; data: number }) => item.data
+          (item: { date: string; data: number }) => item.data
         ),
         borderWidth: 3,
         borderColor: 'rgb(255, 88, 82)',
@@ -116,9 +81,6 @@ const Section2 = ({ data }: { data: any }) => {
       legend: {
         display: false,
         align: 'start',
-        // position: {
-        //   left: 100,
-        // },
       },
       tooltip: {
         padding: 10,
@@ -127,11 +89,6 @@ const Section2 = ({ data }: { data: any }) => {
         usePointStyle: true,
       },
     },
-    // layout: {
-    //   padding: {
-    //     top: 50,
-    //   },
-    // },
     scales: {
       y: {
         id: 'yAxes',
@@ -145,9 +102,9 @@ const Section2 = ({ data }: { data: any }) => {
         id: 'xAxes',
         grid: { display: false },
         ticks: {
-          callback(val: number, index: number): any {
+          callback(val: number, index: number): { val: number; index: number } {
             var newthis = this as any;
-            return newlabel[index] != newlabel[index - 1]
+            return newlabel[index] !== newlabel[index - 1]
               ? newthis.getLabelForValue(val)
               : '';
           },
@@ -184,9 +141,7 @@ const Section2 = ({ data }: { data: any }) => {
             />
           </TextRow>
           <TypoGraphy
-            text={`내 포트폴리오 ${parseInt(
-              data.portfolio_profit
-            )}%,  코스피 ${parseInt(data.kospi_profit)}%`}
+            text={`내 포트폴리오 ${data.portfolio_profit}%,  코스피 ${data.kospi_profit}%`}
             size="t2"
           />
         </TextWrap>

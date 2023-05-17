@@ -1,4 +1,4 @@
-export const initData = {
+export const labInitData = {
   // 기존 포트폴리오
   graph_original_portfolio: [
     {
@@ -25,4 +25,20 @@ export const initData = {
   test_portfolio_max_fall: 1,
   test_portfolio_max_loss: 1,
   test_portfolio_profit: 1,
-} as any;
+} as ILabData;
+
+export interface ILabData {
+  graph_original_portfolio: { date: string; data: number }[];
+  graph_test_portfolio: { date: string; data: number }[];
+  annual_profit_original: number;
+  annual_profit_test: number;
+  final_val_test: number;
+  invest_val_sum: number;
+  original_portfolio_max_fall: number;
+  original_portfolio_max_loss: number;
+  original_portfolio_profit: number;
+  present_val_sum: number;
+  test_portfolio_max_fall: number;
+  test_portfolio_max_loss: number;
+  test_portfolio_profit: number;
+}

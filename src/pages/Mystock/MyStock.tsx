@@ -16,6 +16,7 @@ import StockBox from './components/StockBox';
 import Header from '../../components/Header';
 import { getPortfolio } from '../../network/api';
 import { Cookies } from 'react-cookie';
+import { ISearchStock } from '../../interface/interface';
 
 const MyStock = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -30,7 +31,7 @@ const MyStock = () => {
   let total = 0;
 
   const getPortfolioAPI = async () => {
-    if (name != '') {
+    if (name !== '') {
       await getPortfolio(token, setData, setTotalGain, setTotalRate);
     }
   };
@@ -42,7 +43,7 @@ const MyStock = () => {
 
   // 내 주식 진단하기 버튼 활성화
   let link, button;
-  if (Array.from(data).length != 0) {
+  if (Array.from(data).length !== 0) {
     link = '/diagnosis';
     button = 'check';
   } else {
