@@ -11,7 +11,7 @@ interface InputType {
   name: string;
   market: string;
   symbol: string;
-  setModalOpen: any;
+  setModalOpen: (value: React.SetStateAction<boolean>) => void;
 }
 
 const Modal2 = ({ name, market, symbol, setModalOpen }: InputType) => {

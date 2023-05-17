@@ -82,11 +82,6 @@ const GoogleButton = ({
 
   // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
   useEffect(() => {
-    // async function extendTime(refreshToken: string) {
-    //   const res = (await getRefresh(refreshToken)) as any;
-    //   dispatch(setToken({ token: res.access as string }));
-    // }
-
     async function login() {
       const res = (await Login(googleToken)) as any;
       console.log(res);

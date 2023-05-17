@@ -26,12 +26,13 @@ import {
   patchTestPortfolio,
   postTestPortfolio,
 } from '../../../network/api';
+import { ILabData } from '../labInitData';
 
 interface exp {
   isExp?: boolean;
-  setIsExp?: any;
-  data?: any;
-  setData: React.Dispatch<React.SetStateAction<null>>;
+  setIsExp: React.Dispatch<React.SetStateAction<boolean>>;
+  data?: ILabData;
+  setData: React.Dispatch<React.SetStateAction<ILabData>>;
 }
 
 const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {

@@ -187,9 +187,9 @@ const Result = ({ data }: any) => {
           <Column style={{ justifyContent: 'start' }}>
             <TypoGraphy text="투자 실험 결과" size="h1" />
             <TextWrap lineHeight={29} padding="14px 0 0 0">
-              {list1.map((items: any, idx: number) => (
+              {list1.map((items: string[][], idx: number) => (
                 <TextRow lineHeight={29}>
-                  {items.map((item: any, idx: number) =>
+                  {items.map((item: string[], idx: number) =>
                     item[0] === 'black' ? (
                       <TypoGraphy text={item[1]} size="t3" />
                     ) : (
@@ -227,9 +227,9 @@ const Result = ({ data }: any) => {
         >
           <Column>
             <TextWrap lineHeight={29} style={{ marginBottom: '32px' }}>
-              {list2.map((items: any, idx: number) => (
+              {list2.map((items: string[][], idx: number) => (
                 <TextRow lineHeight={29}>
-                  {items.map((item: any, idx: number) =>
+                  {items.map((item: string[], idx: number) =>
                     item[0] === 'black' ? (
                       <TypoGraphy text={item[1]} size="t3" />
                     ) : (

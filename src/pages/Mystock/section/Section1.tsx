@@ -7,9 +7,10 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { SectorLabel, StockLabel } from '../components/Graph/Label';
 import { useSelector } from 'react-redux';
 import { firstNameState } from '../../../store/slice/userSlice';
+import { IInitData } from '../components/initData';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-const Section1 = ({ data }: any) => {
+const Section1 = ({ data }: { data: IInitData }) => {
   const [stock, setStock] = useState(data.portfolio_ratio);
   const [sector, setPortfolio] = useState(data.sector_ratio);
   const name = useSelector(firstNameState);
@@ -88,9 +89,17 @@ const Section1 = ({ data }: any) => {
           />
         </TextWrap>
         <TextRow>
-          {content.map((i: any, index: number) => (
-            <TypoGraphy text={i.text} color={i.color} size="t2" key={index} />
-          ))}
+          {content.map(
+            (
+              i: {
+                color: string;
+                text: string;
+              },
+              index: number
+            ) => (
+              <TypoGraphy text={i.text} color={i.color} size="t2" key={index} />
+            )
+          )}
         </TextRow>
 
         {/* box */}
@@ -163,23 +172,39 @@ const Section1 = ({ data }: any) => {
               color="var(--type-gray-2)"
             />
             <BarGraphWrapper>
-              {sector.map((i: any, index: number) => (
-                <BarGraph
-                  key={index}
-                  color={backgroundColor[index]}
-                  width={i.ratio}
-                />
-              ))}
+              {sector.map(
+                (
+                  i: {
+                    sector: string;
+                    ratio: number;
+                  },
+                  index: number
+                ) => (
+                  <BarGraph
+                    key={index}
+                    color={backgroundColor[index]}
+                    width={i.ratio}
+                  />
+                )
+              )}
             </BarGraphWrapper>
             <LabelWrapper padding="0 15px">
-              {sector.map((i: any, index: number) => (
-                <SectorLabel
-                  key={index}
-                  color={backgroundColor[index]}
-                  rate={'' + parseInt(i.ratio)}
-                  sector={i.sector}
-                />
-              ))}
+              {sector.map(
+                (
+                  i: {
+                    sector: string;
+                    ratio: number;
+                  },
+                  index: number
+                ) => (
+                  <SectorLabel
+                    key={index}
+                    color={backgroundColor[index]}
+                    rate={'' + i.ratio}
+                    sector={i.sector}
+                  />
+                )
+              )}
             </LabelWrapper>
           </SubContainer>
         </WhiteBox>
@@ -242,8 +267,8 @@ const BarGraphWrapper = styled.div`
   height: 14px;
   margin: 15px 0 10px 15px;
 `;
-const BarGraph = styled.div<{ width: string; color: string }>`
-  width: ${(props) => props.width || '0'}%;
+const BarGraph = styled.div<{ width: number; color: string }>`
+  width: ${(props) => String(props.width) || '0'}%;
   height: 100%;
   background: ${(props) => props.color || 'var(--type-gray-3)'};
 `;

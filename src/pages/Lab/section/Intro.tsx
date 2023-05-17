@@ -30,9 +30,9 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={26}>
-            {list1.map((items: any, itemsIdx: number) => (
+            {list1.map((items: string[][], itemsIdx: number) => (
               <TextRow lineHeight={26} key={`list1_${itemsIdx}`}>
-                {items.map((item: any, itemIdx: number) =>
+                {items.map((item: string[], itemIdx: number) =>
                   item[0] === 'black' ? (
                     <TypoGraphy
                       text={item[1]}
@@ -53,9 +53,9 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={26} padding="16.99px 0 0 0">
-            {list2.map((items: any, itemsIdx: number) => (
+            {list2.map((items: string[][], itemsIdx: number) => (
               <TextRow lineHeight={26} key={`list2_${itemsIdx}`}>
-                {items.map((item: any, itemIdx: number) =>
+                {items.map((item: string[], itemIdx: number) =>
                   item[0] === 'black' ? (
                     <TypoGraphy
                       text={item[1]}
@@ -99,9 +99,9 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={26}>
-            {list3.map((items: any, itemsIdx: number) => (
+            {list3.map((items: string[][], itemsIdx: number) => (
               <TextRow lineHeight={26} key={`list3_${itemsIdx}`}>
-                {items.map((item: any, itemIdx: number) =>
+                {items.map((item: string[], itemIdx: number) =>
                   item[0] === 'black' ? (
                     <TypoGraphy
                       text={item[1]}
@@ -122,9 +122,9 @@ const Intro = () => {
           </TextWrap>
 
           <TextWrap lineHeight={26} padding="17px 0 0 0">
-            {list4.map((items: any, itemsIdx: number) => (
+            {list4.map((items: string[][], itemsIdx: number) => (
               <TextRow lineHeight={26} key={`list4_${itemsIdx}`}>
-                {items.map((item: any, itemIdx: number) =>
+                {items.map((item: string[], itemIdx: number) =>
                   item[0] === 'black' ? (
                     <TypoGraphy
                       text={item[1]}

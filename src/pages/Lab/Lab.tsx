@@ -11,7 +11,7 @@ import { Img, TextRow, TextWrap } from '../../assets/styles/styles';
 import TypoGraphy from '../../components/Typography';
 import closeIcon from '../../assets/icons/close.svg';
 import modalImg from '../../assets/img/lab/modalImg.svg';
-import { initData } from './initData';
+import { labInitData } from './labInitData';
 
 import { nameState } from '../../store/slice/userSlice';
 import { useSelector } from 'react-redux';
@@ -36,7 +36,7 @@ const Lab = () => {
   const [modalOpen, setModalOpen] = useState(true);
   const [isExp, setIsExp] = useState(false);
   const name = useSelector(nameState);
-  const [data, setData] = useState(initData);
+  const [data, setData] = useState(labInitData);
 
   // cookie
   const [appCookies, setAppCookies, removeCookie] = useCookies([
@@ -80,7 +80,7 @@ const Lab = () => {
               data={data}
               setData={setData}
             />
-            {data != initData ? <Result data={data} /> : <></>}
+            {data !== labInitData ? <Result data={data} /> : <></>}
             <ReactModal
               ariaHideApp={false}
               isOpen={modalOpen && !hasCookie}
@@ -94,7 +94,6 @@ const Lab = () => {
                   margin: 'auto',
                   width: '612px',
                   height: '362px',
-                  // height: '400px',
                   background: 'var(--type-white)',
                   display: 'flex',
                   justifyContent: 'center',
@@ -138,13 +137,13 @@ const Lab = () => {
                 <Img src={modalImg} height="188px" />
 
                 <TextWrap lineHeight={26}>
-                  {list1.map((items: any, itemsIdx: number) => (
+                  {list1.map((items: string[][], itemsIdx: number) => (
                     <TextRow
                       align="center"
                       key={`Lab_list1_${itemsIdx}`}
                       lineHeight={26}
                     >
-                      {items.map((item: any, itemIdx: number) =>
+                      {items.map((item: string[], itemIdx: number) =>
                         item[0] === 'black' ? (
                           <TypoGraphy
                             text={item[1]}

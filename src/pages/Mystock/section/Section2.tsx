@@ -102,9 +102,9 @@ const Section2 = ({ data }: { data: IInitData }) => {
         id: 'xAxes',
         grid: { display: false },
         ticks: {
-          callback(val: number, index: number): any {
+          callback(val: number, index: number): { val: number; index: number } {
             var newthis = this as any;
-            return newlabel[index] != newlabel[index - 1]
+            return newlabel[index] !== newlabel[index - 1]
               ? newthis.getLabelForValue(val)
               : '';
           },

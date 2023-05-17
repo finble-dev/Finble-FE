@@ -8,14 +8,19 @@ import Modal2 from './Modal2';
 import { SERVER } from '../../../../network/config';
 import { tokenState } from '../../../../store/slice/tokenSlice';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
+import { ISearchStock } from '../../../../interface/interface';
 
-const Modal = ({ setModalOpen }: { setModalOpen: any }) => {
+const Modal = ({
+  setModalOpen,
+}: {
+  setModalOpen: (value: React.SetStateAction<boolean>) => void;
+}) => {
   const [stockName, setStockName] = useState('');
   const [market, setMarket] = useState('');
   const [symbol, setSymbol] = useState('');
   const [click, setclick] = useState(false);
   const [search, setSearch] = useState('');
-  const [data, setData] = useState([] as any);
+  const [data, setData] = useState([] as ISearchStock[]);
 
   const token = useSelector(tokenState);
 
