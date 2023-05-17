@@ -15,7 +15,7 @@ interface box {
   title: string;
   status?: string;
   max_fall: number;
-  max_loss: string;
+  max_loss: number;
 }
 
 const WhiteSmallBox = ({ title, status, max_fall, max_loss }: box) => {
@@ -58,7 +58,7 @@ const WhiteSmallBox = ({ title, status, max_fall, max_loss }: box) => {
         </TextRow>
         <TextRow style={{ alignItems: 'center', gap: '10px', height: '36px' }}>
           <TypoGraphy
-            text={`-₩ ${parseInt(max_loss).toLocaleString('ko-KR')}`}
+            text={`-₩ ${max_loss.toLocaleString('ko-KR')}`}
             color="var(--type-gray-2)"
             size="t3"
           />

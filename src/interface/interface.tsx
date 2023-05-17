@@ -8,5 +8,5 @@ export interface ETF {
 
 export interface Modal {
   modalOpen: boolean;
-  setModalOpen: any & React.Dispatch<React.SetStateAction<boolean>>;
+  setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
