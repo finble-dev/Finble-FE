@@ -4,7 +4,7 @@ import ReactModal from 'react-modal';
 //components
 import TypoGraphy from '../../../components/Typography';
 import { Btn10, Btn60 } from '../../../components/Button';
-import { AddedItem } from '../components/AddedItem';
+import { AddedItem, IETFFlag } from '../components/AddedItem';
 import { ETFItem } from '../components/ETFItem';
 // assets
 import { TextRow, TextWrap } from '../../../assets/styles/styles';
@@ -89,7 +89,7 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   useEffect(() => {
     async function getPorfolio() {
       const res = (await getTestPortfolio(token)) as any;
-      if (res.data_retain.length != 0) {
+      if (res.data_retain.length !== 0) {
         setModalOpen(false);
         setRetainStock(res.data_retain);
       }
@@ -152,8 +152,11 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
   };
 
   // 보유 종목 비중 수정
-  const changeMine = async (id: number, e: any) => {
-    const patchRes = await patchTestPortfolio(token, id, e.target.value);
+  const changeMine = async (
+    id: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    await patchTestPortfolio(token, id, Number(e.target.value));
   };
 
   // ETF 카테고리 선택
@@ -183,16 +186,10 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
         if (ETFFlag[i][j].flag) {
           const id = (await postTestPortfolio(token, ETFFlag[i][j].symbol)).id;
 
-          const patchRes = await patchTestPortfolio(
-            token,
-            id,
-            ETFFlag[i][j].ratio
-          );
+          await patchTestPortfolio(token, id, ETFFlag[i][j].ratio);
         }
       }
     }
-
-    console.log('---- 실험 시작 -----');
 
     const anaRes = await getTestAnalysis(token);
     console.log('실험 결과 : ', anaRes);
@@ -272,22 +269,31 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
           {/* 선택한 ETF 버튼따라 list 보여줌 */}
           <Box>
             <Row padding="0 0 12px 0">
-              {btn.map((item: any, idx: number) => (
-                <div
-                  onClick={() => onClickBtn(idx)}
-                  style={{ marginRight: '10px' }}
-                  key={`btn_${idx}`}
-                >
-                  {cateFlag[idx] === true ? (
-                    <Btn60 text={item.name} type={'outline_able'} />
-                  ) : (
-                    <Btn60 text={item.name} type={'outline_disable'} />
-                  )}
-                </div>
-              ))}
+              {btn.map(
+                (
+                  item: {
+                    name: string;
+                    text1: string;
+                    text2: string;
+                  },
+                  idx: number
+                ) => (
+                  <div
+                    onClick={() => onClickBtn(idx)}
+                    style={{ marginRight: '10px' }}
+                    key={`btn_${idx}`}
+                  >
+                    {cateFlag[idx] === true ? (
+                      <Btn60 text={item.name} type={'outline_able'} />
+                    ) : (
+                      <Btn60 text={item.name} type={'outline_disable'} />
+                    )}
+                  </div>
+                )
+              )}
             </Row>
 
-            {cateFlag.map((item: any, idx: number) =>
+            {cateFlag.map((item: boolean, idx: number) =>
               item ? (
                 <TextWrap
                   key={`cateFlag_0_${idx}`}
@@ -387,8 +393,8 @@ const Experiment = ({ isExp, setIsExp, data, setData }: exp) => {
               <TextWrap padding="15px 0 20px 0">
                 <TypoGraphy text="추가 종목" size="small" />
               </TextWrap>
-              {ETFFlag.map((items: any, listIdx: number) =>
-                items.map((item: any, itemIdx: number) =>
+              {ETFFlag.map((items: IETFFlag[], listIdx: number) =>
+                items.map((item: IETFFlag, itemIdx: number) =>
                   ETFFlag[listIdx][itemIdx].flag &&
                   retainNameList.lastIndexOf(
                     ETFList[listIdx][itemIdx].intro

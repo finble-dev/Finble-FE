@@ -28,6 +28,7 @@ import {
 import StepBox from '../../../components/StepBox';
 import { postEmail } from '../../../network/api';
 import { GraphLabel } from '../../Mystock/components/Graph/Label';
+import { ILabData } from '../labInitData';
 
 ChartJS.register(
   CategoryScale,
@@ -38,7 +39,7 @@ ChartJS.register(
   Legend
 );
 
-const Result = ({ data }: any) => {
+const Result = ({ data }: { data: ILabData }) => {
   const token = useSelector(tokenState);
   const [email, setEmail] = useState('');
   // 연평균 수익률
@@ -141,8 +142,9 @@ const Result = ({ data }: any) => {
   ];
 
   const graphData = {
-    labels: data.graph_original_portfolio.map((item: any) =>
-      item.date.substring(0, 7).replace('-', '.')
+    labels: data.graph_original_portfolio.map(
+      (item: { date: string; data: number }) =>
+        item.date.substring(0, 7).replace('-', '.')
     ),
     datasets: [
       {
@@ -268,57 +270,68 @@ const Result = ({ data }: any) => {
             />
           </TipContainer>
 
-          {question.map((item: any, idx: number) => (
-            <>
-              <TipLine />
+          {question.map(
+            (
+              item: {
+                flag: boolean;
+                setFlag: React.Dispatch<React.SetStateAction<boolean>>;
+                question: string;
+                answer1: string;
+                answer2: string;
+              },
+              idx: number
+            ) => (
+              <>
+                <TipLine />
 
-              <QuestionRow>
-                <div style={{ display: 'flex', justifyContent: 'start' }}>
-                  <ImgQA src={q} />
-                  <TypoGraphy
-                    text={item.question}
-                    size="b1"
-                    style={{ marginLeft: '30px' }}
-                  />
-                </div>
-
-                <div
-                  onClick={() => {
-                    item.setFlag(!item.flag);
-                  }}
-                >
-                  {item.flag ? (
-                    <ImgToggle src={up} />
-                  ) : (
-                    <ImgToggle src={down} />
-                  )}
-                </div>
-              </QuestionRow>
-              {item.flag ? (
-                <>
-                  <TipLine />
-                  <AnswerRow>
-                    <ImgQA
-                      src={a}
-                      style={{ marginTop: '-25px', marginLeft: '15px' }}
+                <QuestionRow>
+                  <div style={{ display: 'flex', justifyContent: 'start' }}>
+                    <ImgQA src={q} />
+                    <TypoGraphy
+                      text={item.question}
+                      size="b1"
+                      style={{ marginLeft: '30px' }}
                     />
+                  </div>
 
-                    <TextWrap
-                      lineHeight={30}
-                      style={{
-                        marginLeft: '30px',
-                      }}
-                    >
-                      <TypoGraphy text={item.answer1} size="b1" />
-                      <TypoGraphy text={item.answer2} size="b1" />
-                    </TextWrap>
-                  </AnswerRow>
-                </>
-              ) : (
-                <></>
-              )}
-            </>
-          ))}
+                  <div
+                    onClick={() => {
+                      item.setFlag(!item.flag);
+                    }}
+                  >
+                    {item.flag ? (
+                      <ImgToggle src={up} />
+                    ) : (
+                      <ImgToggle src={down} />
+                    )}
+                  </div>
+                </QuestionRow>
+                {item.flag ? (
+                  <>
+                    <TipLine />
+                    <AnswerRow>
+                      <ImgQA
+                        src={a}
+                        style={{ marginTop: '-25px', marginLeft: '15px' }}
+                      />
+
+                      <TextWrap
+                        lineHeight={30}
+                        style={{
+                          marginLeft: '30px',
+                        }}
+                      >
+                        <TypoGraphy text={item.answer1} size="b1" />
+                        <TypoGraphy text={item.answer2} size="b1" />
+                      </TextWrap>
+                    </AnswerRow>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </>
+            )
+          )}
           <TipLine />
         </Column>
       </Column>

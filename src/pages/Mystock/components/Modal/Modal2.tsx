@@ -24,7 +24,6 @@ const Modal2 = ({ name, market, symbol, setModalOpen }: InputType) => {
       title: '종목명',
       type: 'search_enter',
       name: name,
-      // setText: '',
     },
     {
       title: '매수 평단가',
@@ -36,7 +35,6 @@ const Modal2 = ({ name, market, symbol, setModalOpen }: InputType) => {
       title: '수량',
       type: 'number',
       setText: setNum,
-      // name: '',
     },
   ];
 

@@ -162,8 +162,5 @@ export const postEmail = async (token: string, email: string) => {
     body: JSON.stringify({ contact: email }),
   })
     .then((response) => response.json())
-    .then((res) => {
-      console.log('유저 이메일 저장 : ', res);
-    })
     .catch((err) => console.log(err));
 };

@@ -68,7 +68,6 @@ const GoogleButton = ({
   };
   const LoginUntilExpires = (refreshToken: string) => {
     const expires = getExpiredDate(5);
-    console.log('로그인 성공');
     setAppCookies('LOGIN_EXPIRES', refreshToken, {
       path: '/',
       expires,
@@ -78,13 +77,10 @@ const GoogleButton = ({
     if (appCookies['LOGIN_EXPIRES']) return;
   }, []);
 
-  console.log(appCookies);
-
   // google access token을 발급 받으면 finble server에 login 성공 요청을 보냄.
   useEffect(() => {
     async function login() {
       const res = (await Login(googleToken)) as any;
-      console.log(res);
       const refreshToken = await res?.token?.refresh;
 
       if (refreshToken !== undefined) {

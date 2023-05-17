@@ -4,12 +4,17 @@ import { ETFList } from '../../../assets/ETFList';
 import TypoGraphy from '../../../components/Typography';
 import { TextWrap } from '../../../assets/styles/styles';
 
+export interface IETFFlag {
+  symbol: string;
+  flag: boolean;
+  ratio: number;
+}
 interface addedItem {
   listNum: number;
   itemNum: number;
-  ETFFlag: any;
-  onChangeRatio: any;
-  onChangeETF: any;
+  ETFFlag: IETFFlag[][];
+  onChangeRatio: (listNum: number, itemNum: number, ratio: number) => void;
+  onChangeETF: (listNum: number, itemNum: number) => void;
 }
 
 export const AddedItem = ({
@@ -58,7 +63,7 @@ export const AddedItem = ({
             value={ETFFlag[listNum][itemNum].ratio}
             onChange={(e) => {
               // changeMine(item.portfolio.id, e);
-              onChangeRatio(listNum, itemNum, e.target.value);
+              onChangeRatio(listNum, itemNum, Number(e.target.value));
             }}
           />
           <TypoGraphy text="%" size="input" color="var(--type-gray-3)" />

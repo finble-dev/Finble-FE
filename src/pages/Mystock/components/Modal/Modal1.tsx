@@ -24,7 +24,7 @@ const Modal = ({
 
   const token = useSelector(tokenState);
 
-  const onClick = (i: any) => {
+  const onClick = (i: ISearchStock) => {
     setStockName(i.name);
     setMarket(i.market);
     setSymbol(i.symbol);
@@ -65,7 +65,7 @@ const Modal = ({
             </TextWrap>
           ) : (
             <SearchResult>
-              {data.map((i: any, index: number) => (
+              {data.map((i: ISearchStock, index: number) => (
                 <div key={index} onClick={() => onClick(i)}>
                   <SearchListBox name={i.name} symbol={i.symbol} />
                 </div>

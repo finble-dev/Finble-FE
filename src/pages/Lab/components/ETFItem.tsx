@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import { TextRow, TextWrap } from '../../../assets/styles/styles';
+import { TextWrap } from '../../../assets/styles/styles';
 import TypoGraphy from '../../../components/Typography';
 import { ETF } from '../../../interface/interface';
 import { Btn10 } from '../../../components/Button';
 
-interface ETFItem {
+interface IETFItem {
   item: ETF;
   ETFFlag: Array<Array<{ symbol: string; flag: boolean }>>;
-  onChangeETF: any;
+  onChangeETF: (listNum: number, itemNum: number) => void;
   listNum: number;
   itemNum: number;
 }
@@ -18,7 +18,7 @@ export const ETFItem = ({
   onChangeETF,
   listNum,
   itemNum,
-}: ETFItem) => {
+}: IETFItem) => {
   return (
     <Container>
       <Row padding="4px 0" style={{ justifyContent: 'space-between' }}>
